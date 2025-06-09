@@ -21,17 +21,17 @@ const SponsorsSection = () => {
     },
     {
       name: "Pañalón",
-      logo: "/Logo Pañalón.jpg",
+      logo: "/Logo_Pañalón.jpg",
       textColor: "text-white"
     },
     {
       name: "Guitarras Elvira",
-      logo: "/Logo Elvira2.png",
+      logo: "/Logo_Elvira2.png",
       textColor: "text-white"
     },
     {
       name: "Titanes Atletismo",
-      logo: "/Logo Titanes2.png",
+      logo: "/Logo_Titanes2.png",
       textColor: "text-white"
     }
   ];
