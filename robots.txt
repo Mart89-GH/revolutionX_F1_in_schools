@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://legendary-panda-7b91a1.netlify.app/sitemap.xml
