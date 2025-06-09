@@ -21,7 +21,7 @@ const SponsorsSection = () => {
     },
     {
       name: "Pañalón",
-      logo: "/Logo_Panalón.jpg",
+      logo: "/Logo_Panalón.png",
       textColor: "text-white"
     },
     {
