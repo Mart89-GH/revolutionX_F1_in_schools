@@ -11,12 +11,12 @@ const SponsorsSection = () => {
     },
     {
       name: "Perfumería Palárabe",
-      logo: "/perfumería palarabe.jpeg",
+      logo: "/perfumería_palarabe.jpeg",
       textColor: "text-white"
     },
     {
       name: "Ayuntamiento de Majadahonda",
-      logo: "/Ayuntamiento de Majadahonda.png",
+      logo: "/Ayuntamiento_de_Majadahonda.png",
       textColor: "text-white"
     },
     {
