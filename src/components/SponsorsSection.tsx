@@ -11,7 +11,7 @@ const SponsorsSection = () => {
     },
     {
       name: "Perfumería Palárabe",
-      logo: "/perfumeria_palarabe.jpeg",
+      logo: "/perfumeria_palarabe.png",
       textColor: "text-white"
     },
     {
