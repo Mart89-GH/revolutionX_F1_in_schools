@@ -56,23 +56,6 @@ const MarketingSection = () => {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mt-16 text-center"
-        >
-          <h3 className="font-display text-2xl text-rx-gold mb-6">Niveles de Patrocinio Disponibles</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {['Platino', 'Oro', 'Plata'].map((nivel, index) => (
-              <div key={index} className="bg-rx-dark p-6 rounded-lg border border-rx-gold/20 hover:border-rx-gold/50 transition-all">
-                <h4 className="text-xl font-display text-rx-gold mb-2">Patrocinador {nivel}</h4>
-                <p className="text-gray-300">Contacta con nosotros para conocer los beneficios específicos de cada nivel</p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
