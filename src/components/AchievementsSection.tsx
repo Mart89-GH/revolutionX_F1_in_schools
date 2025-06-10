@@ -61,7 +61,7 @@ const AchievementsSection = () => {
             {
               icon: "🚀",
               title: "Innovación",
-              description: "Diseño optimizado basado en coches de F1 actuales
+              description: "Diseño optimizado basado en coches de F1 actuales"
             }
           ].map((achievement, index) => (
             <motion.div
