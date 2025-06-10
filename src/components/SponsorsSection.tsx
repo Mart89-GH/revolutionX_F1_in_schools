@@ -8,37 +8,37 @@ const SponsorsSection = () => {
       name: "Universidad Europea",
       logo: "/Universidad-europea-logo.png",
       textColor: "text-white",
-      hasWhiteBg: true
+      hasBlackBg: true
     },
     {
       name: "Perfumería Palárabe",
       logo: "/perfumeria_palarabe.png",
       textColor: "text-white",
-      hasWhiteBg: true
+      hasBlackBg: true
     },
     {
       name: "Ayuntamiento de Majadahonda",
       logo: "/Ayuntamiento_de_Majadahonda.png",
       textColor: "text-white",
-      hasWhiteBg: true
+      hasBlackBg: true
     },
     {
       name: "Pañalón",
       logo: "/Logo_Panalon.png",
       textColor: "text-white",
-      hasWhiteBg: true
+      hasBlackBg: true
     },
     {
       name: "Guitarras Elvira",
       logo: "/Logo_Elvira2.png",
       textColor: "text-white",
-      hasWhiteBg: true
+      hasBlackBg: true
     },
     {
       name: "Titanes Atletismo",
       logo: "/Logo_Titanes2.png",
       textColor: "text-white",
-      hasWhiteBg: true
+      hasBlackBg: true
     }
   ];
 
