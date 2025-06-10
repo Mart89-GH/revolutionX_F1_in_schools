@@ -7,32 +7,38 @@ const SponsorsSection = () => {
     {
       name: "Universidad Europea",
       logo: "/Universidad-europea-logo.png",
-      textColor: "text-white"
+      textColor: "text-white",
+      hasWhiteBg: true
     },
     {
       name: "Perfumería Palárabe",
       logo: "/perfumeria_palarabe.png",
-      textColor: "text-white"
+      textColor: "text-white",
+      hasWhiteBg: true
     },
     {
       name: "Ayuntamiento de Majadahonda",
       logo: "/Ayuntamiento_de_Majadahonda.png",
-      textColor: "text-white"
+      textColor: "text-white",
+      hasWhiteBg: true
     },
     {
       name: "Pañalón",
       logo: "/Logo_Panalon.png",
-      textColor: "text-white"
+      textColor: "text-white",
+      hasWhiteBg: true
     },
     {
       name: "Guitarras Elvira",
       logo: "/Logo_Elvira2.png",
-      textColor: "text-white"
+      textColor: "text-white",
+      hasWhiteBg: true
     },
     {
       name: "Titanes Atletismo",
       logo: "/Logo_Titanes2.png",
-      textColor: "text-white"
+      textColor: "text-white",
+      hasWhiteBg: true
     }
   ];
 
@@ -63,14 +69,25 @@ const SponsorsSection = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ scale: 1.05 }}
-              className="bg-black p-6 rounded-lg border border-rx-gold/30 hover:border-rx-gold/60 transition-all flex flex-col items-center justify-center min-h-[200px]"
+              className={`${
+                sponsor.hasWhiteBg 
+                  ? 'bg-white border-2 border-rx-gold/30 hover:border-rx-gold/60' 
+                  : 'bg-black border border-rx-gold/30 hover:border-rx-gold/60'
+              } p-6 rounded-lg transition-all flex flex-col items-center justify-center min-h-[200px]`}
             >
               <img
                 src={sponsor.logo}
                 alt={`Logo de ${sponsor.name}`}
-                className="max-w-full max-h-32 object-contain mb-4"
+                className={`max-w-full max-h-32 object-contain mb-4 ${
+                  sponsor.hasWhiteBg ? 'filter-none' : ''
+                }`}
+                style={{
+                  mixBlendMode: sponsor.hasWhiteBg ? 'multiply' : 'normal'
+                }}
               />
-              <h3 className={`font-display text-lg ${sponsor.textColor} text-center`}>
+              <h3 className={`font-display text-lg ${
+                sponsor.hasWhiteBg ? 'text-rx-black' : sponsor.textColor
+              } text-center font-semibold`}>
                 {sponsor.name}
               </h3>
             </motion.div>
