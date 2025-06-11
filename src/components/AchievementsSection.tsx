@@ -23,7 +23,7 @@ const AchievementsSection = () => {
 
   const competitionResults = [
     { event: "Regional Madrid 2025", position: "1º Puesto", category: "Coche Más Rápido - Entry" },
-    { event: "Regional Madrid 2025", position: "Top 3", category: "Clasificación General" },
+    { event: "Regional Madrid 2025", position: "Top 1", category: "Clasificación General" },
     { event: "Nacional España 2025", position: "Clasificado", category: "Representación Madrid" }
   ];
 
