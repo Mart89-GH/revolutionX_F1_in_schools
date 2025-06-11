@@ -20,7 +20,7 @@ const TechnicalSection = () => {
       icon: <Wind className="w-8 h-8" />,
       title: "Optimización Aerodinámica",
       description: "Análisis CFD avanzado y túnel de viento para maximizar el rendimiento y la eficiencia del diseño.",
-      image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?auto=format&fit=crop&q=80&w=1920"
+      image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80&w=1920"
     },
     {
       icon: <Activity className="w-8 h-8" />,
