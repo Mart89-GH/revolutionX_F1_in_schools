@@ -13,41 +13,60 @@ function App() {
     <div className="bg-rx-black text-white min-h-screen font-body">
       <main>
         {/* Hero Section */}
-        <section className="relative h-screen flex items-center justify-center text-center" aria-label="Inicio">
+        <section className="relative h-screen flex items-center justify-center text-center overflow-hidden" aria-label="Inicio">
           <div className="absolute inset-0">
-            <img 
-              src="/revolutionx-logo.png"
-              alt="RevolutionX Logo - Equipo F1 in Schools"
-              className="w-full h-full object-cover opacity-20"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-rx-black/80 to-rx-black"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-rx-black via-rx-dark to-rx-black opacity-95"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-rx-gold/10 via-transparent to-transparent"></div>
           </div>
           
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative z-10 max-w-4xl mx-auto px-4"
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="relative z-10 max-w-5xl mx-auto px-6"
           >
-            <img 
+            <motion.img 
               src="/revolutionx-logo.png"
               alt="RevolutionX - Equipo F1 in Schools del IES José Saramago"
-              className="w-64 mx-auto mb-8"
+              className="w-72 mx-auto mb-12 drop-shadow-2xl"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             />
-            <h1 className="font-display text-6xl md:text-7xl mb-6 text-rx-gold bg-clip-text text-transparent bg-gradient-to-r from-rx-gold via-yellow-200 to-rx-gold animate-gradient">
-              RevolutionX F1 in Schools
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-gray-300">
-              Innovación y excelencia en F1 in Schools del IES José Saramago
-            </p>
-            <p className="text-xl md:text-2xl mb-8 text-rx-gold">
-              Tu marca puede ser parte de nuestra historia
-            </p>
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
+            
+            <motion.h1 
+              className="font-display text-5xl md:text-7xl lg:text-8xl mb-8 text-rx-gold bg-clip-text text-transparent bg-gradient-to-r from-rx-gold via-yellow-200 to-rx-gold leading-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <ChevronDown className="w-12 h-12 mx-auto text-rx-gold" />
+              RevolutionX
+            </motion.h1>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="space-y-6"
+            >
+              <h2 className="font-display text-2xl md:text-3xl text-white/90 font-light tracking-wide">
+                F1 in Schools Team
+              </h2>
+              <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Innovación y excelencia en ingeniería del IES José Saramago
+              </p>
+              <div className="h-px w-24 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto my-8"></div>
+              <p className="text-lg md:text-xl text-rx-gold font-medium">
+                Su marca puede ser parte de nuestra historia de éxito
+              </p>
+            </motion.div>
+            
+            <motion.div
+              className="mt-16"
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ChevronDown className="w-10 h-10 mx-auto text-rx-gold/80" />
             </motion.div>
           </motion.div>
         </section>
@@ -60,10 +79,19 @@ function App() {
         <ContactSection />
       </main>
 
-      <footer className="bg-rx-black border-t border-rx-gold/20 py-8 text-center">
-        <p className="text-gray-400">
-          © {new Date().getFullYear()} RevolutionX - IES José Saramago. Todos los derechos reservados.
-        </p>
+      <footer className="bg-gradient-to-t from-rx-black to-rx-dark border-t border-rx-gold/20 py-12">
+        <div className="container mx-auto px-6 text-center">
+          <div className="mb-6">
+            <img 
+              src="/revolutionx-logo.png"
+              alt="RevolutionX Logo"
+              className="w-16 h-16 mx-auto opacity-60"
+            />
+          </div>
+          <p className="text-gray-400 text-sm">
+            © {new Date().getFullYear()} RevolutionX - IES José Saramago. Todos los derechos reservados.
+          </p>
+        </div>
       </footer>
     </div>
   );

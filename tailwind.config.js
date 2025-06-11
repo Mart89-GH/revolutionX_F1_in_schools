@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         'rx-gold': '#D4AF37',
-        'rx-black': '#111111',
+        'rx-black': '#0A0A0A',
         'rx-dark': '#1A1A1A',
       },
       fontFamily: {
@@ -14,6 +14,7 @@ export default {
       },
       animation: {
         'gradient': 'gradient 8s linear infinite',
+        'float': 'float 6s ease-in-out infinite',
       },
       keyframes: {
         gradient: {
@@ -26,6 +27,22 @@ export default {
             'background-position': 'right center'
           },
         },
+        float: {
+          '0%, 100%': {
+            transform: 'translateY(0px)',
+          },
+          '50%': {
+            transform: 'translateY(-10px)',
+          },
+        },
+      },
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+      },
+      letterSpacing: {
+        'wider': '0.1em',
+        'widest': '0.2em',
       },
     },
   },

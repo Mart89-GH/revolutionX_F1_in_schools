@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users } from 'lucide-react';
+import { Users, User } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const TeamSection = () => {
@@ -16,65 +16,111 @@ const TeamSection = () => {
     {
       name: "Víctor Jímenez",
       role: "Ingeniero de Diseño",
-      responsibilities: ["Diseño del chasis", "Optimización aerodinámica"]
+      responsibilities: [
+        "Diseño del chasis",
+        "Optimización aerodinámica",
+        "Modelado CAD avanzado"
+      ]
     },
     {
       name: "Martín Cendra",
       role: "Ingeniero de Simulación",
-      responsibilities: ["Análisis CFD", "Pruebas de rendimiento"]
+      responsibilities: [
+        "Análisis CFD",
+        "Pruebas de rendimiento",
+        "Validación de diseños"
+      ]
     },
     {
       name: "Ibrahim Aharrar",
       role: "Ingeniero de Manufactura",
-      responsibilities: ["Procesos de fabricación", "Control de calidad"]
+      responsibilities: [
+        "Procesos de fabricación",
+        "Control de calidad",
+        "Optimización de producción"
+      ]
     },
     {
       name: "Yago Álvarez",
       role: "Director de Marketing",
-      responsibilities: ["Estrategia de marca", "Relaciones públicas"]
+      responsibilities: [
+        "Estrategia de marca",
+        "Relaciones públicas",
+        "Gestión de patrocinadores"
+      ]
     },
     {
       name: "Pablo Bianchi",
       role: "Especialista en Marketing Digital",
-      responsibilities: ["Redes sociales", "Contenido digital"]
+      responsibilities: [
+        "Redes sociales",
+        "Contenido digital",
+        "Comunicación online"
+      ]
     }
   ];
 
   return (
-    <section id="equipo" className="py-20 bg-gradient-to-b from-rx-black to-rx-dark">
-      <div className="container mx-auto px-4">
+    <section id="equipo" className="py-24 bg-gradient-to-b from-rx-black to-rx-dark">
+      <div className="container mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
         >
-          <h2 className="font-display text-4xl md:text-5xl text-rx-gold mb-4">Nuestro Equipo</h2>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            Un equipo multidisciplinar de jóvenes talentos comprometidos con la excelencia en ingeniería y diseño.
+          <div className="flex items-center justify-center mb-6">
+            <Users className="w-8 h-8 text-rx-gold mr-4" />
+            <h2 className="font-display text-4xl md:text-6xl text-rx-gold">
+              Nuestro Equipo
+            </h2>
+          </div>
+          <div className="h-px w-32 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto mb-8"></div>
+          <p className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+            Un equipo multidisciplinar de jóvenes talentos comprometidos con la excelencia 
+            en ingeniería, diseño y estrategia empresarial.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {teamMembers.map((member, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ scale: 1.02 }}
-              className="bg-rx-dark p-6 rounded-lg border border-rx-gold/20 hover:border-rx-gold/50 transition-all"
+              viewport={{ once: true }}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              className="bg-gradient-to-br from-rx-dark to-rx-black p-8 rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 shadow-xl hover:shadow-2xl"
             >
-              <h3 className="text-xl font-display text-rx-gold mb-2">{member.name}</h3>
-              <h4 className="text-lg text-gray-300 mb-3">{member.role}</h4>
-              <ul className="space-y-2 text-gray-400">
-                {member.responsibilities.map((resp, idx) => (
-                  <li key={idx} className="flex items-center space-x-2">
-                    <span className="text-rx-gold">→</span>
-                    <span>{resp}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-rx-gold/20 rounded-full flex items-center justify-center mr-4">
+                  <User className="w-6 h-6 text-rx-gold" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-display text-rx-gold font-semibold">
+                    {member.name}
+                  </h3>
+                  <p className="text-gray-400 text-sm font-medium">
+                    {member.role}
+                  </p>
+                </div>
+              </div>
+              
+              <div className="space-y-3">
+                <h4 className="text-white font-medium text-sm uppercase tracking-wider mb-4">
+                  Responsabilidades
+                </h4>
+                <ul className="space-y-3">
+                  {member.responsibilities.map((resp, idx) => (
+                    <li key={idx} className="flex items-start space-x-3 text-gray-300">
+                      <span className="text-rx-gold mt-1 text-sm">●</span>
+                      <span className="text-sm leading-relaxed">{resp}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </motion.div>
           ))}
         </div>
