@@ -50,7 +50,7 @@ function App() {
               className="space-y-6"
             >
               <h2 className="font-display text-2xl md:text-3xl text-white/90 font-light tracking-wide">
-                F1 in Schools Team
+                Equipo F1 in Schools
               </h2>
               <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
                 Innovación y excelencia en ingeniería del IES José Saramago

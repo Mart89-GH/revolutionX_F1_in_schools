@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrench, Zap, Wind, Activity, Cog } from 'lucide-react';
+import { Wrench, Zap, Wind, Activity, Cog, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const TechnicalSection = () => {
@@ -7,27 +7,36 @@ const TechnicalSection = () => {
     {
       icon: <Wrench className="w-8 h-8" />,
       title: "Diseño Avanzado",
-      description: "Utilizamos las últimas tecnologías CAD y simulación CFD para optimizar cada componente del vehículo.",
+      description: "Utilizamos las últimas tecnologías CAD y simulación CFD para optimizar cada componente del vehículo con precisión milimétrica.",
       image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1920"
     },
     {
       icon: <Zap className="w-8 h-8" />,
       title: "Innovación Continua",
-      description: "Desarrollo constante de soluciones innovadoras en aerodinámica y selección de materiales avanzados.",
+      description: "Desarrollo constante de soluciones innovadoras en aerodinámica y selección de materiales avanzados para maximizar el rendimiento.",
       image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=1920"
     },
     {
       icon: <Wind className="w-8 h-8" />,
       title: "Optimización Aerodinámica",
-      description: "Análisis CFD avanzado y túnel de viento para maximizar el rendimiento y la eficiencia del diseño.",
+      description: "Análisis CFD avanzado y pruebas en túnel de viento para maximizar el rendimiento y la eficiencia del diseño aerodinámico.",
       image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80&w=1920"
     },
     {
       icon: <Activity className="w-8 h-8" />,
       title: "Pruebas y Validación",
-      description: "Riguroso proceso de pruebas y validación para garantizar el máximo rendimiento en competición.",
+      description: "Riguroso proceso de pruebas y validación para garantizar el máximo rendimiento en competición y cumplir con los estándares más exigentes.",
       image: "https://images.unsplash.com/photo-1504851149312-7a075b496cc7?auto=format&fit=crop&q=80&w=1920"
     }
+  ];
+
+  const specifications = [
+    { label: "Longitud máxima", value: "210 mm" },
+    { label: "Ancho máximo", value: "65 mm" },
+    { label: "Altura máxima", value: "50 mm" },
+    { label: "Peso mínimo", value: "8 gramos" },
+    { label: "Material principal", value: "Balsa de alta calidad" },
+    { label: "Acabado", value: "Pintura aerodinámica especializada" }
   ];
 
   return (
@@ -51,6 +60,32 @@ const TechnicalSection = () => {
             Combinamos ingeniería de precisión con tecnologías de vanguardia para crear 
             soluciones revolucionarias en el mundo de F1 in Schools.
           </p>
+        </motion.div>
+
+        {/* Especificaciones Técnicas */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto mb-16"
+        >
+          <div className="bg-gradient-to-br from-rx-gold/10 to-rx-gold/5 p-8 rounded-2xl border border-rx-gold/30">
+            <div className="flex items-center justify-center mb-6">
+              <Target className="w-8 h-8 text-rx-gold mr-3" />
+              <h3 className="font-display text-2xl text-rx-gold">
+                Especificaciones Técnicas del Vehículo
+              </h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {specifications.map((spec, index) => (
+                <div key={index} className="bg-rx-black/30 p-4 rounded-lg border border-rx-gold/20">
+                  <p className="text-gray-400 text-sm mb-1">{spec.label}</p>
+                  <p className="text-rx-gold font-semibold text-lg">{spec.value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
@@ -92,6 +127,35 @@ const TechnicalSection = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Proceso de Desarrollo */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mt-20 max-w-6xl mx-auto"
+        >
+          <h3 className="font-display text-3xl text-rx-gold text-center mb-12">
+            Proceso de Desarrollo
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {[
+              { step: "01", title: "Investigación", desc: "Análisis de aerodinámica y materiales" },
+              { step: "02", title: "Diseño", desc: "Modelado CAD y simulaciones CFD" },
+              { step: "03", title: "Prototipado", desc: "Fabricación y pruebas iniciales" },
+              { step: "04", title: "Optimización", desc: "Refinamiento y validación final" }
+            ].map((phase, index) => (
+              <div key={index} className="text-center">
+                <div className="w-16 h-16 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-rx-gold/50">
+                  <span className="text-rx-gold font-display font-bold text-lg">{phase.step}</span>
+                </div>
+                <h4 className="text-white font-semibold mb-2">{phase.title}</h4>
+                <p className="text-gray-400 text-sm">{phase.desc}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

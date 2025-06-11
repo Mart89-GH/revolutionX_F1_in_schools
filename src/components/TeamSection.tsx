@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, User } from 'lucide-react';
+import { Users, User, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const TeamSection = () => {
@@ -14,7 +14,7 @@ const TeamSection = () => {
       ]
     },
     {
-      name: "Víctor Jímenez",
+      name: "Víctor Jiménez",
       role: "Ingeniero de Diseño",
       responsibilities: [
         "Diseño del chasis",
@@ -83,6 +83,27 @@ const TeamSection = () => {
           </p>
         </motion.div>
 
+        {/* Destacado del Equipo */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto mb-16"
+        >
+          <div className="bg-gradient-to-br from-rx-gold/10 to-rx-gold/5 p-8 rounded-2xl border border-rx-gold/30 text-center">
+            <Award className="w-12 h-12 text-rx-gold mx-auto mb-4" />
+            <h3 className="font-display text-2xl text-rx-gold mb-4">
+              Excelencia Académica y Técnica
+            </h3>
+            <p className="text-gray-300 text-lg leading-relaxed">
+              Nuestro equipo está formado por estudiantes destacados del IES José Saramago, 
+              seleccionados por su excelencia académica y pasión por la ingeniería. Cada miembro 
+              aporta habilidades especializadas que nos permiten competir al más alto nivel.
+            </p>
+          </div>
+        </motion.div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {teamMembers.map((member, index) => (
             <motion.div
@@ -110,7 +131,7 @@ const TeamSection = () => {
               
               <div className="space-y-3">
                 <h4 className="text-white font-medium text-sm uppercase tracking-wider mb-4">
-                  Responsabilidades
+                  Responsabilidades Principales
                 </h4>
                 <ul className="space-y-3">
                   {member.responsibilities.map((resp, idx) => (

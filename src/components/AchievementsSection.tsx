@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trophy, Zap, Award, Target, Rocket } from 'lucide-react';
+import { Trophy, Zap, Award, Target, Rocket, Medal, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const AchievementsSection = () => {
@@ -7,18 +7,24 @@ const AchievementsSection = () => {
     {
       icon: <Trophy className="w-8 h-8" />,
       title: "Clasificación Nacional",
-      description: "Clasificados para la competición nacional F1 in Schools"
+      description: "Clasificados para la competición nacional F1 in Schools representando a la Comunidad de Madrid"
     },
     {
       icon: <Target className="w-8 h-8" />,
       title: "Precisión Técnica",
-      description: "Reconocimiento por la precisión en el diseño y manufactura"
+      description: "Reconocimiento por la precisión en el diseño y manufactura con tolerancias milimétricas"
     },
     {
       icon: <Rocket className="w-8 h-8" />,
-      title: "Innovación",
-      description: "Diseño optimizado basado en coches de F1 actuales"
+      title: "Innovación en Diseño",
+      description: "Diseño optimizado basado en principios aerodinámicos de coches de F1 actuales"
     }
+  ];
+
+  const competitionResults = [
+    { event: "Regional Madrid 2025", position: "1º Puesto", category: "Coche Más Rápido - Entry" },
+    { event: "Regional Madrid 2025", position: "Top 3", category: "Clasificación General" },
+    { event: "Nacional España 2025", position: "Clasificado", category: "Representación Madrid" }
   ];
 
   return (
@@ -40,7 +46,7 @@ const AchievementsSection = () => {
           <div className="h-px w-32 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto mb-8"></div>
           <p className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
             Excelencia demostrada en competiciones de F1 in Schools a nivel regional y nacional, 
-            estableciendo nuevos estándares de rendimiento.
+            estableciendo nuevos estándares de rendimiento y precisión técnica.
           </p>
         </motion.div>
 
@@ -79,8 +85,42 @@ const AchievementsSection = () => {
               <p className="text-gray-200 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
                 RevolutionX ha demostrado su excelencia técnica al conseguir el tiempo más rápido 
                 en la categoría Entry de toda la Comunidad de Madrid, estableciendo un nuevo estándar 
-                de rendimiento y precisión en el diseño.
+                de rendimiento y precisión en el diseño aerodinámico.
               </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Resultados de Competición */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto mb-16"
+        >
+          <div className="bg-gradient-to-br from-rx-dark to-rx-black p-8 rounded-2xl border border-rx-gold/20">
+            <div className="flex items-center justify-center mb-6">
+              <Medal className="w-8 h-8 text-rx-gold mr-3" />
+              <h3 className="font-display text-2xl text-rx-gold">
+                Historial de Competiciones
+              </h3>
+            </div>
+            <div className="space-y-4">
+              {competitionResults.map((result, index) => (
+                <div key={index} className="flex items-center justify-between p-4 bg-rx-gold/5 rounded-lg border border-rx-gold/10">
+                  <div className="flex items-center space-x-4">
+                    <Star className="w-5 h-5 text-rx-gold" />
+                    <div>
+                      <p className="text-white font-semibold">{result.event}</p>
+                      <p className="text-gray-400 text-sm">{result.category}</p>
+                    </div>
+                  </div>
+                  <div className="text-rx-gold font-bold text-lg">
+                    {result.position}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </motion.div>
@@ -109,6 +149,29 @@ const AchievementsSection = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Reconocimientos Adicionales */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mt-20 text-center"
+        >
+          <h3 className="font-display text-2xl text-rx-gold mb-8">
+            Reconocimientos y Menciones
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div className="bg-rx-gold/5 p-6 rounded-lg border border-rx-gold/20">
+              <h4 className="text-white font-semibold mb-2">Excelencia Académica</h4>
+              <p className="text-gray-300 text-sm">Reconocimiento por la integración de conocimientos STEM en el proyecto</p>
+            </div>
+            <div className="bg-rx-gold/5 p-6 rounded-lg border border-rx-gold/20">
+              <h4 className="text-white font-semibold mb-2">Innovación Tecnológica</h4>
+              <p className="text-gray-300 text-sm">Mención especial por el uso de tecnologías avanzadas de simulación</p>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
