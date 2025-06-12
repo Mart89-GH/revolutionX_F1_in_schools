@@ -1,56 +1,22 @@
 import React from 'react';
-import { Trophy, Zap, Award, Target, Rocket, Medal, Star } from 'lucide-react';
+import { Award, Zap, Medal, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
+import SectionHeader from './ui/SectionHeader';
+import FeatureCard from './ui/FeatureCard';
+import { mainAchievement, achievements, competitionResults, recognitions } from '../data/achievementsData';
+import * as Icons from 'lucide-react';
 
 const AchievementsSection = () => {
-  const achievements = [
-    {
-      icon: <Trophy className="w-8 h-8" />,
-      title: "Clasificación Nacional",
-      description: "Clasificados para la competición nacional F1 in Schools representando a la Comunidad de Madrid"
-    },
-    {
-      icon: <Target className="w-8 h-8" />,
-      title: "Precisión Técnica",
-      description: "Reconocimiento por la precisión en el diseño y manufactura con tolerancias milimétricas"
-    },
-    {
-      icon: <Rocket className="w-8 h-8" />,
-      title: "Innovación en Diseño",
-      description: "Diseño optimizado basado en principios aerodinámicos de coches de F1 actuales"
-    }
-  ];
-
-  const competitionResults = [
-    { event: "Regional Madrid 2025", position: "1º Puesto", category: "Coche Más Rápido - Entry" },
-    { event: "Regional Madrid 2025", position: "Top 1", category: "Clasificación General" },
-    { event: "Nacional España 2025", position: "Clasificado", category: "Representación Madrid" }
-  ];
-
   return (
     <section id="logros" className="py-24 bg-gradient-to-b from-rx-black to-rx-dark">
       <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
-          <div className="flex items-center justify-center mb-6">
-            <Award className="w-8 h-8 text-rx-gold mr-4" />
-            <h2 className="font-display text-4xl md:text-6xl text-rx-gold">
-              Nuestros Logros
-            </h2>
-          </div>
-          <div className="h-px w-32 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto mb-8"></div>
-          <p className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-            Excelencia demostrada en competiciones de F1 in Schools a nivel regional y nacional, 
-            estableciendo nuevos estándares de rendimiento y precisión técnica.
-          </p>
-        </motion.div>
+        <SectionHeader
+          icon={Award}
+          title="Nuestros Logros"
+          subtitle="Excelencia demostrada en competiciones de F1 in Schools a nivel regional y nacional, estableciendo nuevos estándares de rendimiento y precisión técnica."
+        />
 
-        {/* Logro Principal */}
+        {/* Main Achievement */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -73,25 +39,23 @@ const AchievementsSection = () => {
               </motion.div>
               
               <h3 className="font-display text-3xl md:text-5xl text-rx-gold mb-6 font-bold">
-                Coche Más Rápido
+                {mainAchievement.title}
               </h3>
               <div className="inline-block bg-rx-gold/20 px-6 py-2 rounded-full mb-6">
-                <span className="text-rx-gold font-semibold text-lg">Categoría Entry</span>
+                <span className="text-rx-gold font-semibold text-lg">{mainAchievement.category}</span>
               </div>
               <p className="text-2xl md:text-3xl text-white mb-6 font-light">
-                Comunidad de Madrid 2025
+                {mainAchievement.event}
               </p>
               <div className="h-px w-24 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto mb-8"></div>
               <p className="text-gray-200 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-                RevolutionX ha demostrado su excelencia técnica al conseguir el tiempo más rápido 
-                en la categoría Entry de toda la Comunidad de Madrid, estableciendo un nuevo estándar 
-                de rendimiento y precisión en el diseño aerodinámico.
+                {mainAchievement.description}
               </p>
             </div>
           </div>
         </motion.div>
 
-        {/* Resultados de Competición */}
+        {/* Competition Results */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -125,51 +89,40 @@ const AchievementsSection = () => {
           </div>
         </motion.div>
 
-        {/* Otros Logros */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {achievements.map((achievement, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="bg-gradient-to-br from-rx-dark to-rx-black p-8 rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center shadow-xl hover:shadow-2xl"
-            >
-              <div className="w-16 h-16 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <div className="text-rx-gold">{achievement.icon}</div>
-              </div>
-              <h4 className="font-display text-xl text-rx-gold mb-4 font-semibold">
-                {achievement.title}
-              </h4>
-              <p className="text-gray-300 leading-relaxed">
-                {achievement.description}
-              </p>
-            </motion.div>
-          ))}
+        {/* Other Achievements */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
+          {achievements.map((achievement, index) => {
+            const IconComponent = Icons[achievement.icon as keyof typeof Icons] as React.ComponentType<any>;
+            return (
+              <FeatureCard
+                key={index}
+                icon={IconComponent}
+                title={achievement.title}
+                description={achievement.description}
+                delay={index * 0.2}
+              />
+            );
+          })}
         </div>
 
-        {/* Reconocimientos Adicionales */}
+        {/* Additional Recognitions */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="mt-20 text-center"
+          className="text-center"
         >
           <h3 className="font-display text-2xl text-rx-gold mb-8">
             Reconocimientos y Menciones
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div className="bg-rx-gold/5 p-6 rounded-lg border border-rx-gold/20">
-              <h4 className="text-white font-semibold mb-2">Excelencia Académica</h4>
-              <p className="text-gray-300 text-sm">Reconocimiento por la integración de conocimientos STEM en el proyecto</p>
-            </div>
-            <div className="bg-rx-gold/5 p-6 rounded-lg border border-rx-gold/20">
-              <h4 className="text-white font-semibold mb-2">Innovación Tecnológica</h4>
-              <p className="text-gray-300 text-sm">Mención especial por el uso de tecnologías avanzadas de simulación</p>
-            </div>
+            {recognitions.map((recognition, index) => (
+              <div key={index} className="bg-rx-gold/5 p-6 rounded-lg border border-rx-gold/20">
+                <h4 className="text-white font-semibold mb-2">{recognition.title}</h4>
+                <p className="text-gray-300 text-sm">{recognition.description}</p>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>

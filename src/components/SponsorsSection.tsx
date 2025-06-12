@@ -1,145 +1,46 @@
 import React from 'react';
-import { Heart, Handshake, Building, Users } from 'lucide-react';
+import { Heart, Handshake } from 'lucide-react';
 import { motion } from 'framer-motion';
+import SectionHeader from './ui/SectionHeader';
+import SponsorCard from './ui/SponsorCard';
+import StatCard from './ui/StatCard';
+import { sponsors, sponsorshipLevels, sponsorStats } from '../data/sponsorsData';
+import * as Icons from 'lucide-react';
 
 const SponsorsSection = () => {
-  const sponsors = [
-    {
-      name: "Universidad Europea",
-      logo: "/Universidad-europea-logo.png",
-      category: "Educación Superior",
-      description: "Apoyo en formación técnica y desarrollo profesional"
-    },
-    {
-      name: "Perfumería Palárabe",
-      logo: "/perfumeria_palarabe.png",
-      category: "Comercio Local",
-      description: "Patrocinador local comprometido con la educación"
-    },
-    {
-      name: "Ayuntamiento de Majadahonda",
-      logo: "/Ayuntamiento_de_Majadahonda.png",
-      category: "Administración Pública",
-      description: "Apoyo institucional y promoción del talento local"
-    },
-    {
-      name: "Pañalón",
-      logo: "/Logo_Panalon.png",
-      category: "Empresa Local",
-      description: "Compromiso con el desarrollo de jóvenes talentos"
-    },
-    {
-      name: "Guitarras Elvira",
-      logo: "/Logo_Elvira2.png",
-      category: "Artesanía Musical",
-      description: "Apoyo a la creatividad y la innovación juvenil"
-    },
-    {
-      name: "Titanes Atletismo",
-      logo: "/Logo_Titanes2.png",
-      category: "Deporte",
-      description: "Promoción de valores deportivos y trabajo en equipo"
-    }
-  ];
-
-  const sponsorshipLevels = [
-    {
-      title: "Patrocinador Principal",
-      benefits: ["Logo prominente en el vehículo", "Presencia en todos los materiales", "Networking exclusivo"],
-      color: "from-rx-gold/20 to-rx-gold/10"
-    },
-    {
-      title: "Patrocinador Oficial",
-      benefits: ["Logo en materiales promocionales", "Mención en redes sociales", "Certificado de colaboración"],
-      color: "from-gray-600/20 to-gray-600/10"
-    },
-    {
-      title: "Colaborador",
-      benefits: ["Reconocimiento público", "Acceso a eventos", "Impacto social positivo"],
-      color: "from-amber-600/20 to-amber-600/10"
-    }
-  ];
-
   return (
     <section id="patrocinadores" className="py-24 bg-gradient-to-b from-rx-dark to-rx-black">
       <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
-          <div className="flex items-center justify-center mb-6">
-            <Handshake className="w-8 h-8 text-rx-gold mr-4" />
-            <h2 className="font-display text-4xl md:text-6xl text-rx-gold">
-              Nuestros Patrocinadores
-            </h2>
-          </div>
-          <div className="h-px w-32 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto mb-8"></div>
-          <p className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-            Agradecemos profundamente el apoyo de nuestros patrocinadores, quienes hacen posible 
-            nuestros logros y el desarrollo continuo de nuestro proyecto en F1 in Schools.
-          </p>
-        </motion.div>
+        <SectionHeader
+          icon={Handshake}
+          title="Nuestros Patrocinadores"
+          subtitle="Agradecemos profundamente el apoyo de nuestros patrocinadores, quienes hacen posible nuestros logros y el desarrollo continuo de nuestro proyecto en F1 in Schools."
+        />
 
-        {/* Estadísticas de Impacto */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-16"
-        >
-          {[
-            { icon: <Users className="w-6 h-6" />, number: "6", label: "Patrocinadores Activos" },
-            { icon: <Building className="w-6 h-6" />, number: "3", label: "Sectores Representados" },
-            { icon: <Heart className="w-6 h-6" />, number: "100%", label: "Compromiso Local" },
-            { icon: <Handshake className="w-6 h-6" />, number: "2025", label: "Año de Colaboración" }
-          ].map((stat, index) => (
-            <div key={index} className="bg-rx-gold/10 p-6 rounded-lg border border-rx-gold/20 text-center">
-              <div className="text-rx-gold mb-2 flex justify-center">{stat.icon}</div>
-              <div className="text-2xl font-bold text-rx-gold mb-1">{stat.number}</div>
-              <div className="text-gray-300 text-sm">{stat.label}</div>
-            </div>
-          ))}
-        </motion.div>
+        {/* Sponsor Statistics */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-16">
+          {sponsorStats.map((stat, index) => {
+            const IconComponent = Icons[stat.icon as keyof typeof Icons] as React.ComponentType<any>;
+            return (
+              <StatCard
+                key={index}
+                icon={IconComponent}
+                number={stat.number}
+                label={stat.label}
+                delay={index * 0.1}
+              />
+            );
+          })}
+        </div>
 
-        {/* Grid de Patrocinadores */}
+        {/* Sponsors Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-16">
           {sponsors.map((sponsor, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
-              className="bg-gradient-to-br from-white to-gray-100 p-8 rounded-2xl border-2 border-rx-gold/30 hover:border-rx-gold/60 transition-all duration-300 flex flex-col min-h-[280px] shadow-xl hover:shadow-2xl"
-            >
-              <div className="flex-1 flex items-center justify-center mb-6">
-                <img
-                  src={sponsor.logo}
-                  alt={`Logo de ${sponsor.name}`}
-                  className="max-w-full max-h-32 object-contain filter drop-shadow-lg"
-                />
-              </div>
-              <div className="text-center">
-                <h3 className="font-display text-lg text-rx-black font-semibold mb-2">
-                  {sponsor.name}
-                </h3>
-                <div className="inline-block bg-rx-gold/20 px-3 py-1 rounded-full mb-3">
-                  <span className="text-rx-black text-xs font-medium">{sponsor.category}</span>
-                </div>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {sponsor.description}
-                </p>
-              </div>
-            </motion.div>
+            <SponsorCard key={index} sponsor={sponsor} index={index} />
           ))}
         </div>
 
-        {/* Niveles de Patrocinio */}
+        {/* Sponsorship Levels */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
