@@ -43,7 +43,7 @@ const InteractiveSpeedometer = () => {
 
   return (
     <motion.div
-      className="relative w-64 h-64 mx-auto"
+      className="relative w-80 h-80 mx-auto"
       initial={{ opacity: 0, scale: 0.8 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8 }}
@@ -58,7 +58,7 @@ const InteractiveSpeedometer = () => {
           r="90"
           fill="none"
           stroke="rgba(212, 175, 55, 0.1)"
-          strokeWidth="8"
+          strokeWidth="10"
         />
         
         {/* Progress Circle */}
@@ -68,7 +68,7 @@ const InteractiveSpeedometer = () => {
           r="90"
           fill="none"
           stroke="url(#speedGradient)"
-          strokeWidth="8"
+          strokeWidth="10"
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={strokeDashoffset}
@@ -92,7 +92,7 @@ const InteractiveSpeedometer = () => {
           animate={{ scale: isAnimating ? [1, 1.1, 1] : 1 }}
           transition={{ duration: 0.5, repeat: isAnimating ? Infinity : 0 }}
         >
-          <div className="text-4xl font-display font-bold text-rx-gold mb-2">
+          <div className="text-5xl font-display font-bold text-rx-gold mb-3">
             {Math.round(currentSpeed)}
           </div>
           <div className="text-sm text-gray-400 uppercase tracking-wider">
@@ -101,8 +101,13 @@ const InteractiveSpeedometer = () => {
         </motion.div>
         
         {/* Speed Indicators */}
-        <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
-          <Target className="w-6 h-6 text-rx-gold" />
+        <div className="absolute top-6 left-1/2 transform -translate-x-1/2">
+          <motion.div
+            whileHover={{ scale: 1.2, rotate: 360 }}
+            transition={{ duration: 0.6 }}
+          >
+            <Target className="w-8 h-8 text-rx-gold" />
+          </motion.div>
         </div>
       </div>
 
@@ -110,18 +115,18 @@ const InteractiveSpeedometer = () => {
       <motion.button
         onClick={startAnimation}
         disabled={isAnimating}
-        className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-rx-gold/20 hover:bg-rx-gold/30 disabled:opacity-50 px-6 py-2 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300"
-        whileHover={{ scale: 1.05 }}
+        className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 bg-rx-gold/20 hover:bg-rx-gold/30 disabled:opacity-50 px-8 py-3 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
+        whileHover={{ scale: 1.05, y: -2 }}
         whileTap={{ scale: 0.95 }}
       >
         {isAnimating ? (
           <div className="flex items-center space-x-2">
-            <Timer className="w-4 h-4 animate-spin" />
+            <Timer className="w-5 h-5 animate-spin" />
             <span>Midiendo...</span>
           </div>
         ) : (
           <div className="flex items-center space-x-2">
-            <Zap className="w-4 h-4" />
+            <Zap className="w-5 h-5" />
             <span>Probar Velocidad</span>
           </div>
         )}

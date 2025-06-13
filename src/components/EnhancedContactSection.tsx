@@ -45,22 +45,28 @@ const EnhancedContactSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto mb-16"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-16"
         >
           {/* Email */}
           <motion.a
             href="mailto:revolutionx.f1@gmail.com"
-            className="bg-gradient-to-br from-rx-dark to-rx-black p-6 rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center group"
+            className="bg-gradient-to-br from-rx-dark to-rx-black p-6 rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center group hover:shadow-2xl hover:shadow-rx-gold/10"
             whileHover={{ y: -8, scale: 1.02 }}
             onHoverStart={() => setHoveredCard(0)}
             onHoverEnd={() => setHoveredCard(null)}
           >
-            <div className="w-12 h-12 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-rx-gold/30 transition-colors">
-              <Mail className="w-6 h-6 text-rx-gold" />
-            </div>
-            <h3 className="font-display text-lg text-rx-gold font-semibold mb-2">Email</h3>
-            <p className="text-white font-medium mb-2">revolutionx.f1@gmail.com</p>
-            <p className="text-gray-400 text-sm">Respuesta en 24-48h</p>
+            <motion.div 
+              className="w-14 h-14 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-rx-gold/30 transition-colors"
+              whileHover={{ rotate: 360 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Mail className="w-7 h-7 text-rx-gold" />
+            </motion.div>
+            <h3 className="font-display text-lg text-rx-gold font-semibold mb-3">Email</h3>
+            <p className="text-white font-medium mb-2 text-sm break-all leading-tight">
+              revolutionx.f1@gmail.com
+            </p>
+            <p className="text-gray-400 text-xs">Respuesta en 24-48h</p>
           </motion.a>
 
           {/* Instagram */}
@@ -68,63 +74,79 @@ const EnhancedContactSection = () => {
             href="https://instagram.com/revolutionx_f1"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 p-6 rounded-2xl border border-purple-500/30 hover:border-purple-500/50 transition-all duration-300 text-center group"
+            className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 p-6 rounded-2xl border border-purple-500/30 hover:border-purple-500/50 transition-all duration-300 text-center group hover:shadow-2xl hover:shadow-purple-500/10"
             whileHover={{ y: -8, scale: 1.02 }}
             onHoverStart={() => setHoveredCard(1)}
             onHoverEnd={() => setHoveredCard(null)}
           >
-            <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Instagram className="w-6 h-6 text-white" />
-            </div>
-            <h3 className="font-display text-lg text-purple-300 font-semibold mb-2">Instagram</h3>
-            <p className="text-white font-medium mb-2">@revolutionx_f1</p>
-            <p className="text-gray-400 text-sm">Contenido exclusivo</p>
+            <motion.div 
+              className="w-14 h-14 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4"
+              whileHover={{ rotate: 360 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Instagram className="w-7 h-7 text-white" />
+            </motion.div>
+            <h3 className="font-display text-lg text-purple-300 font-semibold mb-3">Instagram</h3>
+            <p className="text-white font-medium mb-2 text-sm">@revolutionx_f1</p>
+            <p className="text-gray-400 text-xs">Contenido exclusivo</p>
           </motion.a>
 
           {/* Location */}
           <motion.div
-            className="bg-gradient-to-br from-rx-dark to-rx-black p-6 rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center group"
+            className="bg-gradient-to-br from-rx-dark to-rx-black p-6 rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center group hover:shadow-2xl hover:shadow-rx-gold/10"
             whileHover={{ y: -8, scale: 1.02 }}
             onHoverStart={() => setHoveredCard(2)}
             onHoverEnd={() => setHoveredCard(null)}
           >
-            <div className="w-12 h-12 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-rx-gold/30 transition-colors">
-              <MapPin className="w-6 h-6 text-rx-gold" />
-            </div>
-            <h3 className="font-display text-lg text-rx-gold font-semibold mb-2">Ubicación</h3>
-            <p className="text-white font-medium mb-2">IES José Saramago</p>
-            <p className="text-gray-400 text-sm">Madrid, España</p>
+            <motion.div 
+              className="w-14 h-14 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-rx-gold/30 transition-colors"
+              whileHover={{ rotate: 360 }}
+              transition={{ duration: 0.6 }}
+            >
+              <MapPin className="w-7 h-7 text-rx-gold" />
+            </motion.div>
+            <h3 className="font-display text-lg text-rx-gold font-semibold mb-3">Ubicación</h3>
+            <p className="text-white font-medium mb-2 text-sm">IES José Saramago</p>
+            <p className="text-gray-400 text-xs">Madrid, España</p>
           </motion.div>
 
           {/* Schedule */}
           <motion.div
-            className="bg-gradient-to-br from-rx-dark to-rx-black p-6 rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center group"
+            className="bg-gradient-to-br from-rx-dark to-rx-black p-6 rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center group hover:shadow-2xl hover:shadow-rx-gold/10"
             whileHover={{ y: -8, scale: 1.02 }}
             onHoverStart={() => setHoveredCard(3)}
             onHoverEnd={() => setHoveredCard(null)}
           >
-            <div className="w-12 h-12 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-rx-gold/30 transition-colors">
-              <Clock className="w-6 h-6 text-rx-gold" />
-            </div>
-            <h3 className="font-display text-lg text-rx-gold font-semibold mb-2">Horario</h3>
-            <p className="text-white font-medium mb-2">Lunes a Viernes</p>
-            <p className="text-gray-400 text-sm">9:00 - 17:00 CET</p>
+            <motion.div 
+              className="w-14 h-14 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-rx-gold/30 transition-colors"
+              whileHover={{ rotate: 360 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Clock className="w-7 h-7 text-rx-gold" />
+            </motion.div>
+            <h3 className="font-display text-lg text-rx-gold font-semibold mb-3">Horario</h3>
+            <p className="text-white font-medium mb-2 text-sm">Lunes a Viernes</p>
+            <p className="text-gray-400 text-xs">9:00 - 17:00 CET</p>
           </motion.div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 max-w-7xl mx-auto">
           {/* Enhanced Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-rx-dark to-rx-black p-10 rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 shadow-xl"
+            className="bg-gradient-to-br from-rx-dark to-rx-black p-10 rounded-3xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-500 shadow-2xl hover:shadow-rx-gold/10"
           >
             <div className="flex items-center mb-8">
-              <div className="w-12 h-12 bg-rx-gold/20 rounded-full flex items-center justify-center mr-4">
-                <Send className="w-6 h-6 text-rx-gold" />
-              </div>
+              <motion.div 
+                className="w-14 h-14 bg-rx-gold/20 rounded-full flex items-center justify-center mr-4"
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.6 }}
+              >
+                <Send className="w-7 h-7 text-rx-gold" />
+              </motion.div>
               <h3 className="font-display text-2xl text-rx-gold font-semibold">
                 Contacto Directo
               </h3>
@@ -142,7 +164,7 @@ const EnhancedContactSection = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full bg-rx-black/50 border border-rx-gold/20 rounded-lg px-4 py-3 text-white focus:border-rx-gold/50 focus:outline-none transition-colors"
+                    className="w-full bg-rx-black/50 border border-rx-gold/20 rounded-xl px-4 py-3 text-white focus:border-rx-gold/50 focus:outline-none focus:ring-2 focus:ring-rx-gold/20 transition-all duration-300"
                     placeholder="Su nombre"
                   />
                 </div>
@@ -156,7 +178,7 @@ const EnhancedContactSection = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full bg-rx-black/50 border border-rx-gold/20 rounded-lg px-4 py-3 text-white focus:border-rx-gold/50 focus:outline-none transition-colors"
+                    className="w-full bg-rx-black/50 border border-rx-gold/20 rounded-xl px-4 py-3 text-white focus:border-rx-gold/50 focus:outline-none focus:ring-2 focus:ring-rx-gold/20 transition-all duration-300"
                     placeholder="su@email.com"
                   />
                 </div>
@@ -171,7 +193,7 @@ const EnhancedContactSection = () => {
                   name="company"
                   value={formData.company}
                   onChange={handleInputChange}
-                  className="w-full bg-rx-black/50 border border-rx-gold/20 rounded-lg px-4 py-3 text-white focus:border-rx-gold/50 focus:outline-none transition-colors"
+                  className="w-full bg-rx-black/50 border border-rx-gold/20 rounded-xl px-4 py-3 text-white focus:border-rx-gold/50 focus:outline-none focus:ring-2 focus:ring-rx-gold/20 transition-all duration-300"
                   placeholder="Nombre de su empresa"
                 />
               </div>
@@ -186,15 +208,15 @@ const EnhancedContactSection = () => {
                   onChange={handleInputChange}
                   required
                   rows={5}
-                  className="w-full bg-rx-black/50 border border-rx-gold/20 rounded-lg px-4 py-3 text-white focus:border-rx-gold/50 focus:outline-none transition-colors resize-none"
+                  className="w-full bg-rx-black/50 border border-rx-gold/20 rounded-xl px-4 py-3 text-white focus:border-rx-gold/50 focus:outline-none focus:ring-2 focus:ring-rx-gold/20 transition-all duration-300 resize-none"
                   placeholder="Cuéntenos sobre su interés en colaborar con RevolutionX..."
                 />
               </div>
               
               <motion.button
                 type="submit"
-                className="w-full bg-gradient-to-r from-rx-gold to-yellow-600 text-rx-black font-semibold py-3 px-6 rounded-lg hover:from-yellow-600 hover:to-rx-gold transition-all duration-300 flex items-center justify-center space-x-2"
-                whileHover={{ scale: 1.02 }}
+                className="w-full bg-gradient-to-r from-rx-gold to-yellow-600 text-rx-black font-semibold py-4 px-6 rounded-xl hover:from-yellow-600 hover:to-rx-gold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <Send className="w-5 h-5" />
@@ -209,12 +231,16 @@ const EnhancedContactSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-rx-dark to-rx-black p-10 rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 shadow-xl"
+            className="bg-gradient-to-br from-rx-dark to-rx-black p-10 rounded-3xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-500 shadow-2xl hover:shadow-rx-gold/10"
           >
             <div className="flex items-center mb-8">
-              <div className="w-12 h-12 bg-rx-gold/20 rounded-full flex items-center justify-center mr-4">
-                <Phone className="w-6 h-6 text-rx-gold" />
-              </div>
+              <motion.div 
+                className="w-14 h-14 bg-rx-gold/20 rounded-full flex items-center justify-center mr-4"
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.6 }}
+              >
+                <Phone className="w-7 h-7 text-rx-gold" />
+              </motion.div>
               <h3 className="font-display text-2xl text-rx-gold font-semibold">
                 ¿Por Qué Colaborar?
               </h3>
@@ -224,27 +250,36 @@ const EnhancedContactSection = () => {
               {whyCollaborate.map((benefit, index) => (
                 <motion.div 
                   key={index} 
-                  className="flex items-start space-x-3"
+                  className="flex items-start space-x-3 p-3 rounded-lg hover:bg-rx-gold/5 transition-colors duration-300"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
+                  whileHover={{ x: 8 }}
                 >
-                  <div className="w-2 h-2 bg-rx-gold rounded-full mt-2 flex-shrink-0"></div>
+                  <motion.div 
+                    className="w-2 h-2 bg-rx-gold rounded-full mt-2 flex-shrink-0"
+                    whileHover={{ scale: 1.5 }}
+                    transition={{ duration: 0.2 }}
+                  />
                   <span className="text-gray-300 text-sm leading-relaxed">{benefit}</span>
                 </motion.div>
               ))}
             </div>
             
-            <div className="p-4 bg-rx-gold/10 rounded-lg border border-rx-gold/20">
+            <motion.div 
+              className="p-6 bg-gradient-to-r from-rx-gold/10 to-rx-gold/5 rounded-xl border border-rx-gold/20"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
               <p className="text-rx-gold font-medium text-center mb-2">
                 ¡Su apoyo marca la diferencia!
               </p>
-              <p className="text-gray-300 text-sm text-center">
+              <p className="text-gray-300 text-sm text-center leading-relaxed">
                 Contáctenos hoy para explorar oportunidades de colaboración 
                 personalizadas según sus objetivos empresariales.
               </p>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
 
@@ -254,36 +289,36 @@ const EnhancedContactSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="mt-16 text-center bg-gradient-to-r from-rx-gold/10 to-rx-gold/5 p-8 rounded-2xl border border-rx-gold/30 max-w-4xl mx-auto"
+          className="mt-20 text-center bg-gradient-to-r from-rx-gold/10 to-rx-gold/5 p-10 rounded-3xl border border-rx-gold/30 max-w-5xl mx-auto shadow-2xl"
         >
-          <h3 className="font-display text-2xl md:text-3xl text-rx-gold mb-4">
+          <h3 className="font-display text-3xl md:text-4xl text-rx-gold mb-6">
             Comience su Colaboración Hoy
           </h3>
-          <p className="text-gray-300 text-lg mb-6 leading-relaxed">
+          <p className="text-gray-300 text-lg mb-8 leading-relaxed max-w-3xl mx-auto">
             Estamos listos para discutir cómo su empresa puede beneficiarse 
             de una asociación estratégica con RevolutionX.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8">
             <motion.a 
               href="mailto:revolutionx.f1@gmail.com" 
-              className="flex items-center space-x-2 bg-rx-gold/20 hover:bg-rx-gold/30 px-6 py-3 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
+              className="flex items-center space-x-3 bg-rx-gold/20 hover:bg-rx-gold/30 px-8 py-4 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
               <Mail className="w-5 h-5" />
-              <span>revolutionx.f1@gmail.com</span>
+              <span className="text-sm">revolutionx.f1@gmail.com</span>
             </motion.a>
             
             <motion.a
               href="https://instagram.com/revolutionx_f1"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 bg-gradient-to-r from-purple-600/20 to-pink-600/20 px-6 py-3 rounded-full border border-purple-500/30 text-purple-300 font-medium hover:from-purple-600/30 hover:to-pink-600/30 transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
+              className="flex items-center space-x-3 bg-gradient-to-r from-purple-600/20 to-pink-600/20 px-8 py-4 rounded-full border border-purple-500/30 text-purple-300 font-medium hover:from-purple-600/30 hover:to-pink-600/30 transition-all duration-300 shadow-lg hover:shadow-xl"
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
               <Instagram className="w-5 h-5" />
-              <span>@revolutionx_f1</span>
+              <span className="text-sm">@revolutionx_f1</span>
             </motion.a>
           </div>
         </motion.div>

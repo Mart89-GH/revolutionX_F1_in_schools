@@ -52,8 +52,8 @@ const FloatingNavigation = () => {
       >
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-14 h-14 bg-gradient-to-br from-rx-gold to-yellow-600 rounded-full flex items-center justify-center shadow-2xl hover:shadow-rx-gold/25 transition-all duration-300"
-          whileHover={{ scale: 1.1 }}
+          className="w-16 h-16 bg-gradient-to-br from-rx-gold to-yellow-600 rounded-full flex items-center justify-center shadow-2xl hover:shadow-rx-gold/25 transition-all duration-300 border-2 border-rx-gold/20"
+          whileHover={{ scale: 1.1, rotate: 5 }}
           whileTap={{ scale: 0.95 }}
         >
           <AnimatePresence mode="wait">
@@ -65,7 +65,7 @@ const FloatingNavigation = () => {
                 exit={{ rotate: 90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <X className="w-6 h-6 text-rx-black" />
+                <X className="w-7 h-7 text-rx-black" />
               </motion.div>
             ) : (
               <motion.div
@@ -75,7 +75,7 @@ const FloatingNavigation = () => {
                 exit={{ rotate: -90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <Menu className="w-6 h-6 text-rx-black" />
+                <Menu className="w-7 h-7 text-rx-black" />
               </motion.div>
             )}
           </AnimatePresence>
@@ -94,25 +94,25 @@ const FloatingNavigation = () => {
           >
             {/* Backdrop */}
             <motion.div
-              className="absolute inset-0 bg-rx-black/90 backdrop-blur-sm"
+              className="absolute inset-0 bg-rx-black/95 backdrop-blur-md"
               onClick={() => setIsOpen(false)}
             />
             
             {/* Menu Content */}
             <div className="relative z-10 flex items-center justify-center min-h-screen p-6">
               <motion.div
-                className="bg-gradient-to-br from-rx-dark to-rx-black rounded-3xl border border-rx-gold/30 p-8 max-w-md w-full"
+                className="bg-gradient-to-br from-rx-dark to-rx-black rounded-3xl border border-rx-gold/30 p-10 max-w-md w-full shadow-2xl"
                 initial={{ scale: 0.8, opacity: 0, y: 50 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.8, opacity: 0, y: 50 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
               >
-                <div className="text-center mb-8">
-                  <h3 className="font-display text-2xl text-rx-gold mb-2">Navegación</h3>
-                  <div className="h-px w-16 bg-rx-gold mx-auto"></div>
+                <div className="text-center mb-10">
+                  <h3 className="font-display text-3xl text-rx-gold mb-3">Navegación</h3>
+                  <div className="h-px w-20 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto"></div>
                 </div>
                 
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {navItems.map((item, index) => {
                     const Icon = item.icon;
                     const isActive = activeSection === item.id;
@@ -123,16 +123,17 @@ const FloatingNavigation = () => {
                         onClick={() => scrollToSection(item.id)}
                         className={`w-full flex items-center space-x-4 p-4 rounded-xl transition-all duration-300 ${
                           isActive 
-                            ? 'bg-rx-gold/20 border border-rx-gold/50 text-rx-gold' 
+                            ? 'bg-rx-gold/20 border border-rx-gold/50 text-rx-gold shadow-lg' 
                             : 'bg-rx-gold/5 border border-rx-gold/10 text-white hover:bg-rx-gold/10 hover:border-rx-gold/30'
                         }`}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        whileHover={{ x: 8 }}
+                        whileHover={{ x: 8, scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                       >
-                        <Icon className="w-5 h-5" />
-                        <span className="font-medium">{item.label}</span>
+                        <Icon className="w-6 h-6" />
+                        <span className="font-medium text-lg">{item.label}</span>
                       </motion.button>
                     );
                   })}
@@ -142,14 +143,15 @@ const FloatingNavigation = () => {
                     href="https://instagram.com/revolutionx_f1"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full flex items-center space-x-4 p-4 rounded-xl bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 text-white hover:from-purple-600/30 hover:to-pink-600/30 transition-all duration-300"
+                    className="w-full flex items-center space-x-4 p-4 rounded-xl bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 text-white hover:from-purple-600/30 hover:to-pink-600/30 transition-all duration-300 shadow-lg"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: navItems.length * 0.1 }}
-                    whileHover={{ x: 8 }}
+                    whileHover={{ x: 8, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <Instagram className="w-5 h-5" />
-                    <span className="font-medium">Instagram</span>
+                    <Instagram className="w-6 h-6" />
+                    <span className="font-medium text-lg">Instagram</span>
                   </motion.a>
                 </div>
               </motion.div>

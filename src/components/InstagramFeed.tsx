@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Instagram, ExternalLink, Heart, MessageCircle } from 'lucide-react';
+import { Instagram, ExternalLink, Heart, MessageCircle, Play } from 'lucide-react';
 
 const InstagramFeed = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -32,7 +32,7 @@ const InstagramFeed = () => {
 
   return (
     <motion.div
-      className="bg-gradient-to-br from-rx-dark to-rx-black p-8 rounded-2xl border border-rx-gold/20"
+      className="bg-gradient-to-br from-rx-dark to-rx-black p-8 rounded-3xl border border-rx-gold/20 hover:border-rx-gold/40 transition-all duration-500 shadow-2xl hover:shadow-rx-gold/10"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
@@ -41,13 +41,17 @@ const InstagramFeed = () => {
       onHoverEnd={() => setIsHovered(false)}
     >
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
-            <Instagram className="w-6 h-6 text-white" />
-          </div>
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center space-x-4">
+          <motion.div 
+            className="w-16 h-16 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center shadow-lg"
+            whileHover={{ rotate: 360, scale: 1.1 }}
+            transition={{ duration: 0.6 }}
+          >
+            <Instagram className="w-8 h-8 text-white" />
+          </motion.div>
           <div>
-            <h3 className="font-display text-xl text-rx-gold font-semibold">
+            <h3 className="font-display text-2xl text-rx-gold font-semibold">
               @revolutionx_f1
             </h3>
             <p className="text-gray-400 text-sm">Síguenos en Instagram</p>
@@ -58,8 +62,8 @@ const InstagramFeed = () => {
           href="https://instagram.com/revolutionx_f1"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center space-x-2 bg-gradient-to-r from-purple-600/20 to-pink-600/20 px-4 py-2 rounded-full border border-purple-500/30 text-white hover:from-purple-600/30 hover:to-pink-600/30 transition-all duration-300"
-          whileHover={{ scale: 1.05 }}
+          className="flex items-center space-x-2 bg-gradient-to-r from-purple-600/20 to-pink-600/20 px-6 py-3 rounded-full border border-purple-500/30 text-white hover:from-purple-600/30 hover:to-pink-600/30 transition-all duration-300 shadow-lg hover:shadow-xl"
+          whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.95 }}
         >
           <span className="text-sm font-medium">Seguir</span>
@@ -68,16 +72,16 @@ const InstagramFeed = () => {
       </div>
 
       {/* Posts Grid */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-4 mb-8">
         {mockPosts.map((post, index) => (
           <motion.div
             key={post.id}
-            className="relative aspect-square rounded-lg overflow-hidden group cursor-pointer"
+            className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer shadow-lg hover:shadow-xl"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.05, y: -4 }}
           >
             <img
               src={post.image}
@@ -87,7 +91,7 @@ const InstagramFeed = () => {
             
             {/* Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="absolute bottom-2 left-2 right-2">
+              <div className="absolute bottom-3 left-3 right-3">
                 <div className="flex items-center justify-between text-white text-xs">
                   <div className="flex items-center space-x-1">
                     <Heart className="w-3 h-3" />
@@ -99,6 +103,17 @@ const InstagramFeed = () => {
                   </div>
                 </div>
               </div>
+              
+              {/* Play icon for video-like effect */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <motion.div
+                  className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center"
+                  whileHover={{ scale: 1.2 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Play className="w-6 h-6 text-white ml-1" />
+                </motion.div>
+              </div>
             </div>
           </motion.div>
         ))}
@@ -106,15 +121,15 @@ const InstagramFeed = () => {
 
       {/* Call to Action */}
       <motion.div
-        className="mt-6 text-center"
+        className="text-center bg-gradient-to-r from-rx-gold/10 to-rx-gold/5 p-6 rounded-xl border border-rx-gold/20"
         animate={{ y: isHovered ? -2 : 0 }}
         transition={{ duration: 0.3 }}
       >
-        <p className="text-gray-300 text-sm mb-3">
+        <p className="text-gray-300 text-sm mb-4 leading-relaxed">
           Descubre más contenido exclusivo y actualizaciones del equipo
         </p>
         <div className="flex items-center justify-center space-x-2 text-rx-gold">
-          <Instagram className="w-4 h-4" />
+          <Instagram className="w-5 h-5" />
           <span className="text-sm font-medium">@revolutionx_f1</span>
         </div>
       </motion.div>
