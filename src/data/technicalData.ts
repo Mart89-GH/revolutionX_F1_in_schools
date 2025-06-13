@@ -44,12 +44,12 @@ export const technicalFeatures: TechnicalFeature[] = [
 ];
 
 export const specifications: Specification[] = [
-  { label: "Longitud máxima", value: "210 mm" },
-  { label: "Ancho máximo", value: "65 mm" },
-  { label: "Altura máxima", value: "50 mm" },
-  { label: "Peso mínimo", value: "8 gramos" },
+  { label: "Longitud máxima", value: "185 mm" },
+  { label: "Ancho máximo", value: "69 mm" },
+  { label: "Altura máxima", value: "44 mm" },
+  { label: "Peso mínimo", value: "72,8 gramos" },
   { label: "Material principal", value: "PLA" },
-  { label: "Acabado", value: "Pintura aerodinámica especializada" }
+  { label: "Acabado", value: "pintura aerosol" }
 ];
 
 export const developmentPhases: DevelopmentPhase[] = [
