@@ -48,7 +48,7 @@ export const specifications: Specification[] = [
   { label: "Ancho máximo", value: "65 mm" },
   { label: "Altura máxima", value: "50 mm" },
   { label: "Peso mínimo", value: "8 gramos" },
-  { label: "Material principal", value: "Balsa de alta calidad" },
+  { label: "Material principal", value: "PLA" },
   { label: "Acabado", value: "Pintura aerodinámica especializada" }
 ];
 
