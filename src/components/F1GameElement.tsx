@@ -8,7 +8,7 @@ const F1GameElement = () => {
   const [bestTime, setBestTime] = useState(null);
   const [gameState, setGameState] = useState('ready'); // ready, playing, finished
 
-  const targetTime = 2.847; // Our actual best time
+  const targetTime = 1.587; // Our actual best time
   const tolerance = 0.1;
 
   useEffect(() => {
