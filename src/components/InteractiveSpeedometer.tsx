@@ -7,7 +7,7 @@ const InteractiveSpeedometer = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   
   const maxSpeed = 100; // km/h equivalent for F1 in Schools
-  const targetSpeed = 85; // Our achieved speed
+  const targetSpeed = 45; // Our achieved speed
 
   const startAnimation = () => {
     if (isAnimating) return;
