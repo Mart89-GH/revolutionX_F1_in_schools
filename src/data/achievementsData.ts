@@ -10,11 +10,6 @@ export interface CompetitionResult {
   category: string;
 }
 
-export interface Recognition {
-  title: string;
-  description: string;
-}
-
 export const mainAchievement = {
   title: "Coche Más Rápido",
   category: "Categoría Entry",
@@ -44,9 +39,4 @@ export const competitionResults: CompetitionResult[] = [
   { event: "Regional Madrid 2025", position: "1º Puesto", category: "Coche Más Rápido - Entry" },
   { event: "Regional Madrid 2025", position: "Top 1", category: "Clasificación General" },
   { event: "Nacional España 2025", position: "Clasificado", category: "Representación Madrid" }
-];
-
-export const recognitions: Recognition[] = [
-  { title: "Excelencia Académica", description: "Reconocimiento por la integración de conocimientos STEM en el proyecto" },
-  { title: "Innovación Tecnológica", description: "Mención especial por el uso de tecnologías avanzadas de simulación" }
 ];

@@ -3,7 +3,7 @@ import { Award, Zap, Medal, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionHeader from './ui/SectionHeader';
 import FeatureCard from './ui/FeatureCard';
-import { mainAchievement, achievements, competitionResults, recognitions } from '../data/achievementsData';
+import { mainAchievement, achievements, competitionResults } from '../data/achievementsData';
 import * as Icons from 'lucide-react';
 
 const AchievementsSection = () => {
@@ -90,7 +90,7 @@ const AchievementsSection = () => {
         </motion.div>
 
         {/* Other Achievements */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {achievements.map((achievement, index) => {
             const IconComponent = Icons[achievement.icon as keyof typeof Icons] as React.ComponentType<any>;
             return (
@@ -104,27 +104,6 @@ const AchievementsSection = () => {
             );
           })}
         </div>
-
-        {/* Additional Recognitions */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <h3 className="font-display text-2xl text-rx-gold mb-8">
-            Reconocimientos y Menciones
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {recognitions.map((recognition, index) => (
-              <div key={index} className="bg-rx-gold/5 p-6 rounded-lg border border-rx-gold/20">
-                <h4 className="text-white font-semibold mb-2">{recognition.title}</h4>
-                <p className="text-gray-300 text-sm">{recognition.description}</p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
