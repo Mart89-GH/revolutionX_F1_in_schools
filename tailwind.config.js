@@ -44,6 +44,9 @@ export default {
         'wider': '0.1em',
         'widest': '0.2em',
       },
+      screens: {
+        'xs': '475px',
+      },
     },
   },
   plugins: [],

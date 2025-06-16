@@ -19,12 +19,16 @@ const ParallaxSection: React.FC<ParallaxSectionProps> = ({
     triggerOnce: false
   });
 
-  const y = useTransform(scrollY, [0, 1000], [0, -1000 * speed]);
+  // Reduce parallax effect on mobile devices
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const effectiveSpeed = isMobile ? speed * 0.3 : speed;
+  
+  const y = useTransform(scrollY, [0, 1000], [0, -1000 * effectiveSpeed]);
 
   return (
     <motion.div
       ref={ref}
-      style={{ y: inView ? y : 0 }}
+      style={{ y: inView && !isMobile ? y : 0 }}
       className={className}
     >
       {children}
