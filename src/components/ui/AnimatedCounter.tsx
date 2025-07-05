@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -18,6 +18,7 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
   decimals = 0 
 }) => {
   const [count, setCount] = useState(0);
+  const animationRef = useRef<number | null>(null);
   const { ref, inView } = useInView({
     threshold: 0.3,
     triggerOnce: true
@@ -25,23 +26,27 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
 
   useEffect(() => {
     if (inView) {
-      let startTime: number;
-      let animationFrame: number;
+      const startTime = performance.now();
 
-      const animate = (timestamp: number) => {
-        if (!startTime) startTime = timestamp;
-        const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
+      const animate = (currentTime: number) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / (duration * 1000), 1);
         
         const easeOutQuart = 1 - Math.pow(1 - progress, 4);
         setCount(end * easeOutQuart);
 
         if (progress < 1) {
-          animationFrame = requestAnimationFrame(animate);
+          animationRef.current = requestAnimationFrame(animate);
         }
       };
 
-      animationFrame = requestAnimationFrame(animate);
-      return () => cancelAnimationFrame(animationFrame);
+      animationRef.current = requestAnimationFrame(animate);
+      
+      return () => {
+        if (animationRef.current) {
+          cancelAnimationFrame(animationRef.current);
+        }
+      };
     }
   }, [inView, end, duration]);
 

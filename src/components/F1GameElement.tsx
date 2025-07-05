@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Pause, RotateCcw, Trophy, Timer } from 'lucide-react';
 
 const F1GameElement = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-  const [bestTime, setBestTime] = useState(null);
-  const [gameState, setGameState] = useState('ready'); // ready, playing, finished
+  const [bestTime, setBestTime] = useState<number | null>(null);
+  const [gameState, setGameState] = useState<'ready' | 'playing' | 'finished'>('ready');
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const targetTime = 1.587; // Our actual best time
   const tolerance = 0.1;
 
+  // Optimized timer with 0.001 second precision
   useEffect(() => {
-    let interval;
     if (isPlaying && gameState === 'playing') {
-      interval = setInterval(() => {
+      intervalRef.current = setInterval(() => {
         setCurrentTime(prev => {
-          const newTime = prev + 0.01;
+          const newTime = prev + 0.001; // Changed from 0.01 to 0.001 for higher precision
           if (newTime >= 5) { // Max time limit
             setIsPlaying(false);
             setGameState('finished');
@@ -24,18 +25,24 @@ const F1GameElement = () => {
           }
           return newTime;
         });
-      }, 10);
+      }, 1); // 1ms interval for smooth animation
     }
-    return () => clearInterval(interval);
+    
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, [isPlaying, gameState]);
 
-  const startGame = () => {
+  const startGame = useCallback(() => {
     setCurrentTime(0);
     setIsPlaying(true);
     setGameState('playing');
-  };
+  }, []);
 
-  const stopGame = () => {
+  const stopGame = useCallback(() => {
     setIsPlaying(false);
     setGameState('finished');
     
@@ -45,21 +52,21 @@ const F1GameElement = () => {
         setBestTime(currentTime);
       }
     }
-  };
+  }, [currentTime, targetTime, tolerance, bestTime]);
 
-  const resetGame = () => {
+  const resetGame = useCallback(() => {
     setCurrentTime(0);
     setIsPlaying(false);
     setGameState('ready');
-  };
+  }, []);
 
-  const getPerformanceMessage = () => {
+  const getPerformanceMessage = useCallback(() => {
     const timeDiff = Math.abs(currentTime - targetTime);
     if (timeDiff <= 0.05) return "¡Perfecto! Tiempo de campeón 🏆";
     if (timeDiff <= 0.1) return "¡Excelente! Muy cerca del récord ⚡";
     if (timeDiff <= 0.2) return "¡Bien! Sigue practicando 🎯";
     return "¡Inténtalo de nuevo! 🏁";
-  };
+  }, [currentTime, targetTime]);
 
   return (
     <motion.div
@@ -90,7 +97,7 @@ const F1GameElement = () => {
       <div className="relative mb-8 sm:mb-10">
         <div className="text-center">
           <motion.div
-            className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-rx-gold mb-2 sm:mb-3"
+            className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-rx-gold mb-2 sm:mb-3 font-mono"
             animate={{ 
               scale: isPlaying ? [1, 1.02, 1] : 1,
               color: gameState === 'finished' ? 

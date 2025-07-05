@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Mail, MessageSquare, Send, Phone, Instagram, MapPin, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SectionHeader from './ui/SectionHeader';
-import { contactMethods, collaborationAreas, whyCollaborate } from '../data/contactData';
-import * as Icons from 'lucide-react';
+import { whyCollaborate } from '../data/contactData';
 
 const EnhancedContactSection = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -14,21 +13,22 @@ const EnhancedContactSection = () => {
     message: ''
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
     // Create mailto link with form data
     const subject = `Colaboración con RevolutionX - ${formData.company || 'Consulta'}`;
     const body = `Nombre: ${formData.name}\nEmpresa: ${formData.company}\nEmail: ${formData.email}\n\nMensaje:\n${formData.message}`;
     const mailtoLink = `mailto:revolutionx.f1@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
-  };
+  }, [formData]);
 
   return (
     <section id="contacto" className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-rx-dark to-rx-black">
@@ -50,7 +50,7 @@ const EnhancedContactSection = () => {
           {/* Email */}
           <motion.a
             href="mailto:revolutionx.f1@gmail.com"
-            className="bg-gradient-to-br from-rx-dark to-rx-black p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center group hover:shadow-2xl hover:shadow-rx-gold/10"
+            className="bg-gradient-to-br from-rx-dark to-rx-black p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center group hover:shadow-2xl hover:shadow-rx-gold/10 focus:outline-none focus:ring-2 focus:ring-rx-gold/50"
             whileHover={{ y: -8, scale: 1.02 }}
             onHoverStart={() => setHoveredCard(0)}
             onHoverEnd={() => setHoveredCard(null)}
@@ -74,7 +74,7 @@ const EnhancedContactSection = () => {
             href="https://instagram.com/revolutionx_f1"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-purple-500/30 hover:border-purple-500/50 transition-all duration-300 text-center group hover:shadow-2xl hover:shadow-purple-500/10"
+            className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-purple-500/30 hover:border-purple-500/50 transition-all duration-300 text-center group hover:shadow-2xl hover:shadow-purple-500/10 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
             whileHover={{ y: -8, scale: 1.02 }}
             onHoverStart={() => setHoveredCard(1)}
             onHoverEnd={() => setHoveredCard(null)}
@@ -155,11 +155,12 @@ const EnhancedContactSection = () => {
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                 <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-2">
+                  <label htmlFor="name" className="block text-gray-300 text-sm font-medium mb-2">
                     Nombre *
                   </label>
                   <input
                     type="text"
+                    id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
@@ -169,11 +170,12 @@ const EnhancedContactSection = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-2">
+                  <label htmlFor="email" className="block text-gray-300 text-sm font-medium mb-2">
                     Email *
                   </label>
                   <input
                     type="email"
+                    id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
@@ -185,11 +187,12 @@ const EnhancedContactSection = () => {
               </div>
               
               <div>
-                <label className="block text-gray-300 text-sm font-medium mb-2">
+                <label htmlFor="company" className="block text-gray-300 text-sm font-medium mb-2">
                   Empresa/Organización
                 </label>
                 <input
                   type="text"
+                  id="company"
                   name="company"
                   value={formData.company}
                   onChange={handleInputChange}
@@ -199,10 +202,11 @@ const EnhancedContactSection = () => {
               </div>
               
               <div>
-                <label className="block text-gray-300 text-sm font-medium mb-2">
+                <label htmlFor="message" className="block text-gray-300 text-sm font-medium mb-2">
                   Mensaje *
                 </label>
                 <textarea
+                  id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
@@ -215,7 +219,7 @@ const EnhancedContactSection = () => {
               
               <motion.button
                 type="submit"
-                className="w-full bg-gradient-to-r from-rx-gold to-yellow-600 text-rx-black font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl hover:from-yellow-600 hover:to-rx-gold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl text-sm sm:text-base"
+                className="w-full bg-gradient-to-r from-rx-gold to-yellow-600 text-rx-black font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl hover:from-yellow-600 hover:to-rx-gold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-rx-gold/50"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -301,7 +305,7 @@ const EnhancedContactSection = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-6 md:space-x-8">
             <motion.a 
               href="mailto:revolutionx.f1@gmail.com" 
-              className="flex items-center space-x-2 sm:space-x-3 bg-rx-gold/20 hover:bg-rx-gold/30 px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm"
+              className="flex items-center space-x-2 sm:space-x-3 bg-rx-gold/20 hover:bg-rx-gold/30 px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-rx-gold/50"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -313,7 +317,7 @@ const EnhancedContactSection = () => {
               href="https://instagram.com/revolutionx_f1"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 sm:space-x-3 bg-gradient-to-r from-purple-600/20 to-pink-600/20 px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-full border border-purple-500/30 text-purple-300 font-medium hover:from-purple-600/30 hover:to-pink-600/30 transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm"
+              className="flex items-center space-x-2 sm:space-x-3 bg-gradient-to-r from-purple-600/20 to-pink-600/20 px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-full border border-purple-500/30 text-purple-300 font-medium hover:from-purple-600/30 hover:to-pink-600/30 transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >

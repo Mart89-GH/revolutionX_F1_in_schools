@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-import TeamSection from './components/TeamSection';
-import TechnicalSection from './components/TechnicalSection';
-import AchievementsSection from './components/AchievementsSection';
-import SponsorsSection from './components/SponsorsSection';
-import MarketingSection from './components/MarketingSection';
-import ContactSection from './components/ContactSection';
 import FloatingNavigation from './components/FloatingNavigation';
 import ScrollProgressIndicator from './components/ScrollProgressIndicator';
 import ParallaxSection from './components/ParallaxSection';
 import InteractiveSpeedometer from './components/InteractiveSpeedometer';
-import InstagramFeed from './components/InstagramFeed';
 import F1GameElement from './components/F1GameElement';
+import LoadingSpinner from './components/ui/LoadingSpinner';
+
+// Lazy load heavy components for better performance
+const TeamSection = lazy(() => import('./components/TeamSection'));
+const TechnicalSection = lazy(() => import('./components/TechnicalSection'));
+const AchievementsSection = lazy(() => import('./components/AchievementsSection'));
+const SponsorsSection = lazy(() => import('./components/SponsorsSection'));
+const MarketingSection = lazy(() => import('./components/MarketingSection'));
+const ContactSection = lazy(() => import('./components/ContactSection'));
+const InstagramFeed = lazy(() => import('./components/InstagramFeed'));
 
 function App() {
   return (
@@ -27,9 +30,9 @@ function App() {
             <div className="absolute inset-0 bg-gradient-to-br from-rx-black via-rx-dark to-rx-black opacity-95"></div>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-rx-gold/10 via-transparent to-transparent"></div>
             
-            {/* Animated Background Elements */}
+            {/* Optimized Animated Background Elements */}
             <div className="absolute inset-0 overflow-hidden">
-              {[...Array(15)].map((_, i) => (
+              {[...Array(10)].map((_, i) => (
                 <motion.div
                   key={i}
                   className="absolute w-1 h-1 bg-rx-gold/30 rounded-full"
@@ -69,6 +72,7 @@ function App() {
                 rotate: [0, -2, 2, 0],
                 transition: { duration: 0.5 }
               }}
+              loading="eager"
             />
             
             <motion.h1 
@@ -108,80 +112,82 @@ function App() {
           </motion.div>
         </section>
 
-        <ParallaxSection speed={0.3}>
-          <TeamSection />
-        </ParallaxSection>
+        <Suspense fallback={<LoadingSpinner />}>
+          <ParallaxSection speed={0.3}>
+            <TeamSection />
+          </ParallaxSection>
 
-        <ParallaxSection speed={0.2}>
-          <TechnicalSection />
-        </ParallaxSection>
+          <ParallaxSection speed={0.2}>
+            <TechnicalSection />
+          </ParallaxSection>
 
-        {/* Interactive Performance Section */}
-        <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-rx-dark to-rx-black">
-          <div className="container mx-auto px-4 sm:px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center mb-12 sm:mb-16"
-            >
-              <h2 className="font-display text-3xl sm:text-4xl md:text-6xl text-rx-gold mb-6 sm:mb-8">
-                Rendimiento Récord
-              </h2>
-              <p className="text-gray-300 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed px-4">
-                Experimenta la velocidad que nos llevó al primer puesto
-              </p>
-            </motion.div>
+          {/* Interactive Performance Section */}
+          <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-rx-dark to-rx-black">
+            <div className="container mx-auto px-4 sm:px-6">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="text-center mb-12 sm:mb-16"
+              >
+                <h2 className="font-display text-3xl sm:text-4xl md:text-6xl text-rx-gold mb-6 sm:mb-8">
+                  Rendimiento Récord
+                </h2>
+                <p className="text-gray-300 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed px-4">
+                  Experimenta la velocidad que nos llevó al primer puesto
+                </p>
+              </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 max-w-6xl mx-auto">
-              <div className="flex justify-center">
-                <InteractiveSpeedometer />
-              </div>
-              <div className="flex justify-center">
-                <F1GameElement />
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 max-w-6xl mx-auto">
+                <div className="flex justify-center">
+                  <InteractiveSpeedometer />
+                </div>
+                <div className="flex justify-center">
+                  <F1GameElement />
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <ParallaxSection speed={0.1}>
-          <AchievementsSection />
-        </ParallaxSection>
+          <ParallaxSection speed={0.1}>
+            <AchievementsSection />
+          </ParallaxSection>
 
-        <ParallaxSection speed={0.2}>
-          <SponsorsSection />
-        </ParallaxSection>
+          <ParallaxSection speed={0.2}>
+            <SponsorsSection />
+          </ParallaxSection>
 
-        <ParallaxSection speed={0.3}>
-          <MarketingSection />
-        </ParallaxSection>
+          <ParallaxSection speed={0.3}>
+            <MarketingSection />
+          </ParallaxSection>
 
-        {/* Enhanced Social Media Section */}
-        <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-rx-black to-rx-dark">
-          <div className="container mx-auto px-4 sm:px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center mb-12 sm:mb-16"
-            >
-              <h2 className="font-display text-3xl sm:text-4xl md:text-6xl text-rx-gold mb-6 sm:mb-8">
-                Síguenos en Redes
-              </h2>
-              <p className="text-gray-300 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed px-4">
-                Mantente al día con nuestras últimas actualizaciones y contenido exclusivo
-              </p>
-            </motion.div>
+          {/* Enhanced Social Media Section */}
+          <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-rx-black to-rx-dark">
+            <div className="container mx-auto px-4 sm:px-6">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="text-center mb-12 sm:mb-16"
+              >
+                <h2 className="font-display text-3xl sm:text-4xl md:text-6xl text-rx-gold mb-6 sm:mb-8">
+                  Síguenos en Redes
+                </h2>
+                <p className="text-gray-300 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed px-4">
+                  Mantente al día con nuestras últimas actualizaciones y contenido exclusivo
+                </p>
+              </motion.div>
 
-            <div className="max-w-2xl mx-auto">
-              <InstagramFeed />
+              <div className="max-w-2xl mx-auto">
+                <InstagramFeed />
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <ContactSection />
+          <ContactSection />
+        </Suspense>
       </main>
 
       <footer className="bg-gradient-to-t from-rx-black to-rx-dark border-t border-rx-gold/20 py-8 sm:py-12">
@@ -196,6 +202,7 @@ function App() {
                 scale: 1.1,
                 transition: { duration: 0.3 }
               }}
+              loading="lazy"
             />
           </div>
           <p className="text-gray-400 text-xs sm:text-sm px-4">

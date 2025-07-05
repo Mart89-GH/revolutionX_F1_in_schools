@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Users, Cog, Award, Handshake, TrendingUp, MessageSquare, Instagram } from 'lucide-react';
 
@@ -16,41 +16,49 @@ const FloatingNavigation = () => {
     { id: 'contacto', label: 'Contacto', icon: MessageSquare },
   ];
 
+  const checkMobile = useCallback(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  }, [checkMobile]);
+
+  const handleScroll = useCallback(() => {
+    const sections = navItems.map(item => document.getElementById(item.id));
+    const scrollPosition = window.scrollY + 100;
+
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const section = sections[i];
+      if (section && section.offsetTop <= scrollPosition) {
+        setActiveSection(navItems[i].id);
+        break;
+      }
+    }
+  }, [navItems]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = navItems.map(item => document.getElementById(item.id));
-      const scrollPosition = window.scrollY + 100;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(navItems[i].id);
-          break;
-        }
-      }
+    const throttledHandleScroll = () => {
+      requestAnimationFrame(handleScroll);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('scroll', throttledHandleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', throttledHandleScroll);
+  }, [handleScroll]);
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = useCallback((sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
       setIsOpen(false);
     }
-  };
+  }, []);
+
+  const toggleMenu = useCallback(() => {
+    setIsOpen(prev => !prev);
+  }, []);
 
   return (
     <>
@@ -62,10 +70,11 @@ const FloatingNavigation = () => {
         transition={{ delay: 1, type: "spring", stiffness: 260, damping: 20 }}
       >
         <motion.button
-          onClick={() => setIsOpen(!isOpen)}
-          className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-rx-gold to-yellow-600 rounded-full flex items-center justify-center shadow-2xl hover:shadow-rx-gold/25 transition-all duration-300 border-2 border-rx-gold/20"
+          onClick={toggleMenu}
+          className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-rx-gold to-yellow-600 rounded-full flex items-center justify-center shadow-2xl hover:shadow-rx-gold/25 transition-all duration-300 border-2 border-rx-gold/20 focus:outline-none focus:ring-2 focus:ring-rx-gold/50"
           whileHover={{ scale: 1.1, rotate: 5 }}
           whileTap={{ scale: 0.95 }}
+          aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
         >
           <AnimatePresence mode="wait">
             {isOpen ? (
@@ -132,7 +141,7 @@ const FloatingNavigation = () => {
                       <motion.button
                         key={item.id}
                         onClick={() => scrollToSection(item.id)}
-                        className={`w-full flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-lg sm:rounded-xl transition-all duration-300 ${
+                        className={`w-full flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-lg sm:rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-rx-gold/50 ${
                           isActive 
                             ? 'bg-rx-gold/20 border border-rx-gold/50 text-rx-gold shadow-lg' 
                             : 'bg-rx-gold/5 border border-rx-gold/10 text-white hover:bg-rx-gold/10 hover:border-rx-gold/30'
@@ -154,7 +163,7 @@ const FloatingNavigation = () => {
                     href="https://instagram.com/revolutionx_f1"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 text-white hover:from-purple-600/30 hover:to-pink-600/30 transition-all duration-300 shadow-lg"
+                    className="w-full flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 text-white hover:from-purple-600/30 hover:to-pink-600/30 transition-all duration-300 shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: navItems.length * 0.1 }}

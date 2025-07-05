@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -19,9 +19,14 @@ const ParallaxSection: React.FC<ParallaxSectionProps> = ({
     triggerOnce: false
   });
 
-  // Reduce parallax effect on mobile devices
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const effectiveSpeed = isMobile ? speed * 0.3 : speed;
+  // Memoize mobile detection and effective speed
+  const { isMobile, effectiveSpeed } = useMemo(() => {
+    const mobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    return {
+      isMobile: mobile,
+      effectiveSpeed: mobile ? speed * 0.2 : speed // Reduce parallax on mobile for performance
+    };
+  }, [speed]);
   
   const y = useTransform(scrollY, [0, 1000], [0, -1000 * effectiveSpeed]);
 

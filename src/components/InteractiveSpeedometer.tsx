@@ -1,41 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Zap, Timer, Target } from 'lucide-react';
 
 const InteractiveSpeedometer = () => {
   const [currentSpeed, setCurrentSpeed] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const animationRef = useRef<number | null>(null);
   
   const maxSpeed = 100; // km/h equivalent for F1 in Schools
   const targetSpeed = 45; // Our achieved speed
 
-  const startAnimation = () => {
+  const startAnimation = useCallback(() => {
     if (isAnimating) return;
     
     setIsAnimating(true);
     setCurrentSpeed(0);
     
     const duration = 3000; // 3 seconds
-    const steps = 60;
-    const increment = targetSpeed / steps;
+    const startTime = performance.now();
     
-    let step = 0;
-    const interval = setInterval(() => {
-      step++;
-      setCurrentSpeed(Math.min(increment * step, targetSpeed));
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
       
-      if (step >= steps) {
-        clearInterval(interval);
+      // Easing function for smooth animation
+      const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+      setCurrentSpeed(targetSpeed * easeOutCubic);
+      
+      if (progress < 1) {
+        animationRef.current = requestAnimationFrame(animate);
+      } else {
         setIsAnimating(false);
       }
-    }, duration / steps);
-  };
+    };
+    
+    animationRef.current = requestAnimationFrame(animate);
+  }, [isAnimating, targetSpeed]);
 
   useEffect(() => {
     // Auto-start animation when component mounts
     const timer = setTimeout(startAnimation, 1000);
-    return () => clearTimeout(timer);
-  }, []);
+    return () => {
+      clearTimeout(timer);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [startAnimation]);
 
   const speedPercentage = (currentSpeed / maxSpeed) * 100;
   const circumference = 2 * Math.PI * 90; // radius = 90
@@ -92,7 +103,7 @@ const InteractiveSpeedometer = () => {
           animate={{ scale: isAnimating ? [1, 1.1, 1] : 1 }}
           transition={{ duration: 0.5, repeat: isAnimating ? Infinity : 0 }}
         >
-          <div className="text-3xl sm:text-5xl font-display font-bold text-rx-gold mb-2 sm:mb-3">
+          <div className="text-3xl sm:text-5xl font-display font-bold text-rx-gold mb-2 sm:mb-3 font-mono">
             {Math.round(currentSpeed)}
           </div>
           <div className="text-xs sm:text-sm text-gray-400 uppercase tracking-wider">
@@ -115,8 +126,8 @@ const InteractiveSpeedometer = () => {
       <motion.button
         onClick={startAnimation}
         disabled={isAnimating}
-        className="absolute -bottom-12 sm:-bottom-16 left-1/2 transform -translate-x-1/2 bg-rx-gold/20 hover:bg-rx-gold/30 disabled:opacity-50 px-4 sm:px-8 py-2 sm:py-3 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm"
-        whileHover={{ scale: 1.05, y: -2 }}
+        className="absolute -bottom-12 sm:-bottom-16 left-1/2 transform -translate-x-1/2 bg-rx-gold/20 hover:bg-rx-gold/30 disabled:opacity-50 disabled:cursor-not-allowed px-4 sm:px-8 py-2 sm:py-3 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm"
+        whileHover={{ scale: isAnimating ? 1 : 1.05, y: isAnimating ? 0 : -2 }}
         whileTap={{ scale: 0.95 }}
       >
         {isAnimating ? (
