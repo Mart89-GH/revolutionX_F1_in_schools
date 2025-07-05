@@ -24,7 +24,7 @@ const ParallaxSection: React.FC<ParallaxSectionProps> = ({
     const mobile = typeof window !== 'undefined' && window.innerWidth < 768;
     return {
       isMobile: mobile,
-      effectiveSpeed: mobile ? speed * 0.2 : speed // Reduce parallax on mobile for performance
+      effectiveSpeed: mobile ? 0 : speed * 0.3 // Reduce parallax significantly to prevent overlapping
     };
   }, [speed]);
   
@@ -33,8 +33,12 @@ const ParallaxSection: React.FC<ParallaxSectionProps> = ({
   return (
     <motion.div
       ref={ref}
-      style={{ y: inView && !isMobile ? y : 0 }}
-      className={className}
+      style={{ 
+        y: inView && !isMobile ? y : 0,
+        position: 'relative',
+        zIndex: 1
+      }}
+      className={`${className} relative`}
     >
       {children}
     </motion.div>

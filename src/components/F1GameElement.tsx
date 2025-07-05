@@ -12,12 +12,12 @@ const F1GameElement = () => {
   const targetTime = 1.587; // Our actual best time
   const tolerance = 0.1;
 
-  // Optimized timer with 0.001 second precision
+  // Fixed timer with proper 0.01 second increments (back to normal speed)
   useEffect(() => {
     if (isPlaying && gameState === 'playing') {
       intervalRef.current = setInterval(() => {
         setCurrentTime(prev => {
-          const newTime = prev + 0.001; // Changed from 0.01 to 0.001 for higher precision
+          const newTime = prev + 0.01; // Back to 0.01 for normal speed
           if (newTime >= 5) { // Max time limit
             setIsPlaying(false);
             setGameState('finished');
@@ -25,7 +25,7 @@ const F1GameElement = () => {
           }
           return newTime;
         });
-      }, 1); // 1ms interval for smooth animation
+      }, 10); // 10ms interval for smooth but normal speed
     }
     
     return () => {
@@ -130,7 +130,7 @@ const F1GameElement = () => {
             <motion.button
               key="start"
               onClick={startGame}
-              className="flex items-center space-x-2 bg-rx-gold/20 hover:bg-rx-gold/30 px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm"
+              className="flex items-center space-x-2 bg-rx-gold/20 hover:bg-rx-gold/30 px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-rx-gold/50"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 20 }}
@@ -146,7 +146,7 @@ const F1GameElement = () => {
             <motion.button
               key="stop"
               onClick={stopGame}
-              className="flex items-center space-x-2 bg-red-600/20 hover:bg-red-600/30 px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full border border-red-500/50 text-red-400 font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm"
+              className="flex items-center space-x-2 bg-red-600/20 hover:bg-red-600/30 px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full border border-red-500/50 text-red-400 font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-500/50"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 20 }}
@@ -162,7 +162,7 @@ const F1GameElement = () => {
             <motion.button
               key="reset"
               onClick={resetGame}
-              className="flex items-center space-x-2 bg-rx-gold/20 hover:bg-rx-gold/30 px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm"
+              className="flex items-center space-x-2 bg-rx-gold/20 hover:bg-rx-gold/30 px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-rx-gold/50"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 20 }}

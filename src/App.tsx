@@ -32,7 +32,7 @@ function App() {
             
             {/* Optimized Animated Background Elements */}
             <div className="absolute inset-0 overflow-hidden">
-              {[...Array(10)].map((_, i) => (
+              {[...Array(8)].map((_, i) => (
                 <motion.div
                   key={i}
                   className="absolute w-1 h-1 bg-rx-gold/30 rounded-full"
@@ -113,84 +113,101 @@ function App() {
         </section>
 
         <Suspense fallback={<LoadingSpinner />}>
-          <ParallaxSection speed={0.3}>
-            <TeamSection />
-          </ParallaxSection>
+          {/* Fixed sections with proper spacing and z-index */}
+          <div className="relative z-10">
+            <ParallaxSection speed={0.1}>
+              <TeamSection />
+            </ParallaxSection>
+          </div>
 
-          <ParallaxSection speed={0.2}>
-            <TechnicalSection />
-          </ParallaxSection>
+          <div className="relative z-10">
+            <ParallaxSection speed={0.1}>
+              <TechnicalSection />
+            </ParallaxSection>
+          </div>
 
           {/* Interactive Performance Section */}
-          <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-rx-dark to-rx-black">
-            <div className="container mx-auto px-4 sm:px-6">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                className="text-center mb-12 sm:mb-16"
-              >
-                <h2 className="font-display text-3xl sm:text-4xl md:text-6xl text-rx-gold mb-6 sm:mb-8">
-                  Rendimiento Récord
-                </h2>
-                <p className="text-gray-300 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed px-4">
-                  Experimenta la velocidad que nos llevó al primer puesto
-                </p>
-              </motion.div>
+          <div className="relative z-10">
+            <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-rx-dark to-rx-black">
+              <div className="container mx-auto px-4 sm:px-6">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: true }}
+                  className="text-center mb-12 sm:mb-16"
+                >
+                  <h2 className="font-display text-3xl sm:text-4xl md:text-6xl text-rx-gold mb-6 sm:mb-8">
+                    Rendimiento Récord
+                  </h2>
+                  <p className="text-gray-300 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed px-4">
+                    Experimenta la velocidad que nos llevó al primer puesto
+                  </p>
+                </motion.div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 max-w-6xl mx-auto">
-                <div className="flex justify-center">
-                  <InteractiveSpeedometer />
-                </div>
-                <div className="flex justify-center">
-                  <F1GameElement />
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 max-w-6xl mx-auto">
+                  <div className="flex justify-center">
+                    <InteractiveSpeedometer />
+                  </div>
+                  <div className="flex justify-center">
+                    <F1GameElement />
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
 
-          <ParallaxSection speed={0.1}>
-            <AchievementsSection />
-          </ParallaxSection>
+          <div className="relative z-10">
+            <ParallaxSection speed={0.1}>
+              <AchievementsSection />
+            </ParallaxSection>
+          </div>
 
-          <ParallaxSection speed={0.2}>
-            <SponsorsSection />
-          </ParallaxSection>
+          <div className="relative z-10">
+            <ParallaxSection speed={0.1}>
+              <SponsorsSection />
+            </ParallaxSection>
+          </div>
 
-          <ParallaxSection speed={0.3}>
-            <MarketingSection />
-          </ParallaxSection>
+          <div className="relative z-10">
+            <ParallaxSection speed={0.1}>
+              <MarketingSection />
+            </ParallaxSection>
+          </div>
 
           {/* Enhanced Social Media Section */}
-          <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-rx-black to-rx-dark">
-            <div className="container mx-auto px-4 sm:px-6">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                className="text-center mb-12 sm:mb-16"
-              >
-                <h2 className="font-display text-3xl sm:text-4xl md:text-6xl text-rx-gold mb-6 sm:mb-8">
-                  Síguenos en Redes
-                </h2>
-                <p className="text-gray-300 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed px-4">
-                  Mantente al día con nuestras últimas actualizaciones y contenido exclusivo
-                </p>
-              </motion.div>
+          <div className="relative z-10">
+            <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-rx-black to-rx-dark">
+              <div className="container mx-auto px-4 sm:px-6">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: true }}
+                  className="text-center mb-12 sm:mb-16"
+                >
+                  <h2 className="font-display text-3xl sm:text-4xl md:text-6xl text-rx-gold mb-6 sm:mb-8">
+                    Síguenos en Redes
+                  </h2>
+                  <p className="text-gray-300 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed px-4">
+                    Mantente al día con nuestras últimas actualizaciones y contenido exclusivo
+                  </p>
+                </motion.div>
 
-              <div className="max-w-2xl mx-auto">
-                <InstagramFeed />
+                <div className="max-w-2xl mx-auto">
+                  <InstagramFeed />
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
 
-          <ContactSection />
+          <div className="relative z-10">
+            <ContactSection />
+          </div>
         </Suspense>
       </main>
 
-      <footer className="bg-gradient-to-t from-rx-black to-rx-dark border-t border-rx-gold/20 py-8 sm:py-12">
+      <footer className="bg-gradient-to-t from-rx-black to-rx-dark border-t border-rx-gold/20 py-8 sm:py-12 relative z-10">
         <div className="container mx-auto px-4 sm:px-6 text-center">
           <div className="mb-4 sm:mb-6">
             <motion.img 
