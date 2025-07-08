@@ -1,7 +1,5 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import legacy from '@vitejs/plugin-legacy';
-import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   plugins: [
@@ -10,51 +8,6 @@ export default defineConfig({
       fastRefresh: true,
       // Optimize JSX runtime
       jsxRuntime: 'automatic'
-    }),
-    legacy({
-      targets: ['defaults', 'not IE 11']
-    }),
-    VitePWA({
-      registerType: 'autoUpdate',
-      workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,jpg,jpeg}'],
-        runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/images\.unsplash\.com\/.*/i,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'unsplash-images',
-              expiration: {
-                maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
-              }
-            }
-          }
-        ]
-      },
-      manifest: {
-        name: 'RevolutionX - F1 in Schools',
-        short_name: 'RevolutionX',
-        description: 'Equipo líder de F1 in Schools del IES José Saramago',
-        theme_color: '#D4AF37',
-        background_color: '#0A0A0A',
-        display: 'standalone',
-        orientation: 'portrait',
-        scope: '/',
-        start_url: '/',
-        icons: [
-          {
-            src: '/revolutionx-logo.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: '/revolutionx-logo.png',
-            sizes: '512x512',
-            type: 'image/png'
-          }
-        ]
-      }
     })
   ],
   server: {
