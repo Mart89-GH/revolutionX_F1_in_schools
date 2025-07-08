@@ -1,3 +1,310 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Enhanced CSS Reset and Base Styles */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Focus styles for accessibility */
+  *:focus {
+    outline: 2px solid theme('colors.rx-gold');
+    outline-offset: 2px;
+  }
+
+  /* Skip link styles */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  /* Improved form elements */
+  input, textarea, select, button {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  /* Better image handling */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Smooth scrolling for reduced motion users */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .text-gray-300 {
+      color: #ffffff;
+    }
+    
+    .text-gray-400 {
+      color: #e5e5e5;
+    }
+    
+    .border-rx-gold\/20 {
+      border-color: theme('colors.rx-gold');
+    }
+  }
+
+  /* Dark mode preferences */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+    }
+  }
+}
+
+/* Enhanced utility classes */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Performance optimizations */
+  .will-change-transform {
+    will-change: transform;
+  }
+
+  .will-change-opacity {
+    will-change: opacity;
+  }
+
+  .contain-layout {
+    contain: layout;
+  }
+
+  .contain-paint {
+    contain: paint;
+  }
+
+  /* Custom scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: theme('colors.rx-dark');
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: theme('colors.rx-gold');
+    border-radius: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.yellow.500');
+  }
+
+  /* Loading states */
+  .loading-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(212, 175, 55, 0.1),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* Enhanced focus indicators */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-rx-gold focus:ring-offset-2 focus:ring-offset-rx-black;
+  }
+
+  /* Improved button states */
+  .btn-primary {
+    @apply bg-gradient-to-r from-rx-gold to-yellow-600 text-rx-black font-semibold py-3 px-6 rounded-xl hover:from-yellow-600 hover:to-rx-gold transition-all duration-300 shadow-lg hover:shadow-xl focus-ring;
+  }
+
+  .btn-secondary {
+    @apply bg-rx-dark text-white border border-rx-gold/30 font-semibold py-3 px-6 rounded-xl hover:border-rx-gold/50 hover:bg-rx-gold/10 transition-all duration-300 focus-ring;
+  }
+
+  /* Card styles */
+  .card {
+    @apply bg-gradient-to-br from-rx-dark to-rx-black rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 shadow-xl hover:shadow-2xl;
+  }
+
+  /* Typography improvements */
+  .heading-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-rx-gold via-yellow-200 to-rx-gold;
+  }
+
+  /* Layout utilities */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Component-specific styles */
+@layer components {
+  /* Enhanced form styles */
+  .form-input {
+    @apply w-full bg-rx-black/50 border border-rx-gold/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:border-rx-gold/50 focus:outline-none focus:ring-2 focus:ring-rx-gold/20 transition-all duration-300;
+  }
+
+  .form-input:invalid {
+    @apply border-red-500/50 focus:border-red-500 focus:ring-red-500/20;
+  }
+
+  /* Navigation styles */
+  .nav-link {
+    @apply text-white hover:text-rx-gold transition-colors duration-300 font-medium;
+  }
+
+  .nav-link.active {
+    @apply text-rx-gold;
+  }
+
+  /* Section styles */
+  .section-padding {
+    @apply py-16 sm:py-20 md:py-24;
+  }
+
+  /* Grid improvements */
+  .grid-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .grid-auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+/* Print styles */
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a, a:visited {
+    text-decoration: underline;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+
+  p, blockquote {
+    orphans: 3;
+    widows: 3;
+  }
+
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .motion-reduce {
+    animation: none !important;
+    transition: none !important;
+  }
+}

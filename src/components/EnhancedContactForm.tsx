@@ -1,0 +1,251 @@
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { motion } from 'framer-motion';
+import { Send, CheckCircle, AlertCircle } from 'lucide-react';
+import FormField from './ui/FormField';
+import EnhancedButton from './ui/EnhancedButton';
+
+const schema = yup.object({
+  name: yup
+    .string()
+    .required('El nombre es obligatorio')
+    .min(2, 'El nombre debe tener al menos 2 caracteres')
+    .max(50, 'El nombre no puede exceder 50 caracteres'),
+  email: yup
+    .string()
+    .required('El email es obligatorio')
+    .email('Ingrese un email válido'),
+  company: yup
+    .string()
+    .max(100, 'El nombre de la empresa no puede exceder 100 caracteres'),
+  phone: yup
+    .string()
+    .matches(/^[+]?[\d\s\-\(\)]+$/, 'Ingrese un número de teléfono válido')
+    .min(9, 'El teléfono debe tener al menos 9 dígitos'),
+  subject: yup
+    .string()
+    .required('El asunto es obligatorio')
+    .min(5, 'El asunto debe tener al menos 5 caracteres')
+    .max(100, 'El asunto no puede exceder 100 caracteres'),
+  message: yup
+    .string()
+    .required('El mensaje es obligatorio')
+    .min(20, 'El mensaje debe tener al menos 20 caracteres')
+    .max(1000, 'El mensaje no puede exceder 1000 caracteres'),
+  privacy: yup
+    .boolean()
+    .oneOf([true], 'Debe aceptar la política de privacidad')
+});
+
+type FormData = yup.InferType<typeof schema>;
+
+interface EnhancedContactFormProps {
+  onSubmit?: (data: FormData) => Promise<void>;
+}
+
+const EnhancedContactForm: React.FC<EnhancedContactFormProps> = ({ onSubmit }) => {
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isDirty },
+    reset,
+    watch
+  } = useForm<FormData>({
+    resolver: yupResolver(schema),
+    mode: 'onChange'
+  });
+
+  const watchedMessage = watch('message', '');
+  const messageLength = watchedMessage?.length || 0;
+
+  const handleFormSubmit = async (data: FormData) => {
+    setSubmitStatus('loading');
+    
+    try {
+      if (onSubmit) {
+        await onSubmit(data);
+      } else {
+        // Default email submission
+        const subject = `Contacto RevolutionX - ${data.subject}`;
+        const body = `
+Nombre: ${data.name}
+Email: ${data.email}
+Empresa: ${data.company || 'No especificada'}
+Teléfono: ${data.phone || 'No especificado'}
+
+Asunto: ${data.subject}
+
+Mensaje:
+${data.message}
+        `.trim();
+        
+        const mailtoLink = `mailto:revolutionx.f1@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoLink;
+      }
+      
+      setSubmitStatus('success');
+      reset();
+      
+      // Reset status after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+      
+      // Reset status after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    }
+  };
+
+  return (
+    <motion.form
+      onSubmit={handleSubmit(handleFormSubmit)}
+      className="space-y-6"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <FormField
+          label="Nombre completo"
+          {...register('name')}
+          error={errors.name?.message}
+          required
+          placeholder="Su nombre completo"
+          autoComplete="name"
+        />
+        
+        <FormField
+          label="Email"
+          type="email"
+          {...register('email')}
+          error={errors.email?.message}
+          required
+          placeholder="su@email.com"
+          autoComplete="email"
+        />
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <FormField
+          label="Empresa/Organización"
+          {...register('company')}
+          error={errors.company?.message}
+          placeholder="Nombre de su empresa"
+          autoComplete="organization"
+        />
+        
+        <FormField
+          label="Teléfono"
+          type="tel"
+          {...register('phone')}
+          error={errors.phone?.message}
+          placeholder="+34 600 000 000"
+          autoComplete="tel"
+        />
+      </div>
+      
+      <FormField
+        label="Asunto"
+        {...register('subject')}
+        error={errors.subject?.message}
+        required
+        placeholder="Motivo de su consulta"
+      />
+      
+      <div className="space-y-2">
+        <FormField
+          label="Mensaje"
+          multiline
+          rows={6}
+          {...register('message')}
+          error={errors.message?.message}
+          required
+          placeholder="Cuéntenos sobre su interés en colaborar con RevolutionX..."
+        />
+        <div className="flex justify-between text-sm">
+          <span className="text-gray-400">
+            Mínimo 20 caracteres
+          </span>
+          <span className={`${messageLength > 1000 ? 'text-red-400' : 'text-gray-400'}`}>
+            {messageLength}/1000
+          </span>
+        </div>
+      </div>
+      
+      <div className="flex items-start space-x-3">
+        <input
+          type="checkbox"
+          id="privacy"
+          {...register('privacy')}
+          className="mt-1 w-4 h-4 text-rx-gold bg-rx-black border-rx-gold/30 rounded focus:ring-rx-gold focus:ring-2"
+        />
+        <label htmlFor="privacy" className="text-sm text-gray-300 leading-relaxed">
+          Acepto la{' '}
+          <a 
+            href="/privacy" 
+            className="text-rx-gold hover:text-yellow-300 underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            política de privacidad
+          </a>{' '}
+          y el tratamiento de mis datos personales para responder a mi consulta.
+          {errors.privacy && (
+            <span className="block text-red-400 mt-1">
+              {errors.privacy.message}
+            </span>
+          )}
+        </label>
+      </div>
+      
+      <div className="pt-4">
+        {submitStatus === 'success' && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="mb-4 p-4 bg-green-500/20 border border-green-500/30 rounded-lg flex items-center space-x-3"
+          >
+            <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+            <div>
+              <p className="text-green-400 font-medium">¡Mensaje enviado correctamente!</p>
+              <p className="text-green-300 text-sm">Nos pondremos en contacto con usted pronto.</p>
+            </div>
+          </motion.div>
+        )}
+        
+        {submitStatus === 'error' && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="mb-4 p-4 bg-red-500/20 border border-red-500/30 rounded-lg flex items-center space-x-3"
+          >
+            <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
+            <div>
+              <p className="text-red-400 font-medium">Error al enviar el mensaje</p>
+              <p className="text-red-300 text-sm">Por favor, inténtelo de nuevo o contáctenos directamente.</p>
+            </div>
+          </motion.div>
+        )}
+        
+        <EnhancedButton
+          type="submit"
+          variant="primary"
+          size="lg"
+          fullWidth
+          loading={submitStatus === 'loading'}
+          disabled={!isValid || !isDirty || submitStatus === 'loading'}
+          leftIcon={<Send className="w-5 h-5" />}
+        >
+          {submitStatus === 'loading' ? 'Enviando...' : 'Enviar Mensaje'}
+        </EnhancedButton>
+      </div>
+    </motion.form>
+  );
+};
+
+export default EnhancedContactForm;
