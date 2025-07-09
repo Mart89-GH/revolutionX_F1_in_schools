@@ -10,7 +10,8 @@ import FloatingNavigation from './components/FloatingNavigation';
 import ScrollProgressIndicator from './components/ScrollProgressIndicator';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 import OptimizedImage from './components/ui/OptimizedImage';
-import AIAssistant from './components/AIAssistant';
+import OllamaAIAssistant from './components/OllamaAIAssistant';
+import PrivacyConsent from './components/PrivacyConsent';
 
 // Lazy load heavy components for better performance
 const CompactSections = lazy(() => import('./components/CompactSections'));
@@ -156,8 +157,11 @@ function App() {
             </div>
           </footer>
           
-          {/* AI Assistant */}
-          <AIAssistant />
+          {/* Ollama AI Assistant */}
+          <OllamaAIAssistant />
+          
+          {/* Privacy Consent */}
+          <PrivacyConsent />
         </div>
       </ErrorBoundary>
     </HelmetProvider>
