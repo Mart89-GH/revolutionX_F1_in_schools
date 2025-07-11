@@ -12,157 +12,191 @@ import LoadingSpinner from './components/ui/LoadingSpinner';
 import OptimizedImage from './components/ui/OptimizedImage';
 import OllamaAIAssistant from './components/OllamaAIAssistant';
 import PrivacyConsent from './components/PrivacyConsent';
+import MobileGestureHandler from './components/MobileGestureHandler';
+import ParallaxSection from './components/ParallaxSection';
 
 // Lazy load heavy components for better performance
-const CompactSections = lazy(() => import('./components/CompactSections'));
+const TeamSection = lazy(() => import('./components/TeamSection'));
+const TechnicalSection = lazy(() => import('./components/TechnicalSection'));
+const AchievementsSection = lazy(() => import('./components/AchievementsSection'));
+const SponsorsSection = lazy(() => import('./components/SponsorsSection'));
+const MarketingSection = lazy(() => import('./components/MarketingSection'));
+const ContactSection = lazy(() => import('./components/ContactSection'));
 
 function App() {
   return (
     <HelmetProvider>
       <ErrorBoundary>
-        <div className="bg-rx-black text-white min-h-screen font-body overflow-x-hidden">
-          <SEOHead />
-          <AccessibilitySkipLink />
-          <ScrollProgressIndicator />
-          <FloatingNavigation />
-          <PerformanceMonitor />
-          
-          <main id="main-content" role="main">
-            {/* Enhanced Hero Section */}
-            <section 
-              className="relative h-screen flex items-center justify-center text-center overflow-hidden" 
-              aria-label="Inicio"
-            >
-              <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-gradient-to-br from-rx-black via-rx-dark to-rx-black opacity-95"></div>
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-rx-gold/10 via-transparent to-transparent"></div>
-                
-                {/* Optimized Animated Background Elements */}
-                <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-                  {[...Array(8)].map((_, i) => (
+        <MobileGestureHandler>
+          <div className="bg-rx-black text-white min-h-screen font-body overflow-x-hidden">
+            <SEOHead />
+            <AccessibilitySkipLink />
+            <ScrollProgressIndicator />
+            <FloatingNavigation />
+            <PerformanceMonitor />
+            
+            <main id="main-content" role="main">
+              {/* Enhanced Hero Section */}
+              <ParallaxSection speed={0.5}>
+                <section 
+                  className="relative h-screen flex items-center justify-center text-center overflow-hidden" 
+                  aria-label="Inicio"
+                >
+                  <div className="absolute inset-0">
+                    <div className="absolute inset-0 bg-gradient-to-br from-rx-black via-rx-dark to-rx-black opacity-95"></div>
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-rx-gold/10 via-transparent to-transparent"></div>
+                    
+                    {/* Optimized Animated Background Elements */}
+                    <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+                      {[...Array(8)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          className="absolute w-1 h-1 bg-rx-gold/30 rounded-full"
+                          style={{
+                            left: `${Math.random() * 100}%`,
+                            top: `${Math.random() * 100}%`,
+                          }}
+                          animate={{
+                            y: [0, -20, 0],
+                            opacity: [0.3, 1, 0.3],
+                          }}
+                          transition={{
+                            duration: 3 + Math.random() * 2,
+                            repeat: Infinity,
+                            delay: Math.random() * 2,
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <motion.div 
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                    className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 py-4"
+                  >
                     <motion.div
-                      key={i}
-                      className="absolute w-1 h-1 bg-rx-gold/30 rounded-full"
-                      style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
+                      className="w-32 sm:w-48 md:w-56 mx-auto mb-6 sm:mb-8"
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.8, delay: 0.2 }}
+                      whileHover={{ 
+                        scale: 1.05,
+                        rotate: [0, -2, 2, 0],
+                        transition: { duration: 0.5 }
                       }}
-                      animate={{
-                        y: [0, -20, 0],
-                        opacity: [0.3, 1, 0.3],
-                      }}
-                      transition={{
-                        duration: 3 + Math.random() * 2,
-                        repeat: Infinity,
-                        delay: Math.random() * 2,
-                      }}
+                    >
+                      <OptimizedImage
+                        src="/revolutionx-logo.png"
+                        alt="RevolutionX - Equipo F1 in Schools del IES José Saramago"
+                        width={224}
+                        height={224}
+                        priority
+                        className="drop-shadow-2xl"
+                      />
+                    </motion.div>
+                    
+                    <motion.h1 
+                      className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 sm:mb-6 text-rx-gold bg-clip-text text-transparent bg-gradient-to-r from-rx-gold via-yellow-200 to-rx-gold leading-tight"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 0.4 }}
+                    >
+                      RevolutionX
+                    </motion.h1>
+                    
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 0.6 }}
+                      className="space-y-3 sm:space-y-4"
+                    >
+                      <h2 className="font-display text-base sm:text-xl md:text-2xl text-white/90 font-light tracking-wide">
+                        Equipo F1 in Schools
+                      </h2>
+                      <p className="text-sm sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed px-4">
+                        Innovación y excelencia en ingeniería del IES José Saramago
+                      </p>
+                      <div className="h-px w-12 sm:w-16 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto my-4 sm:my-6" aria-hidden="true"></div>
+                      <p className="text-xs sm:text-base md:text-lg text-rx-gold font-medium px-4">
+                        Su marca puede ser parte de nuestra historia de éxito
+                      </p>
+                    </motion.div>
+                    
+                    <motion.div
+                      className="mt-8 sm:mt-12"
+                      animate={{ y: [0, 12, 0] }}
+                      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                      aria-hidden="true"
+                    >
+                      <ChevronDown className="w-6 h-6 sm:w-8 sm:h-8 mx-auto text-rx-gold/80" />
+                    </motion.div>
+                  </motion.div>
+                </section>
+              </ParallaxSection>
+
+              {/* All Sections with Lazy Loading and Parallax */}
+              <Suspense fallback={<LoadingSpinner />}>
+                <ParallaxSection speed={0.3}>
+                  <TeamSection />
+                </ParallaxSection>
+                
+                <ParallaxSection speed={0.4}>
+                  <TechnicalSection />
+                </ParallaxSection>
+                
+                <ParallaxSection speed={0.2}>
+                  <AchievementsSection />
+                </ParallaxSection>
+                
+                <ParallaxSection speed={0.3}>
+                  <SponsorsSection />
+                </ParallaxSection>
+                
+                <ParallaxSection speed={0.4}>
+                  <MarketingSection />
+                </ParallaxSection>
+                
+                <ParallaxSection speed={0.2}>
+                  <ContactSection />
+                </ParallaxSection>
+              </Suspense>
+            </main>
+
+            <footer className="bg-gradient-to-t from-rx-black to-rx-dark border-t border-rx-gold/20 py-6 sm:py-8 relative z-10" role="contentinfo">
+              <div className="container mx-auto px-4 sm:px-6 text-center">
+                <div className="mb-3 sm:mb-4">
+                  <motion.div
+                    className="w-8 h-8 sm:w-12 sm:h-12 mx-auto"
+                    whileHover={{ 
+                      opacity: 1, 
+                      scale: 1.1,
+                      transition: { duration: 0.3 }
+                    }}
+                  >
+                    <OptimizedImage
+                      src="/revolutionx-logo.png"
+                      alt="RevolutionX Logo"
+                      width={48}
+                      height={48}
+                      className="opacity-60"
                     />
-                  ))}
+                  </motion.div>
                 </div>
+                <p className="text-gray-400 text-xs px-4">
+                  © {new Date().getFullYear()} RevolutionX - IES José Saramago. Todos los derechos reservados.
+                </p>
               </div>
-              
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: "easeOut" }}
-                className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 py-4"
-              >
-                <motion.div
-                  className="w-32 sm:w-48 md:w-56 mx-auto mb-6 sm:mb-8"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  whileHover={{ 
-                    scale: 1.05,
-                    rotate: [0, -2, 2, 0],
-                    transition: { duration: 0.5 }
-                  }}
-                >
-                  <OptimizedImage
-                    src="/revolutionx-logo.png"
-                    alt="RevolutionX - Equipo F1 in Schools del IES José Saramago"
-                    width={224}
-                    height={224}
-                    priority
-                    className="drop-shadow-2xl"
-                  />
-                </motion.div>
-                
-                <motion.h1 
-                  className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 sm:mb-6 text-rx-gold bg-clip-text text-transparent bg-gradient-to-r from-rx-gold via-yellow-200 to-rx-gold leading-tight"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                >
-                  RevolutionX
-                </motion.h1>
-                
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                  className="space-y-3 sm:space-y-4"
-                >
-                  <h2 className="font-display text-base sm:text-xl md:text-2xl text-white/90 font-light tracking-wide">
-                    Equipo F1 in Schools
-                  </h2>
-                  <p className="text-sm sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed px-4">
-                    Innovación y excelencia en ingeniería del IES José Saramago
-                  </p>
-                  <div className="h-px w-12 sm:w-16 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto my-4 sm:my-6" aria-hidden="true"></div>
-                  <p className="text-xs sm:text-base md:text-lg text-rx-gold font-medium px-4">
-                    Su marca puede ser parte de nuestra historia de éxito
-                  </p>
-                </motion.div>
-                
-                <motion.div
-                  className="mt-8 sm:mt-12"
-                  animate={{ y: [0, 12, 0] }}
-                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                  aria-hidden="true"
-                >
-                  <ChevronDown className="w-6 h-6 sm:w-8 sm:h-8 mx-auto text-rx-gold/80" />
-                </motion.div>
-              </motion.div>
-            </section>
-
-            <Suspense fallback={<LoadingSpinner />}>
-              <CompactSections />
-            </Suspense>
-          </main>
-
-          <footer className="bg-gradient-to-t from-rx-black to-rx-dark border-t border-rx-gold/20 py-6 sm:py-8 relative z-10" role="contentinfo">
-            <div className="container mx-auto px-4 sm:px-6 text-center">
-              <div className="mb-3 sm:mb-4">
-                <motion.div
-                  className="w-8 h-8 sm:w-12 sm:h-12 mx-auto"
-                  whileHover={{ 
-                    opacity: 1, 
-                    scale: 1.1,
-                    transition: { duration: 0.3 }
-                  }}
-                >
-                  <OptimizedImage
-                    src="/revolutionx-logo.png"
-                    alt="RevolutionX Logo"
-                    width={48}
-                    height={48}
-                    className="opacity-60"
-                  />
-                </motion.div>
-              </div>
-              <p className="text-gray-400 text-xs px-4">
-                © {new Date().getFullYear()} RevolutionX - IES José Saramago. Todos los derechos reservados.
-              </p>
-            </div>
-          </footer>
-          
-          {/* Ollama AI Assistant */}
-          <OllamaAIAssistant />
-          
-          {/* Privacy Consent */}
-          <PrivacyConsent />
-        </div>
+            </footer>
+            
+            {/* Ollama AI Assistant */}
+            <OllamaAIAssistant />
+            
+            {/* Privacy Consent */}
+            <PrivacyConsent />
+          </div>
+        </MobileGestureHandler>
       </ErrorBoundary>
     </HelmetProvider>
   );

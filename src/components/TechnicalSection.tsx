@@ -3,6 +3,8 @@ import { Cog, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionHeader from './ui/SectionHeader';
 import TechnicalFeatureCard from './ui/TechnicalFeatureCard';
+import InteractiveSpeedometer from './components/InteractiveSpeedometer';
+import F1GameElement from './components/F1GameElement';
 import { technicalFeatures, specifications, developmentPhases } from '../data/technicalData';
 
 const TechnicalSection = () => {
@@ -14,6 +16,12 @@ const TechnicalSection = () => {
           title="Innovación Técnica"
           subtitle="Combinamos ingeniería de precisión con tecnologías de vanguardia para crear soluciones revolucionarias en el mundo de F1 in Schools."
         />
+
+        {/* Interactive Elements */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto mb-20">
+          <InteractiveSpeedometer />
+          <F1GameElement />
+        </div>
 
         {/* Technical Specifications */}
         <motion.div

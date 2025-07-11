@@ -3,6 +3,7 @@ import { TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionHeader from './ui/SectionHeader';
 import StatCard from './ui/StatCard';
+import InstagramFeed from './InstagramFeed';
 import { marketingOpportunities, marketingChannels, brandBenefits, impactMetrics } from '../data/marketingData';
 import * as Icons from 'lucide-react';
 
@@ -30,6 +31,11 @@ const MarketingSection = () => {
               />
             );
           })}
+        </div>
+
+        {/* Instagram Feed Integration */}
+        <div className="max-w-2xl mx-auto mb-16">
+          <InstagramFeed />
         </div>
 
         {/* Marketing Opportunities */}
