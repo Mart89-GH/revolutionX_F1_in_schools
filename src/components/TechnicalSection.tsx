@@ -3,8 +3,8 @@ import { Cog, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionHeader from './ui/SectionHeader';
 import TechnicalFeatureCard from './ui/TechnicalFeatureCard';
-import InteractiveSpeedometer from './components/InteractiveSpeedometer';
-import F1GameElement from './components/F1GameElement';
+import InteractiveSpeedometer from './InteractiveSpeedometer';
+import F1GameElement from './F1GameElement';
 import { technicalFeatures, specifications, developmentPhases } from '../data/technicalData';
 
 const TechnicalSection = () => {
