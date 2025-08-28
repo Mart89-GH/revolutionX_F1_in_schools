@@ -25,7 +25,7 @@ interface OpenRouterAIAssistantProps {
 
 const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({ 
   apiKey = import.meta.env.VITE_OPENROUTER_API_KEY,
-  model = 'meta-llama/llama-3.1-8b-instruct:free'
+  model = 'openai/gpt-3.5-turbo'
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputText, setInputText] = useState('');
