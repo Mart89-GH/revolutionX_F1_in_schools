@@ -12,7 +12,7 @@ class OpenRouterService {
   constructor(config: OpenRouterConfig) {
     this.apiKey = config.apiKey;
     this.baseUrl = config.baseUrl || 'https://openrouter.ai/api/v1';
-    this.model = config.model || 'meta-llama/llama-3.1-8b-instruct:free';
+    this.model = config.model || 'openai/gpt-3.5-turbo';
     this.maxRetries = config.maxRetries || 3;
     this.retryDelay = config.retryDelay || 1000;
     this.rateLimitDelay = config.rateLimitDelay || 100;
