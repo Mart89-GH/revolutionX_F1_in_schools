@@ -8,7 +8,7 @@ const useOpenRouter = (config: OpenRouterConfig) => {
     isLoading: false,
     error: null,
     messages: [],
-    model: config.model || 'meta-llama/llama-3.1-8b-instruct:free',
+    model: config.model || 'openai/gpt-3.5-turbo',
     performance: {
       averageResponseTime: 0,
       totalQueries: 0,
