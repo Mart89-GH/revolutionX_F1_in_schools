@@ -10,7 +10,7 @@ import FloatingNavigation from './components/FloatingNavigation';
 import ScrollProgressIndicator from './components/ScrollProgressIndicator';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 import OptimizedImage from './components/ui/OptimizedImage';
-import OllamaAIAssistant from './components/OllamaAIAssistant';
+import OpenRouterAIAssistant from './components/OpenRouterAIAssistant';
 import PrivacyConsent from './components/PrivacyConsent';
 import MobileGestureHandler from './components/MobileGestureHandler';
 import ParallaxSection from './components/ParallaxSection';
@@ -190,8 +190,8 @@ function App() {
               </div>
             </footer>
             
-            {/* Ollama AI Assistant */}
-            <OllamaAIAssistant />
+            {/* OpenRouter AI Assistant */}
+            <OpenRouterAIAssistant />
             
             {/* Privacy Consent */}
             <PrivacyConsent />

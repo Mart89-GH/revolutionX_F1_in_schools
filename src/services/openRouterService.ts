@@ -1,6 +1,7 @@
-import { OllamaConfig, ChatMessage, OllamaResponse, TrainingData } from '../types/ollama';
+import { OpenRouterConfig, ChatMessage, OpenRouterResponse, StreamChunk } from '../types/openrouter';
 
-class OllamaService {
+class OpenRouterService {
+  private apiKey: string;
   private baseUrl: string;
   private model: string;
   private maxRetries: number;
@@ -8,9 +9,10 @@ class OllamaService {
   private rateLimitDelay: number;
   private lastRequestTime: number;
 
-  constructor(config: OllamaConfig) {
-    this.baseUrl = config.baseUrl || 'http://localhost:11434';
-    this.model = config.model || 'llama3.1:8b';
+  constructor(config: OpenRouterConfig) {
+    this.apiKey = config.apiKey;
+    this.baseUrl = config.baseUrl || 'https://openrouter.ai/api/v1';
+    this.model = config.model || 'meta-llama/llama-3.1-8b-instruct:free';
     this.maxRetries = config.maxRetries || 3;
     this.retryDelay = config.retryDelay || 1000;
     this.rateLimitDelay = config.rateLimitDelay || 100;
@@ -41,7 +43,10 @@ class OllamaService {
     const requestOptions: RequestInit = {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${this.apiKey}`,
         'Content-Type': 'application/json',
+        'HTTP-Referer': window.location.origin,
+        'X-Title': 'RevolutionX AI Assistant',
         ...options.headers,
       },
       body: JSON.stringify(data),
@@ -55,7 +60,8 @@ class OllamaService {
         const response = await fetch(url, requestOptions);
         
         if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(`HTTP ${response.status}: ${errorData.error?.message || response.statusText}`);
         }
         
         return response;
@@ -75,30 +81,19 @@ class OllamaService {
 
   async checkConnection(): Promise<boolean> {
     try {
-      const response = await fetch(`${this.baseUrl}/api/tags`);
+      const response = await fetch(`${this.baseUrl}/models`, {
+        headers: {
+          'Authorization': `Bearer ${this.apiKey}`,
+          'HTTP-Referer': window.location.origin,
+        }
+      });
       return response.ok;
     } catch {
       return false;
     }
   }
 
-  async pullModel(): Promise<void> {
-    try {
-      const response = await this.makeRequest('/api/pull', {
-        name: this.model,
-        stream: false
-      });
-
-      if (!response.ok) {
-        throw new Error(`Failed to pull model: ${response.statusText}`);
-      }
-    } catch (error) {
-      console.error('Error pulling model:', error);
-      throw error;
-    }
-  }
-
-  async chat(messages: ChatMessage[], stream: boolean = false): Promise<OllamaResponse> {
+  async chat(messages: ChatMessage[], stream: boolean = false): Promise<OpenRouterResponse> {
     try {
       const systemPrompt = this.buildSystemPrompt();
       const formattedMessages = [
@@ -106,36 +101,41 @@ class OllamaService {
         ...messages
       ];
 
-      const response = await this.makeRequest('/api/chat', {
+      const response = await this.makeRequest('/chat/completions', {
         model: this.model,
         messages: formattedMessages,
         stream,
-        options: {
-          temperature: 0.7,
-          top_p: 0.9,
-          top_k: 40,
-          repeat_penalty: 1.1,
-          num_ctx: 4096,
-        }
+        temperature: 0.7,
+        max_tokens: 1000,
+        top_p: 0.9,
+        frequency_penalty: 0.1,
+        presence_penalty: 0.1,
       });
 
       const data = await response.json();
       
       return {
-        message: {
-          role: 'assistant',
-          content: data.message?.content || 'Lo siento, no pude generar una respuesta.'
-        },
-        done: data.done || true,
-        total_duration: data.total_duration,
-        load_duration: data.load_duration,
-        prompt_eval_count: data.prompt_eval_count,
-        eval_count: data.eval_count,
-        eval_duration: data.eval_duration
+        id: data.id,
+        object: data.object,
+        created: data.created,
+        model: data.model,
+        choices: data.choices || [{
+          index: 0,
+          message: {
+            role: 'assistant',
+            content: 'Lo siento, no pude generar una respuesta.'
+          },
+          finish_reason: 'error'
+        }],
+        usage: data.usage || {
+          prompt_tokens: 0,
+          completion_tokens: 0,
+          total_tokens: 0
+        }
       };
     } catch (error) {
       console.error('Chat error:', error);
-      throw new Error(`Error en la comunicación con Ollama: ${error}`);
+      throw new Error(`Error en la comunicación con OpenRouter: ${error}`);
     }
   }
 
@@ -147,17 +147,15 @@ class OllamaService {
         ...messages
       ];
 
-      const response = await this.makeRequest('/api/chat', {
+      const response = await this.makeRequest('/chat/completions', {
         model: this.model,
         messages: formattedMessages,
         stream: true,
-        options: {
-          temperature: 0.7,
-          top_p: 0.9,
-          top_k: 40,
-          repeat_penalty: 1.1,
-          num_ctx: 4096,
-        }
+        temperature: 0.7,
+        max_tokens: 1000,
+        top_p: 0.9,
+        frequency_penalty: 0.1,
+        presence_penalty: 0.1,
       });
 
       const reader = response.body?.getReader();
@@ -175,13 +173,16 @@ class OllamaService {
         buffer = lines.pop() || '';
 
         for (const line of lines) {
-          if (line.trim()) {
+          if (line.trim() && line.startsWith('data: ')) {
+            const data = line.slice(6);
+            if (data === '[DONE]') return;
+            
             try {
-              const data = JSON.parse(line);
-              if (data.message?.content) {
-                yield data.message.content;
+              const parsed: StreamChunk = JSON.parse(data);
+              const content = parsed.choices[0]?.delta?.content;
+              if (content) {
+                yield content;
               }
-              if (data.done) return;
             } catch (e) {
               // Skip invalid JSON lines
             }
@@ -192,51 +193,6 @@ class OllamaService {
       console.error('Stream error:', error);
       throw error;
     }
-  }
-
-  async createFineTuning(trainingData: TrainingData[]): Promise<void> {
-    try {
-      // Convert training data to Ollama format
-      const modelfile = this.generateModelfile(trainingData);
-      
-      const response = await this.makeRequest('/api/create', {
-        name: `${this.model}-revolutionx`,
-        modelfile,
-        stream: false
-      });
-
-      if (!response.ok) {
-        throw new Error(`Fine-tuning failed: ${response.statusText}`);
-      }
-
-      console.log('Fine-tuning completed successfully');
-    } catch (error) {
-      console.error('Fine-tuning error:', error);
-      throw error;
-    }
-  }
-
-  private generateModelfile(trainingData: TrainingData[]): string {
-    const examples = trainingData.map(data => 
-      `USER: ${data.input}\nASSISTANT: ${data.output}`
-    ).join('\n\n');
-
-    return `FROM ${this.model}
-
-SYSTEM """
-Eres el asistente oficial de RevolutionX, un equipo de F1 in Schools del IES José Saramago.
-Tu objetivo es proporcionar información precisa y útil sobre el equipo, sus logros, tecnología y oportunidades de colaboración.
-
-Características de tu personalidad:
-- Profesional pero amigable
-- Conocedor técnico
-- Entusiasta del proyecto
-- Orientado a la colaboración
-
-Siempre responde en español y mantén un tono positivo y profesional.
-"""
-
-${examples}`;
   }
 
   private buildSystemPrompt(): string {
@@ -278,52 +234,40 @@ INSTRUCCIONES:
 6. Mantén respuestas concisas pero informativas`;
   }
 
-  async validateTraining(testQueries: string[]): Promise<{ query: string; response: string; score: number }[]> {
-    const results = [];
-    
-    for (const query of testQueries) {
-      try {
-        const response = await this.chat([{ role: 'user', content: query }]);
-        const score = this.evaluateResponse(query, response.message.content);
-        
-        results.push({
-          query,
-          response: response.message.content,
-          score
-        });
-      } catch (error) {
-        results.push({
-          query,
-          response: `Error: ${error}`,
-          score: 0
-        });
+  async getAvailableModels(): Promise<string[]> {
+    try {
+      const response = await fetch(`${this.baseUrl}/models`, {
+        headers: {
+          'Authorization': `Bearer ${this.apiKey}`,
+          'HTTP-Referer': window.location.origin,
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch models: ${response.statusText}`);
       }
+
+      const data = await response.json();
+      return data.data?.map((model: any) => model.id) || [];
+    } catch (error) {
+      console.error('Error fetching models:', error);
+      return [];
     }
-    
-    return results;
   }
 
-  private evaluateResponse(query: string, response: string): number {
-    // Simple scoring based on response quality indicators
-    let score = 0;
-    
-    // Check if response is in Spanish
-    if (/[áéíóúñü]/.test(response) || response.includes('RevolutionX')) score += 20;
-    
-    // Check for relevant keywords based on query
-    const queryLower = query.toLowerCase();
-    const responseLower = response.toLowerCase();
-    
-    if (queryLower.includes('equipo') && responseLower.includes('saúl')) score += 20;
-    if (queryLower.includes('logros') && responseLower.includes('rápido')) score += 20;
-    if (queryLower.includes('contacto') && responseLower.includes('gmail')) score += 20;
-    if (queryLower.includes('patrocinadores') && responseLower.includes('universidad')) score += 20;
-    
-    // Check response length (not too short, not too long)
-    if (response.length > 50 && response.length < 500) score += 20;
-    
-    return Math.min(score, 100);
+  async validateApiKey(): Promise<boolean> {
+    try {
+      const response = await fetch(`${this.baseUrl}/models`, {
+        headers: {
+          'Authorization': `Bearer ${this.apiKey}`,
+          'HTTP-Referer': window.location.origin,
+        }
+      });
+      return response.ok;
+    } catch {
+      return false;
+    }
   }
 }
 
-export default OllamaService;
+export default OpenRouterService;

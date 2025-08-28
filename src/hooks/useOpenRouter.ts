@@ -1,47 +1,51 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import OllamaService from '../services/ollamaService';
-import { ChatMessage, AIAssistantState, OllamaConfig } from '../types/ollama';
+import OpenRouterService from '../services/openRouterService';
+import { ChatMessage, AIAssistantState, OpenRouterConfig } from '../types/openrouter';
 
-const useOllama = (config: OllamaConfig = {}) => {
+const useOpenRouter = (config: OpenRouterConfig) => {
   const [state, setState] = useState<AIAssistantState>({
     isConnected: false,
     isLoading: false,
     error: null,
     messages: [],
-    model: config.model || 'llama3.1:8b',
+    model: config.model || 'meta-llama/llama-3.1-8b-instruct:free',
     performance: {
       averageResponseTime: 0,
       totalQueries: 0,
-      successRate: 0
+      successRate: 0,
+      tokensUsed: 0
     }
   });
 
-  const ollamaService = useRef<OllamaService | null>(null);
+  const openRouterService = useRef<OpenRouterService | null>(null);
   const performanceData = useRef<number[]>([]);
   const successCount = useRef(0);
 
   useEffect(() => {
-    ollamaService.current = new OllamaService(config);
+    if (!config.apiKey) {
+      setState(prev => ({ 
+        ...prev, 
+        error: 'API key de OpenRouter requerida. Por favor, configúrela en las variables de entorno.' 
+      }));
+      return;
+    }
+
+    openRouterService.current = new OpenRouterService(config);
     checkConnection();
-  }, []);
+  }, [config.apiKey]);
 
   const checkConnection = useCallback(async () => {
-    if (!ollamaService.current) return;
+    if (!openRouterService.current) return;
 
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
-      const isConnected = await ollamaService.current.checkConnection();
-      
-      if (isConnected) {
-        // Try to pull the model if not available
-        await ollamaService.current.pullModel();
-      }
+      const isConnected = await openRouterService.current.checkConnection();
       
       setState(prev => ({ 
         ...prev, 
         isConnected, 
         isLoading: false,
-        error: isConnected ? null : 'No se pudo conectar con Ollama. Asegúrate de que esté ejecutándose.'
+        error: isConnected ? null : 'No se pudo conectar con OpenRouter. Verifique su API key.'
       }));
     } catch (error) {
       setState(prev => ({ 
@@ -54,8 +58,8 @@ const useOllama = (config: OllamaConfig = {}) => {
   }, []);
 
   const sendMessage = useCallback(async (message: string): Promise<string> => {
-    if (!ollamaService.current || !state.isConnected) {
-      throw new Error('Ollama no está conectado');
+    if (!openRouterService.current || !state.isConnected) {
+      throw new Error('OpenRouter no está conectado');
     }
 
     const startTime = Date.now();
@@ -70,7 +74,7 @@ const useOllama = (config: OllamaConfig = {}) => {
         messages: updatedMessages 
       }));
 
-      const response = await ollamaService.current.chat(updatedMessages);
+      const response = await openRouterService.current.chat(updatedMessages);
       const responseTime = Date.now() - startTime;
       
       // Update performance metrics
@@ -78,11 +82,11 @@ const useOllama = (config: OllamaConfig = {}) => {
       successCount.current++;
       
       const avgResponseTime = performanceData.current.reduce((a, b) => a + b, 0) / performanceData.current.length;
-      const successRate = (successCount.current / state.performance.totalQueries) * 100;
+      const successRate = (successCount.current / (state.performance.totalQueries + 1)) * 100;
 
       const assistantMessage: ChatMessage = {
         role: 'assistant',
-        content: response.message.content
+        content: response.choices[0]?.message?.content || 'No se pudo generar una respuesta.'
       };
 
       setState(prev => ({
@@ -92,11 +96,12 @@ const useOllama = (config: OllamaConfig = {}) => {
         performance: {
           averageResponseTime: avgResponseTime,
           totalQueries: prev.performance.totalQueries + 1,
-          successRate: successRate
+          successRate: successRate,
+          tokensUsed: prev.performance.tokensUsed + (response.usage?.total_tokens || 0)
         }
       }));
 
-      return response.message.content;
+      return response.choices[0]?.message?.content || 'No se pudo generar una respuesta.';
     } catch (error) {
       setState(prev => ({
         ...prev,
@@ -113,8 +118,8 @@ const useOllama = (config: OllamaConfig = {}) => {
   }, [state.isConnected, state.messages, state.performance.totalQueries]);
 
   const sendMessageStream = useCallback(async function* (message: string): AsyncGenerator<string, void, unknown> {
-    if (!ollamaService.current || !state.isConnected) {
-      throw new Error('Ollama no está conectado');
+    if (!openRouterService.current || !state.isConnected) {
+      throw new Error('OpenRouter no está conectado');
     }
 
     setState(prev => ({ ...prev, isLoading: true, error: null }));
@@ -129,8 +134,9 @@ const useOllama = (config: OllamaConfig = {}) => {
       }));
 
       let fullResponse = '';
+      let totalTokens = 0;
       
-      for await (const chunk of ollamaService.current.chatStream(updatedMessages)) {
+      for await (const chunk of openRouterService.current.chatStream(updatedMessages)) {
         fullResponse += chunk;
         yield chunk;
       }
@@ -146,7 +152,8 @@ const useOllama = (config: OllamaConfig = {}) => {
         messages: [...updatedMessages, assistantMessage],
         performance: {
           ...prev.performance,
-          totalQueries: prev.performance.totalQueries + 1
+          totalQueries: prev.performance.totalQueries + 1,
+          tokensUsed: prev.performance.tokensUsed + totalTokens
         }
       }));
 
@@ -179,14 +186,20 @@ const useOllama = (config: OllamaConfig = {}) => {
     checkConnection();
   }, [checkConnection]);
 
+  const getAvailableModels = useCallback(async (): Promise<string[]> => {
+    if (!openRouterService.current) return [];
+    return openRouterService.current.getAvailableModels();
+  }, []);
+
   return {
     ...state,
     sendMessage,
     sendMessageStream,
     clearMessages,
     resetConnection,
-    checkConnection
+    checkConnection,
+    getAvailableModels
   };
 };
 
-export default useOllama;
+export default useOpenRouter;
