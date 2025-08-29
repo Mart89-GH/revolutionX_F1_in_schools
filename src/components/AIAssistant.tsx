@@ -40,7 +40,8 @@ const AIAssistant = () => {
         { name: "Martín Cendra", role: "Ingeniero de Simulación", responsibilities: "Análisis CFD, pruebas de rendimiento, validación de diseños" },
         { name: "Ibrahim Aharrar", role: "Ingeniero de Manufactura", responsibilities: "Procesos de fabricación, control de calidad, optimización de producción" },
         { name: "Yago Álvarez", role: "Director de Marketing", responsibilities: "Estrategia de marca, relaciones públicas, gestión de patrocinadores" },
-        { name: "Pablo Bianchi", role: "Especialista en Marketing Digital", responsibilities: "Redes sociales, contenido digital, comunicación online" }
+        { name: "Pablo Bianchi", role: "Especialista en Marketing Digital", responsibilities: "Redes sociales, contenido digital, comunicación online" },
+        { name: "Jose Ramón Berzosa", role: "Profesor a cargo del equipo", responsibilities: "Ayudar al equipo a contactar con instituciones educativas y gubernamentales" }
       ],
       stats: { members: 6, position: "1º Puesto Regional", commitment: "100%", year: "2025" }
     },
