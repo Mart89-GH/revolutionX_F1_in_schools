@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Mail, MessageSquare, Send, Phone, Instagram, MapPin, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SectionHeader from './ui/SectionHeader';
@@ -6,6 +7,7 @@ import EnhancedContactForm from './EnhancedContactForm';
 import { whyCollaborate } from '../data/contactData';
 
 const EnhancedContactSection = () => {
+  const { t } = useTranslation();
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   return (
@@ -13,8 +15,8 @@ const EnhancedContactSection = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <SectionHeader
           icon={MessageSquare}
-          title="Colabore con Nosotros"
-          subtitle="Únase a RevolutionX y forme parte de la próxima generación de innovadores en ingeniería y tecnología. Juntos construiremos el futuro de la movilidad y la educación STEM."
+          title={t('contact.title')}
+          subtitle={t('contact.subtitle')}
         />
 
         {/* Enhanced Contact Methods */}
@@ -128,7 +130,7 @@ const EnhancedContactSection = () => {
                 <Send className="w-5 h-5 sm:w-7 sm:h-7 text-rx-gold" />
               </motion.div>
               <h3 className="font-display text-xl sm:text-2xl text-rx-gold font-semibold">
-                Contacto Directo
+                {t('contact.form.title', 'Contacto Directo')}
               </h3>
             </div>
             
@@ -152,7 +154,7 @@ const EnhancedContactSection = () => {
                 <Phone className="w-5 h-5 sm:w-7 sm:h-7 text-rx-gold" />
               </motion.div>
               <h3 className="font-display text-xl sm:text-2xl text-rx-gold font-semibold">
-                ¿Por Qué Colaborar?
+                {t('contact.whyCollaborate')}
               </h3>
             </div>
             
@@ -202,7 +204,7 @@ const EnhancedContactSection = () => {
           className="mt-16 sm:mt-20 text-center bg-gradient-to-r from-rx-gold/10 to-rx-gold/5 p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-rx-gold/30 max-w-5xl mx-auto shadow-2xl"
         >
           <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-rx-gold mb-4 sm:mb-6">
-            Comience su Colaboración Hoy
+            {t('contact.startToday')}
           </h3>
           <p className="text-gray-300 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-4">
             Estamos listos para discutir cómo su empresa puede beneficiarse 

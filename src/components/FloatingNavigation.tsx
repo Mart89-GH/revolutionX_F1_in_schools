@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Users, Cog, Award, Handshake, TrendingUp, MessageSquare, Instagram } from 'lucide-react';
 
 const FloatingNavigation = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [isMobile, setIsMobile] = useState(false);
 
   const navItems = [
-    { id: 'equipo', label: 'Equipo', icon: Users },
-    { id: 'tecnico', label: 'Técnico', icon: Cog },
-    { id: 'logros', label: 'Logros', icon: Award },
-    { id: 'patrocinadores', label: 'Patrocinadores', icon: Handshake },
-    { id: 'marketing', label: 'Marketing', icon: TrendingUp },
-    { id: 'contacto', label: 'Contacto', icon: MessageSquare },
+    { id: 'equipo', label: t('nav.team'), icon: Users },
+    { id: 'tecnico', label: t('nav.technical'), icon: Cog },
+    { id: 'logros', label: t('nav.achievements'), icon: Award },
+    { id: 'patrocinadores', label: t('nav.sponsors'), icon: Handshake },
+    { id: 'marketing', label: t('nav.marketing'), icon: TrendingUp },
+    { id: 'contacto', label: t('nav.contact'), icon: MessageSquare },
   ];
 
   const checkMobile = useCallback(() => {

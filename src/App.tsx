@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { ChevronDown, MessageCircle } from 'lucide-react';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -11,9 +12,9 @@ import ScrollProgressIndicator from './components/ScrollProgressIndicator';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 import OptimizedImage from './components/ui/OptimizedImage';
 import OpenRouterAIAssistant from './components/OpenRouterAIAssistant';
-import PrivacyConsent from './components/PrivacyConsent';
 import MobileGestureHandler from './components/MobileGestureHandler';
 import ParallaxSection from './components/ParallaxSection';
+import LanguageSwitcher from './components/LanguageSwitcher';
 
 // Lazy load heavy components for better performance
 const TeamSection = lazy(() => import('./components/TeamSection'));
@@ -24,6 +25,8 @@ const MarketingSection = lazy(() => import('./components/MarketingSection'));
 const ContactSection = lazy(() => import('./components/ContactSection'));
 
 function App() {
+  const { t } = useTranslation();
+
   return (
     <HelmetProvider>
       <ErrorBoundary>
@@ -33,6 +36,12 @@ function App() {
             <AccessibilitySkipLink />
             <ScrollProgressIndicator />
             <FloatingNavigation />
+            
+            {/* Language Switcher */}
+            <div className="fixed top-4 left-4 z-50">
+              <LanguageSwitcher />
+            </div>
+            
             <PerformanceMonitor />
             
             <main id="main-content" role="main">
@@ -103,7 +112,7 @@ function App() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.4 }}
                     >
-                      RevolutionX
+                      {t('hero.title')}
                     </motion.h1>
                     
                     <motion.div
@@ -113,14 +122,14 @@ function App() {
                       className="space-y-3 sm:space-y-4"
                     >
                       <h2 className="font-display text-base sm:text-xl md:text-2xl text-white/90 font-light tracking-wide">
-                        Equipo F1 in Schools
+                        {t('hero.subtitle')}
                       </h2>
                       <p className="text-sm sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed px-4">
-                        Innovación y excelencia en ingeniería del IES José Saramago
+                        {t('hero.description')}
                       </p>
                       <div className="h-px w-12 sm:w-16 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto my-4 sm:my-6" aria-hidden="true"></div>
                       <p className="text-xs sm:text-base md:text-lg text-rx-gold font-medium px-4">
-                        Su marca puede ser parte de nuestra historia de éxito
+                        {t('hero.sponsorMessage')}
                       </p>
                     </motion.div>
                     
@@ -185,16 +194,13 @@ function App() {
                   </motion.div>
                 </div>
                 <p className="text-gray-400 text-xs px-4">
-                  © {new Date().getFullYear()} RevolutionX - IES José Saramago. Todos los derechos reservados.
+                  © {new Date().getFullYear()} RevolutionX - IES José Saramago. {t('footer.rights')}
                 </p>
               </div>
             </footer>
             
             {/* OpenRouter AI Assistant */}
             <OpenRouterAIAssistant />
-            
-            {/* Privacy Consent */}
-            <PrivacyConsent />
           </div>
         </MobileGestureHandler>
       </ErrorBoundary>

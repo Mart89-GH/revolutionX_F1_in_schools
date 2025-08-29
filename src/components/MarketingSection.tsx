@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionHeader from './ui/SectionHeader';
@@ -8,13 +9,15 @@ import { marketingOpportunities, marketingChannels, brandBenefits, impactMetrics
 import * as Icons from 'lucide-react';
 
 const MarketingSection = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="marketing" className="py-24 bg-gradient-to-b from-rx-black to-rx-dark">
       <div className="container mx-auto px-6">
         <SectionHeader
           icon={TrendingUp}
-          title="Oportunidades de Patrocinio"
-          subtitle="Únase a nuestra visión de innovación y excelencia en la ingeniería del futuro. Descubra los beneficios estratégicos de asociarse con RevolutionX y el retorno de inversión en talento y tecnología."
+          title={t('marketing.title')}
+          subtitle={t('marketing.subtitle')}
         />
 
         {/* Impact Metrics */}
@@ -82,7 +85,7 @@ const MarketingSection = () => {
           className="mb-16"
         >
           <h3 className="font-display text-3xl text-rx-gold text-center mb-12">
-            Canales de Exposición
+            {t('marketing.channels')}
           </h3>
           <div className="max-w-4xl mx-auto">
             <div className="bg-gradient-to-br from-rx-dark to-rx-black p-8 rounded-2xl border border-rx-gold/20">
@@ -112,7 +115,7 @@ const MarketingSection = () => {
           className="bg-gradient-to-r from-rx-gold/10 to-rx-gold/5 p-8 rounded-2xl border border-rx-gold/30 max-w-6xl mx-auto"
         >
           <h3 className="font-display text-2xl md:text-3xl text-rx-gold mb-8 text-center">
-            Beneficios Estratégicos del Patrocinio
+            {t('marketing.benefits')}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
@@ -135,11 +138,10 @@ const MarketingSection = () => {
           
           <div className="mt-8 p-6 bg-rx-black/30 rounded-lg border border-rx-gold/20 text-center">
             <h4 className="text-rx-gold font-semibold text-lg mb-2">
-              Retorno de Inversión Garantizado
+              {t('marketing.roi')}
             </h4>
             <p className="text-gray-300">
-              Su inversión en RevolutionX no solo apoya el talento joven, sino que posiciona 
-              su marca como líder en innovación y responsabilidad social corporativa.
+              {t('marketing.roiDescription')}
             </p>
           </div>
         </motion.div>

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   MessageCircle, 
@@ -24,6 +25,7 @@ interface OpenRouterAIAssistantProps {
 }
 
 const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({ 
+  const { t } = useTranslation();
   apiKey = import.meta.env.VITE_OPENROUTER_API_KEY,
   model = 'openai/gpt-3.5-turbo'
 }) => {
@@ -145,7 +147,7 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                   <Bot className="w-5 h-5 text-rx-black" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-rx-black text-sm">RevolutionX AI</h3>
+                  <h3 className="font-semibold text-rx-black text-sm">{t('ai.title')}</h3>
                   <div className="flex items-center space-x-2">
                     <ConnectionIcon className={`w-3 h-3 ${connectionStatus.color} ${isLoading ? 'animate-spin' : ''}`} />
                     <p className="text-rx-black/70 text-xs">{connectionStatus.text}</p>
@@ -313,7 +315,7 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                 <div className="text-center py-8">
                   <Key className="w-12 h-12 text-orange-400 mx-auto mb-4" />
                   <p className="text-orange-400 text-sm mb-2 font-medium">
-                    API Key Requerida
+                    {t('ai.status.apiKeyRequired')}
                   </p>
                   <p className="text-gray-400 text-xs mb-4">
                     Necesitas una API key de OpenRouter para usar el asistente
@@ -349,10 +351,10 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                 <div className="text-center py-8">
                   <Bot className="w-12 h-12 text-rx-gold mx-auto mb-4" />
                   <p className="text-white text-sm mb-2">
-                    ¡Hola! Soy el asistente de RevolutionX
+                    {t('ai.greeting')}
                   </p>
                   <p className="text-gray-400 text-xs">
-                    Pregúntame sobre el equipo, logros, tecnología o patrocinadores
+                    {t('ai.placeholder')}
                   </p>
                 </div>
               )}
@@ -421,7 +423,7 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                     <div className="bg-rx-gold/10 border border-rx-gold/20 rounded-2xl px-3 py-2">
                       <div className="flex items-center space-x-2">
                         <Loader2 className="w-4 h-4 text-rx-gold animate-spin" />
-                        <span className="text-sm text-gray-300">Procesando con Llama 3...</span>
+                        <span className="text-sm text-gray-300">{t('ai.thinking')}</span>
                       </div>
                     </div>
                   </div>
@@ -439,7 +441,7 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder={isConnected ? "Pregunta sobre RevolutionX..." : "Configurar API key primero..."}
+                  placeholder={isConnected ? t('ai.placeholder') : t('ai.status.apiKeyRequired')}
                   className="flex-1 bg-rx-black/50 border border-rx-gold/20 rounded-xl px-3 py-2 text-white text-sm focus:border-rx-gold/50 focus:outline-none disabled:opacity-50"
                   disabled={isLoading || !isConnected}
                 />

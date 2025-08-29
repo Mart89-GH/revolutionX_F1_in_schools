@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Heart, Handshake } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionHeader from './ui/SectionHeader';
@@ -8,13 +9,15 @@ import { sponsors, sponsorshipLevels, sponsorStats } from '../data/sponsorsData'
 import * as Icons from 'lucide-react';
 
 const SponsorsSection = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="patrocinadores" className="py-24 bg-gradient-to-b from-rx-dark to-rx-black">
       <div className="container mx-auto px-6">
         <SectionHeader
           icon={Handshake}
-          title="Nuestros Patrocinadores"
-          subtitle="Agradecemos profundamente el apoyo de nuestros patrocinadores, quienes hacen posible nuestros logros y el desarrollo continuo de nuestro proyecto en F1 in Schools."
+          title={t('sponsors.title')}
+          subtitle={t('sponsors.subtitle')}
         />
 
         {/* Sponsor Statistics */}
@@ -49,7 +52,7 @@ const SponsorsSection = () => {
           className="mb-16"
         >
           <h3 className="font-display text-3xl text-rx-gold text-center mb-12">
-            Oportunidades de Colaboración
+            {t('sponsors.collaboration')}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {sponsorshipLevels.map((level, index) => (
@@ -78,15 +81,13 @@ const SponsorsSection = () => {
         >
           <Heart className="w-12 h-12 text-rx-gold mx-auto mb-6" />
           <h3 className="font-display text-2xl md:text-3xl text-rx-gold mb-4">
-            ¿Quiere ser parte del proyecto?
+            {t('sponsors.question')}
           </h3>
           <p className="text-gray-300 text-lg mb-6 leading-relaxed">
-            Únase a nuestro equipo de patrocinadores y forme parte de la próxima generación 
-            de ingenieros e innovadores. Su apoyo hace posible que jóvenes talentos desarrollen 
-            habilidades técnicas y profesionales de alto nivel.
+            {t('sponsors.description')}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-2 text-lg">
-            <span className="text-gray-400">Contáctenos en:</span>
+            <span className="text-gray-400">{t('sponsors.contact')}</span>
             <a 
               href="mailto:revolutionx.f1@gmail.com" 
               className="text-rx-gold hover:text-yellow-300 transition font-semibold underline decoration-rx-gold/50 hover:decoration-yellow-300"

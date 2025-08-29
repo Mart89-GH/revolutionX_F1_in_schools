@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Cog, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionHeader from './ui/SectionHeader';
@@ -8,13 +9,15 @@ import F1GameElement from './F1GameElement';
 import { technicalFeatures, specifications, developmentPhases } from '../data/technicalData';
 
 const TechnicalSection = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="tecnico" className="py-24 bg-gradient-to-b from-rx-dark to-rx-black">
       <div className="container mx-auto px-6">
         <SectionHeader
           icon={Cog}
-          title="Innovación Técnica"
-          subtitle="Combinamos ingeniería de precisión con tecnologías de vanguardia para crear soluciones revolucionarias en el mundo de F1 in Schools."
+          title={t('technical.title')}
+          subtitle={t('technical.subtitle')}
         />
 
         {/* Interactive Elements */}
@@ -35,7 +38,7 @@ const TechnicalSection = () => {
             <div className="flex items-center justify-center mb-6">
               <Target className="w-8 h-8 text-rx-gold mr-3" />
               <h3 className="font-display text-2xl text-rx-gold">
-                Especificaciones Técnicas del Vehículo
+                {t('technical.specifications')}
               </h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -65,7 +68,7 @@ const TechnicalSection = () => {
           className="max-w-6xl mx-auto"
         >
           <h3 className="font-display text-3xl text-rx-gold text-center mb-12">
-            Proceso de Desarrollo
+            {t('technical.process')}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {developmentPhases.map((phase, index) => (

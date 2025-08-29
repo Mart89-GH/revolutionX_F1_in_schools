@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Award, Zap, Medal, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionHeader from './ui/SectionHeader';
@@ -7,13 +8,15 @@ import { mainAchievement, achievements, competitionResults } from '../data/achie
 import * as Icons from 'lucide-react';
 
 const AchievementsSection = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="logros" className="py-24 bg-gradient-to-b from-rx-black to-rx-dark">
       <div className="container mx-auto px-6">
         <SectionHeader
           icon={Award}
-          title="Nuestros Logros"
-          subtitle="Excelencia demostrada en competiciones de F1 in Schools a nivel regional y nacional, estableciendo nuevos estándares de rendimiento y precisión técnica."
+          title={t('achievements.title')}
+          subtitle={t('achievements.subtitle')}
         />
 
         {/* Main Achievement */}
@@ -39,13 +42,13 @@ const AchievementsSection = () => {
               </motion.div>
               
               <h3 className="font-display text-3xl md:text-5xl text-rx-gold mb-6 font-bold">
-                {mainAchievement.title}
+                {t('achievements.mainTitle')}
               </h3>
               <div className="inline-block bg-rx-gold/20 px-6 py-2 rounded-full mb-6">
-                <span className="text-rx-gold font-semibold text-lg">{mainAchievement.category}</span>
+                <span className="text-rx-gold font-semibold text-lg">{t('achievements.category')}</span>
               </div>
               <p className="text-2xl md:text-3xl text-white mb-6 font-light">
-                {mainAchievement.event}
+                {t('achievements.event')}
               </p>
               <div className="h-px w-24 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto mb-8"></div>
               <p className="text-gray-200 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
@@ -67,7 +70,7 @@ const AchievementsSection = () => {
             <div className="flex items-center justify-center mb-6">
               <Medal className="w-8 h-8 text-rx-gold mr-3" />
               <h3 className="font-display text-2xl text-rx-gold">
-                Historial de Competiciones
+                {t('achievements.history')}
               </h3>
             </div>
             <div className="space-y-4">
