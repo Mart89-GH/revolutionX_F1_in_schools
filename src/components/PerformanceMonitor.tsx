@@ -77,7 +77,7 @@ const PerformanceMonitor: React.FC = () => {
     };
 
     // Log metrics after a delay to ensure all measurements are captured
-    setTimeout(logMetrics, 3000);
+    setTimeout(logMetrics, 1000);
 
     return () => {
       observer.disconnect();

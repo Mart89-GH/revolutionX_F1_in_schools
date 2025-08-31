@@ -22,11 +22,14 @@ export default defineConfig({
   build: {
     target: 'es2020',
     minify: 'terser',
+    cssMinify: true,
+    reportCompressedSize: false,
     terserOptions: {
       compress: {
         drop_console: true,
         drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info', 'console.debug']
+        pure_funcs: ['console.log', 'console.info', 'console.debug'],
+        passes: 2
       },
       mangle: {
         safari10: true
@@ -35,10 +38,11 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom'],
-          animations: ['framer-motion'],
-          icons: ['lucide-react'],
-          utils: ['react-intersection-observer', 'react-helmet-async']
+          'react-vendor': ['react', 'react-dom'],
+          'motion': ['framer-motion'],
+          'icons': ['lucide-react'],
+          'forms': ['react-hook-form', '@hookform/resolvers', 'yup'],
+          'utils': ['react-intersection-observer', 'react-helmet-async', 'react-error-boundary']
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',

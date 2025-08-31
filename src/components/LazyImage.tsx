@@ -25,14 +25,13 @@ const LazyImage: React.FC<LazyImageProps> = ({
   srcSet
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isInView, setIsInView] = useState(false);
+  const [isInView, setIsInView] = useState(loading === 'eager');
   const [hasError, setHasError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    if (loading === 'eager') {
-      setIsInView(true);
+    if (loading === 'eager' || isInView) {
       return;
     }
 
@@ -43,7 +42,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
           observerRef.current?.disconnect();
         }
       },
-      { threshold: 0.1, rootMargin: '50px' }
+      { threshold: 0.05, rootMargin: '100px' }
     );
 
     if (imgRef.current) {
@@ -53,7 +52,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
     return () => {
       observerRef.current?.disconnect();
     };
-  }, [loading]);
+  }, [loading, isInView]);
 
   const handleLoad = () => {
     setIsLoaded(true);

@@ -35,10 +35,11 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     
     const url = new URL(originalUrl);
     if (format) url.searchParams.set('fm', format);
-    if (quality) url.searchParams.set('q', quality.toString());
+    if (quality) url.searchParams.set('q', Math.min(quality, 75).toString());
     if (size) url.searchParams.set('w', size);
     url.searchParams.set('auto', 'format');
     url.searchParams.set('fit', 'crop');
+    url.searchParams.set('dpr', '2');
     
     return url.toString();
   };
@@ -47,7 +48,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const generateSrcSet = (originalUrl: string) => {
     if (!originalUrl.includes('unsplash.com')) return undefined;
     
-    const sizes = [400, 800, 1200, 1600];
+    const sizes = [320, 640, 1024, 1280];
     return sizes
       .map(size => `${generateOptimizedUrl(originalUrl, 'webp', size.toString())} ${size}w`)
       .join(', ');

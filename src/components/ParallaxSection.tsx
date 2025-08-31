@@ -15,7 +15,7 @@ const ParallaxSection: React.FC<ParallaxSectionProps> = ({
 }) => {
   const { scrollY } = useScroll();
   const { ref, inView } = useInView({
-    threshold: 0.1,
+    threshold: 0.05,
     triggerOnce: false
   });
 
@@ -24,11 +24,11 @@ const ParallaxSection: React.FC<ParallaxSectionProps> = ({
     const mobile = typeof window !== 'undefined' && window.innerWidth < 768;
     return {
       isMobile: mobile,
-      effectiveSpeed: mobile ? 0 : speed * 0.3 // Reduce parallax significantly to prevent overlapping
+      effectiveSpeed: mobile ? 0 : speed * 0.2 // Further reduce for better performance
     };
   }, [speed]);
   
-  const y = useTransform(scrollY, [0, 1000], [0, -1000 * effectiveSpeed]);
+  const y = useTransform(scrollY, [0, 2000], [0, -500 * effectiveSpeed]);
 
   return (
     <motion.div
@@ -36,9 +36,10 @@ const ParallaxSection: React.FC<ParallaxSectionProps> = ({
       style={{ 
         y: inView && !isMobile ? y : 0,
         position: 'relative',
-        zIndex: 1
+        zIndex: 1,
+        willChange: inView && !isMobile ? 'transform' : 'auto'
       }}
-      className={`${className} relative`}
+      className={`${className} relative gpu-accelerated`}
     >
       {children}
     </motion.div>

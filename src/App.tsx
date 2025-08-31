@@ -17,12 +17,24 @@ import ParallaxSection from './components/ParallaxSection';
 import LanguageSwitcher from './components/LanguageSwitcher';
 
 // Lazy load heavy components for better performance
-const TeamSection = lazy(() => import('./components/TeamSection'));
-const TechnicalSection = lazy(() => import('./components/TechnicalSection'));
-const AchievementsSection = lazy(() => import('./components/AchievementsSection'));
-const SponsorsSection = lazy(() => import('./components/SponsorsSection'));
-const MarketingSection = lazy(() => import('./components/MarketingSection'));
-const ContactSection = lazy(() => import('./components/ContactSection'));
+const TeamSection = lazy(() => 
+  import('./components/TeamSection').then(module => ({ default: module.default }))
+);
+const TechnicalSection = lazy(() => 
+  import('./components/TechnicalSection').then(module => ({ default: module.default }))
+);
+const AchievementsSection = lazy(() => 
+  import('./components/AchievementsSection').then(module => ({ default: module.default }))
+);
+const SponsorsSection = lazy(() => 
+  import('./components/SponsorsSection').then(module => ({ default: module.default }))
+);
+const MarketingSection = lazy(() => 
+  import('./components/MarketingSection').then(module => ({ default: module.default }))
+);
+const ContactSection = lazy(() => 
+  import('./components/ContactSection').then(module => ({ default: module.default }))
+);
 
 function App() {
   const { t } = useTranslation();
@@ -36,12 +48,6 @@ function App() {
             <AccessibilitySkipLink />
             <ScrollProgressIndicator />
             <FloatingNavigation />
-            
-            {/* Language Switcher */}
-            <div className="fixed top-4 left-4 z-50">
-              <LanguageSwitcher />
-            </div>
-            
             <PerformanceMonitor />
             
             <main id="main-content" role="main">
