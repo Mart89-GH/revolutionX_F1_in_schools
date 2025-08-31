@@ -25,10 +25,10 @@ interface OpenRouterAIAssistantProps {
 }
 
 const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({ 
-  const { t } = useTranslation();
   apiKey = import.meta.env.VITE_OPENROUTER_API_KEY,
   model = 'openai/gpt-3.5-turbo'
 }) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [inputText, setInputText] = useState('');
   const [showSettings, setShowSettings] = useState(false);
