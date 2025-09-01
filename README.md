@@ -42,7 +42,7 @@ npm run dev
 
 ## 🌐 Despliegue
 
-La aplicación está desplegada en: https://legendary-panda-7b91a1.netlify.app
+La aplicación está desplegada en: [https://legendary-panda-7b91a1.netlify.app](https://revolutionx.vercel.app/)
 
 ## 📱 Características
 
