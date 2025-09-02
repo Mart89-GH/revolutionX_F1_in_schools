@@ -18,6 +18,7 @@ const TeamSection = () => {
           icon={Users}
           title={t('team.title')}
           subtitle={t('team.subtitle')}
+          data-translate="true"
         />
 
         {/* Team Excellence Highlight */}
@@ -30,10 +31,10 @@ const TeamSection = () => {
         >
           <div className="bg-gradient-to-br from-rx-gold/10 to-rx-gold/5 p-8 rounded-2xl border border-rx-gold/30 text-center">
             <Award className="w-12 h-12 text-rx-gold mx-auto mb-4" />
-            <h3 className="font-display text-2xl text-rx-gold mb-4">
+            <h3 className="font-display text-2xl text-rx-gold mb-4" data-translate="true">
               {t('team.excellence.title')}
             </h3>
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <p className="text-gray-300 text-lg leading-relaxed" data-translate="true">
               {t('team.excellence.description')}
             </p>
           </div>

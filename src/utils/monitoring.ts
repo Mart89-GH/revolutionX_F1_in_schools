@@ -118,7 +118,8 @@ class MonitoringService {
 
     // Log to console in development
     if (process.env.NODE_ENV === 'development') {
-      console[level](`[${error.timestamp.toISOString()}] ${message}`, context);
+      const logLevel = level === 'warning' ? 'warn' : level;
+      console[logLevel](`[${error.timestamp.toISOString()}] ${message}`, context);
     }
 
     // Send to error tracking service in production

@@ -17,6 +17,7 @@ const AchievementsSection = () => {
           icon={Award}
           title={t('achievements.title')}
           subtitle={t('achievements.subtitle')}
+          data-translate="true"
         />
 
         {/* Main Achievement */}
@@ -41,13 +42,13 @@ const AchievementsSection = () => {
                 </div>
               </motion.div>
               
-              <h3 className="font-display text-3xl md:text-5xl text-rx-gold mb-6 font-bold">
+              <h3 className="font-display text-3xl md:text-5xl text-rx-gold mb-6 font-bold" data-translate="true">
                 {t('achievements.mainTitle')}
               </h3>
               <div className="inline-block bg-rx-gold/20 px-6 py-2 rounded-full mb-6">
-                <span className="text-rx-gold font-semibold text-lg">{t('achievements.category')}</span>
+                <span className="text-rx-gold font-semibold text-lg" data-translate="true">{t('achievements.category')}</span>
               </div>
-              <p className="text-2xl md:text-3xl text-white mb-6 font-light">
+              <p className="text-2xl md:text-3xl text-white mb-6 font-light" data-translate="true">
                 {t('achievements.event')}
               </p>
               <div className="h-px w-24 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto mb-8"></div>

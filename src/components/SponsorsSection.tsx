@@ -51,7 +51,7 @@ const SponsorsSection = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h3 className="font-display text-3xl text-rx-gold text-center mb-12">
+          <h3 className="font-display text-3xl text-rx-gold text-center mb-12" data-translate="true">
             {t('sponsors.collaboration')}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -80,14 +80,14 @@ const SponsorsSection = () => {
           className="text-center bg-gradient-to-r from-rx-gold/10 to-rx-gold/5 p-8 rounded-2xl border border-rx-gold/30 max-w-4xl mx-auto"
         >
           <Heart className="w-12 h-12 text-rx-gold mx-auto mb-6" />
-          <h3 className="font-display text-2xl md:text-3xl text-rx-gold mb-4">
+          <h3 className="font-display text-2xl md:text-3xl text-rx-gold mb-4" data-translate="true">
             {t('sponsors.question')}
           </h3>
-          <p className="text-gray-300 text-lg mb-6 leading-relaxed">
+          <p className="text-gray-300 text-lg mb-6 leading-relaxed" data-translate="true">
             {t('sponsors.description')}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-2 text-lg">
-            <span className="text-gray-400">{t('sponsors.contact')}</span>
+            <span className="text-gray-400" data-translate="true">{t('sponsors.contact')}</span>
             <a 
               href="mailto:revolutionx.f1@gmail.com" 
               className="text-rx-gold hover:text-yellow-300 transition font-semibold underline decoration-rx-gold/50 hover:decoration-yellow-300"

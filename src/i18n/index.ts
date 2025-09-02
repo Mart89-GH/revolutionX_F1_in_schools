@@ -154,17 +154,17 @@ const en = {
     // Hero Section
     hero: {
       title: 'RevolutionX',
-      subtitle: 'F1 in Schools Team',
-      description: 'Innovation and excellence in engineering from IES José Saramago',
-      sponsorMessage: 'Your brand can be part of our success story'
+      subtitle: 'Equipo F1 in Schools',
+      description: 'Innovación y excelencia en ingeniería del IES José Saramago',
+      sponsorMessage: 'Su marca puede ser parte de nuestra historia de éxito'
     },
     // Team Section
     team: {
-      title: 'Our Team',
-      subtitle: 'A multidisciplinary team of young talents committed to excellence in engineering, design and business strategy.',
+      title: 'Nuestro Equipo',
+      subtitle: 'Un equipo multidisciplinar de jóvenes talentos comprometidos con la excelencia en ingeniería, diseño y estrategia empresarial.',
       excellence: {
-        title: 'Academic and Technical Excellence',
-        description: 'Our team consists of outstanding students from IES José Saramago, selected for their academic excellence and passion for engineering. Each member brings unique skills that allow us to compete at the highest level.'
+        title: 'Excelencia Académica y Técnica',
+        description: 'Nuestro equipo está formado por estudiantes destacados del IES José Saramago, seleccionados por su excelencia académica y pasión por la ingeniería. Cada miembro aporta habilidades únicas que nos permiten competir al más alto nivel.'
       },
       stats: {
         members: 'Team Members',
@@ -176,23 +176,23 @@ const en = {
     },
     // Technical Section
     technical: {
-      title: 'Technical Innovation',
-      subtitle: 'We combine precision engineering with cutting-edge technologies to create revolutionary solutions in the F1 in Schools world.',
-      specifications: 'Vehicle Technical Specifications',
-      process: 'Development Process',
+      title: 'Innovación Técnica',
+      subtitle: 'Combinamos ingeniería de precisión con tecnologías de vanguardia para crear soluciones revolucionarias en el mundo de F1 in Schools.',
+      specifications: 'Especificaciones Técnicas del Vehículo',
+      process: 'Proceso de Desarrollo',
       speedometer: {
         title: 'Time Challenge',
-        description: 'Can you match our record time of',
-        objective: 'Target',
-        start: 'Start',
-        stop: 'Stop',
-        retry: 'Retry',
-        measuring: 'Measuring...',
-        testSpeed: 'Test Speed'
+        description: 'Puedes igualar nuestro tiempo record de..',
+        objective: 'Objetivo',
+        start: 'Iniciar',
+        stop: 'Detener',
+        retry: 'Reintentar',
+        measuring: 'Mediendo...',
+        testSpeed: 'Probar Velocidad'
       },
       game: {
         title: 'Time Challenge',
-        description: 'Can you match our record time of',
+        description: 'Puedes igualar nuestro tiempo record de..',
         start: 'Start',
         stop: 'Stop',
         retry: 'Retry',
@@ -202,76 +202,75 @@ const en = {
     },
     // Achievements Section
     achievements: {
-      title: 'Our Achievements',
-      subtitle: 'Excellence demonstrated in F1 in Schools competitions at regional and national level, establishing new standards of performance and technical precision.',
-      mainTitle: 'Fastest Car',
-      category: 'Entry Category',
-      event: 'Community of Madrid 2025',
-      history: 'Competition History'
+      title: 'Nuestros Logros',
+      subtitle: 'Excelencia demostrada en competiciones de F1 in Schools a nivel regional y nacional, estableciendo nuevos estándares de rendimiento y precisión técnica.',
+      mainTitle: 'Vehículo más rápido',
+      category: 'Categoría entry',
+      event: 'Comunidad de Madrid 2025',
+      history: 'Historial de Competiciones'
     },
     // Sponsors Section
     sponsors: {
-      title: 'Our Sponsors',
-      subtitle: 'We deeply appreciate the support of our sponsors, who make our achievements and the continuous development of our F1 in Schools project possible.',
-      collaboration: 'Collaboration Opportunities',
-      question: 'Want to be part of the project?',
-      description: 'Join our sponsor team and be part of the next generation of engineers and innovators.',
-      contact: 'Contact us at:'
+      title: 'Nuestros Patrocinadores',
+      subtitle: 'Agradecemos profundamente el apoyo de nuestros patrocinadores, quienes hacen posible nuestros logros y el desarrollo continuo de nuestro proyecto en F1 in Schools.',
+      collaboration: 'Oportunidades de colaboración',
+      question: '¿Quieres ser parte del proyecto?',
+      description: 'Únete a nuestro equipo de patrocinadores contribuye al desarrollo de la próxima generación de ingenieros y innovadores.',
+      contact: 'Contáctanos en:'
     },
     // Marketing Section
     marketing: {
-      title: 'Sponsorship Opportunities',
-      subtitle: 'Join our vision of innovation and excellence in future engineering. Discover the strategic benefits of partnering with RevolutionX.',
-      channels: 'Exposure Channels',
-      benefits: 'Strategic Sponsorship Benefits',
-      roi: 'Guaranteed Return on Investment',
-      roiDescription: 'Your investment in RevolutionX not only supports young talent, but positions your brand as a leader in innovation and corporate social responsibility.'
+      title: 'Oportunidades de Patrocinio',
+      subtitle: 'Únete a nuestra visión de innovación y excelencia en ingeniería futura. Descubre los beneficios estratégicos de colaborar con RevolutionX.',
+      channels: 'Canales de Exposición',
+      benefits: 'Beneficios Estratégicos de Patrocinio',
+      roi: 'Retorno de Inversión Garantizado',
+      roiDescription: 'Su inversión en RevolutionX no solo apoya el talento joven, sino que posiciona su marca como líder en innovación y responsabilidad social corporativa.'
     },
     // Contact Section
     contact: {
-      title: 'Collaborate with Us',
-      subtitle: 'Join RevolutionX and be part of the next generation of innovators in engineering and technology.',
+      title: 'Colabora con Nosotros',
+      subtitle: 'Únete a RevolutionX y sé parte de la próxima generación de innovadores en ingeniería y tecnología.',
       form: {
-        name: 'Full name',
+        name: 'Nombre Completo',
         email: 'Email',
         company: 'Company/Organization',
         phone: 'Phone',
-        subject: 'Subject',
-        message: 'Message',
-        privacy: 'I accept the privacy policy',
-        send: 'Send Message',
-        sending: 'Sending...',
-        success: 'Message sent successfully!',
-        error: 'Error sending message'
+        subject: 'Asunto',
+        message: 'Mensaje',
+        send: 'Enviar Mensaje',
+        sending: 'Enviando...',
+        success: 'Mensaje enviado con éxito!',
+        error: 'Error al enviar mensaje'
       },
-      whyCollaborate: 'Why Collaborate?',
-      startToday: 'Start Your Collaboration Today'
+      whyCollaborate: '¿Por qué Colaborar?',
+      startToday: 'Comienza tu Colaboración Hoy'
     },
     // AI Assistant
     ai: {
-      title: 'RevolutionX AI',
-      greeting: 'Hello! I am the RevolutionX assistant. I can answer any questions about our team, achievements, technology, sponsors and collaboration opportunities. How can I help you?',
-      placeholder: 'Ask about RevolutionX...',
-      thinking: 'Processing with Llama 3...',
+      title: 'RevolutionX IA',
+      greeting: 'Hola! Soy el asistente de RevolutionX. Puedo responder cualquier pregunta sobre nuestro equipo, logros, tecnología, patrocinadores y oportunidades de colaboración. ¿Cómo puedo ayudarte?',
+      placeholder: 'Pregunta sobre RevolutionX...',
+      thinking: 'Procesando con Chatgpt 3.5 turbo...',
       settings: {
-        model: 'Model',
+        model: 'Modelo',
         streaming: 'Streaming',
         performance: 'Performance',
         tokens: 'Tokens',
-        apiKey: 'API Key',
-        reconnect: 'Reconnect',
-        clear: 'Clear'
+        apiKey: 'Clave API',
+        reconnect: 'Reconectar',
+        clear: 'Limpiar'
       },
       status: {
-        connected: 'Connected',
-        disconnected: 'Disconnected',
-        connecting: 'Connecting...',
-        apiKeyRequired: 'API Key required'
+        connected: 'Conectado',
+        disconnected: 'Desconectado',
+        connecting: 'Conectando...',
+        apiKeyRequired: 'Clave API requerida'
       }
     },
     // Footer
     footer: {
-      rights: 'All rights reserved.'
+      rights: 'Todos los derechos reservados.'
     }
   }
 };

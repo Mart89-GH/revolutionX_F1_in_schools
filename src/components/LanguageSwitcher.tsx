@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Globe, ChevronDown } from 'lucide-react';
+import { Globe, ChevronDown, Type } from 'lucide-react';
 import { updateDocumentLanguage } from '../utils/languageUtils';
+import { translateElements, restoreOriginalText } from '../services/translationService';
 
 const LanguageSwitcher: React.FC = () => {
   const { i18n, t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const [autoTranslate, setAutoTranslate] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
 
   const languages = [
     { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -15,14 +18,45 @@ const LanguageSwitcher: React.FC = () => {
 
   const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0];
 
-  const changeLanguage = (langCode: string) => {
+  const changeLanguage = async (langCode: string) => {
     i18n.changeLanguage(langCode);
     updateDocumentLanguage(langCode, t);
     setIsOpen(false);
+
+    if (autoTranslate && langCode !== 'es') {
+      setIsTranslating(true);
+      const textElements = document.querySelectorAll('[data-translate="true"]');
+      await translateElements(textElements, langCode);
+      setIsTranslating(false);
+    } else if (!autoTranslate || langCode === 'es') {
+      const textElements = document.querySelectorAll('[data-translate="true"]');
+      restoreOriginalText(textElements);
+    }
+  };
+
+  const toggleAutoTranslate = () => {
+    const newState = !autoTranslate;
+    setAutoTranslate(newState);
+    
+    if (!newState || i18n.language === 'es') {
+      const textElements = document.querySelectorAll('[data-translate="true"]');
+      restoreOriginalText(textElements);
+    } else if (newState && i18n.language !== 'es') {
+      changeLanguage(i18n.language);
+    }
   };
 
   return (
-    <div className="relative">
+    <div className="relative flex items-center gap-2">
+      <motion.button
+        onClick={() => toggleAutoTranslate()}
+        className={`flex items-center space-x-2 bg-rx-dark/80 backdrop-blur-sm border ${autoTranslate ? 'border-rx-gold' : 'border-rx-gold/30'} rounded-lg px-3 py-2 text-white hover:border-rx-gold/50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-rx-gold/50`}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        aria-label="Toggle auto translation"
+      >
+        <Type className={`w-4 h-4 ${autoTranslate ? 'text-rx-gold' : 'text-rx-gold/50'}`} />
+      </motion.button>
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center space-x-2 bg-rx-dark/80 backdrop-blur-sm border border-rx-gold/30 rounded-lg px-3 py-2 text-white hover:border-rx-gold/50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-rx-gold/50"

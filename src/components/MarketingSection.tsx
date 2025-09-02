@@ -84,7 +84,7 @@ const MarketingSection = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h3 className="font-display text-3xl text-rx-gold text-center mb-12">
+          <h3 className="font-display text-3xl text-rx-gold text-center mb-12" data-translate="true">
             {t('marketing.channels')}
           </h3>
           <div className="max-w-4xl mx-auto">
@@ -114,7 +114,7 @@ const MarketingSection = () => {
           viewport={{ once: true }}
           className="bg-gradient-to-r from-rx-gold/10 to-rx-gold/5 p-8 rounded-2xl border border-rx-gold/30 max-w-6xl mx-auto"
         >
-          <h3 className="font-display text-2xl md:text-3xl text-rx-gold mb-8 text-center">
+          <h3 className="font-display text-2xl md:text-3xl text-rx-gold mb-8 text-center" data-translate="true">
             {t('marketing.benefits')}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -137,10 +137,10 @@ const MarketingSection = () => {
           </div>
           
           <div className="mt-8 p-6 bg-rx-black/30 rounded-lg border border-rx-gold/20 text-center">
-            <h4 className="text-rx-gold font-semibold text-lg mb-2">
+            <h4 className="text-rx-gold font-semibold text-lg mb-2" data-translate="true">
               {t('marketing.roi')}
             </h4>
-            <p className="text-gray-300">
+            <p className="text-gray-300" data-translate="true">
               {t('marketing.roiDescription')}
             </p>
           </div>

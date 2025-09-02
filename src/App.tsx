@@ -117,6 +117,7 @@ function App() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.4 }}
+                      data-translate="true"
                     >
                       {t('hero.title')}
                     </motion.h1>
@@ -127,14 +128,14 @@ function App() {
                       transition={{ duration: 0.8, delay: 0.6 }}
                       className="space-y-3 sm:space-y-4"
                     >
-                      <h2 className="font-display text-base sm:text-xl md:text-2xl text-white/90 font-light tracking-wide">
+                      <h2 className="font-display text-base sm:text-xl md:text-2xl text-white/90 font-light tracking-wide" data-translate="true">
                         {t('hero.subtitle')}
                       </h2>
-                      <p className="text-sm sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed px-4">
+                      <p className="text-sm sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed px-4" data-translate="true">
                         {t('hero.description')}
                       </p>
                       <div className="h-px w-12 sm:w-16 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto my-4 sm:my-6" aria-hidden="true"></div>
-                      <p className="text-xs sm:text-base md:text-lg text-rx-gold font-medium px-4">
+                      <p className="text-xs sm:text-base md:text-lg text-rx-gold font-medium px-4" data-translate="true">
                         {t('hero.sponsorMessage')}
                       </p>
                     </motion.div>

@@ -18,6 +18,7 @@ const TechnicalSection = () => {
           icon={Cog}
           title={t('technical.title')}
           subtitle={t('technical.subtitle')}
+          data-translate="true"
         />
 
         {/* Interactive Elements */}
@@ -37,7 +38,7 @@ const TechnicalSection = () => {
           <div className="bg-gradient-to-br from-rx-gold/10 to-rx-gold/5 p-8 rounded-2xl border border-rx-gold/30">
             <div className="flex items-center justify-center mb-6">
               <Target className="w-8 h-8 text-rx-gold mr-3" />
-              <h3 className="font-display text-2xl text-rx-gold">
+              <h3 className="font-display text-2xl text-rx-gold" data-translate="true">
                 {t('technical.specifications')}
               </h3>
             </div>
@@ -67,7 +68,7 @@ const TechnicalSection = () => {
           viewport={{ once: true }}
           className="max-w-6xl mx-auto"
         >
-          <h3 className="font-display text-3xl text-rx-gold text-center mb-12">
+          <h3 className="font-display text-3xl text-rx-gold text-center mb-12" data-translate="true">
             {t('technical.process')}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">

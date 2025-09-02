@@ -129,7 +129,7 @@ const EnhancedContactSection = () => {
               >
                 <Send className="w-5 h-5 sm:w-7 sm:h-7 text-rx-gold" />
               </motion.div>
-              <h3 className="font-display text-xl sm:text-2xl text-rx-gold font-semibold">
+              <h3 className="font-display text-xl sm:text-2xl text-rx-gold font-semibold" data-translate="true">
                 {t('contact.form.title', 'Contacto Directo')}
               </h3>
             </div>
@@ -153,7 +153,7 @@ const EnhancedContactSection = () => {
               >
                 <Phone className="w-5 h-5 sm:w-7 sm:h-7 text-rx-gold" />
               </motion.div>
-              <h3 className="font-display text-xl sm:text-2xl text-rx-gold font-semibold">
+              <h3 className="font-display text-xl sm:text-2xl text-rx-gold font-semibold" data-translate="true">
                 {t('contact.whyCollaborate')}
               </h3>
             </div>
@@ -203,10 +203,10 @@ const EnhancedContactSection = () => {
           viewport={{ once: true }}
           className="mt-16 sm:mt-20 text-center bg-gradient-to-r from-rx-gold/10 to-rx-gold/5 p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-rx-gold/30 max-w-5xl mx-auto shadow-2xl"
         >
-          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-rx-gold mb-4 sm:mb-6">
+          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-rx-gold mb-4 sm:mb-6" data-translate="true">
             {t('contact.startToday')}
           </h3>
-          <p className="text-gray-300 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-4">
+          <p className="text-gray-300 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-4" data-translate="true">
             Estamos listos para discutir cómo su empresa puede beneficiarse 
             de una asociación estratégica con RevolutionX.
           </p>
