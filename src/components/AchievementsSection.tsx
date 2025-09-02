@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Award, Zap, Medal, Star } from 'lucide-react';
+import { Award, Zap, Medal, Star, LucideIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionHeader from './ui/SectionHeader';
 import FeatureCard from './ui/FeatureCard';
@@ -96,7 +96,7 @@ const AchievementsSection = () => {
         {/* Other Achievements */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {achievements.map((achievement, index) => {
-            const IconComponent = Icons[achievement.icon as keyof typeof Icons] as React.ComponentType<any>;
+            const IconComponent: LucideIcon = Icons[achievement.icon as keyof typeof Icons] as LucideIcon;
             return (
               <FeatureCard
                 key={index}

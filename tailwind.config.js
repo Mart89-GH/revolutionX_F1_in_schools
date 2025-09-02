@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'rx-gold': '#D4AF37',
+        'rx-gold': '#FFEE99',
         'rx-black': '#0A0A0A',
         'rx-dark': '#1A1A1A',
         'rx-gray': {
@@ -25,8 +25,8 @@ export default {
         'body': ['Space Grotesk', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        'xs': ['0.75rem', { lineHeight: '1rem' }],
-        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
+        'xs': ['1rem', { lineHeight: '1.5rem' }],
+        'sm': ['1rem', { lineHeight: '1.5rem' }],
         'base': ['1rem', { lineHeight: '1.5rem' }],
         'lg': ['1.125rem', { lineHeight: '1.75rem' }],
         'xl': ['1.25rem', { lineHeight: '1.75rem' }],

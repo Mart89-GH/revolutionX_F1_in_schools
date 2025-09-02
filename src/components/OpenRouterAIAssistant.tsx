@@ -144,7 +144,7 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
             <div className="bg-gradient-to-r from-rx-gold to-yellow-600 p-4 flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-rx-black/20 rounded-full flex items-center justify-center">
-                  <Bot className="w-5 h-5 text-rx-black" />
+                  <Bot className="w-5 h-5 text-rx-black" aria-label="Asistente virtual" role="img" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-rx-black text-sm">{t('ai.title')}</h3>
@@ -158,22 +158,26 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                 <button
                   onClick={() => setShowSettings(!showSettings)}
                   className="w-8 h-8 bg-rx-black/20 rounded-full flex items-center justify-center hover:bg-rx-black/30 transition-colors"
+                  aria-label="Configuración del asistente"
+                  aria-expanded={showSettings}
                 >
-                  <Settings className="w-4 h-4 text-rx-black" />
+                  <Settings className="w-4 h-4 text-rx-black" aria-hidden="true" />
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="w-8 h-8 bg-rx-black/20 rounded-full flex items-center justify-center hover:bg-rx-black/30 transition-colors"
+                  aria-label="Cerrar asistente"
                 >
-                  <X className="w-4 h-4 text-rx-black" />
+                  <X className="w-4 h-4 text-rx-black" aria-hidden="true" />
                 </button>
               </div>
             </div>
 
             {/* Settings Panel */}
-            <AnimatePresence>
+            <AnimatePresence mode="wait">
               {showSettings && (
                 <motion.div
+                  key="settings-panel"
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
@@ -191,6 +195,9 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                       className={`w-10 h-6 rounded-full transition-colors ${
                         useStreaming ? 'bg-rx-gold' : 'bg-gray-600'
                       }`}
+                      role="switch"
+                      aria-checked={useStreaming}
+                      aria-label="Activar streaming de respuestas"
                     >
                       <div className={`w-4 h-4 bg-white rounded-full transition-transform ${
                         useStreaming ? 'translate-x-5' : 'translate-x-1'
@@ -201,7 +208,7 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                   <div className="flex items-center justify-between">
                     <span className="text-white text-sm">Performance:</span>
                     <div className="flex items-center space-x-2">
-                      <BarChart3 className="w-4 h-4 text-rx-gold" />
+                      <BarChart3 className="w-4 h-4 text-rx-gold" aria-label="Estadísticas de rendimiento" role="img" />
                       <span className="text-xs text-gray-300">
                         {performance.averageResponseTime.toFixed(0)}ms avg
                       </span>
@@ -227,7 +234,7 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                       onClick={resetConnection}
                       className="flex-1 bg-rx-gold/20 hover:bg-rx-gold/30 px-3 py-2 rounded-lg text-rx-gold text-xs font-medium transition-colors flex items-center justify-center space-x-1"
                     >
-                      <RefreshCw className="w-3 h-3" />
+                      <RefreshCw className="w-3 h-3" aria-label="Reiniciar conexión" role="img" />
                       <span>Reconectar</span>
                     </button>
                     <button
@@ -251,7 +258,7 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                   className="bg-orange-500/10 border-b border-orange-500/20 p-4"
                 >
                   <div className="flex items-center space-x-2 mb-3">
-                    <Key className="w-4 h-4 text-orange-400" />
+                    <Key className="w-4 h-4 text-orange-400" aria-label="Clave API" role="img" />
                     <span className="text-orange-400 text-sm font-medium">Configurar API Key</span>
                   </div>
                   <div className="space-y-3">
@@ -296,7 +303,7 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
             {error && (
               <div className="bg-red-500/20 border-b border-red-500/30 p-3">
                 <div className="flex items-center space-x-2 mb-2">
-                  <AlertTriangle className="w-4 h-4 text-red-400" />
+                  <AlertTriangle className="w-4 h-4 text-red-400" aria-label="Error de conexión" role="img" />
                   <p className="text-red-400 text-xs font-medium">Error de Conexión</p>
                 </div>
                 <p className="text-red-300 text-xs mb-2">{error}</p>
@@ -375,7 +382,7 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                       {message.role === 'user' ? (
                         <User className="w-3 h-3 text-rx-black" />
                       ) : (
-                        <Bot className="w-3 h-3 text-rx-gold" />
+                        <Bot className="w-3 h-3 text-rx-gold" aria-label="Respuesta del asistente" role="img" />
                       )}
                     </div>
                     <div className={`rounded-2xl px-3 py-2 ${
@@ -422,7 +429,7 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                     </div>
                     <div className="bg-rx-gold/10 border border-rx-gold/20 rounded-2xl px-3 py-2">
                       <div className="flex items-center space-x-2">
-                        <Loader2 className="w-4 h-4 text-rx-gold animate-spin" />
+                        <Loader2 className="w-4 h-4 text-rx-gold animate-spin" aria-label="Cargando respuesta" role="img" />
                         <span className="text-sm text-gray-300">{t('ai.thinking')}</span>
                       </div>
                     </div>
@@ -444,13 +451,18 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                   placeholder={isConnected ? t('ai.placeholder') : t('ai.status.apiKeyRequired')}
                   className="flex-1 bg-rx-black/50 border border-rx-gold/20 rounded-xl px-3 py-2 text-white text-sm focus:border-rx-gold/50 focus:outline-none disabled:opacity-50"
                   disabled={isLoading || !isConnected}
+                  aria-label="Escribe tu mensaje"
+                  aria-required="true"
+                  aria-invalid={!inputText.trim() && isConnected}
                 />
                 <button
                   onClick={handleSendMessage}
                   disabled={!inputText.trim() || isLoading || !isConnected}
                   className="w-10 h-10 bg-rx-gold hover:bg-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl flex items-center justify-center transition-colors"
+                  aria-label="Enviar mensaje"
+                  aria-disabled={!inputText.trim() || isLoading || !isConnected}
                 >
-                  <Send className="w-4 h-4 text-rx-black" />
+                  <Send className="w-4 h-4 text-rx-black" aria-hidden="true" />
                 </button>
               </div>
               

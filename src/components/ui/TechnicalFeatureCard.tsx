@@ -23,14 +23,14 @@ const TechnicalFeatureCard: React.FC<TechnicalFeatureCardProps> = ({ feature, in
         <div className="relative h-64 overflow-hidden">
           <img 
             src={feature.image}
-            alt={feature.title}
+            alt={`${feature.title}: ${feature.description}`}
             className="w-full h-full object-cover transform group-hover:scale-110 transition duration-700"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-rx-black via-rx-black/50 to-transparent"></div>
           <div className="absolute bottom-6 left-6">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-rx-gold/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-rx-gold/30">
-                <IconComponent className="w-6 h-6 text-rx-gold" />
+                <IconComponent className="w-6 h-6 text-rx-gold" aria-label={`Icono de característica: ${feature.title}`} role="img" />
               </div>
               <h3 className="text-2xl font-display text-white font-semibold">
                 {feature.title}

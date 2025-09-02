@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Cog, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -38,7 +37,7 @@ const TechnicalSection = () => {
           <div className="bg-gradient-to-br from-rx-gold/10 to-rx-gold/5 p-8 rounded-2xl border border-rx-gold/30">
             <div className="flex items-center justify-center mb-6">
               <Target className="w-8 h-8 text-rx-gold mr-3" />
-              <h3 className="font-display text-2xl text-rx-gold" data-translate="true">
+              <h3 className="font-display text-2xl text-rx-gold" role="heading" aria-level={3} data-translate="true">
                 {t('technical.specifications')}
               </h3>
             </div>
@@ -68,7 +67,7 @@ const TechnicalSection = () => {
           viewport={{ once: true }}
           className="max-w-6xl mx-auto"
         >
-          <h3 className="font-display text-3xl text-rx-gold text-center mb-12" data-translate="true">
+          <h3 className="font-display text-3xl text-rx-gold text-center mb-12" role="heading" aria-level={3} data-translate="true">
             {t('technical.process')}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -84,7 +83,7 @@ const TechnicalSection = () => {
                 <div className="w-16 h-16 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-rx-gold/50">
                   <span className="text-rx-gold font-display font-bold text-lg">{phase.step}</span>
                 </div>
-                <h4 className="text-white font-semibold mb-2">{phase.title}</h4>
+                <h4 className="text-white font-semibold mb-2" role="heading" aria-level={4}>{phase.title}</h4>
                 <p className="text-gray-400 text-sm">{phase.description}</p>
               </motion.div>
             ))}

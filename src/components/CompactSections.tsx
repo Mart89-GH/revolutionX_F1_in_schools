@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Users, Cog, Award, Handshake, TrendingUp, MessageSquare, Instagram, Mail, MapPin, Clock } from 'lucide-react';
+import { Users, Cog, Award, Handshake, TrendingUp, MessageSquare, Instagram, Mail, MapPin } from 'lucide-react';
 
 const CompactSections = () => {
   return (
@@ -41,7 +41,7 @@ const CompactSections = () => {
                 viewport={{ once: true }}
                 className="bg-gradient-to-br from-rx-dark to-rx-black p-4 sm:p-6 rounded-xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300"
               >
-                <h3 className="text-rx-gold font-semibold text-sm sm:text-base mb-1">{member.name}</h3>
+                <h3 className="text-rx-gold font-semibold text-sm sm:text-base mb-1" role="heading" aria-level={3}>{member.name}</h3>
                 <p className="text-white text-xs sm:text-sm font-medium mb-2">{member.role}</p>
                 <p className="text-gray-400 text-xs">{member.desc}</p>
               </motion.div>
@@ -62,7 +62,7 @@ const CompactSections = () => {
           >
             <div className="flex items-center justify-center mb-4">
               <Cog className="w-6 h-6 text-rx-gold mr-3" />
-              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-rx-gold">Innovación Técnica</h2>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-rx-gold" role="heading" aria-level={2}>Innovación Técnica</h2>
             </div>
             <p className="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">
               Tecnología de vanguardia y precisión en cada componente
@@ -101,7 +101,7 @@ const CompactSections = () => {
               viewport={{ once: true }}
               className="bg-gradient-to-br from-rx-dark to-rx-black p-6 rounded-xl border border-rx-gold/20"
             >
-              <h3 className="text-rx-gold font-semibold text-lg mb-3">Tecnologías</h3>
+              <h3 className="text-rx-gold font-semibold text-lg mb-3" role="heading" aria-level={3}>Tecnologías</h3>
               <ul className="space-y-2 text-sm text-gray-300">
                 <li>• Diseño CAD avanzado</li>
                 <li>• Simulación CFD</li>
@@ -183,7 +183,7 @@ const CompactSections = () => {
             className="text-center mb-8 sm:mb-12"
           >
             <div className="flex items-center justify-center mb-4">
-              <Handshake className="w-6 h-6 text-rx-gold mr-3" />
+              <Handshake className="w-6 h-6 text-rx-gold mr-3" aria-label="Icono de colaboración" role="img" />
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-rx-gold">Patrocinadores</h2>
             </div>
             <p className="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">
@@ -210,7 +210,7 @@ const CompactSections = () => {
               >
                 <img
                   src={sponsor.logo}
-                  alt={`Logo de ${sponsor.name}`}
+                  alt={`${sponsor.name}: patrocinador oficial de RevolutionX`}
                   className="max-w-full max-h-16 object-contain"
                 />
               </motion.div>
@@ -230,7 +230,7 @@ const CompactSections = () => {
             className="text-center mb-8 sm:mb-12"
           >
             <div className="flex items-center justify-center mb-4">
-              <TrendingUp className="w-6 h-6 text-rx-gold mr-3" />
+              <TrendingUp className="w-6 h-6 text-rx-gold mr-3" aria-label="Icono de crecimiento" role="img" />
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-rx-gold">Oportunidades</h2>
             </div>
             <p className="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">
@@ -275,7 +275,7 @@ const CompactSections = () => {
             className="text-center mb-8 sm:mb-12"
           >
             <div className="flex items-center justify-center mb-4">
-              <MessageSquare className="w-6 h-6 text-rx-gold mr-3" />
+              <MessageSquare className="w-6 h-6 text-rx-gold mr-3" aria-label="Icono de mensajes" role="img" />
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-rx-gold">Contacto</h2>
             </div>
             <p className="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">
@@ -292,7 +292,7 @@ const CompactSections = () => {
               viewport={{ once: true }}
               className="bg-gradient-to-br from-rx-dark to-rx-black p-4 rounded-xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center group"
             >
-              <Mail className="w-8 h-8 text-rx-gold mx-auto mb-3" />
+              <Mail className="w-8 h-8 text-rx-gold mx-auto mb-3" aria-label="Icono de correo electrónico" role="img" />
               <h3 className="text-rx-gold font-semibold text-sm mb-2">Email</h3>
               <p className="text-white text-xs break-all">revolutionx.f1@gmail.com</p>
             </motion.a>
@@ -307,7 +307,7 @@ const CompactSections = () => {
               viewport={{ once: true }}
               className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 p-4 rounded-xl border border-purple-500/30 hover:border-purple-500/50 transition-all duration-300 text-center"
             >
-              <Instagram className="w-8 h-8 text-purple-300 mx-auto mb-3" />
+              <Instagram className="w-8 h-8 text-purple-300 mx-auto mb-3" aria-label="Icono de Instagram" role="img" />
               <h3 className="text-purple-300 font-semibold text-sm mb-2">Instagram</h3>
               <p className="text-white text-xs">@revolutionx_f1</p>
             </motion.a>
@@ -319,7 +319,7 @@ const CompactSections = () => {
               viewport={{ once: true }}
               className="bg-gradient-to-br from-rx-dark to-rx-black p-4 rounded-xl border border-rx-gold/20 text-center"
             >
-              <MapPin className="w-8 h-8 text-rx-gold mx-auto mb-3" />
+              <MapPin className="w-8 h-8 text-rx-gold mx-auto mb-3" aria-label="Icono de ubicación" role="img" />
               <h3 className="text-rx-gold font-semibold text-sm mb-2">Ubicación</h3>
               <p className="text-white text-xs">IES José Saramago</p>
             </motion.div>
@@ -340,7 +340,7 @@ const CompactSections = () => {
               href="mailto:revolutionx.f1@gmail.com" 
               className="inline-flex items-center space-x-2 bg-rx-gold/20 hover:bg-rx-gold/30 px-6 py-3 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 text-sm"
             >
-              <Mail className="w-4 h-4" />
+              <Mail className="w-4 h-4" aria-label="Icono de correo" role="img" />
               <span>Contáctenos</span>
             </a>
           </motion.div>

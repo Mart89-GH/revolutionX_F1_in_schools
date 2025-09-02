@@ -20,7 +20,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, index }) => {
     >
       <div className="flex items-center mb-6">
         <div className="w-12 h-12 bg-rx-gold/20 rounded-full flex items-center justify-center mr-4">
-          <User className="w-6 h-6 text-rx-gold" />
+          <User className="w-6 h-6 text-rx-gold" aria-label={`Foto de perfil de ${member.name}`} role="img" />
         </div>
         <div>
           <h3 className="text-xl font-display text-rx-gold font-semibold">

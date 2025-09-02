@@ -51,7 +51,9 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
           className="block text-gray-300 text-sm font-medium"
         >
           {label}
-          {required && <span className="text-red-400 ml-1">*</span>}
+          {required && (
+            <span className="text-red-400 ml-1" aria-label="campo obligatorio">*</span>
+          )}
         </label>
         
         <div className="relative">
@@ -81,7 +83,7 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
           
           {hasError && (
             <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-red-400">
-              <AlertCircle className="w-5 h-5" />
+              <AlertCircle className="w-5 h-5" aria-label="Error en el campo" role="img" />
             </div>
           )}
         </div>
@@ -90,19 +92,26 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
           {error && (
             <motion.div
               id={`${fieldId}-error`}
+              role="alert"
+              aria-live="polite"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               className="flex items-center space-x-2 text-red-400 text-sm"
             >
-              <AlertCircle className="w-4 h-4 flex-shrink-0" />
+              <AlertCircle className="w-4 h-4 flex-shrink-0" aria-label="Mensaje de error" role="img" />
               <span>{error}</span>
             </motion.div>
           )}
         </AnimatePresence>
         
         {helperText && !error && (
-          <p id={`${fieldId}-helper`} className="text-gray-400 text-sm">
+          <p 
+            id={`${fieldId}-helper`} 
+            className="text-gray-400 text-sm"
+            role="status"
+            aria-live="polite"
+          >
             {helperText}
           </p>
         )}

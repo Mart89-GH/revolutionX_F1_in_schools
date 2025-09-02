@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { DivideIcon as LucideIcon } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
 interface SectionHeaderProps {
   icon: LucideIcon;
@@ -24,8 +24,8 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
       className={`text-center mb-12 sm:mb-16 md:mb-20 ${className}`}
     >
       <div className="flex items-center justify-center mb-4 sm:mb-6">
-        <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-rx-gold mr-3 sm:mr-4" />
-        <h2 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-rx-gold">
+        <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-rx-gold mr-3 sm:mr-4" aria-label={`Icono de sección: ${title}`} role="img" />
+        <h2 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-rx-gold" role="heading" aria-level={2}>
           {title}
         </h2>
       </div>

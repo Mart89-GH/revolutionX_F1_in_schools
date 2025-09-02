@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { motion } from 'framer-motion';
@@ -39,7 +39,15 @@ const schema = yup.object({
     .oneOf([true], 'Debe aceptar la política de privacidad')
 });
 
-type FormData = yup.InferType<typeof schema>;
+type FormData = {
+  name: string;
+  email: string;
+  company?: string;
+  phone?: string;
+  subject: string;
+  message: string;
+  privacy?: boolean;
+};
 
 interface EnhancedContactFormProps {
   onSubmit?: (data: FormData) => Promise<void>;
@@ -54,7 +62,7 @@ const EnhancedContactForm: React.FC<EnhancedContactFormProps> = ({ onSubmit }) =
     formState: { errors, isValid, isDirty },
     reset,
     watch
-  } = useForm<FormData>({
+  } = useForm({
     resolver: yupResolver(schema),
     mode: 'onChange'
   });
@@ -62,7 +70,7 @@ const EnhancedContactForm: React.FC<EnhancedContactFormProps> = ({ onSubmit }) =
   const watchedMessage = watch('message', '');
   const messageLength = watchedMessage?.length || 0;
 
-  const handleFormSubmit = async (data: FormData) => {
+  const handleFormSubmit: SubmitHandler<FormData> = async (data) => {
     setSubmitStatus('loading');
     
     try {
@@ -111,20 +119,22 @@ ${data.message}
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <FormField
-          label="Nombre completo"
+          label="Nombre completo (obligatorio)"
           {...register('name')}
           error={errors.name?.message}
           required
+          aria-required="true"
           placeholder="Su nombre completo"
           autoComplete="name"
         />
         
         <FormField
-          label="Email"
+          label="Email (obligatorio)"
           type="email"
           {...register('email')}
           error={errors.email?.message}
           required
+          aria-required="true"
           placeholder="su@email.com"
           autoComplete="email"
         />
@@ -150,21 +160,23 @@ ${data.message}
       </div>
       
       <FormField
-        label="Asunto"
+        label="Asunto (obligatorio)"
         {...register('subject')}
         error={errors.subject?.message}
         required
+        aria-required="true"
         placeholder="Motivo de su consulta"
       />
       
       <div className="space-y-2">
         <FormField
-          label="Mensaje"
+          label="Mensaje (obligatorio)"
           multiline
           rows={6}
           {...register('message')}
           error={errors.message?.message}
           required
+          aria-required="true"
           placeholder="Cuéntenos sobre su interés en colaborar con RevolutionX..."
         />
         <div className="flex justify-between text-sm">
@@ -182,6 +194,9 @@ ${data.message}
           type="checkbox"
           id="privacy"
           {...register('privacy')}
+          aria-required="true"
+          aria-invalid={!!errors.privacy}
+          aria-describedby={errors.privacy ? 'privacy-error' : undefined}
           className="mt-1 w-4 h-4 text-rx-gold bg-rx-black border-rx-gold/30 rounded focus:ring-rx-gold focus:ring-2"
         />
         <label htmlFor="privacy" className="text-sm text-gray-300 leading-relaxed">
@@ -196,7 +211,7 @@ ${data.message}
           </a>{' '}
           y el tratamiento de mis datos personales para responder a mi consulta.
           {errors.privacy && (
-            <span className="block text-red-400 mt-1">
+            <span id="privacy-error" className="block text-red-400 mt-1" role="alert">
               {errors.privacy.message}
             </span>
           )}

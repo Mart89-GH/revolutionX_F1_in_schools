@@ -20,7 +20,7 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    line-height: 1.6;
+    line-height: 1.5;
     overflow-x: hidden;
   }
 
@@ -83,11 +83,11 @@
 
   /* High contrast mode support */
   @media (prefers-contrast: high) {
-    .text-gray-300 {
+    .text-gray-300, .text-gray-400 {
       color: #ffffff;
     }
     
-    .text-gray-400 {
+    .text-gray-500 {
       color: #e5e5e5;
     }
     

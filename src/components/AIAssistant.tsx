@@ -234,7 +234,7 @@ const AIAssistant = () => {
             <div className="bg-gradient-to-r from-rx-gold to-yellow-600 p-4 flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-rx-black/20 rounded-full flex items-center justify-center">
-                  <Bot className="w-5 h-5 text-rx-black" />
+                  <Bot className="w-5 h-5 text-rx-black" aria-label="Asistente virtual RevolutionX" role="img" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-rx-black text-sm">Asistente RevolutionX</h3>
@@ -245,7 +245,7 @@ const AIAssistant = () => {
                 onClick={() => setIsOpen(false)}
                 className="w-8 h-8 bg-rx-black/20 rounded-full flex items-center justify-center hover:bg-rx-black/30 transition-colors"
               >
-                <X className="w-4 h-4 text-rx-black" />
+                <X className="w-4 h-4 text-rx-black" aria-label="Cerrar asistente" role="img" />
               </button>
             </div>
 
@@ -263,9 +263,9 @@ const AIAssistant = () => {
                       message.isUser ? 'bg-rx-gold' : 'bg-rx-gold/20'
                     }`}>
                       {message.isUser ? (
-                        <User className="w-3 h-3 text-rx-black" />
+                        <User className="w-3 h-3 text-rx-black" aria-label="Usuario" role="img" />
                       ) : (
-                        <Bot className="w-3 h-3 text-rx-gold" />
+                        <Bot className="w-3 h-3 text-rx-gold" aria-label="Asistente" role="img" />
                       )}
                     </div>
                     <div className={`rounded-2xl px-3 py-2 ${
@@ -292,11 +292,11 @@ const AIAssistant = () => {
                 >
                   <div className="flex items-start space-x-2">
                     <div className="w-6 h-6 bg-rx-gold/20 rounded-full flex items-center justify-center">
-                      <Bot className="w-3 h-3 text-rx-gold" />
+                      <Bot className="w-3 h-3 text-rx-gold" aria-label="Asistente pensando" role="img" />
                     </div>
                     <div className="bg-rx-gold/10 border border-rx-gold/20 rounded-2xl px-3 py-2">
                       <div className="flex items-center space-x-2">
-                        <Loader2 className="w-4 h-4 text-rx-gold animate-spin" />
+                        <Loader2 className="w-4 h-4 text-rx-gold animate-spin" aria-label="Cargando respuesta" role="img" />
                         <span className="text-sm text-gray-300">Pensando...</span>
                       </div>
                     </div>

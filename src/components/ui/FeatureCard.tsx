@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { DivideIcon as LucideIcon } from 'lucide-react';
 
 interface FeatureCardProps {
-  icon: LucideIcon;
+  icon: typeof LucideIcon;
   title: string;
   description: string;
   delay?: number;
@@ -27,7 +27,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
       className={`bg-gradient-to-br from-rx-dark to-rx-black p-8 rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center shadow-xl hover:shadow-2xl ${className}`}
     >
       <div className="w-16 h-16 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-6">
-        <Icon className="w-8 h-8 text-rx-gold" />
+        <Icon className="w-8 h-8 text-rx-gold" aria-label={`Icono de ${title}`} role="img" />
       </div>
       <h4 className="font-display text-xl text-rx-gold mb-4 font-semibold">
         {title}

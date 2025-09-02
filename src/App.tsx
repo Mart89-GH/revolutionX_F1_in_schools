@@ -113,7 +113,7 @@ function App() {
                     </motion.div>
                     
                     <motion.h1 
-                      className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 sm:mb-6 text-rx-gold bg-clip-text text-transparent bg-gradient-to-r from-rx-gold via-yellow-200 to-rx-gold leading-tight"
+                      className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 text-rx-gold bg-clip-text text-transparent bg-gradient-to-r from-rx-gold via-yellow-200 to-rx-gold leading-tight"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.4 }}

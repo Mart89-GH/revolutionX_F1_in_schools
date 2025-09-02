@@ -55,10 +55,12 @@ const EnhancedButton = forwardRef<HTMLButtonElement, EnhancedButtonProps>(
         whileHover={{ scale: disabled || loading ? 1 : 1.02, y: disabled || loading ? 0 : -2 }}
         whileTap={{ scale: disabled || loading ? 1 : 0.98 }}
         transition={{ duration: 0.2 }}
+        aria-busy={loading}
+        aria-disabled={disabled || loading}
         {...props}
       >
         {loading && (
-          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+          <Loader2 className="w-4 h-4 mr-2 animate-spin" aria-label="Cargando" role="img" />
         )}
         {!loading && leftIcon && (
           <span className="mr-2">{leftIcon}</span>
