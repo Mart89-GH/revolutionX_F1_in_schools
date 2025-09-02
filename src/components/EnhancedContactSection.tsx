@@ -219,7 +219,7 @@ const EnhancedContactSection = () => {
               aria-label="Enviar email a revolutionx.f1@gmail.com"
             >
               <Mail className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-              <span className="break-all">revolutionx.f1@gmail.com</span>
+              <span className="break-all">Enviar email de contacto</span>
             </motion.a>
             
             <motion.a

@@ -235,13 +235,13 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                       className="flex-1 bg-rx-gold/20 hover:bg-rx-gold/30 px-3 py-2 rounded-lg text-rx-gold text-xs font-medium transition-colors flex items-center justify-center space-x-1"
                     >
                       <RefreshCw className="w-3 h-3" aria-label="Reiniciar conexión" role="img" />
-                      <span>Reconectar</span>
+                      <span>Reiniciar conexión con OpenRouter</span>
                     </button>
                     <button
                       onClick={clearMessages}
                       className="flex-1 bg-red-500/20 hover:bg-red-500/30 px-3 py-2 rounded-lg text-red-400 text-xs font-medium transition-colors"
                     >
-                      Limpiar
+                      Limpiar historial de mensajes
                     </button>
                   </div>
                 </motion.div>
@@ -280,7 +280,7 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                         onClick={() => setShowApiKeyInput(false)}
                         className="flex-1 bg-gray-600/20 hover:bg-gray-600/30 px-3 py-2 rounded-lg text-gray-400 text-xs font-medium transition-colors"
                       >
-                        Cancelar
+                        Cancelar configuración de API
                       </button>
                     </div>
                     <p className="text-orange-300 text-xs">
@@ -308,11 +308,11 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                 </div>
                 <p className="text-red-300 text-xs mb-2">{error}</p>
                 <button
-                  onClick={checkConnection}
-                  className="text-red-300 hover:text-red-200 text-xs underline"
-                >
-                  Reintentar conexión
-                </button>
+                    onClick={checkConnection}
+                    className="text-red-300 hover:text-red-200 text-xs underline"
+                  >
+                    Reintentar conexión con el asistente
+                  </button>
               </div>
             )}
 
@@ -328,11 +328,11 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                     Necesitas una API key de OpenRouter para usar el asistente
                   </p>
                   <button
-                    onClick={() => setShowApiKeyInput(true)}
-                    className="bg-orange-500/20 hover:bg-orange-500/30 px-4 py-2 rounded-lg text-orange-400 text-sm font-medium transition-colors"
-                  >
-                    Configurar API Key
-                  </button>
+                      onClick={() => setShowApiKeyInput(true)}
+                      className="bg-orange-500/20 hover:bg-orange-500/30 px-4 py-2 rounded-lg text-orange-400 text-sm font-medium transition-colors"
+                    >
+                      Configurar clave API de OpenRouter
+                    </button>
                 </div>
               )}
 
@@ -346,11 +346,11 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                     Verifica tu API key y conexión a internet
                   </p>
                   <button
-                    onClick={checkConnection}
-                    className="bg-rx-gold/20 hover:bg-rx-gold/30 px-4 py-2 rounded-lg text-rx-gold text-sm font-medium transition-colors"
-                  >
-                    Verificar Conexión
-                  </button>
+                      onClick={checkConnection}
+                      className="bg-rx-gold/20 hover:bg-rx-gold/30 px-4 py-2 rounded-lg text-rx-gold text-sm font-medium transition-colors"
+                    >
+                      Verificar conexión con OpenRouter
+                    </button>
                 </div>
               )}
 

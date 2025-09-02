@@ -1,32 +1,108 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Instagram, ExternalLink, Heart, MessageCircle, Play } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Instagram, ExternalLink, Heart, MessageCircle } from 'lucide-react';
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
-const InstagramFeed = () => {
+interface InstagramPost {
+  id: number;
+  image: string;
+  caption: string;
+  likes: number;
+  comments: number;
+}
+
+interface InstagramPostProps {
+  post: InstagramPost;
+  index: number;
+}
+
+const ErrorFallback: React.FC<FallbackProps> = ({ error, resetErrorBoundary }) => (
+  <div className="text-center p-4 bg-red-500/10 rounded-xl border border-red-500/20">
+    <p className="text-red-400 mb-2">Error al cargar el feed de Instagram</p>
+    <button
+      onClick={resetErrorBoundary}
+      className="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 rounded-lg text-red-400 transition-colors"
+    >
+      Reintentar
+    </button>
+  </div>
+);
+
+const InstagramPost: React.FC<InstagramPostProps> = React.memo(({ post, index }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  const handleImageLoad = () => setImageLoaded(true);
+  const handleImageError = () => setImageError(true);
+
+  if (imageError) {
+    return (
+    <div className="aspect-square bg-purple-600/10 rounded-xl flex items-center justify-center">
+        <p className="text-purple-400 text-xs text-center px-2">Imagen no disponible</p>
+      </div>
+    );
+  }
+
+  return (
+    <motion.div
+      key={post.id}
+      className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer shadow-lg hover:shadow-xl"
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      whileHover={{ scale: 1.02 }}
+    >
+      <AnimatePresence>
+        {!imageLoaded && (
+          <motion.div
+            className="absolute inset-0 bg-purple-600/10 flex items-center justify-center"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="w-8 h-8 border-4 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
+      <img
+        src={post.image}
+        alt={post.caption}
+        className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+        onLoad={handleImageLoad}
+        onError={handleImageError}
+      />
+      
+
+    </motion.div>
+  );
+});
+
+const InstagramFeed: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Mock Instagram posts - In a real implementation, you'd fetch from Instagram API
-  const mockPosts = [
+  // Publicaciones reales del equipo RevolutionX
+  const instagramPosts: InstagramPost[] = [
     {
       id: 1,
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=400",
-      caption: "Trabajando en el diseño aerodinámico del nuevo prototipo 🏎️",
-      likes: 127,
-      comments: 23
+      image: "/instagram/coche-f1.png",
+      caption: "¡Nuestro coche F1 listo para la competición! 🏎️ #F1inSchools #RevolutionX",
+      likes: 145,
+      comments: 28
     },
     {
       id: 2,
-      image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=400",
-      caption: "Pruebas de velocidad en el túnel de viento ⚡",
-      likes: 89,
-      comments: 15
+      image: "/instagram/equipo-trabajo.png",
+      caption: "El equipo RevolutionX trabajando en los últimos ajustes antes de la competición regional 💪 #TeamWork",
+      likes: 132,
+      comments: 19
     },
     {
       id: 3,
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=400",
-      caption: "El equipo RevolutionX preparándose para la competición 🏆",
-      likes: 156,
-      comments: 31
+      image: "/instagram/presentacion-sponsors.png",
+      caption: "Presentando nuestro proyecto a los patrocinadores. ¡Gracias por confiar en nosotros! 🤝 #Sponsors",
+      likes: 178,
+      comments: 34
     }
   ];
 
@@ -66,56 +142,16 @@ const InstagramFeed = () => {
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.95 }}
         >
-          <span className="font-medium">Seguir</span>
+          <span className="font-medium">Seguir a RevolutionX en Instagram</span>
           <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
         </motion.a>
       </div>
 
       {/* Posts Grid */}
-      <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8">
-        {mockPosts.map((post, index) => (
-          <motion.div
-            key={post.id}
-            className="relative aspect-square rounded-lg sm:rounded-xl overflow-hidden group cursor-pointer shadow-lg hover:shadow-xl"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.05, y: -4 }}
-          >
-            <img
-              src={post.image}
-              alt={`Instagram post ${post.id}`}
-              className="w-full h-full object-cover"
-            />
-            
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 right-2 sm:right-3">
-                <div className="flex items-center justify-between text-white text-xs">
-                  <div className="flex items-center space-x-1">
-                    <Heart className="w-2 h-2 sm:w-3 sm:h-3" />
-                    <span className="text-xs">{post.likes}</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <MessageCircle className="w-2 h-2 sm:w-3 sm:h-3" />
-                    <span className="text-xs">{post.comments}</span>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Play icon for video-like effect */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <motion.div
-                  className="w-8 h-8 sm:w-12 sm:h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center"
-                  whileHover={{ scale: 1.2 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Play className="w-4 h-4 sm:w-6 sm:h-6 text-white ml-1" />
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-8 sm:mb-10">
+        {instagramPosts.map((post, index) => (
+          <InstagramPost key={post.id} post={post} index={index} />
+
         ))}
       </div>
 
@@ -137,4 +173,10 @@ const InstagramFeed = () => {
   );
 };
 
-export default InstagramFeed;
+const WrappedInstagramFeed: React.FC = () => (
+  <ErrorBoundary FallbackComponent={ErrorFallback}>
+    <InstagramFeed />
+  </ErrorBoundary>
+);
+
+export default React.memo(WrappedInstagramFeed);

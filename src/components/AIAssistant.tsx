@@ -323,6 +323,7 @@ const AIAssistant = () => {
                   onClick={handleSendMessage}
                   disabled={!inputText.trim() || isLoading}
                   className="w-10 h-10 bg-rx-gold hover:bg-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl flex items-center justify-center transition-colors"
+                  aria-label="Enviar mensaje al asistente"
                 >
                   <Send className="w-4 h-4 text-rx-black" />
                 </button>

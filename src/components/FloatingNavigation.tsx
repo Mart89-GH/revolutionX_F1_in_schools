@@ -76,7 +76,7 @@ const FloatingNavigation = () => {
           className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-rx-gold to-yellow-600 rounded-full flex items-center justify-center shadow-2xl hover:shadow-rx-gold/25 transition-all duration-300 border-2 border-rx-gold/20 focus:outline-none focus:ring-2 focus:ring-rx-gold/50"
           whileHover={{ scale: 1.1, rotate: 5 }}
           whileTap={{ scale: 0.95 }}
-          aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-label={isOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
         >
           <AnimatePresence mode="wait">
             {isOpen ? (
