@@ -3,12 +3,21 @@ import { motion } from 'framer-motion';
 import { Zap, Timer, Target } from 'lucide-react';
 
 const InteractiveSpeedometer = () => {
+  // Ref para el anuncio de velocidad actual
+  const speedAnnouncementRef = useRef<HTMLDivElement>(null);
   const [currentSpeed, setCurrentSpeed] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const animationRef = useRef<number | null>(null);
   
   const maxSpeed = 100; // km/h equivalent for F1 in Schools
   const targetSpeed = 45; // Our achieved speed
+
+  // Función para anunciar la velocidad actual a lectores de pantalla
+  const announceSpeed = useCallback((speed: number) => {
+    if (speedAnnouncementRef.current) {
+      speedAnnouncementRef.current.textContent = `Velocidad actual: ${Math.round(speed)} kilómetros por hora equivalentes`;
+    }
+  }, []);
 
   const startAnimation = useCallback(() => {
     if (isAnimating) return;
@@ -25,7 +34,9 @@ const InteractiveSpeedometer = () => {
       
       // Easing function for smooth animation
       const easeOutCubic = 1 - Math.pow(1 - progress, 3);
-      setCurrentSpeed(targetSpeed * easeOutCubic);
+      const newSpeed = targetSpeed * easeOutCubic;
+      setCurrentSpeed(newSpeed);
+      announceSpeed(newSpeed);
       
       if (progress < 1) {
         animationRef.current = requestAnimationFrame(animate);
@@ -35,11 +46,19 @@ const InteractiveSpeedometer = () => {
     };
     
     animationRef.current = requestAnimationFrame(animate);
-  }, [isAnimating, targetSpeed]);
+  }, [isAnimating, targetSpeed, announceSpeed]);
+
+  const handleKeyPress = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      startAnimation();
+    }
+  }, [startAnimation]);
 
   useEffect(() => {
     // Auto-start animation when component mounts
     const timer = setTimeout(startAnimation, 1000);
+
     return () => {
       clearTimeout(timer);
       if (animationRef.current) {
@@ -100,8 +119,8 @@ const InteractiveSpeedometer = () => {
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <motion.div
           className="text-center"
-          animate={{ scale: isAnimating ? [1, 1.1, 1] : 1 }}
-          transition={{ duration: 0.5, repeat: isAnimating ? Infinity : 0 }}
+          animate={{ scale: isAnimating ? [1, 1.05, 1] : 1 }}
+          transition={{ duration: 0.4, repeat: isAnimating ? Infinity : 0, repeatDelay: 0.1 }}
         >
           <div className="text-3xl sm:text-5xl font-display font-bold text-rx-gold mb-2 sm:mb-3 font-mono">
             {Math.round(currentSpeed)}
@@ -114,8 +133,8 @@ const InteractiveSpeedometer = () => {
         {/* Speed Indicators */}
         <div className="absolute top-4 sm:top-6 left-1/2 transform -translate-x-1/2">
           <motion.div
-            whileHover={{ scale: 1.2, rotate: 360 }}
-            transition={{ duration: 0.6 }}
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.3 }}
           >
             <Target className="w-6 h-6 sm:w-8 sm:h-8 text-rx-gold" />
           </motion.div>
@@ -123,12 +142,24 @@ const InteractiveSpeedometer = () => {
       </div>
 
       {/* Interactive Button */}
+      {/* Anuncio de velocidad para lectores de pantalla */}
+      <div
+        ref={speedAnnouncementRef}
+        className="sr-only"
+        role="status"
+        aria-live="polite"
+      />
+
       <motion.button
         onClick={startAnimation}
+        onKeyDown={handleKeyPress}
         disabled={isAnimating}
-        className="absolute -bottom-12 sm:-bottom-16 left-1/2 transform -translate-x-1/2 bg-rx-gold/20 hover:bg-rx-gold/30 disabled:opacity-50 disabled:cursor-not-allowed px-4 sm:px-8 py-2 sm:py-3 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm"
-        whileHover={{ scale: isAnimating ? 1 : 1.05, y: isAnimating ? 0 : -2 }}
-        whileTap={{ scale: 0.95 }}
+        className="absolute -bottom-12 sm:-bottom-16 left-1/2 transform -translate-x-1/2 bg-rx-gold/20 hover:bg-rx-gold/30 focus:bg-rx-gold/40 focus:outline-none focus:ring-2 focus:ring-rx-gold focus:ring-offset-2 focus:ring-offset-rx-black disabled:opacity-50 disabled:cursor-not-allowed px-4 sm:px-8 py-2 sm:py-3 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm"
+        whileHover={{ scale: isAnimating ? 1 : 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        aria-label={isAnimating ? 'Midiendo velocidad...' : 'Probar velocidad'}
+        role="button"
+        tabIndex={0}
       >
         {isAnimating ? (
           <div className="flex items-center space-x-2">

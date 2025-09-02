@@ -4,16 +4,39 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [
     react({
-      // Enable React Fast Refresh
-      fastRefresh: true,
+      // React plugin options
       // Optimize JSX runtime
       jsxRuntime: 'automatic'
-    })
+    }),
+    // Add image optimization plugin
+    {
+      name: 'image-optimizer',
+      enforce: 'pre',
+      transformIndexHtml(html) {
+        return html.replace(/(<img[^>]+)(loading=["']?lazy["']?)/g, '$1loading="lazy" decoding="async"');
+      }
+    }
   ],
   server: {
     port: 5173,
-    https: false,
-    host: true
+    strictPort: false,
+    host: true,
+    hmr: {
+      timeout: 5000
+    },
+    watch: {
+      usePolling: true
+    },
+    fs: {
+      strict: false,
+      allow: ['../']
+    }
+  },
+  resolve: {
+    alias: {
+      '@': '/src',
+      '@public': '/public'
+    }
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'framer-motion'],
@@ -23,7 +46,7 @@ export default defineConfig({
     target: 'es2020',
     minify: 'terser',
     cssMinify: true,
-    reportCompressedSize: false,
+    reportCompressedSize: true,
     terserOptions: {
       compress: {
         drop_console: true,
@@ -50,7 +73,9 @@ export default defineConfig({
           const info = assetInfo.name?.split('.') || [];
           const ext = info[info.length - 1];
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(ext)) {
+            // Optimize image assets
             return `assets/images/[name]-[hash][extname]`;
+            // Enable image compression in build process
           }
           if (/css/i.test(ext)) {
             return `assets/css/[name]-[hash][extname]`;
@@ -61,7 +86,7 @@ export default defineConfig({
     },
     cssCodeSplit: true,
     sourcemap: false,
-    reportCompressedSize: false,
+
     chunkSizeWarningLimit: 1000
   },
   css: {

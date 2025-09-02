@@ -14,9 +14,9 @@ interface SEOHeadProps {
 }
 
 const SEOHead: React.FC<SEOHeadProps> = ({
-  title = 'RevolutionX - Equipo F1 in Schools | IES José Saramago',
-  description = 'Equipo líder de F1 in Schools del IES José Saramago. Innovación en ingeniería, diseño y tecnología para competiciones internacionales.',
-  keywords = 'F1 in Schools, RevolutionX, José Saramago, competición F1, ingeniería, diseño, aerodinámica, educación STEM',
+  title = 'RevolutionX - Equipo de Ingeniería F1 in Schools | IES José Saramago',
+  description = 'Equipo líder de F1 in Schools del IES José Saramago. Innovación en ingeniería automovilística, diseño CAD/CAM, aerodinámica CFD y tecnología de vanguardia para competiciones internacionales.',
+  keywords = 'F1 in Schools, RevolutionX, José Saramago, competición F1, ingeniería automovilística, diseño CAD/CAM, aerodinámica CFD, simulación, impresión 3D, educación STEM, Madrid, España',
   image = '/revolutionx-logo.png',
   url = 'https://legendary-panda-7b91a1.netlify.app/',
   type = 'website',
@@ -31,7 +31,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     description,
     url,
     logo: `${url}${image}`,
-    foundingDate: '2025',
+    foundingDate: '2024',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Madrid',

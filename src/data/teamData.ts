@@ -12,54 +12,60 @@ export const teamMembers: TeamMember[] = [
     name: "Saúl Morán",
     role: "Jefe de Proyectos",
     responsibilities: [
-      "Coordinación general del equipo",
-      "Gestión de recursos y plazos",
-      "Toma de decisiones estratégicas"
+      "Coordinación general del equipo y planificación estratégica",
+      "Gestión de recursos, presupuestos y cronogramas",
+      "Supervisión de objetivos y rendimiento del equipo",
+      "Representación en eventos y competiciones"
     ]
   },
   {
     name: "Víctor Jiménez",
     role: "Ingeniero de Diseño",
     responsibilities: [
-      "Diseño del chasis",
-      "Optimización aerodinámica",
-      "Modelado CAD avanzado"
+      "Diseño aerodinámico avanzado del chasis",
+      "Optimización mediante software CAD profesional",
+      "Desarrollo de soluciones innovadoras de diseño",
+      "Documentación técnica y planos de fabricación"
     ]
   },
   {
     name: "Martín Cendra",
     role: "Ingeniero de Simulación",
     responsibilities: [
-      "Análisis CFD",
-      "Pruebas de rendimiento",
-      "Validación de diseños"
+      "Análisis de dinámica de fluidos computacional (CFD)",
+      "Simulaciones de rendimiento y optimización",
+      "Validación de diseños mediante pruebas virtuales",
+      "Análisis de datos y mejora continua"
     ]
   },
   {
     name: "Ibrahim Aharrar",
     role: "Ingeniero de Manufactura",
     responsibilities: [
-      "Procesos de fabricación",
-      "Control de calidad",
-      "Optimización de producción"
+      "Supervisión de procesos de fabricación 3D",
+      "Control de calidad y tolerancias técnicas",
+      "Optimización de materiales y acabados",
+      "Mantenimiento y calibración de equipos"
     ]
   },
   {
     name: "Yago Álvarez",
     role: "Director de Marketing",
     responsibilities: [
-      "Estrategia de marca",
-      "Relaciones públicas",
-      "Gestión de patrocinadores"
+      "Desarrollo de estrategia de marca y posicionamiento",
+      "Gestión de relaciones con patrocinadores",
+      "Coordinación de eventos y presentaciones",
+      "Análisis de mercado y oportunidades"
     ]
   },
   {
     name: "Pablo Bianchi",
     role: "Especialista en Marketing Digital",
     responsibilities: [
-      "Redes sociales",
-      "Contenido digital",
-      "Comunicación online"
+      "Gestión de presencia en redes sociales",
+      "Creación y curación de contenido multimedia",
+      "Análisis de métricas y engagement digital",
+      "Desarrollo de estrategias de comunicación online"
     ]
   }
 ];
@@ -68,5 +74,5 @@ export const teamStats = [
   { icon: "Users", number: "6", label: "Miembros del Equipo" },
   { icon: "Award", number: "1º", label: "Puesto Regional" },
   { icon: "Target", number: "100%", label: "Compromiso" },
-  { icon: "Zap", number: "2025", label: "Año Activo" }
+  { icon: "Calendar", number: "2024", label: "Año de Fundación" }
 ];

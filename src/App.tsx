@@ -1,20 +1,21 @@
-import React, { Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { ChevronDown, MessageCircle } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
+import PrivacyPolicy from './components/PrivacyPolicy';
 import ErrorBoundary from './components/ErrorBoundary';
 import AccessibilitySkipLink from './components/AccessibilitySkipLink';
 import SEOHead from './components/SEOHead';
 import PerformanceMonitor from './components/PerformanceMonitor';
-import FloatingNavigation from './components/FloatingNavigation';
+import MainNavigation from './components/MainNavigation';
 import ScrollProgressIndicator from './components/ScrollProgressIndicator';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 import OptimizedImage from './components/ui/OptimizedImage';
 import OpenRouterAIAssistant from './components/OpenRouterAIAssistant';
 import MobileGestureHandler from './components/MobileGestureHandler';
 import ParallaxSection from './components/ParallaxSection';
-import LanguageSwitcher from './components/LanguageSwitcher';
+
 
 // Lazy load heavy components for better performance
 const TeamSection = lazy(() => 
@@ -47,10 +48,10 @@ function App() {
             <SEOHead />
             <AccessibilitySkipLink />
             <ScrollProgressIndicator />
-            <FloatingNavigation />
+            <MainNavigation />
             <PerformanceMonitor />
             
-            <main id="main-content" role="main">
+            <main id="main-content" role="main" className="pt-16 sm:pt-20">
               {/* Enhanced Hero Section */}
               <ParallaxSection speed={0.5}>
                 <section 
@@ -72,13 +73,13 @@ function App() {
                             top: `${Math.random() * 100}%`,
                           }}
                           animate={{
-                            y: [0, -20, 0],
-                            opacity: [0.3, 1, 0.3],
+                            y: [0, -10, 0],
+                            opacity: [0.3, 0.6, 0.3],
                           }}
                           transition={{
-                            duration: 3 + Math.random() * 2,
+                            duration: 2,
                             repeat: Infinity,
-                            delay: Math.random() * 2,
+                            delay: Math.random(),
                           }}
                         />
                       ))}
@@ -95,11 +96,10 @@ function App() {
                       className="w-32 sm:w-48 md:w-56 mx-auto mb-6 sm:mb-8"
                       initial={{ scale: 0.8, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.8, delay: 0.2 }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
                       whileHover={{ 
-                        scale: 1.05,
-                        rotate: [0, -2, 2, 0],
-                        transition: { duration: 0.5 }
+                        scale: 1.02,
+                        transition: { duration: 0.3 }
                       }}
                     >
                       <OptimizedImage
@@ -116,7 +116,7 @@ function App() {
                       className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 text-rx-gold bg-clip-text text-transparent bg-gradient-to-r from-rx-gold via-yellow-200 to-rx-gold leading-tight"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.4 }}
+                      transition={{ duration: 0.5, delay: 0.3 }}
                       data-translate="true"
                     >
                       {t('hero.title')}
@@ -125,7 +125,7 @@ function App() {
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.6 }}
+                      transition={{ duration: 0.5, delay: 0.4 }}
                       className="space-y-3 sm:space-y-4"
                     >
                       <h2 className="font-display text-base sm:text-xl md:text-2xl text-white/90 font-light tracking-wide" data-translate="true">
@@ -142,8 +142,8 @@ function App() {
                     
                     <motion.div
                       className="mt-8 sm:mt-12"
-                      animate={{ y: [0, 12, 0] }}
-                      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                      animate={{ y: [0, 8, 0] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                       aria-hidden="true"
                     >
                       <ChevronDown className="w-6 h-6 sm:w-8 sm:h-8 mx-auto text-rx-gold/80" />
@@ -203,8 +203,39 @@ function App() {
                 <p className="text-gray-400 text-xs px-4">
                   © {new Date().getFullYear()} RevolutionX - IES José Saramago. {t('footer.rights')}
                 </p>
+                <nav className="mt-4" aria-label="Enlaces del pie de página">
+                  <ul className="flex justify-center space-x-4 text-sm">
+                    <li>
+                      <button
+                        onClick={() => (document.getElementById('privacy-policy') as HTMLDialogElement)?.showModal()}
+                        className="text-gray-400 hover:text-rx-gold focus:outline-none focus:ring-2 focus:ring-rx-gold focus:ring-offset-2 focus:ring-offset-black"
+                        aria-label="Ver política de privacidad"
+                      >
+                        Política de Privacidad
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
               </div>
             </footer>
+
+            {/* Modal de Política de Privacidad */}
+            <dialog
+              id="privacy-policy"
+              className="bg-rx-dark text-white p-4 rounded-lg w-full max-w-4xl mx-auto backdrop:bg-black backdrop:opacity-80"
+              aria-labelledby="privacy-title"
+            >
+              <div className="relative">
+                <button
+                  onClick={() => (document.getElementById('privacy-policy') as HTMLDialogElement)?.close()}
+                  className="absolute top-2 right-2 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-rx-gold focus:ring-offset-2 focus:ring-offset-black p-2"
+                  aria-label="Cerrar política de privacidad"
+                >
+                  ✕
+                </button>
+                <PrivacyPolicy />
+              </div>
+            </dialog>
             
             {/* OpenRouter AI Assistant */}
             <OpenRouterAIAssistant />

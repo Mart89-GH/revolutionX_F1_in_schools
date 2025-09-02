@@ -11,8 +11,8 @@ const EnhancedContactSection = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   return (
-    <section id="contacto" className="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-rx-dark to-rx-black">
-      <div className="container mx-auto px-4 sm:px-6">
+    <section id="contacto" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-rx-dark to-rx-black">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6">
         <SectionHeader
           icon={MessageSquare}
           title={t('contact.title')}
@@ -25,12 +25,12 @@ const EnhancedContactSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto mb-12 sm:mb-16"
+          className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 xs:gap-4 sm:gap-6 max-w-7xl mx-auto mb-8 sm:mb-12 lg:mb-16"
         >
           {/* Email */}
           <motion.a
             href="mailto:revolutionx.f1@gmail.com"
-            className="bg-gradient-to-br from-rx-dark to-rx-black p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center group hover:shadow-2xl hover:shadow-rx-gold/10 focus:outline-none focus:ring-2 focus:ring-rx-gold/50"
+            className="bg-gradient-to-br from-rx-dark to-rx-black p-3 xs:p-4 sm:p-6 rounded-lg xs:rounded-xl sm:rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center group hover:shadow-2xl hover:shadow-rx-gold/10 focus:outline-none focus:ring-2 focus:ring-rx-gold/50 touch-manipulation"
             whileHover={{ y: -8, scale: 1.02 }}
             onHoverStart={() => setHoveredCard(0)}
             onHoverEnd={() => setHoveredCard(null)}
@@ -112,14 +112,14 @@ const EnhancedContactSection = () => {
           </motion.div>
         </motion.div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 sm:gap-12 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 max-w-7xl mx-auto">
           {/* Enhanced Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-rx-dark to-rx-black p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-500 shadow-2xl hover:shadow-rx-gold/10"
+            className="bg-gradient-to-br from-rx-dark to-rx-black p-4 xs:p-6 sm:p-8 md:p-10 rounded-xl xs:rounded-2xl sm:rounded-3xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-500 shadow-2xl hover:shadow-rx-gold/10"
           >
             <div className="flex items-center mb-6 sm:mb-8">
               <motion.div 
@@ -201,7 +201,7 @@ const EnhancedContactSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="mt-16 sm:mt-20 text-center bg-gradient-to-r from-rx-gold/10 to-rx-gold/5 p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-rx-gold/30 max-w-5xl mx-auto shadow-2xl"
+          className="mt-12 sm:mt-16 lg:mt-20 text-center bg-gradient-to-r from-rx-gold/10 to-rx-gold/5 p-4 xs:p-6 sm:p-8 md:p-10 rounded-xl xs:rounded-2xl sm:rounded-3xl border border-rx-gold/30 max-w-5xl mx-auto shadow-2xl"
         >
           <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-rx-gold mb-4 sm:mb-6" data-translate="true">
             {t('contact.startToday')}
@@ -210,7 +210,7 @@ const EnhancedContactSection = () => {
             Estamos listos para discutir cómo su empresa puede beneficiarse 
             de una asociación estratégica con RevolutionX.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-6 md:space-x-8">
+          <div className="flex flex-col xs:flex-row items-center justify-center space-y-3 xs:space-y-0 xs:space-x-4 sm:space-x-6 md:space-x-8">
             <motion.a 
               href="mailto:revolutionx.f1@gmail.com" 
               className="flex items-center space-x-2 sm:space-x-3 bg-rx-gold/20 hover:bg-rx-gold/30 px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-rx-gold/50"

@@ -31,14 +31,16 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
     const hasError = !!error;
     
     const baseInputClasses = `
-      w-full bg-rx-black/50 border rounded-xl px-4 py-3 text-white 
+      w-full bg-rx-black/50 border rounded-lg xs:rounded-xl px-3 xs:px-4 py-2.5 xs:py-3 text-base xs:text-lg sm:text-base 
       focus:outline-none focus:ring-2 transition-all duration-300
+      placeholder:text-sm xs:placeholder:text-base sm:placeholder:text-sm
       ${hasError 
         ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500/20' 
         : 'border-rx-gold/20 focus:border-rx-gold/50 focus:ring-rx-gold/20'
       }
-      ${leftIcon ? 'pl-12' : ''}
-      ${rightIcon ? 'pr-12' : ''}
+      ${leftIcon ? 'pl-10 xs:pl-12' : ''}
+      ${rightIcon ? 'pr-10 xs:pr-12' : ''}
+      touch-manipulation
       ${className}
     `;
     
@@ -48,7 +50,7 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
       <div className="space-y-2">
         <label 
           htmlFor={fieldId}
-          className="block text-gray-300 text-sm font-medium"
+          className="block text-gray-300 text-xs xs:text-sm font-medium"
         >
           {label}
           {required && (
@@ -58,7 +60,7 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
         
         <div className="relative">
           {leftIcon && (
-            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+            <div className="absolute left-3 xs:left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
               {leftIcon}
             </div>
           )}
@@ -76,13 +78,13 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
           />
           
           {rightIcon && (
-            <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+            <div className="absolute right-3 xs:right-4 top-1/2 transform -translate-y-1/2 text-gray-400">
               {rightIcon}
             </div>
           )}
           
           {hasError && (
-            <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-red-400">
+            <div className="absolute right-3 xs:right-4 top-1/2 transform -translate-y-1/2 text-red-400">
               <AlertCircle className="w-5 h-5" aria-label="Error en el campo" role="img" />
             </div>
           )}
@@ -97,7 +99,7 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="flex items-center space-x-2 text-red-400 text-sm"
+              className="flex items-center space-x-1.5 xs:space-x-2 text-red-400 text-xs xs:text-sm"
             >
               <AlertCircle className="w-4 h-4 flex-shrink-0" aria-label="Mensaje de error" role="img" />
               <span>{error}</span>
@@ -108,7 +110,7 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
         {helperText && !error && (
           <p 
             id={`${fieldId}-helper`} 
-            className="text-gray-400 text-sm"
+            className="text-gray-400 text-xs xs:text-sm"
             role="status"
             aria-live="polite"
           >

@@ -210,7 +210,7 @@ const AIAssistant = () => {
       {/* Floating Button */}
       <motion.button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-br from-rx-gold to-yellow-600 rounded-full flex items-center justify-center shadow-2xl hover:shadow-rx-gold/25 transition-all duration-300 z-50"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-rx-gold to-yellow-600 rounded-full flex items-center justify-center shadow-2xl hover:shadow-rx-gold/25 transition-all duration-300 z-50"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         initial={{ scale: 0 }}
@@ -228,7 +228,7 @@ const AIAssistant = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed bottom-6 right-6 w-96 h-[500px] bg-gradient-to-br from-rx-dark to-rx-black rounded-2xl border border-rx-gold/30 shadow-2xl z-50 flex flex-col overflow-hidden"
+            className="fixed bottom-0 right-0 w-full sm:bottom-6 sm:right-6 sm:w-96 h-[80vh] sm:h-[500px] bg-gradient-to-br from-rx-dark to-rx-black rounded-t-2xl sm:rounded-2xl border border-rx-gold/30 shadow-2xl z-50 flex flex-col overflow-hidden"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-rx-gold to-yellow-600 p-4 flex items-center justify-between">

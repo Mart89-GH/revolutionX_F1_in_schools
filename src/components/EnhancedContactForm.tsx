@@ -112,12 +112,12 @@ ${data.message}
   return (
     <motion.form
       onSubmit={handleSubmit(handleFormSubmit)}
-      className="space-y-6"
+      className="space-y-4 xs:space-y-6"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 xs:gap-6">
         <FormField
           label="Nombre completo (obligatorio)"
           {...register('name')}
@@ -189,7 +189,7 @@ ${data.message}
         </div>
       </div>
       
-      <div className="flex items-start space-x-3">
+      <div className="flex items-start space-x-2 xs:space-x-3">
         <input
           type="checkbox"
           id="privacy"
@@ -197,9 +197,9 @@ ${data.message}
           aria-required="true"
           aria-invalid={!!errors.privacy}
           aria-describedby={errors.privacy ? 'privacy-error' : undefined}
-          className="mt-1 w-4 h-4 text-rx-gold bg-rx-black border-rx-gold/30 rounded focus:ring-rx-gold focus:ring-2"
+          className="mt-1 w-5 h-5 xs:w-4 xs:h-4 text-rx-gold bg-rx-black border-rx-gold/30 rounded focus:ring-rx-gold focus:ring-2 touch-manipulation"
         />
-        <label htmlFor="privacy" className="text-sm text-gray-300 leading-relaxed">
+        <label htmlFor="privacy" className="text-xs xs:text-sm text-gray-300 leading-relaxed">
           Acepto la{' '}
           <a 
             href="/privacy" 
@@ -223,7 +223,7 @@ ${data.message}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="mb-4 p-4 bg-green-500/20 border border-green-500/30 rounded-lg flex items-center space-x-3"
+            className="mb-4 p-3 xs:p-4 bg-green-500/20 border border-green-500/30 rounded-lg flex items-center space-x-2 xs:space-x-3"
           >
             <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
             <div>
@@ -237,7 +237,7 @@ ${data.message}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="mb-4 p-4 bg-red-500/20 border border-red-500/30 rounded-lg flex items-center space-x-3"
+            className="mb-4 p-3 xs:p-4 bg-red-500/20 border border-red-500/30 rounded-lg flex items-center space-x-2 xs:space-x-3"
           >
             <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
             <div>

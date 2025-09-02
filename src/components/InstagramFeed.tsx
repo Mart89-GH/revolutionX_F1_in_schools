@@ -47,11 +47,11 @@ const InstagramPost: React.FC<InstagramPostProps> = React.memo(({ post, index })
     <motion.div
       key={post.id}
       className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer shadow-lg hover:shadow-xl"
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={{ duration: 0.3, delay: index * 0.05 }}
       viewport={{ once: true }}
-      whileHover={{ scale: 1.02 }}
+      whileHover={{ scale: 1.01 }}
     >
       <AnimatePresence>
         {!imageLoaded && (
@@ -109,9 +109,9 @@ const InstagramFeed: React.FC = () => {
   return (
     <motion.div
       className="bg-gradient-to-br from-rx-dark to-rx-black p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl border border-rx-gold/20 hover:border-rx-gold/40 transition-all duration-500 shadow-2xl hover:shadow-rx-gold/10"
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.4 }}
       viewport={{ once: true }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
@@ -121,8 +121,8 @@ const InstagramFeed: React.FC = () => {
         <div className="flex items-center space-x-3 sm:space-x-4">
           <motion.div 
             className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center shadow-lg"
-            whileHover={{ rotate: 360, scale: 1.1 }}
-            transition={{ duration: 0.6 }}
+            whileHover={{ rotate: 180, scale: 1.05 }}
+            transition={{ duration: 0.3 }}
           >
             <Instagram className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
           </motion.div>
@@ -139,8 +139,8 @@ const InstagramFeed: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center space-x-2 bg-gradient-to-r from-purple-600/20 to-pink-600/20 px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-purple-500/30 text-white hover:from-purple-600/30 hover:to-pink-600/30 transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm"
-          whileHover={{ scale: 1.05, y: -2 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
           <span className="font-medium">Seguir a RevolutionX en Instagram</span>
           <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />

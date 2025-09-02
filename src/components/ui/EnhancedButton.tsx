@@ -26,7 +26,7 @@ const EnhancedButton = forwardRef<HTMLButtonElement, EnhancedButtonProps>(
     className = '',
     ...props
   }, ref) => {
-    const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-rx-black disabled:opacity-50 disabled:cursor-not-allowed';
+    const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-rx-black disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation';
     
     const variantClasses = {
       primary: 'bg-gradient-to-r from-rx-gold to-yellow-600 text-rx-black hover:from-yellow-600 hover:to-rx-gold focus:ring-rx-gold shadow-lg hover:shadow-xl',
@@ -37,10 +37,10 @@ const EnhancedButton = forwardRef<HTMLButtonElement, EnhancedButtonProps>(
     };
     
     const sizeClasses = {
-      sm: 'px-3 py-2 text-sm',
-      md: 'px-4 py-2.5 text-base',
-      lg: 'px-6 py-3 text-lg',
-      xl: 'px-8 py-4 text-xl'
+      sm: 'px-2.5 xs:px-3 py-1.5 xs:py-2 text-xs xs:text-sm',
+      md: 'px-3 xs:px-4 py-2 xs:py-2.5 text-sm xs:text-base',
+      lg: 'px-4 xs:px-6 py-2.5 xs:py-3 text-base xs:text-lg',
+      xl: 'px-6 xs:px-8 py-3 xs:py-4 text-lg xs:text-xl'
     };
     
     const widthClass = fullWidth ? 'w-full' : '';
@@ -60,14 +60,14 @@ const EnhancedButton = forwardRef<HTMLButtonElement, EnhancedButtonProps>(
         {...props}
       >
         {loading && (
-          <Loader2 className="w-4 h-4 mr-2 animate-spin" aria-label="Cargando" role="img" />
+          <Loader2 className="w-3 h-3 xs:w-4 xs:h-4 mr-1.5 xs:mr-2 animate-spin" aria-label="Cargando" role="img" />
         )}
         {!loading && leftIcon && (
-          <span className="mr-2">{leftIcon}</span>
+          <span className="mr-1.5 xs:mr-2 [&>svg]:w-3 [&>svg]:h-3 xs:[&>svg]:w-4 xs:[&>svg]:h-4">{leftIcon}</span>
         )}
         <span>{children}</span>
         {!loading && rightIcon && (
-          <span className="ml-2">{rightIcon}</span>
+          <span className="ml-1.5 xs:ml-2 [&>svg]:w-3 [&>svg]:h-3 xs:[&>svg]:w-4 xs:[&>svg]:h-4">{rightIcon}</span>
         )}
       </motion.button>
     );
