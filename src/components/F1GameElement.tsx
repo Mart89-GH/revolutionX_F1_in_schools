@@ -94,7 +94,7 @@ const F1GameElement = () => {
 
   return (
     <motion.div
-      className="bg-gradient-to-br from-rx-dark to-rx-black p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl border border-rx-gold/20 hover:border-rx-gold/40 transition-all duration-500 shadow-2xl hover:shadow-rx-gold/10 w-full max-w-md mx-auto"
+      className="bg-gradient-to-br from-rx-dark to-rx-black p-3 xs:p-4 sm:p-6 md:p-8 rounded-xl xs:rounded-2xl sm:rounded-3xl border border-rx-gold/20 hover:border-rx-gold/40 transition-all duration-500 shadow-2xl hover:shadow-rx-gold/10 w-full max-w-md mx-auto touch-manipulation"
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8 }}
@@ -129,7 +129,7 @@ const F1GameElement = () => {
       <div className="relative mb-8 sm:mb-10">
         <div className="text-center">
           <motion.div
-            className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-rx-gold mb-2 sm:mb-3 font-mono"
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-display font-bold text-rx-gold mb-1 xs:mb-2 sm:mb-3 font-mono"
             animate={{ 
               scale: isPlaying ? [1, 1.01, 1] : 1,
               color: gameState === 'finished' ? 
@@ -166,7 +166,7 @@ const F1GameElement = () => {
               aria-label="Iniciar juego"
               role="button"
               tabIndex={0}
-              className="flex items-center space-x-2 bg-rx-gold/20 hover:bg-rx-gold/30 px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-rx-gold/50"
+              className="flex items-center space-x-2 bg-rx-gold/20 hover:bg-rx-gold/30 px-3 xs:px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-rx-gold/50 touch-manipulation"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               initial={{ opacity: 0, y: 20 }}
@@ -186,7 +186,7 @@ const F1GameElement = () => {
               aria-label="Detener tiempo"
               role="button"
               tabIndex={0}
-              className="flex items-center space-x-2 bg-red-600/20 hover:bg-red-600/30 px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full border border-red-500/50 text-red-400 font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-500/50"
+              className="flex items-center space-x-2 bg-red-600/20 hover:bg-red-600/30 px-3 xs:px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full border border-red-500/50 text-red-400 font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-500/50 touch-manipulation"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 20 }}

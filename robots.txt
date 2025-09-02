@@ -1,4 +1,25 @@
+# RevolutionX F1 in Schools Website Robots.txt
+
+# Allow all robots complete access
 User-agent: *
 Allow: /
+Disallow: /privacy-policy
 
+# Crawl-delay for all bots
+Crawl-delay: 1
+
+# Additional rules for specific bots
+User-agent: Googlebot
+Allow: /*.js
+Allow: /*.css
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.gif
+
+User-agent: Googlebot-Image
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.gif
+
+# Sitemap location
 Sitemap: https://legendary-panda-7b91a1.netlify.app/sitemap.xml

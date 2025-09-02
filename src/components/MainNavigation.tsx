@@ -60,45 +60,46 @@ const MainNavigation: React.FC = () => {
       <AccessibilitySkipLink />
       
       {/* Barra de navegación fija */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-rx-black/95 backdrop-blur-md border-b border-rx-gold/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 sm:h-20">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-rx-black/95 backdrop-blur-md border-b border-rx-gold/20 touch-manipulation">
+        <div className="container-custom">
+          <div className="flex items-center justify-between h-14 xs:h-16 sm:h-20">
             {/* Logo y nombre */}
-            <div className="flex items-center space-x-3">
-              <img src="/revolutionx-logo.png" alt="RevolutionX Logo" className="h-8 sm:h-10 w-auto" />
-              <span className="font-display text-rx-gold text-lg sm:text-xl font-semibold">RevolutionX</span>
+            <div className="flex items-center space-x-2 xs:space-x-3">
+              <img src="/revolutionx-logo.png" alt="RevolutionX Logo" className="h-7 xs:h-8 sm:h-10 w-auto" />
+              <span className="font-display text-rx-gold text-base xs:text-lg sm:text-xl font-semibold">RevolutionX</span>
             </div>
 
             {/* Enlaces de navegación para pantallas grandes */}
-            <div className="hidden lg:flex items-center space-x-6">
+            <div className="hidden lg:flex items-center space-x-4 xl:space-x-6">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300 ${activeSection === item.id ? 'text-rx-gold bg-rx-gold/10' : 'text-gray-300 hover:text-rx-gold hover:bg-rx-gold/5'}`}
+                  className={`flex items-center space-x-1.5 xl:space-x-2 px-2.5 xl:px-3 py-2 rounded-lg transition-all duration-300 ${activeSection === item.id ? 'text-rx-gold bg-rx-gold/10' : 'text-gray-300 hover:text-rx-gold hover:bg-rx-gold/5'}`}
                 >
                   <item.icon className="w-4 h-4" />
-                  <span className="font-medium">{item.label}</span>
+                  <span className="font-medium text-sm xl:text-base">{item.label}</span>
                 </button>
               ))}
               <a
                 href="https://instagram.com/revolutionx_f1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2 px-3 py-2 rounded-lg text-gray-300 hover:text-rx-gold hover:bg-rx-gold/5 transition-all duration-300"
+                className="flex items-center space-x-1.5 xl:space-x-2 px-2.5 xl:px-3 py-2 rounded-lg text-gray-300 hover:text-rx-gold hover:bg-rx-gold/5 transition-all duration-300"
               >
                 <Instagram className="w-4 h-4" />
-                <span className="font-medium">Instagram</span>
+                <span className="font-medium text-sm xl:text-base">Instagram</span>
               </a>
             </div>
 
             {/* Botón de menú para móviles */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 rounded-lg bg-rx-gold/10 hover:bg-rx-gold/20 transition-colors duration-300"
+              className="lg:hidden p-1.5 xs:p-2 rounded-lg bg-rx-gold/10 hover:bg-rx-gold/20 transition-colors duration-300 focus-ring"
               aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={isMenuOpen}
             >
-              {isMenuOpen ? <X className="w-6 h-6 text-rx-gold" /> : <Menu className="w-6 h-6 text-rx-gold" />}
+              {isMenuOpen ? <X className="w-5 h-5 xs:w-6 xs:h-6 text-rx-gold" /> : <Menu className="w-5 h-5 xs:w-6 xs:h-6 text-rx-gold" />}
             </button>
           </div>
         </div>
@@ -113,25 +114,25 @@ const MainNavigation: React.FC = () => {
               transition={{ duration: 0.2 }}
               className="lg:hidden border-t border-rx-gold/10"
             >
-              <div className="px-4 py-4 space-y-2">
+              <div className="px-3 xs:px-4 py-3 xs:py-4 space-y-1.5 xs:space-y-2">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 ${activeSection === item.id ? 'bg-rx-gold/20 text-rx-gold' : 'text-gray-300 hover:bg-rx-gold/10 hover:text-rx-gold'}`}
+                    className={`w-full flex items-center space-x-2 xs:space-x-3 p-2.5 xs:p-3 rounded-lg transition-all duration-300 ${activeSection === item.id ? 'bg-rx-gold/20 text-rx-gold' : 'text-gray-300 hover:bg-rx-gold/10 hover:text-rx-gold'}`}
                   >
-                    <item.icon className="w-5 h-5" />
-                    <span className="font-medium">{item.label}</span>
+                    <item.icon className="w-4 h-4 xs:w-5 xs:h-5" />
+                    <span className="font-medium text-sm xs:text-base">{item.label}</span>
                   </button>
                 ))}
                 <a
                   href="https://instagram.com/revolutionx_f1"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center space-x-3 p-3 rounded-lg text-gray-300 hover:bg-rx-gold/10 hover:text-rx-gold transition-all duration-300"
+                  className="w-full flex items-center space-x-2 xs:space-x-3 p-2.5 xs:p-3 rounded-lg text-gray-300 hover:bg-rx-gold/10 hover:text-rx-gold transition-all duration-300"
                 >
-                  <Instagram className="w-5 h-5" />
-                  <span className="font-medium">Instagram</span>
+                  <Instagram className="w-4 h-4 xs:w-5 xs:h-5" />
+                  <span className="font-medium text-sm xs:text-base">Instagram</span>
                 </a>
               </div>
             </motion.div>
@@ -148,10 +149,10 @@ const MainNavigation: React.FC = () => {
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.2 }}
             onClick={scrollToTop}
-            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 p-3 bg-rx-gold/20 hover:bg-rx-gold/30 text-rx-gold rounded-full shadow-lg hover:shadow-rx-gold/25 border border-rx-gold/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-rx-gold/50"
+            className="fixed bottom-3 right-3 xs:bottom-4 xs:right-4 sm:bottom-6 sm:right-6 z-40 p-2 xs:p-2.5 sm:p-3 bg-rx-gold/20 hover:bg-rx-gold/30 text-rx-gold rounded-full shadow-lg hover:shadow-rx-gold/25 border border-rx-gold/30 transition-all duration-300 focus-ring touch-manipulation"
             aria-label="Volver arriba"
           >
-            <ArrowUp className="w-5 h-5 sm:w-6 sm:h-6" />
+            <ArrowUp className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6" />
           </motion.button>
         )}
       </AnimatePresence>

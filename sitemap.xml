@@ -1,9 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://legendary-panda-7b91a1.netlify.app/</loc>
     <lastmod>2024-03-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://legendary-panda-7b91a1.netlify.app/revolutionx-logo.png</image:loc>
+      <image:title>RevolutionX - F1 in Schools Madrid</image:title>
+      <image:caption>Logo del equipo RevolutionX F1 in Schools</image:caption>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="es" href="https://legendary-panda-7b91a1.netlify.app/" />
+  </url>
+  <url>
+    <loc>https://legendary-panda-7b91a1.netlify.app/#equipo</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://legendary-panda-7b91a1.netlify.app/#tecnico</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://legendary-panda-7b91a1.netlify.app/#logros</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://legendary-panda-7b91a1.netlify.app/#patrocinadores</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://legendary-panda-7b91a1.netlify.app/#marketing</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://legendary-panda-7b91a1.netlify.app/#contacto</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 </urlset>

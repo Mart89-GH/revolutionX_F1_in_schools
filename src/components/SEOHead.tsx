@@ -14,9 +14,9 @@ interface SEOHeadProps {
 }
 
 const SEOHead: React.FC<SEOHeadProps> = ({
-  title = 'RevolutionX - Equipo de Ingeniería F1 in Schools | IES José Saramago',
-  description = 'Equipo líder de F1 in Schools del IES José Saramago. Innovación en ingeniería automovilística, diseño CAD/CAM, aerodinámica CFD y tecnología de vanguardia para competiciones internacionales.',
-  keywords = 'F1 in Schools, RevolutionX, José Saramago, competición F1, ingeniería automovilística, diseño CAD/CAM, aerodinámica CFD, simulación, impresión 3D, educación STEM, Madrid, España',
+  title = 'RevolutionX - F1 in Schools Madrid | Campeones de Ingeniería y Diseño',
+  description = 'Equipo líder RevolutionX del IES José Saramago Madrid, especializado en F1 in Schools. Innovación en ingeniería, diseño 3D y aerodinámica para competiciones internacionales de F1.',
+  keywords = 'F1 in Schools Madrid, RevolutionX F1, competición F1 escolar, ingeniería F1, diseño automovilístico, aerodinámica F1, STEM Madrid, F1 José Saramago, F1 educación España, RevolutionX Madrid',
   image = '/revolutionx-logo.png',
   url = 'https://legendary-panda-7b91a1.netlify.app/',
   type = 'website',
@@ -27,15 +27,20 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'RevolutionX - F1 in Schools',
+    name: 'RevolutionX - F1 in Schools Madrid',
     description,
     url,
     logo: `${url}${image}`,
     foundingDate: '2024',
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Madrid',
+      addressLocality: 'Majadahonda',
+      addressRegion: 'Madrid',
       addressCountry: 'ES'
+    },
+    areaServed: {
+      '@type': 'State',
+      name: 'Comunidad de Madrid'
     },
     contactPoint: {
       '@type': 'ContactPoint',

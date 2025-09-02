@@ -73,7 +73,7 @@ const InteractiveSpeedometer = () => {
 
   return (
     <motion.div
-      className="relative w-64 h-64 sm:w-80 sm:h-80 mx-auto"
+      className="relative w-56 xs:w-64 sm:w-80 h-56 xs:h-64 sm:h-80 mx-auto touch-manipulation"
       initial={{ opacity: 0, scale: 0.8 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8 }}
@@ -122,7 +122,7 @@ const InteractiveSpeedometer = () => {
           animate={{ scale: isAnimating ? [1, 1.05, 1] : 1 }}
           transition={{ duration: 0.4, repeat: isAnimating ? Infinity : 0, repeatDelay: 0.1 }}
         >
-          <div className="text-3xl sm:text-5xl font-display font-bold text-rx-gold mb-2 sm:mb-3 font-mono">
+          <div className="text-2xl xs:text-3xl sm:text-5xl font-display font-bold text-rx-gold mb-1 xs:mb-2 sm:mb-3 font-mono">
             {Math.round(currentSpeed)}
           </div>
           <div className="text-xs sm:text-sm text-gray-400 uppercase tracking-wider">
@@ -154,7 +154,7 @@ const InteractiveSpeedometer = () => {
         onClick={startAnimation}
         onKeyDown={handleKeyPress}
         disabled={isAnimating}
-        className="absolute -bottom-12 sm:-bottom-16 left-1/2 transform -translate-x-1/2 bg-rx-gold/20 hover:bg-rx-gold/30 focus:bg-rx-gold/40 focus:outline-none focus:ring-2 focus:ring-rx-gold focus:ring-offset-2 focus:ring-offset-rx-black disabled:opacity-50 disabled:cursor-not-allowed px-4 sm:px-8 py-2 sm:py-3 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm"
+        className="absolute -bottom-10 xs:-bottom-12 sm:-bottom-16 left-1/2 transform -translate-x-1/2 bg-rx-gold/20 hover:bg-rx-gold/30 focus:bg-rx-gold/40 focus:outline-none focus:ring-2 focus:ring-rx-gold focus:ring-offset-2 focus:ring-offset-rx-black disabled:opacity-50 disabled:cursor-not-allowed px-3 xs:px-4 sm:px-8 py-2 sm:py-3 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm touch-manipulation"
         whileHover={{ scale: isAnimating ? 1 : 1.02 }}
         whileTap={{ scale: 0.98 }}
         aria-label={isAnimating ? 'Midiendo velocidad...' : 'Probar velocidad'}
