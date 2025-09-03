@@ -69,7 +69,7 @@ export default {
       collaboration: 'Oportunidades de Colaboración',
       question: '¿Quiere ser parte del proyecto?',
       description: 'Únete a nuestro equipo de patrocinadores y forme parte de la próxima generación de ingenieros e innovadores.',
-      contact: 'Contáctenos en:'
+      contact: 'Contáctanos en:'
     },
     marketing: {
       title: 'Oportunidades de Patrocinio',
