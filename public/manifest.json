@@ -12,13 +12,13 @@
   "categories": ["education", "technology", "sports"],
   "icons": [
     {
-      "src": "/revolutionx-logo.svg",
+      "src": "/revolutionx-logo.png",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     },
     {
-      "src": "/revolutionx-logo.svg",
+      "src": "/revolutionx-logo.png",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
@@ -26,7 +26,7 @@
   ],
   "screenshots": [
     {
-      "src": "/revolutionx-logo.svg",
+      "src": "/revolutionx-logo.png",
       "sizes": "1280x720",
       "type": "image/svg+xml",
       "form_factor": "wide"

@@ -13,7 +13,7 @@ const Header = () => {
       <div className="container-custom py-2 xs:py-3 md:py-4">
         <div className="flex justify-between items-center">
           <img 
-            src="/revolutionx-logo.svg"
+            src="/revolutionx-logo.png"
             alt="RevolutionX Logo"
             className="h-8 xs:h-10 md:h-12 w-auto object-contain"
             loading="eager"

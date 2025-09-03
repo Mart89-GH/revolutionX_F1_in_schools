@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
-import BreadcrumbProvider from './components/BreadcrumbProvider';
+import { BreadcrumbProvider } from './components/BreadcrumbProvider';
 import './index.css';
 import './i18n';
 

@@ -40,8 +40,7 @@ const ContactSection = lazy(() =>
 
 function App() {
   const { t, i18n } = useTranslation();
-  const breadcrumbContext = useBreadcrumbs();
-  const { breadcrumbs, setBreadcrumbs } = breadcrumbContext;
+  const { breadcrumbs, setBreadcrumbs } = useBreadcrumbs();
 
   useEffect(() => {
     // Set initial breadcrumbs based on sections
@@ -126,7 +125,7 @@ function App() {
                       }}
                     >
                       <OptimizedImage
-                        src="/revolutionx-logo.svg"
+                        src="/revolutionx-logo.png"
                         alt="RevolutionX - Equipo F1 in Schools del IES José Saramago"
                         width={224}
                         height={224}

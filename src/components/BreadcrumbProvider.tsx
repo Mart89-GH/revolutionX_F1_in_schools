@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import * as React from 'react';
 
 interface Breadcrumb {
   name: string;
@@ -13,10 +13,16 @@ interface BreadcrumbContextType {
   clearBreadcrumbs: () => void;
 }
 
-const BreadcrumbContext = createContext<BreadcrumbContextType | undefined>(undefined);
+const BreadcrumbContext = React.createContext<BreadcrumbContextType>({
+  breadcrumbs: [],
+  setBreadcrumbs: () => {},
+  addBreadcrumb: () => {},
+  removeBreadcrumb: () => {},
+  clearBreadcrumbs: () => {}
+});
 
 export const useBreadcrumbs = () => {
-  const context = useContext(BreadcrumbContext);
+  const context = React.useContext(BreadcrumbContext);
   if (!context) {
     throw new Error('useBreadcrumbs must be used within a BreadcrumbProvider');
   }
@@ -27,33 +33,32 @@ interface BreadcrumbProviderProps {
   children: React.ReactNode;
 }
 
-export const BreadcrumbProvider: React.FC<BreadcrumbProviderProps> = ({ children }) => {
-  const [breadcrumbs, setBreadcrumbs] = useState<Breadcrumb[]>([]);
+export const BreadcrumbProvider = ({ children }: BreadcrumbProviderProps): JSX.Element => {
+  const [breadcrumbs, setBreadcrumbs] = React.useState<Breadcrumb[]>([]);
 
-  const addBreadcrumb = useCallback((breadcrumb: Breadcrumb) => {
+  const addBreadcrumb = React.useCallback((breadcrumb: Breadcrumb) => {
     setBreadcrumbs(prev => {
-      // Check if breadcrumb already exists
       const exists = prev.some(b => b.item === breadcrumb.item);
       if (exists) return prev;
       return [...prev, breadcrumb];
     });
   }, []);
 
-  const removeBreadcrumb = useCallback((item: string) => {
+  const removeBreadcrumb = React.useCallback((item: string) => {
     setBreadcrumbs(prev => prev.filter(b => b.item !== item));
   }, []);
 
-  const clearBreadcrumbs = useCallback(() => {
+  const clearBreadcrumbs = React.useCallback(() => {
     setBreadcrumbs([]);
   }, []);
 
-  const value = {
+  const value = React.useMemo(() => ({
     breadcrumbs,
     setBreadcrumbs,
     addBreadcrumb,
     removeBreadcrumb,
     clearBreadcrumbs,
-  };
+  }), [breadcrumbs, addBreadcrumb, removeBreadcrumb, clearBreadcrumbs]);
 
   return (
     <BreadcrumbContext.Provider value={value}>

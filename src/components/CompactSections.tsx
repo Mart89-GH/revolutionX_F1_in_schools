@@ -212,6 +212,8 @@ const CompactSections = () => {
                   src={sponsor.logo}
                   alt={`${sponsor.name}: patrocinador oficial de RevolutionX`}
                   className="max-w-full max-h-16 object-contain"
+                  loading="eager"
+                  decoding="sync"
                 />
               </motion.div>
             ))}

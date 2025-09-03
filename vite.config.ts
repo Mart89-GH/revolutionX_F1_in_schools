@@ -9,20 +9,15 @@ export default defineConfig({
       jsxRuntime: 'automatic'
     }),
     // Add image optimization plugin
-    {
-      name: 'image-optimizer',
-      enforce: 'pre',
-      transformIndexHtml(html) {
-        return html.replace(/(<img[^>]+)(loading=["']?lazy["']?)/g, '$1loading="lazy" decoding="async"');
-      }
-    }
+    {      name: 'image-optimizer',      enforce: 'pre',      transformIndexHtml(html) {        return html.replace(/(<img[^>]+)(loading=["]?lazy["]?)/g, '$1loading="eager" decoding="sync"');      }    }
   ],
   server: {
-    port: 5173,
-    strictPort: false,
+    port: 5174,
+    strictPort: true,
     host: true,
     hmr: {
-      timeout: 5000
+      timeout: 5000,
+      port: 5174
     },
     watch: {
       usePolling: true
