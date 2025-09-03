@@ -257,7 +257,7 @@ ${data.message}
             <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
             <div>
               <p className="text-red-400 font-medium">Error al enviar el mensaje</p>
-              <p className="text-red-300 text-sm">Por favor, inténtelo de nuevo o contáctenos directamente.</p>
+              <p className="text-red-300 text-sm">Por favor, inténtalo de nuevo o contáctanos directamente.</p>
             </div>
           </motion.div>
         )}

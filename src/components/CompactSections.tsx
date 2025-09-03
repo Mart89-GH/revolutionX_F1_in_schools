@@ -281,7 +281,7 @@ const CompactSections = () => {
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-rx-gold">Contacto</h2>
             </div>
             <p className="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">
-              Únase a RevolutionX y forme parte del futuro de la ingeniería
+              Únete a RevolutionX y forme parte del futuro de la ingeniería
             </p>
           </motion.div>
 

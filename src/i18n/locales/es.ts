@@ -68,12 +68,12 @@ export default {
       subtitle: 'Agradecemos profundamente el apoyo de nuestros patrocinadores, quienes hacen posible nuestros logros y el desarrollo continuo de nuestro proyecto en F1 in Schools.',
       collaboration: 'Oportunidades de Colaboración',
       question: '¿Quiere ser parte del proyecto?',
-      description: 'Únase a nuestro equipo de patrocinadores y forme parte de la próxima generación de ingenieros e innovadores.',
+      description: 'Únete a nuestro equipo de patrocinadores y forme parte de la próxima generación de ingenieros e innovadores.',
       contact: 'Contáctenos en:'
     },
     marketing: {
       title: 'Oportunidades de Patrocinio',
-      subtitle: 'Únase a nuestra visión de innovación y excelencia en la ingeniería del futuro. Descubra los beneficios estratégicos de asociarse con RevolutionX.',
+      subtitle: 'Únete a nuestra visión de innovación y excelencia en la ingeniería del futuro. Descubra los beneficios estratégicos de asociarse con RevolutionX.',
       channels: 'Canales de Exposición',
       benefits: 'Beneficios Estratégicos del Patrocinio',
       roi: 'Retorno de Inversión Garantizado',
@@ -81,7 +81,7 @@ export default {
     },
     contact: {
       title: 'Colabore con Nosotros',
-      subtitle: 'Únase a RevolutionX y forme parte de la próxima generación de innovadores en ingeniería y tecnología.',
+      subtitle: 'Únete a RevolutionX y forme parte de la próxima generación de innovadores en ingeniería y tecnología.',
       form: {
         name: 'Nombre completo',
         email: 'Email',
