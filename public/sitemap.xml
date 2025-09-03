@@ -1,52 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
     <loc>https://legendary-panda-7b91a1.netlify.app/</loc>
-    <lastmod>2025-01-03</lastmod>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <priority>1</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://legendary-panda-7b91a1.netlify.app/es" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://legendary-panda-7b91a1.netlify.app/en" />
+
     <image:image>
       <image:loc>https://legendary-panda-7b91a1.netlify.app/revolutionx-logo.png</image:loc>
-      <image:title>RevolutionX - Equipo F1 in Schools</image:title>
-      <image:caption>Logo del equipo RevolutionX del IES José Saramago</image:caption>
+            <image:title>RevolutionX - Equipo F1 in Schools</image:title>
+            <image:caption>Logo del equipo RevolutionX del IES José Saramago</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://legendary-panda-7b91a1.netlify.app/#equipo</loc>
-    <lastmod>2025-01-03</lastmod>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://legendary-panda-7b91a1.netlify.app/es#equipo" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://legendary-panda-7b91a1.netlify.app/en#equipo" />
+
   </url>
   <url>
     <loc>https://legendary-panda-7b91a1.netlify.app/#tecnico</loc>
-    <lastmod>2025-01-03</lastmod>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://legendary-panda-7b91a1.netlify.app/es#tecnico" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://legendary-panda-7b91a1.netlify.app/en#tecnico" />
+
   </url>
   <url>
     <loc>https://legendary-panda-7b91a1.netlify.app/#logros</loc>
-    <lastmod>2025-01-03</lastmod>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://legendary-panda-7b91a1.netlify.app/es#logros" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://legendary-panda-7b91a1.netlify.app/en#logros" />
+
   </url>
   <url>
     <loc>https://legendary-panda-7b91a1.netlify.app/#patrocinadores</loc>
-    <lastmod>2025-01-03</lastmod>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://legendary-panda-7b91a1.netlify.app/es#patrocinadores" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://legendary-panda-7b91a1.netlify.app/en#patrocinadores" />
+
   </url>
   <url>
     <loc>https://legendary-panda-7b91a1.netlify.app/#marketing</loc>
-    <lastmod>2025-01-03</lastmod>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://legendary-panda-7b91a1.netlify.app/es#marketing" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://legendary-panda-7b91a1.netlify.app/en#marketing" />
+
   </url>
   <url>
     <loc>https://legendary-panda-7b91a1.netlify.app/#contacto</loc>
-    <lastmod>2025-01-03</lastmod>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://legendary-panda-7b91a1.netlify.app/es#contacto" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://legendary-panda-7b91a1.netlify.app/en#contacto" />
+
   </url>
 </urlset>
