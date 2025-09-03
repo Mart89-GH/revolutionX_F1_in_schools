@@ -1,4 +1,4 @@
-import { generateSitemap } from '../src/services/sitemapService';
+import { generateSitemap } from '../src/services/sitemapService.js';
 
 // Generate sitemap
 generateSitemap()
