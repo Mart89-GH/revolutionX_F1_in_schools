@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-// Spanish translations
+// Initial Spanish translations (minimal set for bootstrapping)
 const es = {
   translation: {
     // Navigation
@@ -139,7 +139,7 @@ const es = {
   }
 };
 
-// English translations
+// Initial English translations (minimal set for bootstrapping)
 const en = {
   translation: {
     // Navigation
@@ -275,6 +275,18 @@ const en = {
   }
 };
 
+// Language chunks will be loaded dynamically
+const loadLanguageChunk = async (language: string) => {
+  try {
+    const module = await import(`./locales/${language}.ts`);
+    return module.default;
+  } catch (error) {
+    console.error(`Failed to load ${language} translations:`, error);
+    return null;
+  }
+};
+
+// Initialize i18n with dynamic loading
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -291,7 +303,17 @@ i18n
     },
     interpolation: {
       escapeValue: false
-    }
+    },
+    load: 'languageOnly',
+    partialBundledLanguages: true,
   });
+
+// Load full language chunk when language changes
+i18n.on('languageChanged', async (language) => {
+  const translations = await loadLanguageChunk(language);
+  if (translations) {
+    i18n.addResourceBundle(language, 'translation', translations.translation, true, true);
+  }
+});
 
 export default i18n;

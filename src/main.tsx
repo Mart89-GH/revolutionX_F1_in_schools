@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
+import BreadcrumbProvider from './components/BreadcrumbProvider';
 import './index.css';
 import './i18n';
 
@@ -20,13 +21,14 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
 // Performance monitoring
 if (import.meta.env.PROD) {
   // Report Web Vitals
-  import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+  (async () => {
+    const { getCLS, getFID, getFCP, getLCP, getTTFB } = await import('web-vitals');
     getCLS(console.log);
     getFID(console.log);
     getFCP(console.log);
     getLCP(console.log);
     getTTFB(console.log);
-  });
+  })();
 }
 
 const rootElement = document.getElementById('root');
@@ -38,6 +40,8 @@ const root = createRoot(rootElement);
 
 root.render(
   <StrictMode>
-    <App />
+    <BreadcrumbProvider>
+      <App />
+    </BreadcrumbProvider>
   </StrictMode>
 );

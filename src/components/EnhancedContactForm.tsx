@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { motion } from 'framer-motion';
-import { Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, RefreshCw } from 'lucide-react';
 import FormField from './ui/FormField';
 import EnhancedButton from './ui/EnhancedButton';
 
@@ -55,6 +55,8 @@ interface EnhancedContactFormProps {
 
 const EnhancedContactForm: React.FC<EnhancedContactFormProps> = ({ onSubmit }) => {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const {
     register,
@@ -70,7 +72,12 @@ const EnhancedContactForm: React.FC<EnhancedContactFormProps> = ({ onSubmit }) =
   const watchedMessage = watch('message', '');
   const messageLength = watchedMessage?.length || 0;
 
+  const handleFieldBlur = (fieldName: keyof FormData) => {
+    setTouchedFields(prev => ({ ...prev, [fieldName]: true }));
+  };
+
   const handleFormSubmit: SubmitHandler<FormData> = async (data) => {
+    setIsSubmitting(true);
     setSubmitStatus('loading');
     
     try {
@@ -97,12 +104,14 @@ ${data.message}
       
       setSubmitStatus('success');
       reset();
+      setTouchedFields({});
       
       // Reset status after 5 seconds
       setTimeout(() => setSubmitStatus('idle'), 5000);
     } catch (error) {
       console.error('Error submitting form:', error);
       setSubmitStatus('error');
+      setIsSubmitting(false);
       
       // Reset status after 5 seconds
       setTimeout(() => setSubmitStatus('idle'), 5000);
@@ -120,23 +129,29 @@ ${data.message}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 xs:gap-6">
         <FormField
           label="Nombre completo (obligatorio)"
-          {...register('name')}
-          error={errors.name?.message}
+          {...register('name', {
+            onBlur: () => handleFieldBlur('name')
+          })}
+          error={touchedFields['name'] ? errors.name?.message : undefined}
           required
           aria-required="true"
           placeholder="Su nombre completo"
           autoComplete="name"
+          disabled={isSubmitting}
         />
         
         <FormField
           label="Email (obligatorio)"
           type="email"
-          {...register('email')}
-          error={errors.email?.message}
+          {...register('email', {
+            onBlur: () => handleFieldBlur('email')
+          })}
+          error={touchedFields['email'] ? errors.email?.message : undefined}
           required
           aria-required="true"
           placeholder="su@email.com"
           autoComplete="email"
+          disabled={isSubmitting}
         />
       </div>
       
@@ -254,7 +269,16 @@ ${data.message}
           fullWidth
           loading={submitStatus === 'loading'}
           disabled={!isValid || !isDirty || submitStatus === 'loading'}
-          leftIcon={<Send className="w-5 h-5" />}
+          leftIcon={isSubmitting ? (
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+            >
+              <RefreshCw className="w-5 h-5" />
+            </motion.div>
+          ) : (
+            <Send className="w-5 h-5" />
+          )}
         >
           {submitStatus === 'loading' ? 'Enviando...' : 'Enviar Mensaje'}
         </EnhancedButton>

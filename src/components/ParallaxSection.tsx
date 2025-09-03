@@ -46,4 +46,10 @@ const ParallaxSection: React.FC<ParallaxSectionProps> = ({
   );
 };
 
-export default ParallaxSection;
+export default React.memo(ParallaxSection, (prevProps, nextProps) => {
+  return (
+    prevProps.speed === nextProps.speed &&
+    prevProps.className === nextProps.className &&
+    prevProps.children === nextProps.children
+  );
+});

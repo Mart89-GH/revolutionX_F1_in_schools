@@ -92,4 +92,17 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   );
 };
 
-export default OptimizedImage;
+export default React.memo(OptimizedImage, (prevProps, nextProps) => {
+  return (
+    prevProps.src === nextProps.src &&
+    prevProps.alt === nextProps.alt &&
+    prevProps.className === nextProps.className &&
+    prevProps.width === nextProps.width &&
+    prevProps.height === nextProps.height &&
+    prevProps.quality === nextProps.quality &&
+    prevProps.loading === nextProps.loading &&
+    prevProps.priority === nextProps.priority &&
+    prevProps.placeholder === nextProps.placeholder &&
+    prevProps.blurDataURL === nextProps.blurDataURL
+  );
+});

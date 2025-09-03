@@ -149,7 +149,7 @@ const MainNavigation: React.FC = () => {
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.2 }}
             onClick={scrollToTop}
-            className="fixed bottom-3 right-3 xs:bottom-4 xs:right-4 sm:bottom-6 sm:right-6 z-40 p-2 xs:p-2.5 sm:p-3 bg-rx-gold/20 hover:bg-rx-gold/30 text-rx-gold rounded-full shadow-lg hover:shadow-rx-gold/25 border border-rx-gold/30 transition-all duration-300 focus-ring touch-manipulation"
+            className="fixed bottom-24 right-3 xs:bottom-28 xs:right-4 sm:bottom-32 sm:right-6 z-40 p-2 xs:p-2.5 sm:p-3 bg-rx-gold/20 hover:bg-rx-gold/30 text-rx-gold rounded-full shadow-lg hover:shadow-rx-gold/25 border border-rx-gold/30 transition-all duration-300 focus-ring touch-manipulation"
             aria-label="Volver arriba"
           >
             <ArrowUp className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6" />

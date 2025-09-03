@@ -39,4 +39,12 @@ const SponsorCard: React.FC<SponsorCardProps> = ({ sponsor, index }) => {
   );
 };
 
-export default SponsorCard;
+export default React.memo(SponsorCard, (prevProps, nextProps) => {
+  return (
+    prevProps.sponsor.name === nextProps.sponsor.name &&
+    prevProps.sponsor.logo === nextProps.sponsor.logo &&
+    prevProps.sponsor.category === nextProps.sponsor.category &&
+    prevProps.sponsor.description === nextProps.sponsor.description &&
+    prevProps.index === nextProps.index
+  );
+});

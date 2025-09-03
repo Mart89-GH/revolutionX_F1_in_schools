@@ -6,9 +6,25 @@ import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
 interface ErrorFallbackProps {
   error: Error;
   resetErrorBoundary: () => void;
+  componentStack?: string;
 }
 
-const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, resetErrorBoundary }) => {
+interface ErrorInfo {
+  lastError: Error | null;
+  retryCount: number;
+}
+
+const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, resetErrorBoundary, componentStack }) => {
+  const [errorInfo, setErrorInfo] = React.useState<ErrorInfo>({ lastError: null, retryCount: 0 });
+
+  React.useEffect(() => {
+    if (error !== errorInfo.lastError) {
+      setErrorInfo(prev => ({
+        lastError: error,
+        retryCount: error === prev.lastError ? prev.retryCount + 1 : 0
+      }));
+    }
+  }, [error, errorInfo.lastError]);
   return (
     <div className="min-h-screen bg-rx-black flex items-center justify-center p-4">
       <motion.div
@@ -33,13 +49,20 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, resetErrorBoundary
         </p>
         
         <div className="space-y-3">
-          <button
-            onClick={resetErrorBoundary}
-            className="w-full flex items-center justify-center space-x-2 bg-rx-gold/20 hover:bg-rx-gold/30 px-6 py-3 rounded-lg border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300"
-          >
-            <RefreshCw className="w-4 h-4" />
-            <span>Reintentar</span>
-          </button>
+          {errorInfo.retryCount < 3 ? (
+            <button
+              onClick={resetErrorBoundary}
+              className="w-full flex items-center justify-center space-x-2 bg-rx-gold/20 hover:bg-rx-gold/30 px-6 py-3 rounded-lg border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300"
+            >
+              <RefreshCw className="w-4 h-4" />
+              <span>Reintentar ({3 - errorInfo.retryCount} intentos restantes)</span>
+            </button>
+          ) : (
+            <p className="text-red-400 text-sm mb-4">
+              No se pudo recuperar después de varios intentos.
+              Por favor, regrese al inicio o contacte con soporte.
+            </p>
+          )}
           
           <button
             onClick={() => window.location.href = '/'}
@@ -50,7 +73,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, resetErrorBoundary
           </button>
         </div>
         
-        {process.env.NODE_ENV === 'development' && (
+        {(process.env.NODE_ENV === 'development' || errorInfo.retryCount >= 3) && (
           <details className="mt-6 text-left">
             <summary className="text-red-400 cursor-pointer text-sm">
               Detalles del error (desarrollo)
@@ -67,15 +90,23 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, resetErrorBoundary
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
+  fallbackRender?: (props: ErrorFallbackProps) => React.ReactNode;
+  onReset?: () => void;
 }
 
-const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children }) => {
+const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children, fallbackRender, onReset }) => {
   return (
     <ReactErrorBoundary
       FallbackComponent={ErrorFallback}
-      onError={(error, errorInfo) => {
+      onError={(error, componentStack) => {
         // Log error to monitoring service in production
-        console.error('Error caught by boundary:', error, errorInfo);
+        console.error('Error caught by boundary:', error, componentStack);
+        
+        // Send error to monitoring service
+        if (process.env.NODE_ENV === 'production') {
+          // TODO: Implement error reporting service
+          // reportError(error, componentStack);
+        }
       }}
       onReset={() => {
         // Clear any cached state that might be causing the error

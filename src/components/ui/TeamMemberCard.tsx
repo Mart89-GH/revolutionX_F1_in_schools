@@ -49,4 +49,11 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, index }) => {
   );
 };
 
-export default TeamMemberCard;
+export default React.memo(TeamMemberCard, (prevProps, nextProps) => {
+  return (
+    prevProps.member.name === nextProps.member.name &&
+    prevProps.member.role === nextProps.member.role &&
+    prevProps.index === nextProps.index &&
+    JSON.stringify(prevProps.member.responsibilities) === JSON.stringify(nextProps.member.responsibilities)
+  );
+});

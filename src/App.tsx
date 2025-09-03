@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
@@ -15,6 +15,7 @@ import OptimizedImage from './components/ui/OptimizedImage';
 import OpenRouterAIAssistant from './components/OpenRouterAIAssistant';
 import MobileGestureHandler from './components/MobileGestureHandler';
 import ParallaxSection from './components/ParallaxSection';
+import BreadcrumbProvider, { useBreadcrumbs } from './components/BreadcrumbProvider';
 
 
 // Lazy load heavy components for better performance
@@ -38,14 +39,36 @@ const ContactSection = lazy(() =>
 );
 
 function App() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const breadcrumbContext = useBreadcrumbs();
+  const { breadcrumbs, setBreadcrumbs } = breadcrumbContext;
+
+  useEffect(() => {
+    // Set initial breadcrumbs based on sections
+    setBreadcrumbs([
+      { name: 'Inicio', item: 'https://legendary-panda-7b91a1.netlify.app/' },
+      { name: t('nav.team'), item: 'https://legendary-panda-7b91a1.netlify.app/#equipo' },
+      { name: t('nav.technical'), item: 'https://legendary-panda-7b91a1.netlify.app/#tecnico' },
+      { name: t('nav.achievements'), item: 'https://legendary-panda-7b91a1.netlify.app/#logros' },
+      { name: t('nav.sponsors'), item: 'https://legendary-panda-7b91a1.netlify.app/#patrocinadores' },
+      { name: t('nav.marketing'), item: 'https://legendary-panda-7b91a1.netlify.app/#marketing' },
+      { name: t('nav.contact'), item: 'https://legendary-panda-7b91a1.netlify.app/#contacto' }
+    ]);
+  }, [t, setBreadcrumbs]);
 
   return (
     <HelmetProvider>
       <ErrorBoundary>
         <MobileGestureHandler>
-          <div className="bg-rx-black text-white min-h-screen font-body overflow-x-hidden">
-            <SEOHead />
+          <div className="bg-rx-black text-white min-h-screen font-body overflow-x-hidden relative z-0">
+            <SEOHead 
+              currentLanguage={i18n.language}
+              alternateLanguages={[
+                { lang: 'es-ES', url: 'https://legendary-panda-7b91a1.netlify.app/es' },
+                { lang: 'en-US', url: 'https://legendary-panda-7b91a1.netlify.app/en' }
+              ]}
+              breadcrumb={breadcrumbs}
+            />
             <AccessibilitySkipLink />
             <ScrollProgressIndicator />
             <MainNavigation />

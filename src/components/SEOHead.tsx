@@ -11,6 +11,18 @@ interface SEOHeadProps {
   author?: string;
   publishedTime?: string;
   modifiedTime?: string;
+  currentLanguage?: string;
+  alternateLanguages?: Array<{
+    lang: string;
+    url: string;
+  }>;
+  breadcrumb?: Array<{
+    name: string;
+    item: string;
+  }>;
+  contentType?: 'article' | 'website' | 'profile';
+  twitterSite?: string;
+  twitterCreator?: string;
 }
 
 const SEOHead: React.FC<SEOHeadProps> = ({
@@ -22,9 +34,18 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   type = 'website',
   author = 'RevolutionX Team',
   publishedTime,
-  modifiedTime
+  modifiedTime,
+  currentLanguage = 'es-ES',
+  alternateLanguages = [
+    { lang: 'es-ES', url: 'https://legendary-panda-7b91a1.netlify.app/es' },
+    { lang: 'en-US', url: 'https://legendary-panda-7b91a1.netlify.app/en' }
+  ],
+  breadcrumb = [],
+  contentType = 'website',
+  twitterSite = '@revolutionx_f1',
+  twitterCreator = '@revolutionx_f1'
 }) => {
-  const structuredData = {
+  const organizationStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'RevolutionX - F1 in Schools Madrid',
@@ -97,11 +118,47 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <link rel="canonical" href={url} />
 
       {/* Structured Data */}
+      {/* Alternate Language Links */}
+      {alternateLanguages.map((lang) => (
+        <link
+          key={lang.lang}
+          rel="alternate"
+          hrefLang={lang.lang}
+          href={lang.url}
+        />
+      ))}
+      <link rel="alternate" hrefLang="x-default" href={url} />
+
+      {/* Enhanced Social Media Meta Tags */}
+      <meta name="twitter:site" content={twitterSite} />
+      <meta name="twitter:creator" content={twitterCreator} />
+      <meta property="og:type" content={contentType} />
+      <meta property="article:section" content="F1 in Schools" />
+      <meta property="og:updated_time" content={modifiedTime || new Date().toISOString()} />
+
+      {/* Structured Data - Organization */}
       <script type="application/ld+json">
-        {JSON.stringify(structuredData)}
+        {JSON.stringify(organizationStructuredData)}
       </script>
+
+      {/* Structured Data - Breadcrumb */}
+      {breadcrumb.length > 0 && (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            'itemListElement': breadcrumb.map((item, index) => ({
+              '@type': 'ListItem',
+              'position': index + 1,
+              'name': item.name,
+              'item': item.item
+            }))
+          })}
+        </script>
+      )}
     </Helmet>
   );
 };
+
 
 export default SEOHead;

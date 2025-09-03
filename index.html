@@ -5,6 +5,15 @@
     <link rel="icon" type="image/png" href="/revolutionx-logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- Resource Hints -->
+    <link rel="preload" href="/revolutionx-logo.png" as="image" />
+    <link rel="preload" href="/src/main.tsx" as="script" type="module" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="prefetch" href="/src/components/TeamSection.tsx" as="script" />
+    <link rel="prefetch" href="/src/components/TechnicalSection.tsx" as="script" />
+    <link rel="prefetch" href="/src/components/AchievementsSection.tsx" as="script" />
+    
     <!-- Primary Meta Tags -->
     <title id="page-title">RevolutionX - F1 in Schools Madrid | Campeones de Ingeniería y Diseño</title>
     <meta name="title" content="RevolutionX - F1 in Schools Madrid | Campeones de Ingeniería y Diseño" id="meta-title">
@@ -40,9 +49,24 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://legendary-panda-7b91a1.netlify.app/" />
   </head>
-  <body>
-    <div id="root"></div>
+  <body class="bg-rx-black">
+    <div id="root" class="bg-rx-black"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('ServiceWorker registration successful');
+            })
+            .catch(error => {
+              console.error('ServiceWorker registration failed:', error);
+            });
+        });
+      }
+    </script>
     
     <!-- Structured Data -->
     <script type="application/ld+json">
