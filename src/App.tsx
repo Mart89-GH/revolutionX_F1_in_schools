@@ -126,7 +126,7 @@ function App() {
                       }}
                     >
                       <OptimizedImage
-                        src="/revolutionx-logo.png"
+                        src="/revolutionx-logo.svg"
                         alt="RevolutionX - Equipo F1 in Schools del IES José Saramago"
                         width={224}
                         height={224}

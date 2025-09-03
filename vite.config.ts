@@ -33,10 +33,11 @@ export default defineConfig({
     }
   },
   resolve: {
-    alias: {
-      '@': '/src',
-      '@public': '/public'
-    }
+    alias: [
+      { find: '@', replacement: '/src' },
+      { find: '@public', replacement: '/public' },
+      { find: /^(.+)\.png$/, replacement: '/public/$1.png' }
+    ]
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'framer-motion'],

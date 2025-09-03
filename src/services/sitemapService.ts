@@ -17,7 +17,7 @@ interface SitemapURL {
   }>;
 }
 
-const BASE_URL = 'https://legendary-panda-7b91a1.netlify.app';
+const BASE_URL = 'https://revolutionx-f1-in-schools.vercel.app';
 
 const SITE_SECTIONS = [
   { path: '', priority: 1.0, changefreq: 'weekly' },
