@@ -119,7 +119,7 @@ const EnhancedContactSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-rx-dark to-rx-black p-4 xs:p-6 sm:p-8 md:p-10 rounded-xl xs:rounded-2xl sm:rounded-3xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-500 shadow-2xl hover:shadow-rx-gold/10"
+            className="dark:bg-gradient-to-br dark:from-rx-dark dark:to-rx-black light:bg-gradient-to-br light:from-white light:to-gray-100 p-4 xs:p-6 sm:p-8 md:p-10 rounded-xl xs:rounded-2xl sm:rounded-3xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-500 shadow-2xl hover:shadow-rx-gold/10"
           >
             <div className="flex items-center mb-6 sm:mb-8">
               <motion.div 
@@ -174,7 +174,7 @@ const EnhancedContactSection = () => {
                     whileHover={{ scale: 1.5 }}
                     transition={{ duration: 0.2 }}
                   />
-                  <span className="text-gray-300 text-xs sm:text-sm leading-relaxed">{benefit}</span>
+                  <span className="dark:text-gray-300 light:text-gray-700 text-xs sm:text-sm leading-relaxed">{benefit}</span>
                 </motion.div>
               ))}
             </div>

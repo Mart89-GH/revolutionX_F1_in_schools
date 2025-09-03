@@ -48,11 +48,11 @@ const AchievementsSection = () => {
               <div className="inline-block bg-rx-gold/20 px-6 py-2 rounded-full mb-6">
                 <span className="text-rx-gold font-semibold text-lg" data-translate="true">{t('achievements.category')}</span>
               </div>
-              <p className="text-2xl md:text-3xl text-white mb-6 font-light" data-translate="true">
+              <p className="text-2xl md:text-3xl dark:text-white light:text-rx-black mb-6 font-light" data-translate="true">
                 {t('achievements.event')}
               </p>
               <div className="h-px w-24 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto mb-8"></div>
-              <p className="text-gray-200 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+              <p className="dark:text-gray-200 light:text-gray-700 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
                 {mainAchievement.description}
               </p>
             </div>
@@ -67,7 +67,7 @@ const AchievementsSection = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto mb-16"
         >
-          <div className="bg-gradient-to-br from-rx-dark to-rx-black p-8 rounded-2xl border border-rx-gold/20">
+          <div className="dark:bg-gradient-to-br dark:from-rx-dark dark:to-rx-black light:bg-gradient-to-br light:from-white light:to-gray-100 p-8 rounded-2xl border border-rx-gold/20">
             <div className="flex items-center justify-center mb-6">
               <Medal className="w-8 h-8 text-rx-gold mr-3" />
               <h3 className="font-display text-2xl text-rx-gold">
@@ -80,7 +80,7 @@ const AchievementsSection = () => {
                   <div className="flex items-center space-x-4">
                     <Star className="w-5 h-5 text-rx-gold" />
                     <div>
-                      <p className="text-white font-semibold">{result.event}</p>
+                      <p className="dark:text-white light:text-rx-black font-semibold">{result.event}</p>
                       <p className="text-gray-400 text-sm">{result.category}</p>
                     </div>
                   </div>

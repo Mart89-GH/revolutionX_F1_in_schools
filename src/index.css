@@ -13,7 +13,6 @@
     -webkit-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    background-color: theme('colors.rx-black');
     min-height: 100vh;
   }
 
@@ -24,8 +23,15 @@
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.5;
     overflow-x: hidden;
-    background-color: theme('colors.rx-black');
     min-height: 100vh;
+    @media (prefers-color-scheme: dark) {
+      background-color: theme('colors.rx-black');
+      color: theme('colors.white');
+    }
+    @media (prefers-color-scheme: light) {
+      background-color: theme('colors.white');
+      color: theme('colors.rx-black');
+    }
   }
 
   /* Focus styles for accessibility */
@@ -194,7 +200,7 @@
 
   /* Card styles */
   .card {
-    @apply bg-gradient-to-br from-rx-dark to-rx-black rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 shadow-xl hover:shadow-2xl;
+    @apply dark:bg-gradient-to-br dark:from-rx-dark dark:to-rx-black light:bg-gradient-to-br light:from-white light:to-gray-100 rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 shadow-xl hover:shadow-2xl;
   }
 
   /* Typography improvements */
@@ -241,7 +247,7 @@
 @layer components {
   /* Enhanced form styles */
   .form-input {
-    @apply w-full bg-rx-black/50 border border-rx-gold/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:border-rx-gold/50 focus:outline-none focus:ring-2 focus:ring-rx-gold/20 transition-all duration-300;
+    @apply w-full dark:bg-rx-black/50 light:bg-gray-100 border border-rx-gold/20 rounded-xl px-4 py-3 dark:text-white light:text-rx-black placeholder-gray-400 focus:border-rx-gold/50 focus:outline-none focus:ring-2 focus:ring-rx-gold/20 transition-all duration-300;
   }
 
   .form-input:invalid {
@@ -250,7 +256,7 @@
 
   /* Navigation styles */
   .nav-link {
-    @apply text-white hover:text-rx-gold transition-colors duration-300 font-medium;
+    @apply dark:text-white light:text-rx-black hover:text-rx-gold transition-colors duration-300 font-medium;
   }
 
   .nav-link.active {

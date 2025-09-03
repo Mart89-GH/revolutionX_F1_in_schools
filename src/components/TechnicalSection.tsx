@@ -11,7 +11,7 @@ const TechnicalSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="tecnico" className="py-24 bg-gradient-to-b from-rx-dark to-rx-black">
+    <section id="tecnico" className="py-24 dark:bg-gradient-to-b dark:from-rx-dark dark:to-rx-black light:bg-gradient-to-b light:from-white light:to-gray-100">
       <div className="container mx-auto px-6">
         <SectionHeader
           icon={Cog}

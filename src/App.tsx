@@ -15,7 +15,7 @@ import OptimizedImage from './components/ui/OptimizedImage';
 import OpenRouterAIAssistant from './components/OpenRouterAIAssistant';
 import MobileGestureHandler from './components/MobileGestureHandler';
 import ParallaxSection from './components/ParallaxSection';
-import BreadcrumbProvider, { useBreadcrumbs } from './components/BreadcrumbProvider';
+import { BreadcrumbProvider, useBreadcrumbs } from './components/BreadcrumbProvider';
 
 
 // Lazy load heavy components for better performance
@@ -59,7 +59,7 @@ function App() {
     <HelmetProvider>
       <ErrorBoundary>
         <MobileGestureHandler>
-          <div className="bg-rx-black text-white min-h-screen font-body overflow-x-hidden relative z-0">
+          <div className="dark:bg-rx-black dark:text-white light:bg-white light:text-rx-black min-h-screen font-body overflow-x-hidden relative z-0">
             <SEOHead 
               currentLanguage={i18n.language}
               alternateLanguages={[
@@ -202,7 +202,7 @@ function App() {
               </Suspense>
             </main>
 
-            <footer className="bg-gradient-to-t from-rx-black to-rx-dark border-t border-rx-gold/20 py-6 sm:py-8 relative z-10" role="contentinfo">
+            <footer className="dark:bg-gradient-to-t dark:from-rx-black dark:to-rx-dark light:bg-gradient-to-t light:from-gray-100 light:to-white border-t border-rx-gold/20 py-6 sm:py-8 relative z-10" role="contentinfo">
               <div className="container mx-auto px-4 sm:px-6 text-center">
                 <div className="mb-3 sm:mb-4">
                   <motion.div
@@ -222,7 +222,7 @@ function App() {
                     />
                   </motion.div>
                 </div>
-                <p className="text-gray-400 text-xs px-4">
+                <p className="dark:text-gray-400 light:text-gray-600 text-xs px-4">
                   © {new Date().getFullYear()} RevolutionX - IES José Saramago. {t('footer.rights')}
                 </p>
                 <nav className="mt-4" aria-label="Enlaces del pie de página">
