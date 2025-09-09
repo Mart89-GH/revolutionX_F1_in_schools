@@ -78,14 +78,16 @@ const EnhancedContactForm: React.FC<EnhancedContactFormProps> = ({ onSubmit }) =
 
   const handleFormSubmit: SubmitHandler<FormData> = async (data) => {
     setIsSubmitting(true);
+    // Marcamos visualmente que la información se está enviando
     setSubmitStatus('loading');
-    
+
     try {
+      // Si se proporciona una función onSubmit externa, la usamos
       if (onSubmit) {
-        await onSubmit(data);
+        await onSubmit(data); // Esperamos a que la función externa termine
       } else {
-        // Default email submission
-        const subject = `Contacto RevolutionX - ${data.subject}`;
+        // Si no hay función externa, usamos el envío por correo electrónico
+        const subject = `Contacto RevolutionX - ${data.subject}`; // Definimos el asunto del correo
         const body = `
 Nombre: ${data.name}
 Email: ${data.email}
@@ -97,25 +99,24 @@ Asunto: ${data.subject}
 Mensaje:
 ${data.message}
         `.trim();
-        
-        const mailtoLink = `mailto:revolutionx.f1@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        window.location.href = mailtoLink;
+
+        const mailtoLink = `mailto:revolutionx.f1@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; // Construimos el enlace mailto codificando los parámetros
+        window.location.href = mailtoLink; // Abrimos el cliente de correo del usuario
       }
-      
-      setSubmitStatus('success');
-      reset();
-      setTouchedFields({});
-      
-      // Reset status after 5 seconds
-      setTimeout(() => setSubmitStatus('idle'), 5000);
+
+      setSubmitStatus('success'); // Indicamos que el proceso fue exitoso
+      reset(); // Limpiamos los campos del formulario
+      setTouchedFields({}); // Reiniciamos los campos marcados como tocados
     } catch (error) {
-      console.error('Error submitting form:', error);
-      setSubmitStatus('error');
-      setIsSubmitting(false);
-      
-      // Reset status after 5 seconds
+      console.error('Error submitting form:', error); // Mostramos el error en la consola para depuración
+      setSubmitStatus('error'); // Indicamos que algo salió mal
+    } finally {
+      setIsSubmitting(false); // Siempre reactivamos el formulario sin importar el resultado
+      // Después de 5 segundos, volvemos el estado a 'idle' para ocultar mensajes
       setTimeout(() => setSubmitStatus('idle'), 5000);
     }
+    // Resumen: esta función envía el formulario, maneja errores y siempre vuelve a activar la interfaz.
+    // Alternativa: React Hook Form incluye formState.isSubmitting, que podría eliminar la necesidad de este estado manual.
   };
 
   return (
