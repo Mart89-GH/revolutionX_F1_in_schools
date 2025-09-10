@@ -246,9 +246,9 @@
 /* Component-specific styles */
 @layer components {
   /* Enhanced form styles */
-  .form-input {
-    @apply w-full dark:bg-rx-black/50 light:bg-gray-100 border border-rx-gold/20 rounded-xl px-4 py-3 dark:text-white light:text-rx-black placeholder-gray-400 focus:border-rx-gold/50 focus:outline-none focus:ring-2 focus:ring-rx-gold/20 transition-all duration-300;
-  }
+.form-input {
+  @apply w-full dark:bg-rx-black/50 light:bg-gray-100 border border-rx-gold/20 rounded-xl px-4 py-3 dark:text-white light:text-white placeholder-gray-400 focus:border-rx-gold/50 focus:outline-none focus:ring-2 focus:ring-rx-gold/20 transition-all duration-300;
+}
 
   .form-input:invalid {
     @apply border-red-500/50 focus:border-red-500 focus:ring-red-500/20;

@@ -48,11 +48,11 @@ const AchievementsSection = () => {
               <div className="inline-block bg-rx-gold/20 px-6 py-2 rounded-full mb-6">
                 <span className="text-rx-gold font-semibold text-lg" data-translate="true">{t('achievements.category')}</span>
               </div>
-              <p className="text-2xl md:text-3xl dark:text-white light:text-rx-black mb-6 font-light" data-translate="true">
+              <p className="text-2xl md:text-3xl text-white mb-6 font-light" data-translate="true">
                 {t('achievements.event')}
               </p>
               <div className="h-px w-24 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto mb-8"></div>
-              <p className="dark:text-gray-200 light:text-gray-700 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+              <p className="text-white text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
                 {mainAchievement.description}
               </p>
             </div>
@@ -80,8 +80,8 @@ const AchievementsSection = () => {
                   <div className="flex items-center space-x-4">
                     <Star className="w-5 h-5 text-rx-gold" />
                     <div>
-                      <p className="dark:text-white light:text-rx-black font-semibold">{result.event}</p>
-                      <p className="text-gray-400 text-sm">{result.category}</p>
+                      <p className="text-white font-semibold">{result.event}</p>
+                      <p className="text-white text-sm">{result.category}</p>
                     </div>
                   </div>
                   <div className="text-rx-gold font-bold text-lg">

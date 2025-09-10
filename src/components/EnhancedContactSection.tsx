@@ -174,7 +174,7 @@ const EnhancedContactSection = () => {
                     whileHover={{ scale: 1.5 }}
                     transition={{ duration: 0.2 }}
                   />
-                  <span className="dark:text-gray-300 light:text-gray-700 text-xs sm:text-sm leading-relaxed">{benefit}</span>
+                  <span className="text-white text-xs sm:text-sm leading-relaxed">{benefit}</span>
                 </motion.div>
               ))}
             </div>

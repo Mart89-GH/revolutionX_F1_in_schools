@@ -39,11 +39,11 @@ const CompactSections = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gradient-to-br from-rx-dark to-rx-black p-4 sm:p-6 rounded-xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300"
+                className="bg-gradient-to-br from-rx-dark to-rx-black p-4 sm:p-6 rounded-xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-white"
               >
                 <h3 className="text-rx-gold font-semibold text-sm sm:text-base mb-1" role="heading" aria-level={3}>{member.name}</h3>
                 <p className="text-white text-xs sm:text-sm font-medium mb-2">{member.role}</p>
-                <p className="text-gray-400 text-xs">{member.desc}</p>
+                <p className="text-white text-xs">{member.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -80,15 +80,15 @@ const CompactSections = () => {
               <h3 className="text-rx-gold font-semibold text-lg mb-3">Especificaciones</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-gray-400">Longitud:</span>
+                  <span className="text-white">Longitud:</span>
                   <span className="text-white">185 mm</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">Peso:</span>
+                  <span className="text-white">Peso:</span>
                   <span className="text-white">72.8 g</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">Material:</span>
+                  <span className="text-white">Material:</span>
                   <span className="text-white">PLA</span>
                 </div>
               </div>
@@ -102,7 +102,7 @@ const CompactSections = () => {
               className="bg-gradient-to-br from-rx-dark to-rx-black p-6 rounded-xl border border-rx-gold/20"
             >
               <h3 className="text-rx-gold font-semibold text-lg mb-3" role="heading" aria-level={3}>Tecnologías</h3>
-              <ul className="space-y-2 text-sm text-gray-300">
+              <ul className="space-y-2 text-sm text-white">
                 <li>• Diseño CAD avanzado</li>
                 <li>• Simulación CFD</li>
                 <li>• Optimización aerodinámica</li>
@@ -143,8 +143,8 @@ const CompactSections = () => {
               <div className="inline-block bg-rx-gold/20 px-4 py-1 rounded-full mb-3">
                 <span className="text-rx-gold font-semibold text-sm">Categoría Entry</span>
               </div>
-              <p className="text-lg text-white mb-3">Comunidad de Madrid 2025</p>
-              <p className="text-gray-200 text-sm leading-relaxed">
+              <p className="text-lg text-white dark:text-white mb-3">Comunidad de Madrid 2025</p>
+              <p className="text-white text-sm leading-relaxed">
                 Tiempo récord estableciendo nuevos estándares de rendimiento
               </p>
             </div>
@@ -165,7 +165,7 @@ const CompactSections = () => {
                 className="bg-rx-gold/10 p-4 rounded-lg border border-rx-gold/20 text-center"
               >
                 <div className="text-xl font-bold text-rx-gold mb-1">{stat.number}</div>
-                <div className="text-gray-300 text-xs">{stat.label}</div>
+                <div className="text-white text-xs">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -186,7 +186,7 @@ const CompactSections = () => {
               <Handshake className="w-6 h-6 text-rx-gold mr-3" aria-label="Icono de colaboración" role="img" />
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-rx-gold">Patrocinadores</h2>
             </div>
-            <p className="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">
+            <p className="text-white text-sm sm:text-base max-w-2xl mx-auto">
               Empresas que apoyan nuestro proyecto de innovación
             </p>
           </motion.div>
@@ -206,7 +206,7 @@ const CompactSections = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white p-4 rounded-xl border border-rx-gold/30 hover:border-rx-gold/60 transition-all duration-300 flex items-center justify-center min-h-[100px]"
+                className="bg-gray-100 p-4 rounded-xl border border-rx-gold/30 hover:border-rx-gold/60 transition-all duration-300 flex items-center justify-center min-h-[100px]"
               >
                 <img
                   src={sponsor.logo}
@@ -253,10 +253,10 @@ const CompactSections = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gradient-to-br from-rx-dark to-rx-black p-6 rounded-xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300"
+                className="bg-gradient-to-br from-rx-dark to-rx-black p-6 rounded-xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-white"
               >
                 <h3 className="text-rx-gold font-semibold text-lg mb-2">{opportunity.title}</h3>
-                <p className="text-gray-300 text-sm mb-3 leading-relaxed">{opportunity.desc}</p>
+                <p className="text-white text-sm mb-3 leading-relaxed">{opportunity.desc}</p>
                 <div className="bg-rx-gold/10 px-3 py-1 rounded-lg border border-rx-gold/20">
                   <p className="text-rx-gold text-xs font-medium">{opportunity.metric}</p>
                 </div>
@@ -280,7 +280,7 @@ const CompactSections = () => {
               <MessageSquare className="w-6 h-6 text-rx-gold mr-3" aria-label="Icono de mensajes" role="img" />
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-rx-gold">Contacto</h2>
             </div>
-            <p className="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">
+            <p className="text-white text-sm sm:text-base max-w-2xl mx-auto">
               Únete a RevolutionX y forme parte del futuro de la ingeniería
             </p>
           </motion.div>
@@ -335,7 +335,7 @@ const CompactSections = () => {
             className="text-center bg-gradient-to-r from-rx-gold/10 to-rx-gold/5 p-6 rounded-xl border border-rx-gold/30 max-w-3xl mx-auto"
           >
             <h3 className="font-display text-xl text-rx-gold mb-3">¿Listo para Colaborar?</h3>
-            <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+            <p className="text-white text-sm mb-4 leading-relaxed">
               Su apoyo hace posible que jóvenes talentos desarrollen habilidades técnicas de alto nivel
             </p>
             <a 
