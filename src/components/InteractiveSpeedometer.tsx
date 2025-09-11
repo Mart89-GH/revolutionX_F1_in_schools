@@ -1,52 +1,80 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Zap, Timer, Target } from 'lucide-react';
 
 const InteractiveSpeedometer = () => {
-  // Ref para el anuncio de velocidad actual
   const speedAnnouncementRef = useRef<HTMLDivElement>(null);
-  const [currentSpeed, setCurrentSpeed] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [currentSpeed, setCurrentSpeed] = useState<number>(0);
+  const [isAnimating, setIsAnimating] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const animationRef = useRef<number | null>(null);
-  
-  const maxSpeed = 100; // km/h equivalent for F1 in Schools
-  const targetSpeed = 45; // Our achieved speed
+  const mountedRef = useRef<boolean>(true);
 
-  // Función para anunciar la velocidad actual a lectores de pantalla
+  const maxSpeed = 100; // Maximum speed in km/h
+  const targetSpeed = 45; // Target speed to reach
+  const animationDuration = 2000; // Duration in milliseconds - faster for better responsiveness
+
+  const cleanup = useCallback(() => {
+    if (animationRef.current !== null) {
+      cancelAnimationFrame(animationRef.current);
+      animationRef.current = null;
+    }
+  }, []);
+
+  const reset = useCallback(() => {
+    cleanup();
+    setCurrentSpeed(0);
+    setIsAnimating(false);
+    setError(null);
+  }, [cleanup]);
+
   const announceSpeed = useCallback((speed: number) => {
     if (speedAnnouncementRef.current) {
-      speedAnnouncementRef.current.textContent = `Velocidad actual: ${Math.round(speed)} kilómetros por hora equivalentes`;
+      speedAnnouncementRef.current.textContent =
+        `Velocidad actual: ${Math.round(speed)} kilómetros por hora equivalentes`;
     }
   }, []);
 
   const startAnimation = useCallback(() => {
-    if (isAnimating) return;
-    
-    setIsAnimating(true);
-    setCurrentSpeed(0);
-    
-    const duration = 3000; // 3 seconds
-    const startTime = performance.now();
-    
-    const animate = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
+    try {
+      if (isAnimating || !mountedRef.current) return;
+
+      // Clean up any existing animation
+      cleanup();
       
-      // Easing function for smooth animation
-      const easeOutCubic = 1 - Math.pow(1 - progress, 3);
-      const newSpeed = targetSpeed * easeOutCubic;
+      setIsAnimating(true);
+      setCurrentSpeed(0);
+      setError(null);
+
+      const startTime = performance.now();
+
+      const animate = (currentTime: number) => {
+        if (!mountedRef.current) return;
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / animationDuration, 1);
+      
+      // Smooth easing function
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const newSpeed = targetSpeed * eased;
+
       setCurrentSpeed(newSpeed);
       announceSpeed(newSpeed);
-      
-      if (progress < 1) {
+
+      if (progress < 1 && mountedRef.current) {
         animationRef.current = requestAnimationFrame(animate);
       } else {
         setIsAnimating(false);
       }
     };
-    
+
     animationRef.current = requestAnimationFrame(animate);
-  }, [isAnimating, targetSpeed, announceSpeed]);
+    } catch (err) {
+      console.error('Animation error:', err);
+      setError('Error en la animación');
+      setIsAnimating(false);
+      cleanup();
+    }
+  }, [isAnimating, targetSpeed, announceSpeed, cleanup, animationDuration, mountedRef]);
 
   const handleKeyPress = useCallback((e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -56,29 +84,41 @@ const InteractiveSpeedometer = () => {
   }, [startAnimation]);
 
   useEffect(() => {
-    // Auto-start animation when component mounts
-    const timer = setTimeout(startAnimation, 1000);
+    mountedRef.current = true;
+    
+    // Only start animation if component is mounted and not already animating
+    if (!isAnimating) {
+      const timer = setTimeout(() => {
+        if (mountedRef.current && !isAnimating) {
+          startAnimation();
+        }
+      }, 1000);
 
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+    
     return () => {
-      clearTimeout(timer);
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      mountedRef.current = false;
+      cleanup();
     };
-  }, [startAnimation]);
+  }, [startAnimation, isAnimating, cleanup]);
 
   const speedPercentage = (currentSpeed / maxSpeed) * 100;
   const circumference = 2 * Math.PI * 90; // radius = 90
   const strokeDashoffset = circumference - (speedPercentage / 100) * circumference;
 
   return (
-    <motion.div
-      className="relative w-56 xs:w-64 sm:w-80 h-56 xs:h-64 sm:h-80 mx-auto touch-manipulation"
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
-    >
+    <AnimatePresence mode="wait">
+      <motion.div
+        key="speedometer"
+        className="relative w-56 xs:w-64 sm:w-80 h-56 xs:h-64 sm:h-80 mx-auto touch-manipulation"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.8 }}
+        transition={{ duration: 0.5 }}
+      >
       {/* Speedometer Background */}
       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 200 200">
         {/* Background Circle */}
@@ -151,7 +191,13 @@ const InteractiveSpeedometer = () => {
       />
 
       <motion.button
-        onClick={startAnimation}
+        onClick={(e) => {
+          e.preventDefault();
+          if (!isAnimating) {
+            reset();
+            startAnimation();
+          }
+        }}
         onKeyDown={handleKeyPress}
         disabled={isAnimating}
         className="absolute -bottom-10 xs:-bottom-12 sm:-bottom-16 left-1/2 transform -translate-x-1/2 bg-rx-gold/20 hover:bg-rx-gold/30 focus:bg-rx-gold/40 focus:outline-none focus:ring-2 focus:ring-rx-gold focus:ring-offset-2 focus:ring-offset-rx-black disabled:opacity-50 disabled:cursor-not-allowed px-3 xs:px-4 sm:px-8 py-2 sm:py-3 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm touch-manipulation"
@@ -173,7 +219,8 @@ const InteractiveSpeedometer = () => {
           </div>
         )}
       </motion.button>
-    </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
