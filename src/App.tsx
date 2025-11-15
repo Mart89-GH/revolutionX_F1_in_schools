@@ -41,19 +41,20 @@ const ContactSection = lazy(() =>
 function App() {
   const { t, i18n } = useTranslation();
   const { breadcrumbs, setBreadcrumbs } = useBreadcrumbs();
+  const baseUrl = import.meta.env.VITE_BASE_URL || window.location.origin;
 
   useEffect(() => {
     // Set initial breadcrumbs based on sections
     setBreadcrumbs([
-      { name: 'Inicio', item: 'https://legendary-panda-7b91a1.netlify.app/' },
-      { name: t('nav.team'), item: 'https://legendary-panda-7b91a1.netlify.app/#equipo' },
-      { name: t('nav.technical'), item: 'https://legendary-panda-7b91a1.netlify.app/#tecnico' },
-      { name: t('nav.achievements'), item: 'https://legendary-panda-7b91a1.netlify.app/#logros' },
-      { name: t('nav.sponsors'), item: 'https://legendary-panda-7b91a1.netlify.app/#patrocinadores' },
-      { name: t('nav.marketing'), item: 'https://legendary-panda-7b91a1.netlify.app/#marketing' },
-      { name: t('nav.contact'), item: 'https://legendary-panda-7b91a1.netlify.app/#contacto' }
+      { name: 'Inicio', item: `${baseUrl}/` },
+      { name: t('nav.team'), item: `${baseUrl}/#equipo` },
+      { name: t('nav.technical'), item: `${baseUrl}/#tecnico` },
+      { name: t('nav.achievements'), item: `${baseUrl}/#logros` },
+      { name: t('nav.sponsors'), item: `${baseUrl}/#patrocinadores` },
+      { name: t('nav.marketing'), item: `${baseUrl}/#marketing` },
+      { name: t('nav.contact'), item: `${baseUrl}/#contacto` }
     ]);
-  }, [t, setBreadcrumbs]);
+  }, [t, setBreadcrumbs, baseUrl]);
 
   return (
     <HelmetProvider>
@@ -63,8 +64,8 @@ function App() {
             <SEOHead 
               currentLanguage={i18n.language}
               alternateLanguages={[
-                { lang: 'es-ES', url: 'https://legendary-panda-7b91a1.netlify.app/es' },
-                { lang: 'en-US', url: 'https://legendary-panda-7b91a1.netlify.app/en' }
+                { lang: 'es-ES', url: `${baseUrl}/es` },
+                { lang: 'en-US', url: `${baseUrl}/en` }
               ]}
               breadcrumb={breadcrumbs}
             />

@@ -10,24 +10,27 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
       .then((registration) => {
-        console.log('SW registered: ', registration);
+        if (import.meta.env.DEV) {
+          console.log('SW registered: ', registration);
+        }
       })
       .catch((registrationError) => {
-        console.log('SW registration failed: ', registrationError);
+        console.error('SW registration failed: ', registrationError);
       });
   });
 }
 
 // Performance monitoring
-if (import.meta.env.PROD) {
-  // Report Web Vitals
+if (import.meta.env.PROD && import.meta.env.DEV) {
+  // Report Web Vitals in development only
   (async () => {
     const { onCLS, onFID, onFCP, onLCP, onTTFB } = await import('web-vitals');
-    onCLS(console.log);
-    onFID(console.log);
-    onFCP(console.log);
-    onLCP(console.log);
-    onTTFB(console.log);
+    const logMetric = (metric: any) => console.log(metric);
+    onCLS(logMetric);
+    onFID(logMetric);
+    onFCP(logMetric);
+    onLCP(logMetric);
+    onTTFB(logMetric);
   })();
 }
 
