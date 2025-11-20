@@ -59,19 +59,39 @@ export const teamMembers: TeamMember[] = [
     ]
   },
   {
-    name: "Pablo Bianchi",
-    role: "Especialista en Marketing Digital",
+    name: "Martina Corredor",
+    role: "Gestión de recursos",
     responsibilities: [
-      "Gestión de presencia en redes sociales",
-      "Creación y curación de contenido multimedia",
-      "Análisis de métricas y engagement digital",
-      "Desarrollo de estrategias de comunicación online"
+      "Administración de presupuestos y financiamiento",
+      "Organización de recursos materiales y humanos",
+      "Coordinación logística de proyectos",
+      "Mantenimiento de registros y documentación"
+    ]
+  },
+  {
+    name: "Claudia de Paz",
+    role: "Gestión de Redes Sociales",
+    responsibilities: [
+      "Creación de contenido para plataformas sociales",
+      "Gestión de comunidades online",
+      "Monitoreo de métricas de engagement",
+      "Planificación de calendarios de contenido"
+    ]
+  },
+  {
+    name: "Álvaro Cardona",
+    role: "Ingeniero de Apoyo",
+    responsibilities: [
+      "Soporte técnico y solución de problemas",
+      "Mantenimiento de equipos y herramientas",
+      "Colaboración en desarrollo de proyectos",
+      "Investigación y pruebas de nuevas tecnologías"
     ]
   }
 ];
 
 export const teamStats = [
-  { icon: "Users", number: "6", label: "Miembros del Equipo" },
+  { icon: "Users", number: "8", label: "Miembros del Equipo" },
   { icon: "Award", number: "1º", label: "Puesto Regional" },
   { icon: "Target", number: "100%", label: "Compromiso" },
   { icon: "Calendar", number: "2024", label: "Año de Fundación" }
