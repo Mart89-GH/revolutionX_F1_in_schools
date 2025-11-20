@@ -9,7 +9,16 @@ export default defineConfig({
       jsxRuntime: 'automatic'
     }),
     // Add image optimization plugin
-    {      name: 'image-optimizer',      enforce: 'pre',      transformIndexHtml(html) {        return html.replace(/(<img[^>]+)(loading=["]?lazy["]?)/g, '$1loading="eager" decoding="sync"');      }    }
+    {
+      name: 'image-optimizer',
+      enforce: 'pre' as const,
+      transformIndexHtml(html) {
+        return html.replace(
+          /(<img[^>]+)(loading=["']?lazy["']?)/g, 
+          '$1loading="eager" decoding="sync"'
+        );
+      }
+    }
   ],
   server: {
     port: 5174,
