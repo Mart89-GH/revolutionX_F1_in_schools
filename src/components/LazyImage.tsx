@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface LazyImageProps {
@@ -11,6 +11,8 @@ interface LazyImageProps {
   loading?: 'lazy' | 'eager';
   sizes?: string;
   srcSet?: string;
+  width?: number;
+  height?: number;
 }
 
 const LazyImage: React.FC<LazyImageProps> = ({
@@ -22,7 +24,9 @@ const LazyImage: React.FC<LazyImageProps> = ({
   onError,
   loading = 'lazy',
   sizes,
-  srcSet
+  srcSet,
+  width,
+  height
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(loading === 'eager');
@@ -35,14 +39,21 @@ const LazyImage: React.FC<LazyImageProps> = ({
       return;
     }
 
+    // Use a single observer instance if possible, but for now local is fine
+    // Ensure we clean up previous observer if it exists
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
     observerRef.current = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
+      (entries) => {
+        if (entries[0].isIntersecting) {
           setIsInView(true);
           observerRef.current?.disconnect();
+          observerRef.current = null;
         }
       },
-      { threshold: 0.05, rootMargin: '100px' }
+      { threshold: 0.01, rootMargin: '50px' } // Reduced margin for more precise loading
     );
 
     if (imgRef.current) {
@@ -54,15 +65,15 @@ const LazyImage: React.FC<LazyImageProps> = ({
     };
   }, [loading, isInView]);
 
-  const handleLoad = () => {
+  const handleLoad = useCallback(() => {
     setIsLoaded(true);
     onLoad?.();
-  };
+  }, [onLoad]);
 
-  const handleError = () => {
+  const handleError = useCallback(() => {
     setHasError(true);
     onError?.();
-  };
+  }, [onError]);
 
   return (
     <div ref={imgRef} className={`relative overflow-hidden ${className}`}>
@@ -71,7 +82,8 @@ const LazyImage: React.FC<LazyImageProps> = ({
           <motion.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-gradient-to-br from-rx-gold/10 to-rx-gold/5 animate-pulse"
+            transition={{ duration: 0.3 }} // Faster exit
+            className="absolute inset-0 bg-gradient-to-br from-rx-gold/10 to-rx-gold/5"
           >
             {placeholder && (
               <img
@@ -85,22 +97,22 @@ const LazyImage: React.FC<LazyImageProps> = ({
         )}
       </AnimatePresence>
 
-      {isInView && !hasError && (
+      {(isInView || loading === 'eager') && !hasError && (
         <motion.img
           src={src}
           srcSet={srcSet}
           sizes={sizes}
           alt={alt}
-          className={`w-full h-full object-cover transition-opacity duration-500 ${
-            isLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`w-full h-full object-cover ${className}`}
           onLoad={handleLoad}
           onError={handleError}
           loading={loading}
           decoding="async"
+          width={width}
+          height={height}
           initial={{ opacity: 0 }}
           animate={{ opacity: isLoaded ? 1 : 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
         />
       )}
 
@@ -108,7 +120,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
         <div className="absolute inset-0 bg-rx-dark flex items-center justify-center">
           <div className="text-gray-400 text-center">
             <div className="w-8 h-8 bg-gray-600 rounded mx-auto mb-2"></div>
-            <p className="text-xs">Error al cargar imagen</p>
+            <p className="text-xs">Error</p>
           </div>
         </div>
       )}
@@ -116,4 +128,4 @@ const LazyImage: React.FC<LazyImageProps> = ({
   );
 };
 
-export default LazyImage;
+export default React.memo(LazyImage);

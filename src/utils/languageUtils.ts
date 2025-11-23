@@ -1,6 +1,6 @@
-import type { TFunction } from 'i18next';
+import type { i18n } from 'i18next';
 
-export const updateDocumentLanguage = (language: string, t: TFunction) => {
+export const updateDocumentLanguage = (language: string) => {
   const htmlElement = document.documentElement;
   const titleElement = document.getElementById('page-title');
   const metaTitleElement = document.getElementById('meta-title');
@@ -40,16 +40,16 @@ export const detectLanguageFromURL = (): string => {
   return path.startsWith('/en') ? 'en' : 'es';
 };
 
-export const initializeLanguage = (i18n: any) => {
+export const initializeLanguage = (i18n: i18n) => {
   const urlLanguage = detectLanguageFromURL();
   const storedLanguage = localStorage.getItem('i18nextLng');
-  
+
   // Priority: URL > Stored > Browser > Default
   const targetLanguage = urlLanguage || storedLanguage || navigator.language.split('-')[0] || 'es';
-  
+
   if (i18n.language !== targetLanguage) {
     i18n.changeLanguage(targetLanguage);
   }
-  
+
   return targetLanguage;
 };

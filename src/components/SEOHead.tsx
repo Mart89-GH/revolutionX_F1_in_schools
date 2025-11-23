@@ -35,7 +35,6 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   author = 'RevolutionX Team',
   publishedTime,
   modifiedTime,
-  currentLanguage = 'es-ES',
   alternateLanguages = [
     { lang: 'es-ES', url: 'https://legendary-panda-7b91a1.netlify.app/es' },
     { lang: 'en-US', url: 'https://legendary-panda-7b91a1.netlify.app/en' }
@@ -73,6 +72,50 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     ]
   };
 
+  const sportsTeamStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'SportsTeam',
+    name: 'RevolutionX',
+    sport: 'F1 in Schools Racing',
+    description: 'Competitive F1 in Schools team from IES José Saramago, Madrid',
+    url,
+    logo: `${url}${image}`,
+    foundingDate: '2024',
+    memberOf: {
+      '@type': 'EducationalOrganization',
+      name: 'IES José Saramago',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Majadahonda',
+        addressRegion: 'Madrid',
+        addressCountry: 'ES'
+      }
+    },
+    location: {
+      '@type': 'Place',
+      name: 'Majadahonda, Madrid',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Majadahonda',
+        addressRegion: 'Madrid',
+        addressCountry: 'ES'
+      }
+    }
+  };
+
+  const educationalOrganizationData = {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOrganization',
+    name: 'RevolutionX - F1 in Schools Educational Team',
+    description: 'STEM education team focused on engineering, design, and technology through F1 in Schools competition',
+    url,
+    educationalCredentialAwarded: 'F1 in Schools Competition Experience',
+    areaServed: {
+      '@type': 'State',
+      name: 'Comunidad de Madrid'
+    }
+  };
+
   return (
     <Helmet>
       {/* Primary Meta Tags */}
@@ -90,7 +133,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <meta property="og:url" content={url} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={`${url}${image}`} />
+      <meta property="og:image" content={image.startsWith('http') ? image : `${url}${image}`} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:site_name" content="RevolutionX" />
@@ -139,6 +182,16 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       {/* Structured Data - Organization */}
       <script type="application/ld+json">
         {JSON.stringify(organizationStructuredData)}
+      </script>
+
+      {/* Structured Data - SportsTeam */}
+      <script type="application/ld+json">
+        {JSON.stringify(sportsTeamStructuredData)}
+      </script>
+
+      {/* Structured Data - Educational Organization */}
+      <script type="application/ld+json">
+        {JSON.stringify(educationalOrganizationData)}
       </script>
 
       {/* Structured Data - Breadcrumb */}

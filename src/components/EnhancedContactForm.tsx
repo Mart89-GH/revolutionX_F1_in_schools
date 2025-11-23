@@ -22,7 +22,7 @@ const schema = yup.object({
     .max(100, 'El nombre de la empresa no puede exceder 100 caracteres'),
   phone: yup
     .string()
-    .matches(/^[+]?[\d\s\-\(\)]+$/, 'Ingrese un número de teléfono válido')
+    .matches(/^[+]?[\d\s\-()]+$/, 'Ingrese un número de teléfono válido')
     .min(9, 'El teléfono debe tener al menos 9 dígitos'),
   subject: yup
     .string()
@@ -57,7 +57,7 @@ const EnhancedContactForm: React.FC<EnhancedContactFormProps> = ({ onSubmit }) =
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const {
     register,
     handleSubmit,
@@ -140,7 +140,7 @@ ${data.message}
           autoComplete="name"
           disabled={isSubmitting}
         />
-        
+
         <FormField
           label="Email (obligatorio)"
           type="email"
@@ -155,7 +155,7 @@ ${data.message}
           disabled={isSubmitting}
         />
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <FormField
           label="Empresa/Organización"
@@ -164,7 +164,7 @@ ${data.message}
           placeholder="Nombre de su empresa"
           autoComplete="organization"
         />
-        
+
         <FormField
           label="Teléfono"
           type="tel"
@@ -174,7 +174,7 @@ ${data.message}
           autoComplete="tel"
         />
       </div>
-      
+
       <FormField
         label="Asunto (obligatorio)"
         {...register('subject')}
@@ -183,7 +183,7 @@ ${data.message}
         aria-required="true"
         placeholder="Motivo de su consulta"
       />
-      
+
       <div className="space-y-2">
         <FormField
           label="Mensaje (obligatorio)"
@@ -204,7 +204,7 @@ ${data.message}
           </span>
         </div>
       </div>
-      
+
       <div className="flex items-start space-x-2 xs:space-x-3">
         <input
           type="checkbox"
@@ -217,8 +217,8 @@ ${data.message}
         />
         <label htmlFor="privacy" className="text-xs xs:text-sm text-gray-300 leading-relaxed">
           Acepto la{' '}
-          <a 
-            href="/privacy" 
+          <a
+            href="/privacy"
             className="text-rx-gold hover:text-yellow-300 underline"
             target="_blank"
             rel="noopener noreferrer"
@@ -233,7 +233,7 @@ ${data.message}
           )}
         </label>
       </div>
-      
+
       <div className="pt-4">
         {submitStatus === 'success' && (
           <motion.div
@@ -248,7 +248,7 @@ ${data.message}
             </div>
           </motion.div>
         )}
-        
+
         {submitStatus === 'error' && (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -262,7 +262,7 @@ ${data.message}
             </div>
           </motion.div>
         )}
-        
+
         <EnhancedButton
           type="submit"
           variant="primary"

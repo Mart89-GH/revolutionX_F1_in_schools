@@ -1,4 +1,5 @@
 import { StrictMode } from 'react';
+import type { Metric } from 'web-vitals';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import { BreadcrumbProvider } from './components/BreadcrumbProvider';
@@ -24,10 +25,10 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
 if (import.meta.env.PROD && import.meta.env.DEV) {
   // Report Web Vitals in development only
   (async () => {
-    const { onCLS, onFID, onFCP, onLCP, onTTFB } = await import('web-vitals');
-    const logMetric = (metric: any) => console.log(metric);
+    const { onCLS, onFCP, onLCP, onTTFB } = await import('web-vitals');
+    const logMetric = (metric: Metric) => console.log(metric);
     onCLS(logMetric);
-    onFID(logMetric);
+
     onFCP(logMetric);
     onLCP(logMetric);
     onTTFB(logMetric);

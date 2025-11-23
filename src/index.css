@@ -116,14 +116,6 @@
 
 /* Enhanced utility classes */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .text-pretty {
-    text-wrap: pretty;
-  }
-
   /* Performance optimizations */
   .will-change-transform {
     will-change: transform;
@@ -132,12 +124,6 @@
 
   .will-change-opacity {
     will-change: opacity;
-  }
-
-  .gpu-accelerated {
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
-    perspective: 1000px;
   }
 
   .optimize-animations {

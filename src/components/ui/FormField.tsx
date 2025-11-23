@@ -29,13 +29,13 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
   }, ref) => {
     const fieldId = id || `field-${Math.random().toString(36).substr(2, 9)}`;
     const hasError = !!error;
-    
+
     const baseInputClasses = `
       w-full bg-rx-black/50 border rounded-lg xs:rounded-xl px-3 xs:px-4 py-2.5 xs:py-3 text-base xs:text-lg sm:text-base 
       focus:outline-none focus:ring-2 transition-all duration-300
       placeholder:text-sm xs:placeholder:text-base sm:placeholder:text-sm
-      ${hasError 
-        ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500/20' 
+      ${hasError
+        ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500/20'
         : 'border-rx-gold/20 focus:border-rx-gold/50 focus:ring-rx-gold/20'
       }
       ${leftIcon ? 'pl-10 xs:pl-12' : ''}
@@ -43,12 +43,12 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
       touch-manipulation
       ${className}
     `;
-    
+
     const InputComponent = multiline ? 'textarea' : 'input';
-    
+
     return (
       <div className="space-y-2">
-        <label 
+        <label
           htmlFor={fieldId}
           className="block text-gray-300 text-xs xs:text-sm font-medium"
         >
@@ -57,16 +57,16 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
             <span className="text-red-400 ml-1" aria-label="campo obligatorio">*</span>
           )}
         </label>
-        
+
         <div className="relative">
           {leftIcon && (
             <div className="absolute left-3 xs:left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
               {leftIcon}
             </div>
           )}
-          
+
           <InputComponent
-            ref={ref as any}
+            ref={ref as React.Ref<HTMLInputElement & HTMLTextAreaElement>}
             id={fieldId}
             className={baseInputClasses}
             rows={multiline ? rows : undefined}
@@ -76,20 +76,20 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
             }
             {...props}
           />
-          
+
           {rightIcon && (
             <div className="absolute right-3 xs:right-4 top-1/2 transform -translate-y-1/2 text-gray-400">
               {rightIcon}
             </div>
           )}
-          
+
           {hasError && (
             <div className="absolute right-3 xs:right-4 top-1/2 transform -translate-y-1/2 text-red-400">
               <AlertCircle className="w-5 h-5" aria-label="Error en el campo" role="img" />
             </div>
           )}
         </div>
-        
+
         <AnimatePresence>
           {error && (
             <motion.div
@@ -106,10 +106,10 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
             </motion.div>
           )}
         </AnimatePresence>
-        
+
         {helperText && !error && (
-          <p 
-            id={`${fieldId}-helper`} 
+          <p
+            id={`${fieldId}-helper`}
             className="text-gray-400 text-xs xs:text-sm"
             role="status"
             aria-live="polite"

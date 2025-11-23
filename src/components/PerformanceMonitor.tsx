@@ -8,6 +8,15 @@ interface PerformanceMetrics {
   ttfb?: number;
 }
 
+interface PerformanceEventTiming extends PerformanceEntry {
+  processingStart: number;
+}
+
+interface LayoutShift extends PerformanceEntry {
+  value: number;
+  hadRecentInput: boolean;
+}
+
 const PerformanceMonitor: React.FC = () => {
   useEffect(() => {
     if (typeof window === 'undefined' || !('performance' in window)) return;
@@ -35,7 +44,7 @@ const PerformanceMonitor: React.FC = () => {
     // First Input Delay
     const fidObserver = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        metrics.fid = (entry as any).processingStart - entry.startTime;
+        metrics.fid = (entry as PerformanceEventTiming).processingStart - entry.startTime;
       }
     });
     fidObserver.observe({ entryTypes: ['first-input'] });
@@ -44,8 +53,8 @@ const PerformanceMonitor: React.FC = () => {
     let clsValue = 0;
     const clsObserver = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        if (!(entry as any).hadRecentInput) {
-          clsValue += (entry as any).value;
+        if (!(entry as LayoutShift).hadRecentInput) {
+          clsValue += (entry as LayoutShift).value;
         }
       }
       metrics.cls = clsValue;

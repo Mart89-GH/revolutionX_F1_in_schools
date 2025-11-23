@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  MessageCircle, 
-  X, 
-  Send, 
-  Bot, 
-  User, 
-  Loader2, 
-  Wifi, 
-  WifiOff, 
+import {
+  MessageCircle,
+  X,
+  Send,
+  Bot,
+  User,
+  Loader2,
+  Wifi,
+  WifiOff,
   RefreshCw,
   Settings,
   BarChart3,
@@ -17,14 +17,13 @@ import {
   AlertTriangle
 } from 'lucide-react';
 import useOpenRouter from '../hooks/useOpenRouter';
-import { ChatMessage } from '../types/openrouter';
 
 interface OpenRouterAIAssistantProps {
   apiKey?: string;
   model?: string;
 }
 
-const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({ 
+const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
   apiKey = import.meta.env.VITE_OPENROUTER_API_KEY,
   model = 'openai/gpt-3.5-turbo'
 }) => {
@@ -50,9 +49,9 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
     clearMessages,
     resetConnection,
     checkConnection
-  } = useOpenRouter({ 
+  } = useOpenRouter({
     apiKey: apiKey || tempApiKey,
-    model 
+    model
   });
 
   const scrollToBottom = () => {
@@ -73,12 +72,12 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
       if (useStreaming) {
         setStreamingResponse('');
         let fullResponse = '';
-        
+
         for await (const chunk of sendMessageStream(messageText)) {
           fullResponse += chunk;
           setStreamingResponse(fullResponse);
         }
-        
+
         setStreamingResponse('');
       } else {
         await sendMessage(messageText);
@@ -187,21 +186,19 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                     <span className="text-white text-sm">Modelo:</span>
                     <span className="text-rx-gold text-xs font-mono">{currentModel}</span>
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <span className="text-white text-sm">Streaming:</span>
                     <button
                       onClick={() => setUseStreaming(!useStreaming)}
-                      className={`w-10 h-6 rounded-full transition-colors ${
-                        useStreaming ? 'bg-rx-gold' : 'bg-gray-600'
-                      }`}
+                      className={`w-10 h-6 rounded-full transition-colors ${useStreaming ? 'bg-rx-gold' : 'bg-gray-600'
+                        }`}
                       role="switch"
                       aria-checked={useStreaming}
                       aria-label="Activar streaming de respuestas"
                     >
-                      <div className={`w-4 h-4 bg-white rounded-full transition-transform ${
-                        useStreaming ? 'translate-x-5' : 'translate-x-1'
-                      }`} />
+                      <div className={`w-4 h-4 bg-white rounded-full transition-transform ${useStreaming ? 'translate-x-5' : 'translate-x-1'
+                        }`} />
                     </button>
                   </div>
 
@@ -285,9 +282,9 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                     </div>
                     <p className="text-orange-300 text-xs">
                       Obtén tu API key gratuita en{' '}
-                      <a 
-                        href="https://openrouter.ai/keys" 
-                        target="_blank" 
+                      <a
+                        href="https://openrouter.ai/keys"
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="underline hover:text-orange-200"
                       >
@@ -308,11 +305,11 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                 </div>
                 <p className="text-red-300 text-xs mb-2">{error}</p>
                 <button
-                    onClick={checkConnection}
-                    className="text-red-300 hover:text-red-200 text-xs underline"
-                  >
-                    Reintentar conexión con el asistente
-                  </button>
+                  onClick={checkConnection}
+                  className="text-red-300 hover:text-red-200 text-xs underline"
+                >
+                  Reintentar conexión con el asistente
+                </button>
               </div>
             )}
 
@@ -328,11 +325,11 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                     Necesitas una API key de OpenRouter para usar el asistente
                   </p>
                   <button
-                      onClick={() => setShowApiKeyInput(true)}
-                      className="bg-orange-500/20 hover:bg-orange-500/30 px-4 py-2 rounded-lg text-orange-400 text-sm font-medium transition-colors"
-                    >
-                      Configurar clave API de OpenRouter
-                    </button>
+                    onClick={() => setShowApiKeyInput(true)}
+                    className="bg-orange-500/20 hover:bg-orange-500/30 px-4 py-2 rounded-lg text-orange-400 text-sm font-medium transition-colors"
+                  >
+                    Configurar clave API de OpenRouter
+                  </button>
                 </div>
               )}
 
@@ -346,11 +343,11 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                     Verifica tu API key y conexión a internet
                   </p>
                   <button
-                      onClick={checkConnection}
-                      className="bg-rx-gold/20 hover:bg-rx-gold/30 px-4 py-2 rounded-lg text-rx-gold text-sm font-medium transition-colors"
-                    >
-                      Verificar conexión con OpenRouter
-                    </button>
+                    onClick={checkConnection}
+                    className="bg-rx-gold/20 hover:bg-rx-gold/30 px-4 py-2 rounded-lg text-rx-gold text-sm font-medium transition-colors"
+                  >
+                    Verificar conexión con OpenRouter
+                  </button>
                 </div>
               )}
 
@@ -373,23 +370,20 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                   animate={{ opacity: 1, y: 0 }}
                   className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`flex items-start space-x-2 max-w-[80%] ${
-                    message.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''
-                  }`}>
-                    <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${
-                      message.role === 'user' ? 'bg-rx-gold' : 'bg-rx-gold/20'
+                  <div className={`flex items-start space-x-2 max-w-[80%] ${message.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''
                     }`}>
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${message.role === 'user' ? 'bg-rx-gold' : 'bg-rx-gold/20'
+                      }`}>
                       {message.role === 'user' ? (
                         <User className="w-3 h-3 text-rx-black" />
                       ) : (
                         <Bot className="w-3 h-3 text-rx-gold" aria-label="Respuesta del asistente" role="img" />
                       )}
                     </div>
-                    <div className={`rounded-2xl px-3 py-2 ${
-                      message.role === 'user'
-                        ? 'bg-rx-gold text-rx-black' 
+                    <div className={`rounded-2xl px-3 py-2 ${message.role === 'user'
+                        ? 'bg-rx-gold text-rx-black'
                         : 'bg-rx-gold/10 text-white border border-rx-gold/20'
-                    }`}>
+                      }`}>
                       <p className="text-sm whitespace-pre-line">{message.content}</p>
                     </div>
                   </div>
@@ -416,7 +410,7 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                   </div>
                 </motion.div>
               )}
-              
+
               {isLoading && !streamingResponse && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -436,7 +430,7 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                   </div>
                 </motion.div>
               )}
-              
+
               <div ref={messagesEndRef} />
             </div>
 
@@ -465,7 +459,7 @@ const OpenRouterAIAssistant: React.FC<OpenRouterAIAssistantProps> = ({
                   <Send className="w-4 h-4 text-rx-black" aria-hidden="true" />
                 </button>
               </div>
-              
+
               {isConnected && (
                 <div className="mt-2 flex items-center justify-between text-xs text-gray-400">
                   <span>

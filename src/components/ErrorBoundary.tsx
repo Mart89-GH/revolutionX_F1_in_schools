@@ -14,7 +14,7 @@ interface ErrorInfo {
   retryCount: number;
 }
 
-const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, resetErrorBoundary, componentStack }) => {
+const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, resetErrorBoundary }) => {
   const [errorInfo, setErrorInfo] = React.useState<ErrorInfo>({ lastError: null, retryCount: 0 });
 
   React.useEffect(() => {
@@ -39,15 +39,15 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, resetErrorBoundary
         >
           <AlertTriangle className="w-8 h-8 text-red-400" />
         </motion.div>
-        
+
         <h2 className="text-2xl font-display text-white mb-4">
           Algo salió mal
         </h2>
-        
+
         <p className="text-gray-300 mb-6 text-sm">
           Ha ocurrido un error inesperado. Por favor, intenta recargar la página.
         </p>
-        
+
         <div className="space-y-3">
           {errorInfo.retryCount < 3 ? (
             <button
@@ -63,7 +63,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, resetErrorBoundary
               Por favor, regrese al inicio o contacte con soporte.
             </p>
           )}
-          
+
           <button
             onClick={() => window.location.href = '/'}
             className="w-full flex items-center justify-center space-x-2 bg-gray-600/20 hover:bg-gray-600/30 px-6 py-3 rounded-lg border border-gray-500/50 text-gray-300 font-medium transition-all duration-300"
@@ -72,7 +72,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, resetErrorBoundary
             <span>Ir al inicio</span>
           </button>
         </div>
-        
+
         {(process.env.NODE_ENV === 'development' || errorInfo.retryCount >= 3) && (
           <details className="mt-6 text-left">
             <summary className="text-red-400 cursor-pointer text-sm">
@@ -94,14 +94,14 @@ interface ErrorBoundaryProps {
   onReset?: () => void;
 }
 
-const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children, fallbackRender, onReset }) => {
+const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children }) => {
   return (
     <ReactErrorBoundary
       FallbackComponent={ErrorFallback}
       onError={(error, componentStack) => {
         // Log error to monitoring service in production
         console.error('Error caught by boundary:', error, componentStack);
-        
+
         // Send error to monitoring service
         if (process.env.NODE_ENV === 'production') {
           // TODO: Implement error reporting service

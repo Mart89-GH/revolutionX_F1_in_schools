@@ -21,18 +21,7 @@ const useOpenRouter = (config: OpenRouterConfig) => {
   const performanceData = useRef<number[]>([]);
   const successCount = useRef(0);
 
-  useEffect(() => {
-    if (!config.apiKey) {
-      setState(prev => ({ 
-        ...prev, 
-        error: 'API key de OpenRouter requerida. Por favor, configúrela en las variables de entorno.' 
-      }));
-      return;
-    }
-
-    openRouterService.current = new OpenRouterService(config);
-    checkConnection();
-  }, [config.apiKey]);
+  const { apiKey, baseUrl, model, maxRetries, retryDelay, rateLimitDelay } = config;
 
   const checkConnection = useCallback(async () => {
     if (!openRouterService.current) return;
@@ -40,22 +29,42 @@ const useOpenRouter = (config: OpenRouterConfig) => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
       const isConnected = await openRouterService.current.checkConnection();
-      
-      setState(prev => ({ 
-        ...prev, 
-        isConnected, 
+
+      setState(prev => ({
+        ...prev,
+        isConnected,
         isLoading: false,
         error: isConnected ? null : 'No se pudo conectar con OpenRouter. Verifique su API key.'
       }));
     } catch (error) {
-      setState(prev => ({ 
-        ...prev, 
-        isConnected: false, 
+      setState(prev => ({
+        ...prev,
+        isConnected: false,
         isLoading: false,
         error: `Error de conexión: ${error}`
       }));
     }
   }, []);
+
+  useEffect(() => {
+    if (!apiKey) {
+      setState(prev => ({
+        ...prev,
+        error: 'API key de OpenRouter requerida. Por favor, configúrela en las variables de entorno.'
+      }));
+      return;
+    }
+
+    openRouterService.current = new OpenRouterService({
+      apiKey,
+      baseUrl,
+      model,
+      maxRetries,
+      retryDelay,
+      rateLimitDelay
+    });
+    checkConnection();
+  }, [apiKey, baseUrl, model, maxRetries, retryDelay, rateLimitDelay, checkConnection]);
 
   const sendMessage = useCallback(async (message: string): Promise<string> => {
     if (!openRouterService.current || !state.isConnected) {
@@ -68,19 +77,19 @@ const useOpenRouter = (config: OpenRouterConfig) => {
     try {
       const userMessage: ChatMessage = { role: 'user', content: message };
       const updatedMessages = [...state.messages, userMessage];
-      
-      setState(prev => ({ 
-        ...prev, 
-        messages: updatedMessages 
+
+      setState(prev => ({
+        ...prev,
+        messages: updatedMessages
       }));
 
       const response = await openRouterService.current.chat(updatedMessages);
       const responseTime = Date.now() - startTime;
-      
+
       // Update performance metrics
       performanceData.current.push(responseTime);
       successCount.current++;
-      
+
       const avgResponseTime = performanceData.current.reduce((a, b) => a + b, 0) / performanceData.current.length;
       const successRate = (successCount.current / (state.performance.totalQueries + 1)) * 100;
 
@@ -127,15 +136,15 @@ const useOpenRouter = (config: OpenRouterConfig) => {
     try {
       const userMessage: ChatMessage = { role: 'user', content: message };
       const updatedMessages = [...state.messages, userMessage];
-      
-      setState(prev => ({ 
-        ...prev, 
-        messages: updatedMessages 
+
+      setState(prev => ({
+        ...prev,
+        messages: updatedMessages
       }));
 
       let fullResponse = '';
-      let totalTokens = 0;
-      
+      const totalTokens = 0;
+
       for await (const chunk of openRouterService.current.chatStream(updatedMessages)) {
         fullResponse += chunk;
         yield chunk;

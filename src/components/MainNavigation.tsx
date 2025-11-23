@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Users, Cog, Award, Handshake, TrendingUp, MessageCircle, Instagram, ArrowUp } from 'lucide-react';
@@ -10,14 +10,14 @@ const MainNavigation: React.FC = () => {
   const [activeSection, setActiveSection] = useState('');
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { id: 'equipo', label: t('nav.team'), icon: Users },
     { id: 'tecnico', label: t('nav.technical'), icon: Cog },
     { id: 'logros', label: t('nav.achievements'), icon: Award },
     { id: 'patrocinadores', label: t('nav.sponsors'), icon: Handshake },
     { id: 'marketing', label: t('nav.marketing'), icon: TrendingUp },
     { id: 'contacto', label: t('nav.contact'), icon: MessageCircle },
-  ];
+  ], [t]);
 
   const handleScroll = useCallback(() => {
     const sections = navItems.map(item => document.getElementById(item.id));
@@ -58,7 +58,7 @@ const MainNavigation: React.FC = () => {
   return (
     <>
       <AccessibilitySkipLink />
-      
+
       {/* Barra de navegación fija */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-rx-black/95 backdrop-blur-md border-b border-rx-gold/20 touch-manipulation">
         <div className="container-custom">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, ChevronDown, Type } from 'lucide-react';
@@ -6,10 +6,10 @@ import { updateDocumentLanguage } from '../utils/languageUtils';
 import { translateElements, restoreOriginalText } from '../services/translationService';
 
 const LanguageSwitcher: React.FC = () => {
-  const { i18n, t } = useTranslation();
+  const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [autoTranslate, setAutoTranslate] = useState(false);
-  const [isTranslating, setIsTranslating] = useState(false);
+
 
   const languages = [
     { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -20,14 +20,12 @@ const LanguageSwitcher: React.FC = () => {
 
   const changeLanguage = async (langCode: string) => {
     i18n.changeLanguage(langCode);
-    updateDocumentLanguage(langCode, t);
+    updateDocumentLanguage(langCode);
     setIsOpen(false);
 
     if (autoTranslate && langCode !== 'es') {
-      setIsTranslating(true);
       const textElements = document.querySelectorAll('[data-translate="true"]');
       await translateElements(textElements, langCode);
-      setIsTranslating(false);
     } else if (!autoTranslate || langCode === 'es') {
       const textElements = document.querySelectorAll('[data-translate="true"]');
       restoreOriginalText(textElements);
@@ -37,7 +35,7 @@ const LanguageSwitcher: React.FC = () => {
   const toggleAutoTranslate = () => {
     const newState = !autoTranslate;
     setAutoTranslate(newState);
-    
+
     if (!newState || i18n.language === 'es') {
       const textElements = document.querySelectorAll('[data-translate="true"]');
       restoreOriginalText(textElements);
@@ -83,9 +81,8 @@ const LanguageSwitcher: React.FC = () => {
               <motion.button
                 key={language.code}
                 onClick={() => changeLanguage(language.code)}
-                className={`w-full flex items-center space-x-3 px-4 py-3 text-left hover:bg-rx-gold/10 transition-colors ${
-                  currentLanguage.code === language.code ? 'bg-rx-gold/20 text-rx-gold' : 'text-white'
-                }`}
+                className={`w-full flex items-center space-x-3 px-4 py-3 text-left hover:bg-rx-gold/10 transition-colors ${currentLanguage.code === language.code ? 'bg-rx-gold/20 text-rx-gold' : 'text-white'
+                  }`}
                 whileHover={{ x: 4 }}
                 transition={{ duration: 0.2 }}
               >

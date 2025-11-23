@@ -1,14 +1,14 @@
-import React, { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Mail, MessageSquare, Send, Phone, Instagram, MapPin, Clock } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import SectionHeader from './ui/SectionHeader';
 import EnhancedContactForm from './EnhancedContactForm';
 import { whyCollaborate } from '../data/contactData';
 
 const EnhancedContactSection = () => {
   const { t } = useTranslation();
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [, setHoveredCard] = useState<number | null>(null);
 
   return (
     <section id="contacto" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-rx-dark to-rx-black">
@@ -36,7 +36,7 @@ const EnhancedContactSection = () => {
             onHoverEnd={() => setHoveredCard(null)}
             aria-label="Enviar email a revolutionx.f1@gmail.com"
           >
-            <motion.div 
+            <motion.div
               className="w-12 h-12 sm:w-14 sm:h-14 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:bg-rx-gold/30 transition-colors"
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.6 }}
@@ -61,7 +61,7 @@ const EnhancedContactSection = () => {
             onHoverEnd={() => setHoveredCard(null)}
             aria-label="Visitar perfil de Instagram @revolutionx_f1"
           >
-            <motion.div 
+            <motion.div
               className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4"
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.6 }}
@@ -80,7 +80,7 @@ const EnhancedContactSection = () => {
             onHoverStart={() => setHoveredCard(2)}
             onHoverEnd={() => setHoveredCard(null)}
           >
-            <motion.div 
+            <motion.div
               className="w-12 h-12 sm:w-14 sm:h-14 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:bg-rx-gold/30 transition-colors"
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.6 }}
@@ -99,7 +99,7 @@ const EnhancedContactSection = () => {
             onHoverStart={() => setHoveredCard(3)}
             onHoverEnd={() => setHoveredCard(null)}
           >
-            <motion.div 
+            <motion.div
               className="w-12 h-12 sm:w-14 sm:h-14 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:bg-rx-gold/30 transition-colors"
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.6 }}
@@ -122,7 +122,7 @@ const EnhancedContactSection = () => {
             className="dark:bg-gradient-to-br dark:from-rx-dark dark:to-rx-black light:bg-gradient-to-br light:from-white light:to-gray-100 p-4 xs:p-6 sm:p-8 md:p-10 rounded-xl xs:rounded-2xl sm:rounded-3xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-500 shadow-2xl hover:shadow-rx-gold/10"
           >
             <div className="flex items-center mb-6 sm:mb-8">
-              <motion.div 
+              <motion.div
                 className="w-12 h-12 sm:w-14 sm:h-14 bg-rx-gold/20 rounded-full flex items-center justify-center mr-3 sm:mr-4"
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.6 }}
@@ -133,7 +133,7 @@ const EnhancedContactSection = () => {
                 {t('contact.form.title', 'Contacto Directo')}
               </h3>
             </div>
-            
+
             <EnhancedContactForm />
           </motion.div>
 
@@ -146,7 +146,7 @@ const EnhancedContactSection = () => {
             className="bg-gradient-to-br from-rx-dark to-rx-black p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-500 shadow-2xl hover:shadow-rx-gold/10"
           >
             <div className="flex items-center mb-6 sm:mb-8">
-              <motion.div 
+              <motion.div
                 className="w-12 h-12 sm:w-14 sm:h-14 bg-rx-gold/20 rounded-full flex items-center justify-center mr-3 sm:mr-4"
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.6 }}
@@ -157,11 +157,11 @@ const EnhancedContactSection = () => {
                 {t('contact.whyCollaborate')}
               </h3>
             </div>
-            
+
             <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
               {whyCollaborate.map((benefit, index) => (
-                <motion.div 
-                  key={index} 
+                <motion.div
+                  key={index}
                   className="flex items-start space-x-3 p-2 sm:p-3 rounded-lg hover:bg-rx-gold/5 transition-colors duration-300"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -169,7 +169,7 @@ const EnhancedContactSection = () => {
                   viewport={{ once: true }}
                   whileHover={{ x: 8 }}
                 >
-                  <motion.div 
+                  <motion.div
                     className="w-2 h-2 bg-rx-gold rounded-full mt-2 flex-shrink-0"
                     whileHover={{ scale: 1.5 }}
                     transition={{ duration: 0.2 }}
@@ -178,8 +178,8 @@ const EnhancedContactSection = () => {
                 </motion.div>
               ))}
             </div>
-            
-            <motion.div 
+
+            <motion.div
               className="p-4 sm:p-6 bg-gradient-to-r from-rx-gold/10 to-rx-gold/5 rounded-lg sm:rounded-xl border border-rx-gold/20"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
@@ -188,7 +188,7 @@ const EnhancedContactSection = () => {
                 ¡Su apoyo marca la diferencia!
               </p>
               <p className="text-gray-300 text-xs sm:text-sm text-center leading-relaxed">
-                Contáctenos hoy para explorar oportunidades de colaboración 
+                Contáctenos hoy para explorar oportunidades de colaboración
                 personalizadas según sus objetivos empresariales.
               </p>
             </motion.div>
@@ -207,12 +207,12 @@ const EnhancedContactSection = () => {
             {t('contact.startToday')}
           </h3>
           <p className="text-gray-300 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-4" data-translate="true">
-            Estamos listos para discutir cómo su empresa puede beneficiarse 
+            Estamos listos para discutir cómo su empresa puede beneficiarse
             de una asociación estratégica con RevolutionX.
           </p>
           <div className="flex flex-col xs:flex-row items-center justify-center space-y-3 xs:space-y-0 xs:space-x-4 sm:space-x-6 md:space-x-8">
-            <motion.a 
-              href="mailto:revolutionx.f1@gmail.com" 
+            <motion.a
+              href="mailto:revolutionx.f1@gmail.com"
               className="flex items-center space-x-2 sm:space-x-3 bg-rx-gold/20 hover:bg-rx-gold/30 px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-rx-gold/50"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
@@ -221,7 +221,7 @@ const EnhancedContactSection = () => {
               <Mail className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
               <span className="break-all">Enviar email de contacto</span>
             </motion.a>
-            
+
             <motion.a
               href="https://instagram.com/revolutionx_f1"
               target="_blank"

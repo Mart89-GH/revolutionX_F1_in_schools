@@ -23,7 +23,7 @@ const MarketingSection = () => {
         {/* Impact Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-16">
           {impactMetrics.map((metric, index) => {
-            const IconComponent = Icons[metric.icon as keyof typeof Icons] as React.ComponentType<any>;
+            const IconComponent = Icons[metric.icon as keyof typeof Icons] as React.ComponentType<{ className?: string }>;
             return (
               <StatCard
                 key={index}
@@ -44,7 +44,7 @@ const MarketingSection = () => {
         {/* Marketing Opportunities */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto mb-16">
           {marketingOpportunities.map((opportunity, index) => {
-            const IconComponent = Icons[opportunity.icon as keyof typeof Icons] as React.ComponentType<any>;
+            const IconComponent = Icons[opportunity.icon as keyof typeof Icons] as React.ComponentType<{ className?: string }>;
             return (
               <motion.div
                 key={index}
@@ -135,7 +135,7 @@ const MarketingSection = () => {
               ))}
             </div>
           </div>
-          
+
           <div className="mt-8 p-6 bg-rx-black/30 rounded-lg border border-rx-gold/20 text-center">
             <h4 className="text-rx-gold font-semibold text-lg mb-2" data-translate="true">
               {t('marketing.roi')}

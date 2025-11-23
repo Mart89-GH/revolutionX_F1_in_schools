@@ -15,13 +15,13 @@ const MobileGestureHandler: React.FC<MobileGestureHandlerProps> = ({ children })
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const handlePanEnd = (event: any, info: PanInfo) => {
+  const handlePanEnd = (_event: Event, info: PanInfo) => {
     if (!isMobile) return;
 
     const threshold = 50;
@@ -63,7 +63,7 @@ const MobileGestureHandler: React.FC<MobileGestureHandlerProps> = ({ children })
       className="touch-pan-y"
     >
       {children}
-      
+
       {/* Mobile Navigation Dots */}
       <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 space-y-3">
         {sections.map((section, index) => (
@@ -73,11 +73,10 @@ const MobileGestureHandler: React.FC<MobileGestureHandlerProps> = ({ children })
               setCurrentSection(index);
               scrollToSection(section);
             }}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              currentSection === index 
-                ? 'bg-rx-gold scale-125' 
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSection === index
+                ? 'bg-rx-gold scale-125'
                 : 'bg-rx-gold/30 hover:bg-rx-gold/60'
-            }`}
+              }`}
             whileTap={{ scale: 0.8 }}
           />
         ))}

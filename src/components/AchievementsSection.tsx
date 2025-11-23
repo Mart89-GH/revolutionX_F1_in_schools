@@ -9,9 +9,44 @@ import * as Icons from 'lucide-react';
 
 const AchievementsSection = () => {
   const { t } = useTranslation();
+  const baseUrl = import.meta.env.VITE_BASE_URL || 'https://legendary-panda-7b91a1.netlify.app';
+
+  // Structured data for main achievement (SportsEvent)
+  const sportsEventData = {
+    '@context': 'https://schema.org',
+    '@type': 'SportsEvent',
+    name: 'F1 in Schools - Campeonato Autonómico de Madrid',
+    description: 'RevolutionX won 1st place in the F1 in Schools Regional Championship Madrid',
+    startDate: '2024-03-15',
+    endDate: '2024-03-17',
+    location: {
+      '@type': 'Place',
+      name: 'Madrid',
+      address: {
+        '@type': 'PostalAddress',
+        addressRegion: 'Madrid',
+        addressCountry: 'ES'
+      }
+    },
+    competitor: {
+      '@type': 'SportsTeam',
+      name: 'RevolutionX',
+      url: baseUrl
+    },
+    organizer: {
+      '@type': 'Organization',
+      name: 'F1 in Schools',
+      url: 'https://www.f1inschools.com'
+    }
+  };
 
   return (
     <section id="logros" className="py-24 bg-gradient-to-b from-rx-black to-rx-dark">
+      {/* SportsEvent Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify(sportsEventData)}
+      </script>
+
       <div className="container mx-auto px-6">
         <SectionHeader
           icon={Award}
@@ -30,9 +65,9 @@ const AchievementsSection = () => {
         >
           <div className="relative bg-gradient-to-br from-rx-gold/20 via-rx-gold/10 to-transparent p-12 rounded-3xl border-2 border-rx-gold/50 text-center overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-rx-gold/5 via-transparent to-transparent"></div>
-            
+
             <div className="relative z-10">
-              <motion.div 
+              <motion.div
                 className="flex justify-center mb-8"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ duration: 0.3 }}
@@ -41,7 +76,7 @@ const AchievementsSection = () => {
                   <Zap className="w-10 h-10 text-rx-black" />
                 </div>
               </motion.div>
-              
+
               <h3 className="font-display text-3xl md:text-5xl text-rx-gold mb-6 font-bold" data-translate="true">
                 {t('achievements.mainTitle')}
               </h3>

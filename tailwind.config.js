@@ -173,7 +173,7 @@ export default {
   },
   plugins: [
     // Custom plugin for additional utilities
-    function({ addUtilities, theme }) {
+    function ({ addUtilities, theme }) {
       const newUtilities = {
         '.text-shadow': {
           textShadow: '0 2px 4px rgba(0,0,0,0.10)',
@@ -190,8 +190,10 @@ export default {
         '.backface-hidden': {
           backfaceVisibility: 'hidden',
         },
-        '.transform-gpu': {
+        '.gpu-accelerated': {
           transform: 'translate3d(0, 0, 0)',
+          backfaceVisibility: 'hidden',
+          perspective: '1000px',
         },
       }
       addUtilities(newUtilities)

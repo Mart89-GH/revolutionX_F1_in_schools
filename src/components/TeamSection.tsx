@@ -43,7 +43,7 @@ const TeamSection = () => {
         {/* Team Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-16">
           {teamStats.map((stat, index) => {
-            const IconComponent = Icons[stat.icon as keyof typeof Icons] as React.ComponentType<any>;
+            const IconComponent = Icons[stat.icon as keyof typeof Icons] as React.ComponentType<{ className?: string }>;
             return (
               <StatCard
                 key={index}

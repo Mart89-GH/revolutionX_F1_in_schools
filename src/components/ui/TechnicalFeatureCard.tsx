@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import * as Icons from 'lucide-react';
+import { LucideProps } from 'lucide-react';
 import { TechnicalFeature } from '../../data/technicalData';
 
 interface TechnicalFeatureCardProps {
@@ -9,7 +10,7 @@ interface TechnicalFeatureCardProps {
 }
 
 const TechnicalFeatureCard: React.FC<TechnicalFeatureCardProps> = ({ feature, index }) => {
-  const IconComponent = Icons[feature.icon as keyof typeof Icons] as React.ComponentType<any>;
+  const IconComponent = Icons[feature.icon as keyof typeof Icons] as React.FC<LucideProps>;
 
   return (
     <motion.div
@@ -21,7 +22,7 @@ const TechnicalFeatureCard: React.FC<TechnicalFeatureCardProps> = ({ feature, in
     >
       <div className="bg-gradient-to-br from-rx-dark to-rx-black rounded-2xl overflow-hidden border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-500 shadow-xl hover:shadow-2xl">
         <div className="relative h-64 overflow-hidden">
-          <img 
+          <img
             src={feature.image}
             alt={`${feature.title}: ${feature.description}`}
             className="w-full h-full object-cover transform group-hover:scale-110 transition duration-700"
@@ -38,7 +39,7 @@ const TechnicalFeatureCard: React.FC<TechnicalFeatureCardProps> = ({ feature, in
             </div>
           </div>
         </div>
-        
+
         <div className="p-8">
           <p className="text-gray-300 leading-relaxed text-lg">
             {feature.description}

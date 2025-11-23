@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
 export default function PrivacyPolicy() {
-  const { t } = useTranslation();
+  useTranslation();
 
   return (
     <motion.div

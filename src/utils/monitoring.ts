@@ -7,7 +7,7 @@ export interface PerformanceMetric {
   name: string;
   value: number;
   timestamp: Date;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface ErrorLog {
@@ -16,7 +16,7 @@ export interface ErrorLog {
   level: 'error' | 'warning' | 'info';
   message: string;
   stack?: string;
-  context?: Record<string, any>;
+  context?: Record<string, unknown>;
   userId?: string;
 }
 
@@ -27,6 +27,14 @@ export interface SystemHealth {
   responseTime: number;
   errorRate: number;
   lastCheck: Date;
+}
+
+interface PerformanceWithMemory extends Performance {
+  memory: {
+    usedJSHeapSize: number;
+    totalJSHeapSize: number;
+    jsHeapSizeLimit: number;
+  };
 }
 
 class MonitoringService {
@@ -73,7 +81,7 @@ class MonitoringService {
     }, 30000); // Check every 30 seconds
   }
 
-  recordMetric(name: string, value: number, metadata?: Record<string, any>): void {
+  recordMetric(name: string, value: number, metadata?: Record<string, unknown>): void {
     const metric: PerformanceMetric = {
       name,
       value,
@@ -97,7 +105,7 @@ class MonitoringService {
   logError(
     level: ErrorLog['level'],
     message: string,
-    context?: Record<string, any>,
+    context?: Record<string, unknown>,
     userId?: string
   ): void {
     const error: ErrorLog = {
@@ -181,7 +189,7 @@ class MonitoringService {
   getErrorRate(since?: Date): number {
     const errors = this.getErrors('error', since);
     const totalRequests = this.getMetrics('request', since).length;
-    
+
     if (totalRequests === 0) return 0;
     return (errors.length / totalRequests) * 100;
   }
@@ -192,11 +200,11 @@ class MonitoringService {
 
   private async performHealthCheck(): Promise<SystemHealth> {
     const startTime = performance.now();
-    
+
     try {
       // Run all health checks
       const results = await Promise.all(
-        this.healthChecks.map(check => 
+        this.healthChecks.map(check =>
           check().catch(() => false)
         )
       );
@@ -221,7 +229,7 @@ class MonitoringService {
       return health;
     } catch (error) {
       this.logError('error', 'Health check failed', { error });
-      
+
       return {
         status: 'unhealthy',
         uptime: Date.now() - this.startTime.getTime(),
@@ -235,7 +243,7 @@ class MonitoringService {
 
   private getMemoryUsage(): number {
     if ('memory' in performance) {
-      return (performance as any).memory.usedJSHeapSize / 1024 / 1024; // MB
+      return (performance as unknown as PerformanceWithMemory).memory.usedJSHeapSize / 1024 / 1024; // MB
     }
     return 0;
   }
@@ -247,10 +255,10 @@ class MonitoringService {
   generateReport(): string {
     const now = new Date();
     const lastHour = new Date(now.getTime() - 3600000);
-    
+
     const recentMetrics = this.getMetrics(undefined, lastHour);
     const recentErrors = this.getErrors(undefined, lastHour);
-    
+
     const report = {
       timestamp: now.toISOString(),
       uptime: Date.now() - this.startTime.getTime(),
@@ -276,7 +284,7 @@ class MonitoringService {
   // Utility methods for common monitoring patterns
   timeFunction<T>(name: string, fn: () => Promise<T>): Promise<T> {
     const start = performance.now();
-    
+
     return fn().then(
       result => {
         this.recordMetric(name, performance.now() - start);
@@ -290,13 +298,13 @@ class MonitoringService {
     );
   }
 
-  trackUserAction(action: string, userId?: string, metadata?: Record<string, any>): void {
+  trackUserAction(action: string, userId?: string, metadata?: Record<string, unknown>): void {
     this.recordMetric('user_action', 1, { action, userId, ...metadata });
   }
 
   trackAPICall(endpoint: string, duration: number, success: boolean): void {
     this.recordMetric('api_call_duration', duration, { endpoint, success });
-    
+
     if (!success) {
       this.logError('warning', `API call failed: ${endpoint}`, { endpoint, duration });
     }
@@ -306,11 +314,11 @@ class MonitoringService {
 export const monitoring = MonitoringService.getInstance();
 
 // Convenience functions
-export const recordMetric = (name: string, value: number, metadata?: Record<string, any>) => {
+export const recordMetric = (name: string, value: number, metadata?: Record<string, unknown>) => {
   monitoring.recordMetric(name, value, metadata);
 };
 
-export const logError = (level: ErrorLog['level'], message: string, context?: Record<string, any>) => {
+export const logError = (level: ErrorLog['level'], message: string, context?: Record<string, unknown>) => {
   monitoring.logError(level, message, context);
 };
 
@@ -318,6 +326,6 @@ export const timeFunction = <T>(name: string, fn: () => Promise<T>): Promise<T> 
   return monitoring.timeFunction(name, fn);
 };
 
-export const trackUserAction = (action: string, userId?: string, metadata?: Record<string, any>) => {
+export const trackUserAction = (action: string, userId?: string, metadata?: Record<string, unknown>) => {
   monitoring.trackUserAction(action, userId, metadata);
 };

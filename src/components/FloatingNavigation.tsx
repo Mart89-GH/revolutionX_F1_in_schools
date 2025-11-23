@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Users, Cog, Award, Handshake, TrendingUp, MessageSquare, Instagram } from 'lucide-react';
@@ -7,26 +7,18 @@ const FloatingNavigation = () => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const [isMobile, setIsMobile] = useState(false);
 
-  const navItems = [
+
+  const navItems = useMemo(() => [
     { id: 'equipo', label: t('nav.team'), icon: Users },
     { id: 'tecnico', label: t('nav.technical'), icon: Cog },
     { id: 'logros', label: t('nav.achievements'), icon: Award },
     { id: 'patrocinadores', label: t('nav.sponsors'), icon: Handshake },
     { id: 'marketing', label: t('nav.marketing'), icon: TrendingUp },
     { id: 'contacto', label: t('nav.contact'), icon: MessageSquare },
-  ];
+  ], [t]);
 
-  const checkMobile = useCallback(() => {
-    setIsMobile(window.innerWidth < 768);
-  }, []);
 
-  useEffect(() => {
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, [checkMobile]);
 
   const handleScroll = useCallback(() => {
     const sections = navItems.map(item => document.getElementById(item.id));
@@ -119,7 +111,7 @@ const FloatingNavigation = () => {
               className="absolute inset-0 bg-rx-black/95 backdrop-blur-md"
               onClick={() => setIsOpen(false)}
             />
-            
+
             {/* Menu Content */}
             <div className="relative z-10 flex items-center justify-center min-h-screen p-4 sm:p-6">
               <motion.div
@@ -133,21 +125,20 @@ const FloatingNavigation = () => {
                   <h3 className="font-display text-2xl sm:text-3xl text-rx-gold mb-3">Navegación</h3>
                   <div className="h-px w-16 sm:w-20 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto"></div>
                 </div>
-                
+
                 <div className="space-y-3 sm:space-y-4">
                   {navItems.map((item, index) => {
                     const Icon = item.icon;
                     const isActive = activeSection === item.id;
-                    
+
                     return (
                       <motion.button
                         key={item.id}
                         onClick={() => scrollToSection(item.id)}
-                        className={`w-full flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-lg sm:rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-rx-gold/50 ${
-                          isActive 
-                            ? 'bg-rx-gold/20 border border-rx-gold/50 text-rx-gold shadow-lg' 
-                            : 'bg-rx-gold/5 border border-rx-gold/10 text-white hover:bg-rx-gold/10 hover:border-rx-gold/30'
-                        }`}
+                        className={`w-full flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-lg sm:rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-rx-gold/50 ${isActive
+                          ? 'bg-rx-gold/20 border border-rx-gold/50 text-rx-gold shadow-lg'
+                          : 'bg-rx-gold/5 border border-rx-gold/10 text-white hover:bg-rx-gold/10 hover:border-rx-gold/30'
+                          }`}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
@@ -159,7 +150,7 @@ const FloatingNavigation = () => {
                       </motion.button>
                     );
                   })}
-                  
+
                   {/* Instagram Link */}
                   <motion.a
                     href="https://instagram.com/revolutionx_f1"

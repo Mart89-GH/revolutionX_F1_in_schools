@@ -3,7 +3,6 @@
 # Allow all robots complete access
 User-agent: *
 Allow: /
-Disallow: /privacy-policy
 
 # Crawl-delay for all bots
 Crawl-delay: 1

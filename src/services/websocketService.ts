@@ -7,7 +7,7 @@ class WebSocketService {
   private maxReconnectAttempts = 5;
   private reconnectDelay = 1000;
   private messageQueue: WebSocketMessage[] = [];
-  private listeners: Map<string, ((data: any) => void)[]> = new Map();
+  private listeners: Map<string, ((data: unknown) => void)[]> = new Map();
 
   constructor(url: string) {
     this.url = url;
@@ -53,9 +53,9 @@ class WebSocketService {
     if (this.reconnectAttempts < this.maxReconnectAttempts) {
       this.reconnectAttempts++;
       const delay = this.reconnectDelay * Math.pow(2, this.reconnectAttempts - 1);
-      
+
       console.log(`Attempting to reconnect in ${delay}ms (attempt ${this.reconnectAttempts})`);
-      
+
       setTimeout(() => {
         this.connect().catch(error => {
           console.error('Reconnection failed:', error);
@@ -89,14 +89,14 @@ class WebSocketService {
     }
   }
 
-  on(event: string, callback: (data: any) => void): void {
+  on(event: string, callback: (data: unknown) => void): void {
     if (!this.listeners.has(event)) {
       this.listeners.set(event, []);
     }
     this.listeners.get(event)!.push(callback);
   }
 
-  off(event: string, callback: (data: any) => void): void {
+  off(event: string, callback: (data: unknown) => void): void {
     const eventListeners = this.listeners.get(event);
     if (eventListeners) {
       const index = eventListeners.indexOf(callback);
@@ -106,7 +106,7 @@ class WebSocketService {
     }
   }
 
-  private emit(event: string, data: any): void {
+  private emit(event: string, data: unknown): void {
     const eventListeners = this.listeners.get(event);
     if (eventListeners) {
       eventListeners.forEach(callback => callback(data));

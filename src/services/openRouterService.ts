@@ -22,19 +22,19 @@ class OpenRouterService {
   private async enforceRateLimit(): Promise<void> {
     const now = Date.now();
     const timeSinceLastRequest = now - this.lastRequestTime;
-    
+
     if (timeSinceLastRequest < this.rateLimitDelay) {
-      await new Promise(resolve => 
+      await new Promise(resolve =>
         setTimeout(resolve, this.rateLimitDelay - timeSinceLastRequest)
       );
     }
-    
+
     this.lastRequestTime = Date.now();
   }
 
   private async makeRequest(
-    endpoint: string, 
-    data: any, 
+    endpoint: string,
+    data: unknown,
     options: RequestInit = {}
   ): Promise<Response> {
     await this.enforceRateLimit();
@@ -58,18 +58,18 @@ class OpenRouterService {
     for (let attempt = 0; attempt < this.maxRetries; attempt++) {
       try {
         const response = await fetch(url, requestOptions);
-        
+
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));
           throw new Error(`HTTP ${response.status}: ${errorData.error?.message || response.statusText}`);
         }
-        
+
         return response;
       } catch (error) {
         lastError = error as Error;
-        
+
         if (attempt < this.maxRetries - 1) {
-          await new Promise(resolve => 
+          await new Promise(resolve =>
             setTimeout(resolve, this.retryDelay * Math.pow(2, attempt))
           );
         }
@@ -113,7 +113,7 @@ class OpenRouterService {
       });
 
       const data = await response.json();
-      
+
       return {
         id: data.id,
         object: data.object,
@@ -176,14 +176,14 @@ class OpenRouterService {
           if (line.trim() && line.startsWith('data: ')) {
             const data = line.slice(6);
             if (data === '[DONE]') return;
-            
+
             try {
               const parsed: StreamChunk = JSON.parse(data);
               const content = parsed.choices[0]?.delta?.content;
               if (content) {
                 yield content;
               }
-            } catch (e) {
+            } catch {
               // Skip invalid JSON lines
             }
           }
@@ -197,7 +197,7 @@ class OpenRouterService {
 
   private buildSystemPrompt(): string {
     const isEnglish = document.documentElement.lang === 'en';
-    
+
     return isEnglish ? `You are the official assistant of RevolutionX, an F1 in Schools team from IES José Saramago in Madrid, Spain.
 
 TEAM INFORMATION:
@@ -285,7 +285,7 @@ INSTRUCCIONES:
       }
 
       const data = await response.json();
-      return data.data?.map((model: any) => model.id) || [];
+      return data.data?.map((model: { id: string }) => model.id) || [];
     } catch (error) {
       console.error('Error fetching models:', error);
       return [];

@@ -23,7 +23,7 @@ const SponsorsSection = () => {
         {/* Sponsor Statistics */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-16">
           {sponsorStats.map((stat, index) => {
-            const IconComponent = Icons[stat.icon as keyof typeof Icons] as React.ComponentType<any>;
+            const IconComponent = Icons[stat.icon as keyof typeof Icons] as React.ComponentType<{ className?: string }>;
             return (
               <StatCard
                 key={index}
@@ -88,8 +88,8 @@ const SponsorsSection = () => {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-2 text-lg">
             <span className="text-gray-400" data-translate="true">{t('sponsors.contact')}</span>
-            <a 
-              href="mailto:revolutionx.f1@gmail.com" 
+            <a
+              href="mailto:revolutionx.f1@gmail.com"
               className="text-rx-gold hover:text-yellow-300 transition font-semibold underline decoration-rx-gold/50 hover:decoration-yellow-300"
             >
               revolutionx.f1@gmail.com
