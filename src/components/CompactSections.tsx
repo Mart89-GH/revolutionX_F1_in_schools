@@ -28,7 +28,8 @@ const CompactSections = () => {
             {[
               { name: "Saúl Morán", role: "Jefe de Proyectos", desc: "Coordinación y gestión estratégica" },
               { name: "Víctor Jiménez", role: "Ingeniero de Diseño", desc: "Diseño CAD y optimización" },
-              { name: "Martín Cendra", role: "Ingeniero de Simulación", desc: "Análisis CFD y validación" },
+              { name: "Martín Cendra", role: "Team Manager", desc: "Gestión y liderazgo del equipo" },
+              { name: "Martina Corredor", role: "Head of Strategy & Engineering", desc: "Estrategia técnica y relaciones externas" },
               { name: "Ibrahim Aharrar", role: "Ingeniero de Manufactura", desc: "Fabricación y calidad" },
               { name: "Yago Álvarez", role: "Director de Marketing", desc: "Estrategia de marca" },
               { name: "Pablo Bianchi", role: "Marketing Digital", desc: "Redes sociales y contenido" }
@@ -338,8 +339,8 @@ const CompactSections = () => {
             <p className="text-white text-sm mb-4 leading-relaxed">
               Su apoyo hace posible que jóvenes talentos desarrollen habilidades técnicas de alto nivel
             </p>
-            <a 
-              href="mailto:revolutionx.f1@gmail.com" 
+            <a
+              href="mailto:revolutionx.f1@gmail.com"
               className="inline-flex items-center space-x-2 bg-rx-gold/20 hover:bg-rx-gold/30 px-6 py-3 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 text-sm"
             >
               <Mail className="w-4 h-4" aria-label="Icono de correo" role="img" />

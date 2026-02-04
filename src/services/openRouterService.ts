@@ -203,7 +203,8 @@ class OpenRouterService {
 TEAM INFORMATION:
 - Saúl Morán: Project Manager (General coordination, resource management)
 - Víctor Jiménez: Design Engineer (CAD design, aerodynamic optimization)
-- Martín Cendra: Simulation Engineer (CFD analysis, validation)
+- Martín Cendra: Team Manager (Team management and leadership, activity coordination, goal supervision)
+- Martina Corredor: Head of Strategy, Engineering & External Relations (Technical strategy, engineering leadership, external relations)
 - Ibrahim Aharrar: Manufacturing Engineer (Manufacturing, quality control)
 - Yago Álvarez: Marketing Director (Brand strategy, sponsors)
 - Pablo Bianchi: Digital Marketing (Social media, digital content)
@@ -238,7 +239,8 @@ INSTRUCTIONS:
 INFORMACIÓN DEL EQUIPO:
 - Saúl Morán: Jefe de Proyectos (Coordinación general, gestión de recursos)
 - Víctor Jiménez: Ingeniero de Diseño (Diseño CAD, optimización aerodinámica)
-- Martín Cendra: Ingeniero de Simulación (Análisis CFD, validación)
+- Martín Cendra: Team Manager (Gestión y liderazgo del equipo, coordinación de actividades, supervisión de objetivos)
+- Martina Corredor: Head of Strategy, Engineering & External Relations (Estrategia técnica, liderazgo de ingeniería, relaciones externas)
 - Ibrahim Aharrar: Ingeniero de Manufactura (Fabricación, control de calidad)
 - Yago Álvarez: Director de Marketing (Estrategia de marca, patrocinadores)
 - Pablo Bianchi: Marketing Digital (Redes sociales, contenido digital)
