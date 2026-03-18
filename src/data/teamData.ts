@@ -30,12 +30,12 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: "Martín Cendra",
-    role: "Ingeniero de Simulación",
+    role: "Team Manager",
     responsibilities: [
-      "Análisis de dinámica de fluidos computacional (CFD)",
-      "Simulaciones de rendimiento y optimización",
-      "Validación de diseños mediante pruebas virtuales",
-      "Análisis de datos y mejora continua"
+      "Gestión integral del equipo y liderazgo operativo",
+      "Coordinación de actividades y reuniones del equipo",
+      "Supervisión del cumplimiento de objetivos y plazos",
+      "Comunicación interna y motivación del equipo"
     ]
   },
   {
@@ -60,12 +60,12 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: "Martina Corredor",
-    role: "Gestión de recursos",
+    role: "Head of Strategy, Engineering & External Relations",
     responsibilities: [
-      "Administración de presupuestos y financiamiento",
-      "Organización de recursos materiales y humanos",
-      "Coordinación logística de proyectos",
-      "Mantenimiento de registros y documentación"
+      "Desarrollo y supervisión de la estrategia técnica del equipo",
+      "Liderazgo de iniciativas de ingeniería e innovación",
+      "Gestión de relaciones externas con patrocinadores e instituciones",
+      "Representación oficial del equipo en eventos y competiciones"
     ]
   },
   {

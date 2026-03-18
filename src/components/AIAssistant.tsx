@@ -37,7 +37,8 @@ const AIAssistant = () => {
       members: [
         { name: "Saúl Morán", role: "Jefe de Proyectos", responsibilities: "Coordinación general del equipo, gestión de recursos y plazos, toma de decisiones estratégicas" },
         { name: "Víctor Jiménez", role: "Ingeniero de Diseño", responsibilities: "Diseño del chasis, optimización aerodinámica, modelado CAD avanzado" },
-        { name: "Martín Cendra", role: "Ingeniero de Simulación", responsibilities: "Análisis CFD, pruebas de rendimiento, validación de diseños" },
+        { name: "Martín Cendra", role: "Team Manager", responsibilities: "Gestión integral del equipo, coordinación de actividades, supervisión de objetivos y motivación" },
+        { name: "Martina Corredor", role: "Head of Strategy, Engineering & External Relations", responsibilities: "Estrategia técnica del equipo, liderazgo de ingeniería, relaciones externas con patrocinadores e instituciones" },
         { name: "Ibrahim Aharrar", role: "Ingeniero de Manufactura", responsibilities: "Procesos de fabricación, control de calidad, optimización de producción" },
         { name: "Yago Álvarez", role: "Director de Marketing", responsibilities: "Estrategia de marca, relaciones públicas, gestión de patrocinadores" },
         { name: "Pablo Bianchi", role: "Especialista en Marketing Digital", responsibilities: "Redes sociales, contenido digital, comunicación online" },
@@ -101,70 +102,70 @@ const AIAssistant = () => {
 
   const generateResponse = (userMessage: string): string => {
     const message = userMessage.toLowerCase();
-    
+
     // Greetings
     if (message.includes('hola') || message.includes('buenos') || message.includes('saludos')) {
       return '¡Hola! Bienvenido a RevolutionX. Soy tu asistente virtual y estoy aquí para ayudarte con cualquier pregunta sobre nuestro equipo de F1 in Schools. ¿Qué te gustaría saber?';
     }
-    
+
     // Team questions
     if (message.includes('equipo') || message.includes('miembros') || message.includes('integrantes')) {
-      const teamInfo = knowledgeBase.team.members.map(member => 
+      const teamInfo = knowledgeBase.team.members.map(member =>
         `• ${member.name} - ${member.role}: ${member.responsibilities}`
       ).join('\n');
       return `Nuestro equipo está formado por ${knowledgeBase.team.stats.members} miembros especializados:\n\n${teamInfo}\n\nSomos estudiantes del IES José Saramago comprometidos con la excelencia en ingeniería.`;
     }
-    
+
     // Individual team member questions
-    const teamMember = knowledgeBase.team.members.find(member => 
+    const teamMember = knowledgeBase.team.members.find(member =>
       message.includes(member.name.toLowerCase()) || message.includes(member.role.toLowerCase())
     );
     if (teamMember) {
       return `${teamMember.name} es nuestro ${teamMember.role}. Sus principales responsabilidades incluyen: ${teamMember.responsibilities}. Es una pieza clave en el éxito de RevolutionX.`;
     }
-    
+
     // Achievements questions
     if (message.includes('logros') || message.includes('premios') || message.includes('ganado') || message.includes('primero')) {
       return `¡Estamos muy orgullosos de nuestros logros! Nuestro principal achievement es: ${knowledgeBase.achievements.main}.\n\n${knowledgeBase.achievements.description}\n\nResultados de competiciones:\n${knowledgeBase.achievements.results.map(r => `• ${r.event}: ${r.position} - ${r.category}`).join('\n')}`;
     }
-    
+
     // Technical questions
     if (message.includes('técnico') || message.includes('especificaciones') || message.includes('coche') || message.includes('diseño')) {
       const specs = knowledgeBase.technical.specifications;
       return `Nuestro vehículo cuenta con especificaciones técnicas de alta precisión:\n\n• Longitud: ${specs.length}\n• Ancho: ${specs.width}\n• Altura: ${specs.height}\n• Peso: ${specs.weight}\n• Material: ${specs.material}\n• Acabado: ${specs.finish}\n\nUtilizamos tecnologías avanzadas como: ${knowledgeBase.technical.technologies.join(', ')}.`;
     }
-    
+
     // Sponsors questions
     if (message.includes('patrocinadores') || message.includes('sponsors') || message.includes('empresas')) {
-      const sponsorsList = knowledgeBase.sponsors.map(sponsor => 
+      const sponsorsList = knowledgeBase.sponsors.map(sponsor =>
         `• ${sponsor.name} (${sponsor.category}): ${sponsor.description}`
       ).join('\n');
       return `Contamos con el apoyo de ${knowledgeBase.sponsors.length} patrocinadores comprometidos:\n\n${sponsorsList}\n\n¡Siempre estamos abiertos a nuevas colaboraciones!`;
     }
-    
+
     // Contact questions
     if (message.includes('contacto') || message.includes('email') || message.includes('teléfono') || message.includes('ubicación')) {
       return `Puedes contactarnos a través de:\n\n• Email: ${knowledgeBase.contact.email}\n• Instagram: ${knowledgeBase.contact.instagram}\n• Ubicación: ${knowledgeBase.contact.location}\n• Horario: ${knowledgeBase.contact.schedule}\n\n¡Estaremos encantados de responder a tus consultas!`;
     }
-    
+
     // Marketing/collaboration questions
     if (message.includes('colaborar') || message.includes('patrocinio') || message.includes('marketing') || message.includes('beneficios')) {
-      const opportunities = knowledgeBase.marketing.opportunities.map(opp => 
+      const opportunities = knowledgeBase.marketing.opportunities.map(opp =>
         `• ${opp.title}: ${opp.description} (${opp.metrics})`
       ).join('\n');
       return `Colaborar con RevolutionX ofrece múltiples beneficios:\n\n${opportunities}\n\nAdemás, obtendrás: ${knowledgeBase.marketing.benefits.slice(0, 4).join(', ')} y mucho más. ¡Contáctanos para explorar oportunidades personalizadas!`;
     }
-    
+
     // F1 in Schools questions
     if (message.includes('f1 in schools') || message.includes('competición') || message.includes('formula 1')) {
       return 'F1 in Schools es la competición de tecnología STEM más grande del mundo. Los estudiantes diseñan, fabrican y prueban coches de F1 en miniatura usando las mismas tecnologías que los equipos profesionales. RevolutionX compite a nivel regional y nacional, representando la excelencia del IES José Saramago.';
     }
-    
+
     // Speed/performance questions
     if (message.includes('velocidad') || message.includes('rápido') || message.includes('tiempo') || message.includes('récord')) {
       return 'Nuestro vehículo logró el tiempo más rápido en la categoría Entry de la Comunidad de Madrid 2025, estableciendo un nuevo récord de rendimiento. Esto se debe a nuestro diseño aerodinámico optimizado, análisis CFD avanzado y manufactura de precisión.';
     }
-    
+
     // Default response
     return 'Gracias por tu pregunta. Puedo ayudarte con información sobre nuestro equipo, logros técnicos, patrocinadores, oportunidades de colaboración, especificaciones del vehículo, y cómo contactarnos. ¿Podrías ser más específico sobre qué aspecto de RevolutionX te interesa?';
   };
@@ -259,31 +260,28 @@ const AIAssistant = () => {
                   className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
                 >
                   <div className={`flex items-start space-x-2 max-w-[80%] ${message.isUser ? 'flex-row-reverse space-x-reverse' : ''}`}>
-                    <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${
-                      message.isUser ? 'bg-rx-gold' : 'bg-rx-gold/20'
-                    }`}>
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${message.isUser ? 'bg-rx-gold' : 'bg-rx-gold/20'
+                      }`}>
                       {message.isUser ? (
                         <User className="w-3 h-3 text-rx-black" aria-label="Usuario" role="img" />
                       ) : (
                         <Bot className="w-3 h-3 text-rx-gold" aria-label="Asistente" role="img" />
                       )}
                     </div>
-                    <div className={`rounded-2xl px-3 py-2 ${
-                      message.isUser 
-                        ? 'bg-rx-gold text-rx-black' 
+                    <div className={`rounded-2xl px-3 py-2 ${message.isUser
+                        ? 'bg-rx-gold text-rx-black'
                         : 'bg-rx-gold/10 text-white border border-rx-gold/20'
-                    }`}>
-                      <p className="text-sm whitespace-pre-line">{message.text}</p>
-                      <p className={`text-xs mt-1 ${
-                        message.isUser ? 'text-rx-black/70' : 'text-gray-400'
                       }`}>
+                      <p className="text-sm whitespace-pre-line">{message.text}</p>
+                      <p className={`text-xs mt-1 ${message.isUser ? 'text-rx-black/70' : 'text-gray-400'
+                        }`}>
                         {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </p>
                     </div>
                   </div>
                 </motion.div>
               ))}
-              
+
               {isLoading && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -303,7 +301,7 @@ const AIAssistant = () => {
                   </div>
                 </motion.div>
               )}
-              
+
               <div ref={messagesEndRef} />
             </div>
 
