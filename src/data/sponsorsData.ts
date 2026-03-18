@@ -48,6 +48,12 @@ export const sponsors: Sponsor[] = [
     logo: "/Logo_Titanes2.png",
     category: "Deporte",
     description: "Promoción de valores deportivos y trabajo en equipo"
+  },
+  {
+    name: "Moñita",
+    logo: "/Logo_Monita.png",
+    category: "Ingeniería y Estructuras Textiles",
+    description: "Diseño, fabricación e instalación de estructuras textiles con materiales certificados y conforme a normativas"
   }
 ];
 
@@ -70,8 +76,8 @@ export const sponsorshipLevels: SponsorshipLevel[] = [
 ];
 
 export const sponsorStats = [
-  { icon: "Users", number: "6", label: "Patrocinadores Activos" },
-  { icon: "Building", number: "3", label: "Sectores Representados" },
+  { icon: "Users", number: "7", label: "Patrocinadores Activos" },
+  { icon: "Building", number: "4", label: "Sectores Representados" },
   { icon: "Heart", number: "100%", label: "Compromiso Local" },
   { icon: "Handshake", number: "2025", label: "Año de Colaboración" }
 ];
