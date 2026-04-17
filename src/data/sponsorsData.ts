@@ -52,8 +52,8 @@ export const sponsors: Sponsor[] = [
   {
     name: "Moñita",
     logo: "/Logo_Monita.png",
-    category: "Ingeniería y Estructuras Textiles",
-    description: "Diseño, fabricación e instalación de estructuras textiles con materiales certificados y conforme a normativas"
+    category: "Carpas y Arquitectura Textil",
+    description: "Diseño, fabricación e instalación de carpas, estructuras temporales, confecciones industriales y arquitectura textil"
   }
 ];
 
