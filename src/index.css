@@ -2,7 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Enhanced CSS Reset and Base Styles */
+/* ================================================================
+   REVOLUTIONX — ULTRA-MODERN DESIGN SYSTEM
+   ================================================================ */
+
 @layer base {
   * {
     box-sizing: border-box;
@@ -21,23 +24,21 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    line-height: 1.5;
+    line-height: 1.6;
     overflow-x: hidden;
     min-height: 100vh;
-    @media (prefers-color-scheme: dark) {
-      background-color: theme('colors.rx-black');
-      color: theme('colors.white');
-    }
-    @media (prefers-color-scheme: light) {
-      background-color: theme('colors.white');
-      color: theme('colors.rx-black');
-    }
+    background-color: #060606;
+    color: #e5e5e5;
   }
 
   /* Focus styles for accessibility */
-  *:focus {
-    outline: 2px solid theme('colors.rx-gold');
+  *:focus-visible {
+    outline: 2px solid rgba(200, 169, 81, 0.6);
     outline-offset: 2px;
+  }
+
+  *:focus:not(:focus-visible) {
+    outline: none;
   }
 
   /* Skip link styles */
@@ -78,6 +79,30 @@
     display: block;
   }
 
+  /* Ultra-minimal scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(200, 169, 81, 0.2);
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(200, 169, 81, 0.4);
+  }
+
+  /* Selection color */
+  ::selection {
+    background: rgba(200, 169, 81, 0.25);
+    color: #fff;
+  }
+
   /* Smooth scrolling for reduced motion users */
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -100,21 +125,17 @@
     .text-gray-500 {
       color: #e5e5e5;
     }
-    
-    .border-rx-gold\/20 {
-      border-color: theme('colors.rx-gold');
-    }
   }
 
   /* Dark mode preferences */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      color-scheme: dark;
-    }
+  :root {
+    color-scheme: dark;
   }
 }
 
-/* Enhanced utility classes */
+/* ================================================================
+   UTILITY CLASSES
+   ================================================================ */
 @layer utilities {
   /* Performance optimizations */
   .will-change-transform {
@@ -131,67 +152,71 @@
     transform: translateZ(0);
   }
 
-  /* Custom scrollbar */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 8px;
+  /* Noise texture overlay */
+  .noise::after {
+    content: '';
+    position: fixed;
+    inset: -200%;
+    width: 400%;
+    height: 400%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    animation: grain 8s steps(10) infinite;
+    opacity: 0.4;
   }
 
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: theme('colors.rx-dark');
+  /* Gradient mesh backgrounds */
+  .bg-mesh {
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(200, 169, 81, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(200, 169, 81, 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(200, 169, 81, 0.03) 0%, transparent 50%);
   }
 
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: theme('colors.rx-gold');
-    border-radius: 4px;
+  .bg-mesh-subtle {
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(200, 169, 81, 0.03) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 80%, rgba(200, 169, 81, 0.02) 0%, transparent 60%);
   }
 
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: theme('colors.yellow.500');
+  /* Glow line */
+  .glow-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200, 169, 81, 0.5), transparent);
   }
 
-  /* Loading states */
-  .loading-shimmer {
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(212, 175, 55, 0.1),
-      transparent
-    );
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-  }
-
-  @keyframes shimmer {
-    0% {
-      background-position: -200% 0;
-    }
-    100% {
-      background-position: 200% 0;
-    }
+  .glow-line-vertical {
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(200, 169, 81, 0.3), transparent);
   }
 
   /* Enhanced focus indicators */
   .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-rx-gold focus:ring-offset-2 focus:ring-offset-rx-black;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rx-gold/40 focus-visible:ring-offset-2 focus-visible:ring-offset-rx-black;
   }
 
   /* Improved button states */
   .btn-primary {
-    @apply bg-gradient-to-r from-rx-gold to-yellow-600 text-rx-black font-semibold py-3 px-6 rounded-xl hover:from-yellow-600 hover:to-rx-gold transition-all duration-300 shadow-lg hover:shadow-xl focus-ring;
+    @apply bg-rx-gold text-rx-black font-medium py-3 px-8 rounded-full hover:bg-rx-gold-light transition-all duration-300 focus-ring;
   }
 
   .btn-secondary {
-    @apply bg-rx-dark text-white border border-rx-gold/30 font-semibold py-3 px-6 rounded-xl hover:border-rx-gold/50 hover:bg-rx-gold/10 transition-all duration-300 focus-ring;
+    @apply bg-transparent text-white/80 border border-white/10 font-medium py-3 px-8 rounded-full hover:border-rx-gold/40 hover:text-rx-gold transition-all duration-300 focus-ring;
   }
 
   /* Card styles */
-  .card {
-    @apply dark:bg-gradient-to-br dark:from-rx-dark dark:to-rx-black light:bg-gradient-to-br light:from-white light:to-gray-100 rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 shadow-xl hover:shadow-2xl;
+  .card-glass {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-2xl transition-all duration-500;
+  }
+
+  .card-glass:hover {
+    @apply border-rx-gold/20 bg-white/[0.05];
   }
 
   /* Typography improvements */
   .heading-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-rx-gold via-yellow-200 to-rx-gold;
+    @apply text-gradient-gold;
   }
 
   /* Layout utilities */
@@ -199,50 +224,28 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Animation utilities */
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-in-out;
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.5s ease-out;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* Section divider */
+  .section-divider {
+    @apply w-full h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent;
   }
 }
 
-/* Component-specific styles */
+/* ================================================================
+   COMPONENT STYLES
+   ================================================================ */
 @layer components {
   /* Enhanced form styles */
-.form-input {
-  @apply w-full dark:bg-rx-black/50 light:bg-gray-100 border border-rx-gold/20 rounded-xl px-4 py-3 dark:text-white light:text-white placeholder-gray-400 focus:border-rx-gold/50 focus:outline-none focus:ring-2 focus:ring-rx-gold/20 transition-all duration-300;
-}
+  .form-input {
+    @apply w-full bg-transparent border-0 border-b border-white/10 px-0 py-3 text-white placeholder-white/20 focus:border-rx-gold focus:outline-none focus:ring-0 transition-colors duration-300;
+  }
 
   .form-input:invalid {
-    @apply border-red-500/50 focus:border-red-500 focus:ring-red-500/20;
+    @apply border-red-500/50 focus:border-red-500;
   }
 
   /* Navigation styles */
   .nav-link {
-    @apply dark:text-white light:text-rx-black hover:text-rx-gold transition-colors duration-300 font-medium;
+    @apply text-white/50 hover:text-white transition-colors duration-300 text-sm tracking-wide;
   }
 
   .nav-link.active {
@@ -251,7 +254,7 @@
 
   /* Section styles */
   .section-padding {
-    @apply py-16 sm:py-20 md:py-24;
+    @apply py-24 sm:py-32 md:py-40;
   }
 
   /* Grid improvements */
@@ -264,7 +267,9 @@
   }
 }
 
-/* Print styles */
+/* ================================================================
+   PRINT STYLES
+   ================================================================ */
 @media print {
   * {
     background: transparent !important;

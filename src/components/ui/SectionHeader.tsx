@@ -7,32 +7,47 @@ interface SectionHeaderProps {
   title: string;
   subtitle: string;
   className?: string;
+  sectionNumber?: string;
 }
 
 const SectionHeader: React.FC<SectionHeaderProps> = ({ 
   icon: Icon, 
   title, 
   subtitle, 
-  className = "" 
+  className = "",
+  sectionNumber
 }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       viewport={{ once: true }}
-      className={`text-center mb-12 sm:mb-16 md:mb-20 ${className}`}
+      className={`relative mb-16 sm:mb-20 md:mb-28 ${className}`}
     >
-      <div className="flex items-center justify-center mb-4 sm:mb-6">
-        <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-rx-gold mr-3 sm:mr-4" aria-label={`Icono de sección: ${title}`} role="img" />
-        <h2 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-rx-gold" role="heading" aria-level={2}>
+      {/* Section number as decorative background element */}
+      {sectionNumber && (
+        <span className="absolute -top-8 -left-2 text-[8rem] sm:text-[10rem] font-display font-bold text-white/[0.02] select-none pointer-events-none leading-none">
+          {sectionNumber}
+        </span>
+      )}
+
+      <div className="relative z-10">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="p-2 rounded-lg bg-rx-gold/10">
+            <Icon className="w-4 h-4 text-rx-gold" aria-label={`Icono de sección: ${title}`} role="img" />
+          </div>
+          <span className="font-mono text-[11px] text-white/30 uppercase tracking-[0.2em]">
+            {subtitle}
+          </span>
+        </div>
+        
+        <h2 className="font-display text-display-sm sm:text-display font-bold text-white leading-[0.9] tracking-tight" role="heading" aria-level={2}>
           {title}
         </h2>
+
+        <div className="mt-6 sm:mt-8 glow-line max-w-[120px]" />
       </div>
-      <div className="h-px w-20 sm:w-24 md:w-32 bg-gradient-to-r from-transparent via-rx-gold to-transparent mx-auto mb-6 sm:mb-8"></div>
-      <p className="text-gray-300 text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed px-4">
-        {subtitle}
-      </p>
     </motion.div>
   );
 };

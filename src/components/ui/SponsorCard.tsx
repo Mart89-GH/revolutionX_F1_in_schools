@@ -10,28 +10,27 @@ interface SponsorCardProps {
 const SponsorCard: React.FC<SponsorCardProps> = ({ sponsor, index }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
       viewport={{ once: true }}
-      whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
-      className="bg-gradient-to-br from-white to-gray-100 p-8 rounded-2xl border-2 border-rx-gold/30 hover:border-rx-gold/60 transition-all duration-300 flex flex-col min-h-[280px] shadow-xl hover:shadow-2xl"
+      className="group card-glass p-6 sm:p-8 flex flex-col min-h-[240px] hover:shadow-glow"
     >
       <div className="flex-1 flex items-center justify-center mb-6">
         <img
           src={sponsor.logo}
           alt={`Logo de ${sponsor.name}`}
-          className="max-w-full max-h-32 object-contain filter drop-shadow-lg"
+          className="max-w-full max-h-24 object-contain brightness-75 group-hover:brightness-100 transition-all duration-500"
         />
       </div>
       <div className="text-center">
-        <h3 className="font-display text-lg text-rx-black font-semibold mb-2">
+        <h3 className="font-display text-base text-white font-medium mb-1.5 tracking-tight">
           {sponsor.name}
         </h3>
-        <div className="inline-block bg-rx-gold/20 px-3 py-1 rounded-full mb-3">
-          <span className="text-rx-black text-xs font-medium">{sponsor.category}</span>
-        </div>
-        <p className="text-gray-600 text-sm leading-relaxed">
+        <span className="inline-block text-rx-gold/50 text-[11px] font-mono uppercase tracking-widest mb-2">
+          {sponsor.category}
+        </span>
+        <p className="text-white/30 text-xs leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">
           {sponsor.description}
         </p>
       </div>

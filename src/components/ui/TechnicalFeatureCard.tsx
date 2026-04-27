@@ -14,37 +14,36 @@ const TechnicalFeatureCard: React.FC<TechnicalFeatureCardProps> = ({ feature, in
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.8, delay: index * 0.2 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: Math.min(index * 0.1, 0.4), ease: [0.16, 1, 0.3, 1] }}
       viewport={{ once: true }}
-      className="group"
+      className="group relative rounded-2xl overflow-hidden h-[320px] sm:h-[380px]"
     >
-      <div className="bg-gradient-to-br from-rx-dark to-rx-black rounded-2xl overflow-hidden border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-500 shadow-xl hover:shadow-2xl">
-        <div className="relative h-64 overflow-hidden">
-          <img
-            src={feature.image}
-            alt={`${feature.title}: ${feature.description}`}
-            className="w-full h-full object-cover transform group-hover:scale-110 transition duration-700"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-rx-black via-rx-black/50 to-transparent"></div>
-          <div className="absolute bottom-6 left-6">
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-rx-gold/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-rx-gold/30">
-                <IconComponent className="w-6 h-6 text-rx-gold" aria-label={`Icono de característica: ${feature.title}`} role="img" />
-              </div>
-              <h3 className="text-2xl font-display text-white font-semibold">
-                {feature.title}
-              </h3>
-            </div>
-          </div>
-        </div>
+      {/* Full-bleed background image */}
+      <div className="absolute inset-0">
+        <img
+          src={feature.image}
+          alt={`${feature.title}: ${feature.description}`}
+          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+        />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-rx-black via-rx-black/60 to-transparent" />
+      </div>
 
-        <div className="p-8">
-          <p className="text-gray-300 leading-relaxed text-lg">
-            {feature.description}
-          </p>
+      {/* Content overlay at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="w-8 h-8 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center">
+            <IconComponent className="w-4 h-4 text-rx-gold" aria-label={`Icono de característica: ${feature.title}`} role="img" />
+          </div>
+          <h3 className="text-lg font-display text-white font-medium tracking-tight">
+            {feature.title}
+          </h3>
         </div>
+        <p className="text-white/50 text-sm leading-relaxed group-hover:text-white/70 transition-colors duration-500">
+          {feature.description}
+        </p>
       </div>
     </motion.div>
   );

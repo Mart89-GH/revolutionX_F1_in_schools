@@ -19,22 +19,23 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay }}
+      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
       viewport={{ once: true }}
-      whileHover={{ y: -8, transition: { duration: 0.3 } }}
-      className={`bg-gradient-to-br from-rx-dark to-rx-black p-8 rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center shadow-xl hover:shadow-2xl ${className}`}
+      className={`group card-glass p-6 sm:p-8 flex items-start gap-5 hover:shadow-glow ${className}`}
     >
-      <div className="w-16 h-16 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-6">
-        <Icon className="w-8 h-8 text-rx-gold" aria-label={`Icono de ${title}`} role="img" />
+      <div className="w-10 h-10 rounded-xl bg-rx-gold/10 flex items-center justify-center flex-shrink-0 group-hover:bg-rx-gold/20 transition-colors duration-500">
+        <Icon className="w-5 h-5 text-rx-gold" aria-label={`Icono de ${title}`} role="img" />
       </div>
-      <h4 className="font-display text-xl text-rx-gold mb-4 font-semibold">
-        {title}
-      </h4>
-      <p className="text-gray-300 leading-relaxed">
-        {description}
-      </p>
+      <div>
+        <h4 className="font-display text-lg text-white font-medium mb-2 tracking-tight">
+          {title}
+        </h4>
+        <p className="text-white/40 text-sm leading-relaxed">
+          {description}
+        </p>
+      </div>
     </motion.div>
   );
 };
