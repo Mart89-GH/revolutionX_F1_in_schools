@@ -54,6 +54,12 @@ export const sponsors: Sponsor[] = [
     logo: "/Logo_Monita.png",
     category: "Ingeniería y Estructuras Textiles",
     description: "Diseño, fabricación e instalación de estructuras textiles con materiales certificados y conforme a normativas"
+  },
+  {
+    name: "F1 Bearings",
+    logo: "/logo-f1bearings.png",
+    category: "Fabricación de Rodamientos",
+    description: "Rodamientos de alta calidad para equipos de STEM Racing"
   }
 ];
 
@@ -76,8 +82,8 @@ export const sponsorshipLevels: SponsorshipLevel[] = [
 ];
 
 export const sponsorStats = [
-  { icon: "Users", number: "7", label: "Patrocinadores Activos" },
-  { icon: "Building", number: "4", label: "Sectores Representados" },
+  { icon: "Users", number: "8", label: "Patrocinadores Activos" },
+  { icon: "Building", number: "8", label: "Sectores Representados" },
   { icon: "Heart", number: "100%", label: "Compromiso Local" },
   { icon: "Handshake", number: "2025", label: "Año de Colaboración" }
 ];

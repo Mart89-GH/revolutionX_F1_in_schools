@@ -222,6 +222,7 @@ TECHNICAL SPECIFICATIONS:
 SPONSORS:
 - Universidad Europea, Perfumería Palárabe, Ayuntamiento de Majadahonda
 - Pañalón, Guitarras Elvira, Titanes Atletismo
+- Moñita, F1 Bearings
 
 CONTACT:
 - Email: revolutionx.f1@gmail.com
@@ -258,6 +259,7 @@ ESPECIFICACIONES TÉCNICAS:
 PATROCINADORES:
 - Universidad Europea, Perfumería Palárabe, Ayuntamiento de Majadahonda
 - Pañalón, Guitarras Elvira, Titanes Atletismo
+- Moñita, F1 Bearings
 
 CONTACTO:
 - Email: revolutionx.f1@gmail.com

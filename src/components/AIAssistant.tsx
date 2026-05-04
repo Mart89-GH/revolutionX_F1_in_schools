@@ -73,7 +73,9 @@ const AIAssistant = () => {
       { name: "Ayuntamiento de Majadahonda", category: "Administración Pública", description: "Apoyo institucional y promoción del talento local" },
       { name: "Pañalón", category: "Empresa Local", description: "Compromiso con el desarrollo de jóvenes talentos" },
       { name: "Guitarras Elvira", category: "Artesanía Musical", description: "Apoyo a la creatividad y la innovación juvenil" },
-      { name: "Titanes Atletismo", category: "Deporte", description: "Promoción de valores deportivos y trabajo en equipo" }
+      { name: "Titanes Atletismo", category: "Deporte", description: "Promoción de valores deportivos y trabajo en equipo" },
+      { name: "Moñita", category: "Ingeniería y Estructuras Textiles", description: "Diseño, fabricación e instalación de estructuras textiles con materiales certificados y conforme a normativas" },
+      { name: "F1 Bearings", category: "Fabricación de Rodamientos", description: "Rodamientos de alta calidad para equipos de STEM Racing" }
     ],
     contact: {
       email: "revolutionx.f1@gmail.com",

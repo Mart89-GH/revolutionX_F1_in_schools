@@ -199,7 +199,9 @@ const CompactSections = () => {
               { name: "Ayuntamiento Majadahonda", logo: "/Ayuntamiento_de_Majadahonda.png" },
               { name: "Pañalón", logo: "/Logo_Panalon.png" },
               { name: "Guitarras Elvira", logo: "/Logo_Elvira2.png" },
-              { name: "Titanes Atletismo", logo: "/Logo_Titanes2.png" }
+              { name: "Titanes Atletismo", logo: "/Logo_Titanes2.png" },
+              { name: "Moñita", logo: "/Logo_Monita.png" },
+              { name: "F1 Bearings", logo: "/logo-f1bearings.png" }
             ].map((sponsor, index) => (
               <motion.div
                 key={index}
