@@ -1,7 +1,6 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import ErrorBoundary from './components/ErrorBoundary';
 import AccessibilitySkipLink from './components/AccessibilitySkipLink';
@@ -10,10 +9,7 @@ import PerformanceMonitor from './components/PerformanceMonitor';
 import MainNavigation from './components/MainNavigation';
 import ScrollProgressIndicator from './components/ScrollProgressIndicator';
 import LoadingSpinner from './components/ui/LoadingSpinner';
-import OptimizedImage from './components/ui/OptimizedImage';
 import OpenRouterAIAssistant from './components/OpenRouterAIAssistant';
-import MobileGestureHandler from './components/MobileGestureHandler';
-import ParallaxSection from './components/ParallaxSection';
 import HeroSection from './components/HeroSection';
 import { useBreadcrumbs } from './components/BreadcrumbProvider';
 
@@ -59,114 +55,84 @@ function App() {
   return (
     <HelmetProvider>
       <ErrorBoundary>
-        <MobileGestureHandler>
-          <div className="dark:bg-rx-black dark:text-white light:bg-white light:text-rx-black min-h-screen font-body overflow-x-hidden relative z-0">
-            <SEOHead
-              currentLanguage={i18n.language}
-              alternateLanguages={[
-                { lang: 'es-ES', url: `${baseUrl}/es` },
-                { lang: 'en-US', url: `${baseUrl}/en` }
-              ]}
-              breadcrumb={breadcrumbs}
-            />
-            <AccessibilitySkipLink />
-            <ScrollProgressIndicator />
-            <MainNavigation />
-            <PerformanceMonitor />
+        <div className="bg-rx-black text-white min-h-screen font-body overflow-x-hidden relative z-0">
+          <SEOHead
+            currentLanguage={i18n.language}
+            alternateLanguages={[
+              { lang: 'es-ES', url: `${baseUrl}/es` },
+              { lang: 'en-US', url: `${baseUrl}/en` }
+            ]}
+            breadcrumb={breadcrumbs}
+          />
+          <AccessibilitySkipLink />
+          <ScrollProgressIndicator />
+          <MainNavigation />
+          <PerformanceMonitor />
 
-            <main id="main-content" role="main" className="pt-16 sm:pt-20">
-              {/* Enhanced Hero Section */}
-              <HeroSection />
+          <main id="main-content" role="main">
+            {/* Hero */}
+            <HeroSection />
 
-              {/* All Sections with Lazy Loading and Parallax */}
-              <Suspense fallback={<LoadingSpinner />}>
-                <ParallaxSection speed={0.3}>
-                  <TeamSection />
-                </ParallaxSection>
+            {/* Sections with dividers */}
+            <Suspense fallback={<LoadingSpinner />}>
+              <TeamSection />
+              <div className="section-divider" />
+              
+              <TechnicalSection />
+              <div className="section-divider" />
+              
+              <AchievementsSection />
+              <div className="section-divider" />
+              
+              <SponsorsSection />
+              <div className="section-divider" />
+              
+              <MarketingSection />
+              <div className="section-divider" />
+              
+              <ContactSection />
+            </Suspense>
+          </main>
 
-                <ParallaxSection speed={0.4}>
-                  <TechnicalSection />
-                </ParallaxSection>
-
-                <ParallaxSection speed={0.2}>
-                  <AchievementsSection />
-                </ParallaxSection>
-
-                <ParallaxSection speed={0.3}>
-                  <SponsorsSection />
-                </ParallaxSection>
-
-                <ParallaxSection speed={0.4}>
-                  <MarketingSection />
-                </ParallaxSection>
-
-                <ParallaxSection speed={0.2}>
-                  <ContactSection />
-                </ParallaxSection>
-              </Suspense>
-            </main>
-
-            <footer className="dark:bg-gradient-to-t dark:from-rx-black dark:to-rx-dark light:bg-gradient-to-t light:from-gray-100 light:to-white border-t border-rx-gold/20 py-6 sm:py-8 relative z-10" role="contentinfo">
-              <div className="container mx-auto px-4 sm:px-6 text-center">
-                <div className="mb-3 sm:mb-4">
-                  <motion.div
-                    className="w-8 h-8 sm:w-12 sm:h-12 mx-auto"
-                    whileHover={{
-                      opacity: 1,
-                      scale: 1.1,
-                      transition: { duration: 0.3 }
-                    }}
-                  >
-                    <OptimizedImage
-                      src="/revolutionx-logo.png"
-                      alt="RevolutionX Logo"
-                      width={48}
-                      height={48}
-                      className="opacity-60"
-                    />
-                  </motion.div>
-                </div>
-                <p className="dark:text-gray-400 light:text-gray-600 text-xs px-4">
-                  © {new Date().getFullYear()} RevolutionX - IES José Saramago. {t('footer.rights')}
-                </p>
-                <nav className="mt-4" aria-label="Enlaces del pie de página">
-                  <ul className="flex justify-center space-x-4 text-sm">
-                    <li>
-                      <button
-                        onClick={() => (document.getElementById('privacy-policy') as HTMLDialogElement)?.showModal()}
-                        className="text-gray-400 hover:text-rx-gold focus:outline-none focus:ring-2 focus:ring-rx-gold focus:ring-offset-2 focus:ring-offset-black"
-                        aria-label="Ver política de privacidad"
-                      >
-                        Política de Privacidad
-                      </button>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </footer>
-
-            {/* Modal de Política de Privacidad */}
-            <dialog
-              id="privacy-policy"
-              className="bg-rx-dark text-white p-4 rounded-lg w-full max-w-4xl mx-auto backdrop:bg-black backdrop:opacity-80"
-              aria-labelledby="privacy-title"
-            >
-              <div className="relative">
+          {/* Ultra-minimal footer */}
+          <footer className="py-8 sm:py-12 border-t border-white/[0.04] relative z-10" role="contentinfo">
+            <div className="container mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <p className="text-white/20 text-xs">
+                © {new Date().getFullYear()} RevolutionX — IES José Saramago. {t('footer.rights')}
+              </p>
+              <nav aria-label="Enlaces del pie de página">
                 <button
-                  onClick={() => (document.getElementById('privacy-policy') as HTMLDialogElement)?.close()}
-                  className="absolute top-2 right-2 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-rx-gold focus:ring-offset-2 focus:ring-offset-black p-2"
-                  aria-label="Cerrar política de privacidad"
+                  onClick={() => (document.getElementById('privacy-policy') as HTMLDialogElement)?.showModal()}
+                  className="text-white/20 hover:text-white/40 text-xs transition-colors duration-300 focus-ring"
+                  aria-label="Ver política de privacidad"
                 >
-                  ✕
+                  Política de Privacidad
                 </button>
-                <PrivacyPolicy />
-              </div>
-            </dialog>
+              </nav>
+            </div>
+          </footer>
 
-            {/* OpenRouter AI Assistant */}
-            <OpenRouterAIAssistant />
-          </div>
-        </MobileGestureHandler>
+          {/* Privacy Policy Modal */}
+          <dialog
+            id="privacy-policy"
+            className="bg-rx-dark text-white p-6 rounded-2xl w-full max-w-4xl mx-auto backdrop:bg-black/80 border border-white/[0.06]"
+            aria-labelledby="privacy-title"
+          >
+            <div className="relative">
+              <button
+                onClick={() => (document.getElementById('privacy-policy') as HTMLDialogElement)?.close()}
+                className="absolute top-0 right-0 text-white/30 hover:text-white/60 transition-colors duration-300 p-2 focus-ring"
+                aria-label="Cerrar política de privacidad"
+              >
+                ✕
+              </button>
+              <PrivacyPolicy />
+            </div>
+          </dialog>
+
+          {/* OpenRouter AI Assistant */}
+          <OpenRouterAIAssistant />
+        </div>
       </ErrorBoundary>
     </HelmetProvider>
   );

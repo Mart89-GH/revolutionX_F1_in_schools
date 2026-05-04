@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Mail, MessageSquare, Send, Phone, Instagram, MapPin, Clock } from 'lucide-react';
+import { Mail, MessageSquare, Send, Instagram, MapPin, Clock, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionHeader from './ui/SectionHeader';
 import EnhancedContactForm from './EnhancedContactForm';
@@ -8,232 +8,172 @@ import { whyCollaborate } from '../data/contactData';
 
 const EnhancedContactSection = () => {
   const { t } = useTranslation();
-  const [, setHoveredCard] = useState<number | null>(null);
+
+  const contactCards = [
+    {
+      icon: Mail,
+      title: 'Email',
+      value: 'revolutionx.f1@gmail.com',
+      sub: 'Respuesta en 24-48h',
+      href: 'mailto:revolutionx.f1@gmail.com',
+    },
+    {
+      icon: Instagram,
+      title: 'Instagram',
+      value: '@revolutionx_f1',
+      sub: 'Contenido exclusivo',
+      href: 'https://instagram.com/revolutionx_f1',
+      external: true,
+    },
+    {
+      icon: MapPin,
+      title: 'Ubicación',
+      value: 'IES José Saramago',
+      sub: 'Madrid, España',
+    },
+    {
+      icon: Clock,
+      title: 'Horario',
+      value: 'Lunes a Viernes',
+      sub: '9:00 - 17:00 CET',
+    },
+  ];
 
   return (
-    <section id="contacto" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-rx-dark to-rx-black">
-      <div className="container mx-auto px-3 sm:px-4 md:px-6">
+    <section id="contacto" className="section-padding bg-rx-black relative">
+      <div className="absolute inset-0 bg-mesh" />
+
+      <div className="container mx-auto px-6 relative z-10">
         <SectionHeader
           icon={MessageSquare}
           title={t('contact.title')}
           subtitle={t('contact.subtitle')}
+          sectionNumber="06"
         />
 
-        {/* Enhanced Contact Methods */}
+        {/* Contact Methods — minimal row */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 xs:gap-4 sm:gap-6 max-w-7xl mx-auto mb-8 sm:mb-12 lg:mb-16"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto mb-16 sm:mb-24"
         >
-          {/* Email */}
-          <motion.a
-            href="mailto:revolutionx.f1@gmail.com"
-            className="bg-gradient-to-br from-rx-dark to-rx-black p-3 xs:p-4 sm:p-6 rounded-lg xs:rounded-xl sm:rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center group hover:shadow-2xl hover:shadow-rx-gold/10 focus:outline-none focus:ring-2 focus:ring-rx-gold/50 touch-manipulation"
-            whileHover={{ y: -8, scale: 1.02 }}
-            onHoverStart={() => setHoveredCard(0)}
-            onHoverEnd={() => setHoveredCard(null)}
-            aria-label="Enviar email a revolutionx.f1@gmail.com"
-          >
-            <motion.div
-              className="w-12 h-12 sm:w-14 sm:h-14 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:bg-rx-gold/30 transition-colors"
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
-            >
-              <Mail className="w-5 h-5 sm:w-7 sm:h-7 text-rx-gold" />
-            </motion.div>
-            <h3 className="font-display text-base sm:text-lg text-rx-gold font-semibold mb-2 sm:mb-3">Email</h3>
-            <p className="text-white font-medium mb-1 sm:mb-2 text-xs sm:text-sm break-all leading-tight">
-              revolutionx.f1@gmail.com
-            </p>
-            <p className="text-gray-400 text-xs">Respuesta en 24-48h</p>
-          </motion.a>
-
-          {/* Instagram */}
-          <motion.a
-            href="https://instagram.com/revolutionx_f1"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-purple-500/30 hover:border-purple-500/50 transition-all duration-300 text-center group hover:shadow-2xl hover:shadow-purple-500/10 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
-            whileHover={{ y: -8, scale: 1.02 }}
-            onHoverStart={() => setHoveredCard(1)}
-            onHoverEnd={() => setHoveredCard(null)}
-            aria-label="Visitar perfil de Instagram @revolutionx_f1"
-          >
-            <motion.div
-              className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4"
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
-            >
-              <Instagram className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
-            </motion.div>
-            <h3 className="font-display text-base sm:text-lg text-purple-300 font-semibold mb-2 sm:mb-3">Instagram</h3>
-            <p className="text-white font-medium mb-1 sm:mb-2 text-xs sm:text-sm">@revolutionx_f1</p>
-            <p className="text-gray-400 text-xs">Contenido exclusivo</p>
-          </motion.a>
-
-          {/* Location */}
-          <motion.div
-            className="bg-gradient-to-br from-rx-dark to-rx-black p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center group hover:shadow-2xl hover:shadow-rx-gold/10"
-            whileHover={{ y: -8, scale: 1.02 }}
-            onHoverStart={() => setHoveredCard(2)}
-            onHoverEnd={() => setHoveredCard(null)}
-          >
-            <motion.div
-              className="w-12 h-12 sm:w-14 sm:h-14 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:bg-rx-gold/30 transition-colors"
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
-            >
-              <MapPin className="w-5 h-5 sm:w-7 sm:h-7 text-rx-gold" />
-            </motion.div>
-            <h3 className="font-display text-base sm:text-lg text-rx-gold font-semibold mb-2 sm:mb-3">Ubicación</h3>
-            <p className="text-white font-medium mb-1 sm:mb-2 text-xs sm:text-sm">IES José Saramago</p>
-            <p className="text-gray-400 text-xs">Madrid, España</p>
-          </motion.div>
-
-          {/* Schedule */}
-          <motion.div
-            className="bg-gradient-to-br from-rx-dark to-rx-black p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 text-center group hover:shadow-2xl hover:shadow-rx-gold/10"
-            whileHover={{ y: -8, scale: 1.02 }}
-            onHoverStart={() => setHoveredCard(3)}
-            onHoverEnd={() => setHoveredCard(null)}
-          >
-            <motion.div
-              className="w-12 h-12 sm:w-14 sm:h-14 bg-rx-gold/20 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:bg-rx-gold/30 transition-colors"
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
-            >
-              <Clock className="w-5 h-5 sm:w-7 sm:h-7 text-rx-gold" />
-            </motion.div>
-            <h3 className="font-display text-base sm:text-lg text-rx-gold font-semibold mb-2 sm:mb-3">Horario</h3>
-            <p className="text-white font-medium mb-1 sm:mb-2 text-xs sm:text-sm">Lunes a Viernes</p>
-            <p className="text-gray-400 text-xs">9:00 - 17:00 CET</p>
-          </motion.div>
+          {contactCards.map((card, index) => {
+            const Wrapper = card.href ? 'a' : 'div';
+            const wrapperProps = card.href ? {
+              href: card.href,
+              ...(card.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
+            } : {};
+            
+            return (
+              <Wrapper
+                key={index}
+                {...wrapperProps}
+                className="card-glass p-5 sm:p-6 text-center group hover:shadow-glow transition-all duration-500"
+              >
+                <card.icon className="w-5 h-5 text-rx-gold/40 mx-auto mb-3 group-hover:text-rx-gold/70 transition-colors duration-500" />
+                <h3 className="font-display text-sm text-white font-medium mb-1">{card.title}</h3>
+                <p className="text-white/50 text-xs mb-0.5 break-all">{card.value}</p>
+                <p className="text-white/20 text-[11px]">{card.sub}</p>
+              </Wrapper>
+            );
+          })}
         </motion.div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 max-w-7xl mx-auto">
-          {/* Enhanced Contact Form */}
+        {/* Split section: Form + Why Collaborate */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 max-w-6xl mx-auto">
+          {/* Form */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
-            className="dark:bg-gradient-to-br dark:from-rx-dark dark:to-rx-black light:bg-gradient-to-br light:from-white light:to-gray-100 p-4 xs:p-6 sm:p-8 md:p-10 rounded-xl xs:rounded-2xl sm:rounded-3xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-500 shadow-2xl hover:shadow-rx-gold/10"
+            className="card-glass p-6 sm:p-8 md:p-10"
           >
-            <div className="flex items-center mb-6 sm:mb-8">
-              <motion.div
-                className="w-12 h-12 sm:w-14 sm:h-14 bg-rx-gold/20 rounded-full flex items-center justify-center mr-3 sm:mr-4"
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.6 }}
-              >
-                <Send className="w-5 h-5 sm:w-7 sm:h-7 text-rx-gold" />
-              </motion.div>
-              <h3 className="font-display text-xl sm:text-2xl text-rx-gold font-semibold" data-translate="true">
+            <div className="flex items-center gap-3 mb-8">
+              <Send className="w-4 h-4 text-rx-gold/40" />
+              <h3 className="font-display text-xl text-white font-medium tracking-tight" data-translate="true">
                 {t('contact.form.title', 'Contacto Directo')}
               </h3>
             </div>
-
             <EnhancedContactForm />
           </motion.div>
 
           {/* Why Collaborate */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-rx-dark to-rx-black p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-500 shadow-2xl hover:shadow-rx-gold/10"
+            className="card-glass p-6 sm:p-8 md:p-10"
           >
-            <div className="flex items-center mb-6 sm:mb-8">
-              <motion.div
-                className="w-12 h-12 sm:w-14 sm:h-14 bg-rx-gold/20 rounded-full flex items-center justify-center mr-3 sm:mr-4"
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.6 }}
-              >
-                <Phone className="w-5 h-5 sm:w-7 sm:h-7 text-rx-gold" />
-              </motion.div>
-              <h3 className="font-display text-xl sm:text-2xl text-rx-gold font-semibold" data-translate="true">
-                {t('contact.whyCollaborate')}
-              </h3>
-            </div>
+            <h3 className="font-display text-xl text-white font-medium mb-8 tracking-tight" data-translate="true">
+              {t('contact.whyCollaborate')}
+            </h3>
 
-            <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+            <div className="space-y-4 mb-8">
               {whyCollaborate.map((benefit, index) => (
                 <motion.div
                   key={index}
-                  className="flex items-start space-x-3 p-2 sm:p-3 rounded-lg hover:bg-rx-gold/5 transition-colors duration-300"
-                  initial={{ opacity: 0, x: -20 }}
+                  className="flex items-start gap-3 group"
+                  initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ duration: 0.4, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
                   viewport={{ once: true }}
-                  whileHover={{ x: 8 }}
                 >
-                  <motion.div
-                    className="w-2 h-2 bg-rx-gold rounded-full mt-2 flex-shrink-0"
-                    whileHover={{ scale: 1.5 }}
-                    transition={{ duration: 0.2 }}
-                  />
-                  <span className="text-white text-xs sm:text-sm leading-relaxed">{benefit}</span>
+                  <ArrowRight className="w-3 h-3 text-rx-gold/30 mt-1.5 flex-shrink-0 group-hover:text-rx-gold/60 transition-colors duration-300" />
+                  <span className="text-white/40 text-sm leading-relaxed group-hover:text-white/60 transition-colors duration-300">{benefit}</span>
                 </motion.div>
               ))}
             </div>
 
-            <motion.div
-              className="p-4 sm:p-6 bg-gradient-to-r from-rx-gold/10 to-rx-gold/5 rounded-lg sm:rounded-xl border border-rx-gold/20"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            >
-              <p className="text-rx-gold font-medium text-center mb-2 text-sm sm:text-base">
+            <div className="p-5 sm:p-6 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+              <p className="text-rx-gold/70 font-medium text-center text-sm mb-1.5">
                 ¡Su apoyo marca la diferencia!
               </p>
-              <p className="text-gray-300 text-xs sm:text-sm text-center leading-relaxed">
+              <p className="text-white/25 text-xs text-center leading-relaxed">
                 Contáctenos hoy para explorar oportunidades de colaboración
                 personalizadas según sus objetivos empresariales.
               </p>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
 
-        {/* Final Call to Action */}
+        {/* Final CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true }}
-          className="mt-12 sm:mt-16 lg:mt-20 text-center bg-gradient-to-r from-rx-gold/10 to-rx-gold/5 p-4 xs:p-6 sm:p-8 md:p-10 rounded-xl xs:rounded-2xl sm:rounded-3xl border border-rx-gold/30 max-w-5xl mx-auto shadow-2xl"
+          className="mt-16 sm:mt-24 text-center max-w-3xl mx-auto"
         >
-          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-rx-gold mb-4 sm:mb-6" data-translate="true">
+          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-white font-medium mb-4 tracking-tight" data-translate="true">
             {t('contact.startToday')}
           </h3>
-          <p className="text-gray-300 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-4" data-translate="true">
+          <p className="text-white/30 text-sm sm:text-base mb-8 leading-relaxed" data-translate="true">
             Estamos listos para discutir cómo su empresa puede beneficiarse
             de una asociación estratégica con RevolutionX.
           </p>
-          <div className="flex flex-col xs:flex-row items-center justify-center space-y-3 xs:space-y-0 xs:space-x-4 sm:space-x-6 md:space-x-8">
-            <motion.a
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
               href="mailto:revolutionx.f1@gmail.com"
-              className="flex items-center space-x-2 sm:space-x-3 bg-rx-gold/20 hover:bg-rx-gold/30 px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-rx-gold/50"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
+              className="btn-primary inline-flex items-center gap-2"
               aria-label="Enviar email a revolutionx.f1@gmail.com"
             >
-              <Mail className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-              <span className="break-all">Enviar email de contacto</span>
-            </motion.a>
-
-            <motion.a
+              <Mail className="w-4 h-4" />
+              Enviar email
+            </a>
+            <a
               href="https://instagram.com/revolutionx_f1"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 sm:space-x-3 bg-gradient-to-r from-purple-600/20 to-pink-600/20 px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-full border border-purple-500/30 text-purple-300 font-medium hover:from-purple-600/30 hover:to-pink-600/30 transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
+              className="btn-secondary inline-flex items-center gap-2"
               aria-label="Visitar perfil de Instagram @revolutionx_f1"
             >
-              <Instagram className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-              <span>@revolutionx_f1</span>
-            </motion.a>
+              <Instagram className="w-4 h-4" />
+              @revolutionx_f1
+            </a>
           </div>
         </motion.div>
       </div>

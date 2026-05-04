@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { User } from 'lucide-react';
 import { TeamMember } from '../../data/teamData';
 
 interface TeamMemberCardProps {
@@ -9,41 +8,40 @@ interface TeamMemberCardProps {
 }
 
 const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, index }) => {
+  const initials = member.name.split(' ').map(n => n[0]).join('').slice(0, 2);
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
       viewport={{ once: true }}
-      whileHover={{ y: -8, transition: { duration: 0.3 } }}
-      className="bg-gradient-to-br from-rx-dark to-rx-black p-8 rounded-2xl border border-rx-gold/20 hover:border-rx-gold/50 transition-all duration-300 shadow-xl hover:shadow-2xl"
+      className="group card-glass p-6 sm:p-8 hover:shadow-glow"
     >
-      <div className="flex items-center mb-6">
-        <div className="w-12 h-12 bg-rx-gold/20 rounded-full flex items-center justify-center mr-4">
-          <User className="w-6 h-6 text-rx-gold" aria-label={`Foto de perfil de ${member.name}`} role="img" />
+      <div className="flex items-center gap-4 mb-6">
+        {/* Avatar with initials */}
+        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-rx-gold/20 to-rx-gold/5 flex items-center justify-center border border-rx-gold/20 group-hover:border-rx-gold/40 transition-colors duration-500">
+          <span className="font-display text-sm font-semibold text-rx-gold">
+            {initials}
+          </span>
         </div>
         <div>
-          <h3 className="text-xl font-display text-rx-gold font-semibold">
+          <h3 className="font-display text-lg text-white font-medium tracking-tight">
             {member.name}
           </h3>
-          <p className="text-gray-400 text-sm font-medium">
+          <p className="text-rx-gold/70 text-xs font-mono uppercase tracking-wider">
             {member.role}
           </p>
         </div>
       </div>
       
-      <div className="space-y-3">
-        <h4 className="text-white font-medium text-sm uppercase tracking-wider mb-4">
-          Responsabilidades Principales
-        </h4>
-        <ul className="space-y-3">
-          {member.responsibilities.map((resp, idx) => (
-            <li key={idx} className="flex items-start space-x-3 text-gray-300">
-              <span className="text-rx-gold mt-1 text-sm">●</span>
-              <span className="text-sm leading-relaxed">{resp}</span>
-            </li>
-          ))}
-        </ul>
+      <div className="space-y-2.5">
+        {member.responsibilities.map((resp, idx) => (
+          <div key={idx} className="flex items-start gap-3 text-white/40 group-hover:text-white/60 transition-colors duration-500">
+            <span className="w-1 h-1 bg-rx-gold/40 rounded-full mt-2 flex-shrink-0" />
+            <span className="text-sm leading-relaxed">{resp}</span>
+          </div>
+        ))}
       </div>
     </motion.div>
   );

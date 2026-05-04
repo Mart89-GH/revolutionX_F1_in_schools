@@ -10,9 +10,9 @@ const InteractiveSpeedometer = () => {
   const animationRef = useRef<number | null>(null);
   const mountedRef = useRef<boolean>(true);
 
-  const maxSpeed = 100; // Maximum speed in km/h
-  const targetSpeed = 45; // Target speed to reach
-  const animationDuration = 2000; // Duration in milliseconds - faster for better responsiveness
+  const maxSpeed = 100;
+  const targetSpeed = 45;
+  const animationDuration = 2000;
 
   const cleanup = useCallback(() => {
     if (animationRef.current !== null) {
@@ -25,7 +25,6 @@ const InteractiveSpeedometer = () => {
     cleanup();
     setCurrentSpeed(0);
     setIsAnimating(false);
-
   }, [cleanup]);
 
   const announceSpeed = useCallback((speed: number) => {
@@ -38,13 +37,9 @@ const InteractiveSpeedometer = () => {
   const startAnimation = useCallback(() => {
     try {
       if (isAnimating || !mountedRef.current) return;
-
-      // Clean up any existing animation
       cleanup();
-
       setIsAnimating(true);
       setCurrentSpeed(0);
-
 
       const startTime = performance.now();
 
@@ -52,8 +47,6 @@ const InteractiveSpeedometer = () => {
         if (!mountedRef.current) return;
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / animationDuration, 1);
-
-        // Smooth easing function
         const eased = 1 - Math.pow(1 - progress, 3);
         const newSpeed = targetSpeed * eased;
 
@@ -70,7 +63,6 @@ const InteractiveSpeedometer = () => {
       animationRef.current = requestAnimationFrame(animate);
     } catch (err) {
       console.error('Animation error:', err);
-
       setIsAnimating(false);
       cleanup();
     }
@@ -86,7 +78,6 @@ const InteractiveSpeedometer = () => {
   useEffect(() => {
     mountedRef.current = true;
 
-    // Only start animation if component is mounted and not already animating
     if (!isAnimating) {
       const timer = setTimeout(() => {
         if (mountedRef.current && !isAnimating) {
@@ -106,83 +97,71 @@ const InteractiveSpeedometer = () => {
   }, [startAnimation, isAnimating, cleanup]);
 
   const speedPercentage = (currentSpeed / maxSpeed) * 100;
-  const circumference = 2 * Math.PI * 90; // radius = 90
+  const circumference = 2 * Math.PI * 90;
   const strokeDashoffset = circumference - (speedPercentage / 100) * circumference;
 
   return (
     <AnimatePresence mode="wait">
       <motion.div
         key="speedometer"
-        className="relative w-56 xs:w-64 sm:w-80 h-56 xs:h-64 sm:h-80 mx-auto touch-manipulation"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.8 }}
-        transition={{ duration: 0.5 }}
+        className="card-glass !rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
-        {/* Speedometer Background */}
-        <svg className="w-full h-full transform -rotate-90" viewBox="0 0 200 200">
-          {/* Background Circle */}
-          <circle
-            cx="100"
-            cy="100"
-            r="90"
-            fill="none"
-            stroke="rgba(212, 175, 55, 0.1)"
-            strokeWidth="8"
-          />
+        {/* Header */}
+        <div className="flex items-center gap-3 self-start mb-6">
+          <div className="w-8 h-8 rounded-lg bg-rx-gold/10 flex items-center justify-center">
+            <Target className="w-4 h-4 text-rx-gold" />
+          </div>
+          <h3 className="font-display text-base sm:text-lg text-white font-medium tracking-tight">
+            Velocímetro
+          </h3>
+        </div>
 
-          {/* Progress Circle */}
-          <motion.circle
-            cx="100"
-            cy="100"
-            r="90"
-            fill="none"
-            stroke="url(#speedGradient)"
-            strokeWidth="8"
-            strokeLinecap="round"
-            strokeDasharray={circumference}
-            strokeDashoffset={strokeDashoffset}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          />
+        {/* SVG Speedometer */}
+        <div className="relative w-48 h-48 sm:w-56 sm:h-56 mx-auto">
+          <svg className="w-full h-full transform -rotate-90" viewBox="0 0 200 200">
+            <circle
+              cx="100"
+              cy="100"
+              r="90"
+              fill="none"
+              stroke="rgba(255, 255, 255, 0.04)"
+              strokeWidth="4"
+            />
+            <motion.circle
+              cx="100"
+              cy="100"
+              r="90"
+              fill="none"
+              stroke="url(#speedGradientNew)"
+              strokeWidth="4"
+              strokeLinecap="round"
+              strokeDasharray={circumference}
+              strokeDashoffset={strokeDashoffset}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            />
+            <defs>
+              <linearGradient id="speedGradientNew" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#C8A951" />
+                <stop offset="100%" stopColor="#E8D48B" />
+              </linearGradient>
+            </defs>
+          </svg>
 
-          {/* Gradient Definition */}
-          <defs>
-            <linearGradient id="speedGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#D4AF37" />
-              <stop offset="50%" stopColor="#FFD700" />
-              <stop offset="100%" stopColor="#FFA500" />
-            </linearGradient>
-          </defs>
-        </svg>
-
-        {/* Center Content */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <motion.div
-            className="text-center"
-            animate={{ scale: isAnimating ? [1, 1.05, 1] : 1 }}
-            transition={{ duration: 0.4, repeat: isAnimating ? Infinity : 0, repeatDelay: 0.1 }}
-          >
-            <div className="text-2xl xs:text-3xl sm:text-5xl font-display font-bold text-rx-gold mb-1 xs:mb-2 sm:mb-3 font-mono">
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="text-3xl sm:text-4xl font-display font-bold text-white tracking-tight font-mono">
               {Math.round(currentSpeed)}
             </div>
-            <div className="text-xs sm:text-sm text-gray-400 uppercase tracking-wider">
+            <div className="text-[11px] text-white/20 font-mono uppercase tracking-widest mt-1">
               km/h equiv.
             </div>
-          </motion.div>
-
-          {/* Speed Indicators */}
-          <div className="absolute top-4 sm:top-6 left-1/2 transform -translate-x-1/2">
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Target className="w-6 h-6 sm:w-8 sm:h-8 text-rx-gold" />
-            </motion.div>
           </div>
         </div>
 
-        {/* Interactive Button */}
-        {/* Anuncio de velocidad para lectores de pantalla */}
+        {/* Speed Announce */}
         <div
           ref={speedAnnouncementRef}
           className="sr-only"
@@ -190,7 +169,8 @@ const InteractiveSpeedometer = () => {
           aria-live="polite"
         />
 
-        <motion.button
+        {/* Button */}
+        <button
           onClick={(e) => {
             e.preventDefault();
             if (!isAnimating) {
@@ -200,25 +180,22 @@ const InteractiveSpeedometer = () => {
           }}
           onKeyDown={handleKeyPress}
           disabled={isAnimating}
-          className="absolute -bottom-10 xs:-bottom-12 sm:-bottom-16 left-1/2 transform -translate-x-1/2 bg-rx-gold/20 hover:bg-rx-gold/30 focus:bg-rx-gold/40 focus:outline-none focus:ring-2 focus:ring-rx-gold focus:ring-offset-2 focus:ring-offset-rx-black disabled:opacity-50 disabled:cursor-not-allowed px-3 xs:px-4 sm:px-8 py-2 sm:py-3 rounded-full border border-rx-gold/50 text-rx-gold font-medium transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm touch-manipulation"
-          whileHover={{ scale: isAnimating ? 1 : 1.02 }}
-          whileTap={{ scale: 0.98 }}
+          className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/[0.03] border border-white/[0.06] text-white/40 hover:text-rx-gold hover:border-rx-gold/30 disabled:opacity-30 disabled:cursor-not-allowed text-sm transition-all duration-300 focus-ring"
           aria-label={isAnimating ? 'Midiendo velocidad...' : 'Probar velocidad'}
-          role="button"
           tabIndex={0}
         >
           {isAnimating ? (
-            <div className="flex items-center space-x-2">
-              <Timer className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
+            <>
+              <Timer className="w-4 h-4 animate-spin" />
               <span>Midiendo...</span>
-            </div>
+            </>
           ) : (
-            <div className="flex items-center space-x-2">
-              <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
+            <>
+              <Zap className="w-4 h-4" />
               <span>Probar Velocidad</span>
-            </div>
+            </>
           )}
-        </motion.button>
+        </button>
       </motion.div>
     </AnimatePresence>
   );
