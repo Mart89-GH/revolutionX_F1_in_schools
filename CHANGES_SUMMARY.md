@@ -2,7 +2,7 @@
 
 ## 🎯 Quick Overview
 
-This update addresses critical security issues and improves code quality for the RevolutionX F1 in Schools project.
+This update addresses critical security issues and improves code quality for the RevolutionX STEM Racing project.
 
 ## ✅ Changes Made
 

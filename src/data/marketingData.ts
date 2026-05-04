@@ -15,7 +15,7 @@ export const marketingOpportunities: MarketingOpportunity[] = [
   {
     icon: "Target",
     title: "Alcance Global",
-    description: "Exposición internacional en competiciones F1 in Schools, con cobertura en medios especializados, redes sociales y eventos presenciales",
+    description: "Exposición internacional en competiciones STEM Racing, con cobertura en medios especializados, redes sociales y eventos presenciales",
     metrics: "Audiencia directa: 5,000+ (eventos) | Alcance digital: 45,000+ (redes sociales)"
   },
   {
@@ -39,14 +39,14 @@ export const marketingOpportunities: MarketingOpportunity[] = [
 ];
 
 export const marketingChannels: MarketingChannel[] = [
-  { channel: "Competiciones F1 in Schools", reach: "5,000+ asistentes por evento", engagement: "Muy Alto" },
+  { channel: "Competiciones STEM Racing", reach: "5,000+ asistentes por evento", engagement: "Muy Alto" },
   { channel: "Redes Sociales", reach: "45,000+ alcance mensual", engagement: "Alto" },
   { channel: "Medios Especializados", reach: "25,000+ lectores mensuales", engagement: "Medio-Alto" },
   { channel: "Eventos Educativos", reach: "1,000+ estudiantes/profesionales", engagement: "Muy Alto" }
 ];
 
 export const brandBenefits: string[] = [
-  "Visibilidad premium en competiciones internacionales F1 in Schools",
+  "Visibilidad premium en competiciones internacionales STEM Racing",
   "Cobertura destacada en medios especializados de ingeniería y educación",
   "Asociación con tecnologías avanzadas: CAD, CFD, Impresión 3D",
   "Acceso directo a talento joven altamente cualificado",

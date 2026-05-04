@@ -11,7 +11,7 @@ export default {
     },
     hero: {
       title: 'RevolutionX',
-      subtitle: 'Equipo F1 in Schools',
+      subtitle: 'Equipo STEM Racing',
       description: 'Innovación y excelencia en ingeniería del IES José Saramago',
       sponsorMessage: 'Su marca puede ser parte de nuestra historia de éxito'
     },
@@ -32,7 +32,7 @@ export default {
     },
     technical: {
       title: 'Innovación Técnica',
-      subtitle: 'Combinamos ingeniería de precisión con tecnologías de vanguardia para crear soluciones revolucionarias en el mundo de F1 in Schools.',
+      subtitle: 'Combinamos ingeniería de precisión con tecnologías de vanguardia para crear soluciones revolucionarias en el mundo de STEM Racing.',
       specifications: 'Especificaciones Técnicas del Vehículo',
       process: 'Proceso de Desarrollo',
       speedometer: {
@@ -57,7 +57,7 @@ export default {
     },
     achievements: {
       title: 'Nuestros Logros',
-      subtitle: 'Excelencia demostrada en competiciones de F1 in Schools a nivel regional y nacional, estableciendo nuevos estándares de rendimiento y precisión técnica.',
+      subtitle: 'Excelencia demostrada en competiciones de STEM Racing a nivel regional y nacional, estableciendo nuevos estándares de rendimiento y precisión técnica.',
       mainTitle: 'Coche Más Rápido',
       category: 'Categoría Entry',
       event: 'Comunidad de Madrid 2025',
@@ -65,7 +65,7 @@ export default {
     },
     sponsors: {
       title: 'Nuestros Patrocinadores',
-      subtitle: 'Agradecemos profundamente el apoyo de nuestros patrocinadores, quienes hacen posible nuestros logros y el desarrollo continuo de nuestro proyecto en F1 in Schools.',
+      subtitle: 'Agradecemos profundamente el apoyo de nuestros patrocinadores, quienes hacen posible nuestros logros y el desarrollo continuo de nuestro proyecto en STEM Racing.',
       collaboration: 'Oportunidades de Colaboración',
       question: '¿Quiere ser parte del proyecto?',
       description: 'Únete a nuestro equipo de patrocinadores y forme parte de la próxima generación de ingenieros e innovadores.',

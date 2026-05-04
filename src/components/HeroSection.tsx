@@ -20,13 +20,13 @@ const HeroSection: React.FC = () => {
         >
             {/* Gradient mesh background */}
             <div className="absolute inset-0 bg-mesh opacity-60" />
-            
+
             {/* Subtle radial glow behind logo */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-rx-gold/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
             <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-20 sm:py-0">
                 <div className="flex flex-col items-center text-center">
-                    
+
                     {/* Logo */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
@@ -64,7 +64,7 @@ const HeroSection: React.FC = () => {
                         className="space-y-4 mb-12 sm:mb-16"
                     >
                         <p className="font-mono text-xs sm:text-sm text-rx-gold/60 tracking-[0.3em] uppercase">
-                            F1 IN SCHOOLS — Engineering Documentation
+                            STEM Racing — Engineering Documentation
                         </p>
                         <p className="font-body text-white/30 text-sm sm:text-base max-w-lg mx-auto leading-relaxed" data-translate="true">
                             {t('hero.description')}

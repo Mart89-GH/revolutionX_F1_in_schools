@@ -198,7 +198,7 @@ class OpenRouterService {
   private buildSystemPrompt(): string {
     const isEnglish = document.documentElement.lang === 'en';
 
-    return isEnglish ? `You are the official assistant of RevolutionX, an F1 in Schools team from IES José Saramago in Madrid, Spain.
+    return isEnglish ? `You are the official assistant of RevolutionX, an STEM Racing team from IES José Saramago in Madrid, Spain.
 
 TEAM INFORMATION:
 - Saúl Morán: Project Manager (General coordination, resource management)
@@ -235,7 +235,7 @@ INSTRUCTIONS:
 3. Provide accurate information based on the above data
 4. Promote collaboration opportunities
 5. If you don't know something specific, refer to direct contact
-6. Keep responses concise but informative` : `Eres el asistente oficial de RevolutionX, un equipo de F1 in Schools del IES José Saramago en Madrid, España.
+6. Keep responses concise but informative` : `Eres el asistente oficial de RevolutionX, un equipo de STEM Racing del IES José Saramago en Madrid, España.
 
 INFORMACIÓN DEL EQUIPO:
 - Saúl Morán: Jefe de Proyectos (Coordinación general, gestión de recursos)

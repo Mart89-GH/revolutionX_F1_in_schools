@@ -33,7 +33,7 @@ const SUPPORTED_LANGUAGES = ['es', 'en'];
 
 const generateSitemapURLs = (): SitemapURL[] => {
   const currentDate = new Date().toISOString().split('T')[0];
-  
+
   return SITE_SECTIONS.map(section => {
     const url: SitemapURL = {
       loc: `${BASE_URL}/${section.path}`,
@@ -46,7 +46,7 @@ const generateSitemapURLs = (): SitemapURL[] => {
       })),
       images: section.path === '' ? [{
         loc: `${BASE_URL}/revolutionx-logo.png`,
-        title: 'RevolutionX - Equipo F1 in Schools',
+        title: 'RevolutionX - Equipo STEM Racing',
         caption: 'Logo del equipo RevolutionX del IES José Saramago'
       }] : undefined
     };

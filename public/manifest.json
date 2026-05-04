@@ -1,7 +1,7 @@
 {
-  "name": "RevolutionX - F1 in Schools",
+  "name": "RevolutionX - STEM Racing",
   "short_name": "RevolutionX",
-  "description": "Equipo líder de F1 in Schools del IES José Saramago. Innovación en ingeniería, diseño y tecnología para competiciones internacionales.",
+  "description": "Equipo líder de STEM Racing del IES José Saramago. Innovación en ingeniería, diseño y tecnología para competiciones internacionales.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0A0A0A",
@@ -9,7 +9,11 @@
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "es",
-  "categories": ["education", "technology", "sports"],
+  "categories": [
+    "education",
+    "technology",
+    "sports"
+  ],
   "icons": [
     {
       "src": "/revolutionx-logo.png",

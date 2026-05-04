@@ -1,6 +1,6 @@
-# RevolutionX F1 in Schools
+# RevolutionX STEM Racing
 
-Sitio web oficial del equipo RevolutionX del IES José Saramago - Equipo líder de F1 in Schools con IA integrada.
+Sitio web oficial del equipo RevolutionX del IES José Saramago - Equipo líder de STEM Racing con IA integrada.
 
 ## 🤖 Asistente de IA con OpenRouter
 
@@ -64,7 +64,7 @@ La aplicación está desplegada en: [https://legendary-panda-7b91a1.netlify.app]
 
 ## 🏆 Sobre RevolutionX
 
-Equipo de F1 in Schools del IES José Saramago, Madrid. Campeones regionales 2025 en la categoría Entry con el coche más rápido de la Comunidad de Madrid.
+Equipo de STEM Racing del IES José Saramago, Madrid. Campeones regionales 2025 en la categoría Entry con el coche más rápido de la Comunidad de Madrid.
 
 **Contacto**: revolutionx.f1@gmail.com
 **Instagram**: @revolutionx_f1

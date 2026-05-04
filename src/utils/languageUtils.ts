@@ -11,13 +11,13 @@ export const updateDocumentLanguage = (language: string) => {
 
   // Update page title and meta tags based on language
   if (language === 'en') {
-    if (titleElement) titleElement.textContent = 'RevolutionX - F1 in Schools Team | IES José Saramago';
-    if (metaTitleElement) metaTitleElement.setAttribute('content', 'RevolutionX - F1 in Schools Team | IES José Saramago');
-    if (metaDescriptionElement) metaDescriptionElement.setAttribute('content', 'Leading F1 in Schools team from IES José Saramago. Innovation in engineering, design and technology for international competitions.');
+    if (titleElement) titleElement.textContent = 'RevolutionX - STEM Racing Team | IES José Saramago';
+    if (metaTitleElement) metaTitleElement.setAttribute('content', 'RevolutionX - STEM Racing Team | IES José Saramago');
+    if (metaDescriptionElement) metaDescriptionElement.setAttribute('content', 'Leading STEM Racing team from IES José Saramago. Innovation in engineering, design and technology for international competitions.');
   } else {
-    if (titleElement) titleElement.textContent = 'RevolutionX - Equipo F1 in Schools | IES José Saramago';
-    if (metaTitleElement) metaTitleElement.setAttribute('content', 'RevolutionX - Equipo F1 in Schools | IES José Saramago');
-    if (metaDescriptionElement) metaDescriptionElement.setAttribute('content', 'Equipo líder de F1 in Schools del IES José Saramago. Innovación en ingeniería, diseño y tecnología para competiciones internacionales.');
+    if (titleElement) titleElement.textContent = 'RevolutionX - Equipo STEM Racing | IES José Saramago';
+    if (metaTitleElement) metaTitleElement.setAttribute('content', 'RevolutionX - Equipo STEM Racing | IES José Saramago');
+    if (metaDescriptionElement) metaDescriptionElement.setAttribute('content', 'Equipo líder de STEM Racing del IES José Saramago. Innovación en ingeniería, diseño y tecnología para competiciones internacionales.');
   }
 
   // Update URL structure

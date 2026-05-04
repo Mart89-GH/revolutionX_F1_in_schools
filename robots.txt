@@ -1,4 +1,4 @@
-# RevolutionX F1 in Schools Website Robots.txt
+# RevolutionX STEM Racing Website Robots.txt
 
 # Allow all robots complete access
 User-agent: *

@@ -26,9 +26,9 @@ interface SEOHeadProps {
 }
 
 const SEOHead: React.FC<SEOHeadProps> = ({
-  title = 'RevolutionX - F1 in Schools Madrid | Campeones de Ingeniería y Diseño',
-  description = 'Equipo líder RevolutionX del IES José Saramago Madrid, especializado en F1 in Schools. Innovación en ingeniería, diseño 3D y aerodinámica para competiciones internacionales de F1.',
-  keywords = 'F1 in Schools Madrid, RevolutionX F1, competición F1 escolar, ingeniería F1, diseño automovilístico, aerodinámica F1, STEM Madrid, F1 José Saramago, F1 educación España, RevolutionX Madrid',
+  title = 'RevolutionX - STEM Racing Madrid | Campeones de Ingeniería y Diseño',
+  description = 'Equipo líder RevolutionX del IES José Saramago Madrid, especializado en STEM Racing. Innovación en ingeniería, diseño 3D y aerodinámica para competiciones internacionales de F1.',
+  keywords = 'STEM Racing Madrid, RevolutionX F1, competición F1 escolar, ingeniería F1, diseño automovilístico, aerodinámica F1, STEM Madrid, F1 José Saramago, F1 educación España, RevolutionX Madrid',
   image = '/revolutionx-logo.png',
   url = 'https://legendary-panda-7b91a1.netlify.app/',
   type = 'website',
@@ -47,7 +47,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   const organizationStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'RevolutionX - F1 in Schools Madrid',
+    name: 'RevolutionX - STEM Racing Madrid',
     description,
     url,
     logo: `${url}${image}`,
@@ -76,8 +76,8 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     '@context': 'https://schema.org',
     '@type': 'SportsTeam',
     name: 'RevolutionX',
-    sport: 'F1 in Schools Racing',
-    description: 'Competitive F1 in Schools team from IES José Saramago, Madrid',
+    sport: 'STEM Racing Racing',
+    description: 'Competitive STEM Racing team from IES José Saramago, Madrid',
     url,
     logo: `${url}${image}`,
     foundingDate: '2024',
@@ -106,10 +106,10 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   const educationalOrganizationData = {
     '@context': 'https://schema.org',
     '@type': 'EducationalOrganization',
-    name: 'RevolutionX - F1 in Schools Educational Team',
-    description: 'STEM education team focused on engineering, design, and technology through F1 in Schools competition',
+    name: 'RevolutionX - STEM Racing Educational Team',
+    description: 'STEM education team focused on engineering, design, and technology through STEM Racing competition',
     url,
-    educationalCredentialAwarded: 'F1 in Schools Competition Experience',
+    educationalCredentialAwarded: 'STEM Racing Competition Experience',
     areaServed: {
       '@type': 'State',
       name: 'Comunidad de Madrid'
@@ -176,7 +176,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <meta name="twitter:site" content={twitterSite} />
       <meta name="twitter:creator" content={twitterCreator} />
       <meta property="og:type" content={contentType} />
-      <meta property="article:section" content="F1 in Schools" />
+      <meta property="article:section" content="STEM Racing" />
       <meta property="og:updated_time" content={modifiedTime || new Date().toISOString()} />
 
       {/* Structured Data - Organization */}

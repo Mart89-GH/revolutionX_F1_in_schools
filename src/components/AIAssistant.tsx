@@ -107,7 +107,7 @@ const AIAssistant = () => {
 
     // Greetings
     if (message.includes('hola') || message.includes('buenos') || message.includes('saludos')) {
-      return '¡Hola! Bienvenido a RevolutionX. Soy tu asistente virtual y estoy aquí para ayudarte con cualquier pregunta sobre nuestro equipo de F1 in Schools. ¿Qué te gustaría saber?';
+      return '¡Hola! Bienvenido a RevolutionX. Soy tu asistente virtual y estoy aquí para ayudarte con cualquier pregunta sobre nuestro equipo de STEM Racing. ¿Qué te gustaría saber?';
     }
 
     // Team questions
@@ -158,9 +158,9 @@ const AIAssistant = () => {
       return `Colaborar con RevolutionX ofrece múltiples beneficios:\n\n${opportunities}\n\nAdemás, obtendrás: ${knowledgeBase.marketing.benefits.slice(0, 4).join(', ')} y mucho más. ¡Contáctanos para explorar oportunidades personalizadas!`;
     }
 
-    // F1 in Schools questions
-    if (message.includes('f1 in schools') || message.includes('competición') || message.includes('formula 1')) {
-      return 'F1 in Schools es la competición de tecnología STEM más grande del mundo. Los estudiantes diseñan, fabrican y prueban coches de F1 en miniatura usando las mismas tecnologías que los equipos profesionales. RevolutionX compite a nivel regional y nacional, representando la excelencia del IES José Saramago.';
+    // STEM Racing questions
+    if (message.includes('STEM Racing') || message.includes('competición') || message.includes('formula 1')) {
+      return 'STEM Racing es la competición de tecnología STEM más grande del mundo. Los estudiantes diseñan, fabrican y prueban coches de F1 en miniatura usando las mismas tecnologías que los equipos profesionales. RevolutionX compite a nivel regional y nacional, representando la excelencia del IES José Saramago.';
     }
 
     // Speed/performance questions
@@ -271,8 +271,8 @@ const AIAssistant = () => {
                       )}
                     </div>
                     <div className={`rounded-2xl px-3 py-2 ${message.isUser
-                        ? 'bg-rx-gold text-rx-black'
-                        : 'bg-rx-gold/10 text-white border border-rx-gold/20'
+                      ? 'bg-rx-gold text-rx-black'
+                      : 'bg-rx-gold/10 text-white border border-rx-gold/20'
                       }`}>
                       <p className="text-sm whitespace-pre-line">{message.text}</p>
                       <p className={`text-xs mt-1 ${message.isUser ? 'text-rx-black/70' : 'text-gray-400'

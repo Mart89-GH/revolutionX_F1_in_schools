@@ -15,8 +15,8 @@ const AchievementsSection = () => {
   const sportsEventData = {
     '@context': 'https://schema.org',
     '@type': 'SportsEvent',
-    name: 'F1 in Schools - Campeonato Autonómico de Madrid',
-    description: 'RevolutionX won 1st place in the F1 in Schools Regional Championship Madrid',
+    name: 'STEM Racing - Campeonato Autonómico de Madrid',
+    description: 'RevolutionX won 1st place in the STEM Racing Regional Championship Madrid',
     startDate: '2024-03-15',
     endDate: '2024-03-17',
     location: {
@@ -35,7 +35,7 @@ const AchievementsSection = () => {
     },
     organizer: {
       '@type': 'Organization',
-      name: 'F1 in Schools',
+      name: 'STEM Racing',
       url: 'https://www.f1inschools.com'
     }
   };
@@ -75,7 +75,7 @@ const AchievementsSection = () => {
               <Zap className="w-12 h-12 sm:w-16 sm:h-16 text-rx-gold/60" />
             </div>
           </div>
-          
+
           <h3 className="font-display text-3xl sm:text-4xl md:text-5xl text-white font-bold mb-4 tracking-tight" data-translate="true">
             {t('achievements.mainTitle')}
           </h3>

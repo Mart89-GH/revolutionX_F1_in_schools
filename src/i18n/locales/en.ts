@@ -11,7 +11,7 @@ export default {
     },
     hero: {
       title: 'RevolutionX',
-      subtitle: 'F1 in Schools Team',
+      subtitle: 'STEM Racing Team',
       description: 'Engineering innovation and excellence at IES José Saramago',
       sponsorMessage: 'Your brand can be part of our success story'
     },
@@ -32,7 +32,7 @@ export default {
     },
     technical: {
       title: 'Technical Innovation',
-      subtitle: 'We combine precision engineering with cutting-edge technologies to create revolutionary solutions in the world of F1 in Schools.',
+      subtitle: 'We combine precision engineering with cutting-edge technologies to create revolutionary solutions in the world of STEM Racing.',
       specifications: 'Vehicle Technical Specifications',
       process: 'Development Process',
       speedometer: {
@@ -57,7 +57,7 @@ export default {
     },
     achievements: {
       title: 'Our Achievements',
-      subtitle: 'Demonstrated excellence in F1 in Schools competitions at regional and national levels, setting new standards for performance and technical precision.',
+      subtitle: 'Demonstrated excellence in STEM Racing competitions at regional and national levels, setting new standards for performance and technical precision.',
       mainTitle: 'Fastest Car',
       category: 'Entry Category',
       event: 'Community of Madrid 2025',
@@ -65,7 +65,7 @@ export default {
     },
     sponsors: {
       title: 'Our Sponsors',
-      subtitle: 'We deeply appreciate the support of our sponsors, who make our achievements and continuous development in F1 in Schools possible.',
+      subtitle: 'We deeply appreciate the support of our sponsors, who make our achievements and continuous development in STEM Racing possible.',
       collaboration: 'Collaboration Opportunities',
       question: 'Want to be part of the project?',
       description: 'Join our team of sponsors and be part of the next generation of engineers and innovators.',
