@@ -50,6 +50,7 @@ const AIAssistant = () => {
       main: "Coche Más Rápido en Categoría Entry - Comunidad de Madrid 2025",
       description: "RevolutionX estableció un nuevo récord de velocidad en la categoría Entry, demostrando excelencia técnica y precisión en el diseño aerodinámico",
       results: [
+        { event: "Finales Regionales Madrid 25/26", position: "3º Puesto", category: "Professional" },
         { event: "Regional Madrid 2025", position: "1º Puesto", category: "Coche Más Rápido - Entry" },
         { event: "Regional Madrid 2025", position: "Top 1", category: "Clasificación General" },
         { event: "Nacional España 2025", position: "Clasificado", category: "Representación Madrid" }
@@ -68,13 +69,13 @@ const AIAssistant = () => {
       process: ["Investigación", "Diseño", "Prototipado", "Optimización"]
     },
     sponsors: [
-      { name: "Universidad Europea", category: "Educación Superior", description: "Apoyo en formación técnica y desarrollo profesional" },
-      { name: "Perfumería Palárabe", category: "Comercio Local", description: "Patrocinador local comprometido con la educación" },
-      { name: "Ayuntamiento de Majadahonda", category: "Administración Pública", description: "Apoyo institucional y promoción del talento local" },
+      { name: "Ayuntamiento de Majadahonda", category: "Administración Pública", description: "Apoyando al talento joven del municipio" },
       { name: "Pañalón", category: "Empresa Local", description: "Compromiso con el desarrollo de jóvenes talentos" },
-      { name: "Guitarras Elvira", category: "Artesanía Musical", description: "Apoyo a la creatividad y la innovación juvenil" },
+      { name: "Black and White", category: "Impresión y Merchandising", description: "Empresa de impresión sobre camisetas, merchandising y productos personalizados" },
+      { name: "Lorena Solutions", category: "Soluciones Empresariales", description: "Compañía que ofrece soluciones a empresas" },
       { name: "Titanes Atletismo", category: "Deporte", description: "Promoción de valores deportivos y trabajo en equipo" },
       { name: "Moñita", category: "Ingeniería y Estructuras Textiles", description: "Diseño, fabricación e instalación de estructuras textiles con materiales certificados y conforme a normativas" },
+      { name: "El Postrecito de Isabel", category: "Dulces y Postres", description: "Elaboración de dulces y postres irresistibles" },
       { name: "F1 Bearings", category: "Fabricación de Rodamientos", description: "Rodamientos de alta calidad para equipos de STEM Racing" }
     ],
     contact: {

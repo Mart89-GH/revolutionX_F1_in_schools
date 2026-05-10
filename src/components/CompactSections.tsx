@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Users, Cog, Award, Handshake, TrendingUp, MessageSquare, Instagram, Mail, MapPin } from 'lucide-react';
+import { sponsors } from '../data/sponsorsData';
 
 const CompactSections = () => {
   return (
@@ -193,16 +194,7 @@ const CompactSections = () => {
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
-            {[
-              { name: "Universidad Europea", logo: "/Universidad-europea-logo.png" },
-              { name: "Perfumería Palárabe", logo: "/perfumeria_palarabe.png" },
-              { name: "Ayuntamiento Majadahonda", logo: "/Ayuntamiento_de_Majadahonda.png" },
-              { name: "Pañalón", logo: "/Logo_Panalon.png" },
-              { name: "Guitarras Elvira", logo: "/Logo_Elvira2.png" },
-              { name: "Titanes Atletismo", logo: "/Logo_Titanes2.png" },
-              { name: "Moñita", logo: "/Logo_Monita.png" },
-              { name: "F1 Bearings", logo: "/logo-f1bearings.png" }
-            ].map((sponsor, index) => (
+            {sponsors.map((sponsor, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}

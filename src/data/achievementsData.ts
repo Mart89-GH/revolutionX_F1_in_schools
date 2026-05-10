@@ -19,6 +19,11 @@ export const mainAchievement = {
 
 export const achievements: Achievement[] = [
   {
+    icon: "Medal",
+    title: "Podio Regional Professional",
+    description: "3º puesto en las Finales Regionales de Madrid de la categoría Professional durante la temporada 25/26."
+  },
+  {
     icon: "Trophy",
     title: "Clasificación Nacional",
     description: "Clasificación directa para la competición nacional STEM Racing 2024, representando a la Comunidad de Madrid tras obtener el primer puesto regional"
@@ -36,6 +41,7 @@ export const achievements: Achievement[] = [
 ];
 
 export const competitionResults: CompetitionResult[] = [
+  { event: "Finales Regionales Madrid 25/26", position: "3º Puesto", category: "Professional" },
   { event: "Regional Madrid 2024", position: "1º Puesto", category: "Coche Más Rápido - Entry" },
   { event: "Regional Madrid 2024", position: "1º Puesto", category: "Clasificación General" },
   { event: "Nacional España 2024", position: "Clasificado", category: "Representación Madrid" }

@@ -14,22 +14,10 @@ export interface SponsorshipLevel {
 
 export const sponsors: Sponsor[] = [
   {
-    name: "Universidad Europea",
-    logo: "/Universidad-europea-logo.png",
-    category: "Educación Superior",
-    description: "Apoyo en formación técnica y desarrollo profesional"
-  },
-  {
-    name: "Perfumería Palárabe",
-    logo: "/perfumeria_palarabe.png",
-    category: "Comercio Local",
-    description: "Patrocinador local comprometido con la educación"
-  },
-  {
     name: "Ayuntamiento de Majadahonda",
-    logo: "/Ayuntamiento_de_Majadahonda.png",
+    logo: "/Logo Ayuntamiento de Majadahonda.jpeg",
     category: "Administración Pública",
-    description: "Apoyo institucional y promoción del talento local"
+    description: "Apoyando al talento joven del municipio"
   },
   {
     name: "Pañalón",
@@ -38,10 +26,16 @@ export const sponsors: Sponsor[] = [
     description: "Compromiso con el desarrollo de jóvenes talentos"
   },
   {
-    name: "Guitarras Elvira",
-    logo: "/Logo_Elvira2.png",
-    category: "Artesanía Musical",
-    description: "Apoyo a la creatividad y la innovación juvenil"
+    name: "Black and White",
+    logo: "/Logo Black&White_logo.jpeg",
+    category: "Impresión y Merchandising",
+    description: "Empresa de impresión sobre camisetas, merchandising y productos personalizados"
+  },
+  {
+    name: "Lorena Solutions",
+    logo: "/Logo Lorena Solutions.png",
+    category: "Soluciones Empresariales",
+    description: "Compañía que ofrece soluciones a empresas"
   },
   {
     name: "Titanes Atletismo",
@@ -54,6 +48,12 @@ export const sponsors: Sponsor[] = [
     logo: "/Logo_Monita.png",
     category: "Ingeniería y Arquitectura Textil",
     description: "Diseño, fabricación e instalación de carpas, estructuras textiles y arquitectura textil con materiales certificados"
+  },
+  {
+    name: "El Postrecito de Isabel",
+    logo: "/Logo El Postrecito de Isabel.jpeg",
+    category: "Dulces y Postres",
+    description: "Elaboración de dulces y postres irresistibles"
   },
   {
     name: "F1 Bearings",

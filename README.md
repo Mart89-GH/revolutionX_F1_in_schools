@@ -64,7 +64,7 @@ La aplicación está desplegada en: [https://legendary-panda-7b91a1.netlify.app]
 
 ## 🏆 Sobre RevolutionX
 
-Equipo de STEM Racing del IES José Saramago, Madrid. Campeones regionales 2025 en la categoría Entry con el coche más rápido de la Comunidad de Madrid.
+Equipo de STEM Racing del IES José Saramago, Madrid. Campeones regionales 2025 en la categoría Entry con el coche más rápido de la Comunidad de Madrid y terceros en las Finales Regionales de Madrid de la categoría Professional en la temporada 25/26.
 
 **Contacto**: revolutionx.f1@gmail.com
 **Instagram**: @revolutionx_f1

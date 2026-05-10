@@ -213,6 +213,7 @@ MAIN ACHIEVEMENTS:
 - Fastest Car in Entry Category - Community of Madrid 2025
 - 1st Regional Position Madrid 2025
 - Qualified for National Spain 2025
+- 3rd Place in Madrid Regional Finals, Professional Category, 2025/26 Season
 
 TECHNICAL SPECIFICATIONS:
 - Length: 185 mm, Width: 69 mm, Height: 44 mm
@@ -220,9 +221,9 @@ TECHNICAL SPECIFICATIONS:
 - Technologies: CAD, CFD, aerodynamic optimization
 
 SPONSORS:
-- Universidad Europea, Perfumería Palárabe, Ayuntamiento de Majadahonda
-- Pañalón, Guitarras Elvira, Titanes Atletismo
-- Moñita, F1 Bearings
+- Ayuntamiento de Majadahonda, Pañalón, Black and White
+- Lorena Solutions, Titanes Atletismo, Moñita
+- El Postrecito de Isabel, F1 Bearings
 
 CONTACT:
 - Email: revolutionx.f1@gmail.com
@@ -250,6 +251,7 @@ LOGROS PRINCIPALES:
 - Coche Más Rápido en Categoría Entry - Comunidad de Madrid 2025
 - 1º Puesto Regional Madrid 2025
 - Clasificados para Nacional España 2025
+- 3º Puesto en Finales Regionales Madrid, Categoría Professional, Temporada 25/26
 
 ESPECIFICACIONES TÉCNICAS:
 - Longitud: 185 mm, Ancho: 69 mm, Altura: 44 mm
@@ -257,9 +259,9 @@ ESPECIFICACIONES TÉCNICAS:
 - Tecnologías: CAD, CFD, optimización aerodinámica
 
 PATROCINADORES:
-- Universidad Europea, Perfumería Palárabe, Ayuntamiento de Majadahonda
-- Pañalón, Guitarras Elvira, Titanes Atletismo
-- Moñita, F1 Bearings
+- Ayuntamiento de Majadahonda, Pañalón, Black and White
+- Lorena Solutions, Titanes Atletismo, Moñita
+- El Postrecito de Isabel, F1 Bearings
 
 CONTACTO:
 - Email: revolutionx.f1@gmail.com
