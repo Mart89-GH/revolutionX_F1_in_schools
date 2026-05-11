@@ -15,10 +15,10 @@ interface BreadcrumbContextType {
 
 const BreadcrumbContext = React.createContext<BreadcrumbContextType>({
   breadcrumbs: [],
-  setBreadcrumbs: () => {},
-  addBreadcrumb: () => {},
-  removeBreadcrumb: () => {},
-  clearBreadcrumbs: () => {}
+  setBreadcrumbs: () => { },
+  addBreadcrumb: () => { },
+  removeBreadcrumb: () => { },
+  clearBreadcrumbs: () => { }
 });
 
 export const useBreadcrumbs = () => {

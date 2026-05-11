@@ -26,7 +26,7 @@ export const achievements: Achievement[] = [
   {
     icon: "Trophy",
     title: "Clasificación Nacional",
-    description: "Clasificación directa para la competición nacional STEM Racing 2024, representando a la Comunidad de Madrid tras obtener el primer puesto regional"
+    description: "Clasificación directa para la competición nacional F1 in Schools Spain 2025, representando a la Comunidad de Madrid tras obtener el primer puesto regional"
   },
   {
     icon: "Target",
