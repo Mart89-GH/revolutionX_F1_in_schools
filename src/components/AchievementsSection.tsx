@@ -17,8 +17,8 @@ const AchievementsSection = () => {
     '@type': 'SportsEvent',
     name: 'STEM Racing - Campeonato Autonómico de Madrid',
     description: 'RevolutionX won 1st place in the STEM Racing Regional Championship Madrid',
-    startDate: '2024-03-15',
-    endDate: '2024-03-17',
+    startDate: '2025-04-15',
+    endDate: '2025-04-17',
     location: {
       '@type': 'Place',
       name: 'Madrid',

@@ -13,7 +13,7 @@ export interface CompetitionResult {
 export const mainAchievement = {
   title: "Coche Más Rápido",
   category: "Categoría Entry",
-  event: "Comunidad de Madrid 2024",
+  event: "Comunidad de Madrid 2025",
   description: "RevolutionX ha demostrado su excelencia técnica al conseguir el tiempo más rápido en la categoría Entry de toda la Comunidad de Madrid, combinando innovación en diseño aerodinámico, precisión en manufactura y optimización mediante simulaciones CFD avanzadas."
 };
 
@@ -42,7 +42,7 @@ export const achievements: Achievement[] = [
 
 export const competitionResults: CompetitionResult[] = [
   { event: "Finales Regionales Madrid 25/26", position: "3º Puesto", category: "Professional" },
-  { event: "Regional Madrid 2024", position: "1º Puesto", category: "Coche Más Rápido - Entry" },
-  { event: "Regional Madrid 2024", position: "1º Puesto", category: "Clasificación General" },
-  { event: "Nacional España 2024", position: "Clasificado", category: "Representación Madrid" }
+  { event: "Regional Madrid 2025", position: "1º Puesto", category: "Coche Más Rápido - Entry" },
+  { event: "Regional Madrid 2025", position: "1º Puesto", category: "Clasificación General" },
+  { event: "Nacional España 2025", position: "Clasificado", category: "Representación Madrid" }
 ];
